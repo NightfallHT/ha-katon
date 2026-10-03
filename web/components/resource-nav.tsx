@@ -10,7 +10,7 @@ const LINKS = [
 
 export function ResourceNav({ current }: { current: string }) {
   return (
-    <>
+    <div className="pb-20">
       <nav aria-label="Zasobnik wiedzy" className="mb-8">
         <ul className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
           {LINKS.map((item) => (
@@ -32,6 +32,6 @@ export function ResourceNav({ current }: { current: string }) {
         </ul>
       </nav>
       <HelpBot />
-    </>
+    </div>
   );
 }

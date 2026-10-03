@@ -2,6 +2,8 @@
 
 Sylwia + Klaudia. Jedna myśl na slajd, duże litery, zrzuty z live. Zgodne z `docs/content/flows.md`.
 
+Podgląd do klikania / druku: [`docs/pitch/slajdy.html`](slajdy.html) (strzałki ← →). PDF niedziela rano.
+
 Wizualnie: tło `#F3EFE8`, tekst `#142033`, brand `#0F3D6E`, akcent koralowy `#B83A12` (kontrast 4.5:1 z białym). Font Atkinson Hyperlegible. CTA w kształcie pigułki, karty z cienkim paskiem gradientu.
 
 ## 1. Nazwa i obietnica

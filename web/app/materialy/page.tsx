@@ -5,6 +5,13 @@ import { ResourceNav } from "@/components/resource-nav";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { materials } from "@/content/catalog";
 
+const TYPE_LABEL: Record<string, string> = {
+  raport: "Raport",
+  poradnik: "Poradnik",
+  film: "Film",
+  canvas: "Canvas",
+};
+
 const TYPES = [
   { value: "all", label: "Wszystkie" },
   { value: "raport", label: "Raport" },
@@ -58,7 +65,7 @@ export default function MaterialyPage() {
                 <CardTitle className="text-xl font-bold">{item.title}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <p>Rodzaj: {item.type}</p>
+                <p>Rodzaj: {TYPE_LABEL[item.type] ?? item.type}</p>
                 <p>{item.description}</p>
                 <p>
                   <a

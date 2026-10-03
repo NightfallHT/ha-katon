@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Canvas innowacji społecznej — HubMI</title>
+    <style>
+      :root {
+        --bg: #f3efe8;
+        --ink: #142033;
+        --brand: #0f3d6e;
+        --accent: #b83a12;
+        --line: #4a5a6e;
+        --card: #fff;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font: 1.125rem/1.55 "Atkinson Hyperlegible", system-ui, sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+        padding: 1.25rem;
+      }
+      h1 { font-size: 1.7rem; max-width: 40rem; }
+      p { max-width: 40rem; }
+      .grid {
+        display: grid;
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+      }
+      @media (min-width: 720px) {
+        .grid { grid-template-columns: 1fr 1fr; }
+      }
+      label { display: block; font-weight: 700; margin-bottom: 0.35rem; }
+      textarea {
+        width: 100%;
+        min-height: 6.5rem;
+        padding: 0.75rem;
+        border: 1.5px solid var(--line);
+        border-radius: 1rem;
+        font: inherit;
+        background: var(--card);
+        color: var(--ink);
+      }
+      button {
+        min-height: 48px;
+        margin-top: 1rem;
+        padding: 0 1.2rem;
+        border: 0;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #fff;
+        font: inherit;
+        font-weight: 700;
+      }
+      @media print {
+        button { display: none; }
+        body { background: #fff; }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Canvas innowacji społecznej</h1>
+    <p>Osiem krótkich pól. Wypełnij zwykłym językiem i wydrukuj albo zapisz jako PDF.</p>
+    <form class="grid" onsubmit="event.preventDefault(); window.print();">
+      <div>
+        <label for="p1">1. Jaki problem rozwiązujemy?</label>
+        <textarea id="p1" name="problem"></textarea>
+      </div>
+      <div>
+        <label for="p2">2. Dla kogo?</label>
+        <textarea id="p2" name="kogo"></textarea>
+      </div>
+      <div>
+        <label for="p3">3. Pomysł</label>
+        <textarea id="p3" name="pomysl"></textarea>
+      </div>
+      <div>
+        <label for="p4">4. Co z tego mają ludzie?</label>
+        <textarea id="p4" name="wartosc"></textarea>
+      </div>
+      <div>
+        <label for="p5">5. Co już mamy?</label>
+        <textarea id="p5" name="zasoby"></textarea>
+      </div>
+      <div>
+        <label for="p6">6. Z kim to zrobimy?</label>
+        <textarea id="p6" name="partnerzy"></textarea>
+      </div>
+      <div>
+        <label for="p7">7. Jak sprawdzimy, czy działa?</label>
+        <textarea id="p7" name="test"></textarea>
+      </div>
+      <div>
+        <label for="p8">8. Jak to utrzymać?</label>
+        <textarea id="p8" name="skala"></textarea>
+      </div>
+      <div style="grid-column: 1 / -1">
+        <button type="submit">Drukuj / zapisz PDF</button>
+      </div>
+    </form>
+  </body>
+</html>

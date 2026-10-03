@@ -130,5 +130,16 @@
       "wcag",
       "treść"
     ]
+  },
+  {
+    "title": "Canvas innowacji społecznej (do wydruku)",
+    "type": "canvas",
+    "url": "/demo/canvas-innowacji.html",
+    "description": "Osiem pól: problem, dla kogo, pomysł, wartość, zasoby, partnerzy, test i utrzymanie. Można wypełnić i wydrukować.",
+    "tags": [
+      "canvas",
+      "kreator",
+      "druk"
+    ]
   }
 ]

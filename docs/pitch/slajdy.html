@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HubMI — 10 slajdów</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+      :root { --bg:#f3efe8; --ink:#142033; --brand:#0f3d6e; --accent:#b83a12; --muted:#3d4a5c; --card:#fff; --line:#4a5a6e; }
+      * { box-sizing: border-box; }
+      html { font-size: 20px; }
+      body { margin: 0; font-family: "Atkinson Hyperlegible", system-ui, sans-serif; color: var(--ink); background: #d9d3c8; }
+      .skip { position: absolute; left: .75rem; top: .75rem; transform: translateY(-160%); background: var(--brand); color: #fff; padding: .6rem .9rem; border-radius: 999px; text-decoration: none; }
+      .skip:focus { transform: none; }
+      main { max-width: 56rem; margin: 0 auto; padding: 1rem; }
+      .slide {
+        min-height: 100dvh;
+        background: var(--bg);
+        border-radius: 1.5rem;
+        padding: 2rem 2rem 5rem;
+        margin: 1rem 0 2rem;
+        box-shadow: 0 12px 32px rgb(20 32 51 / 10%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .kicker { color: var(--brand); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; font-size: .85rem; }
+      h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.2; margin: .4rem 0 1rem; }
+      p, li { font-size: 1.15rem; color: var(--ink); }
+      .muted { color: var(--muted); }
+      ul { padding-left: 1.2rem; }
+      table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+      th, td { text-align: left; padding: .55rem .4rem; border-bottom: 1px solid color-mix(in srgb, var(--line) 35%, var(--card)); }
+      .bar { display: flex; gap: .4rem; position: sticky; bottom: 0; background: color-mix(in srgb, var(--card) 92%, transparent); padding: .7rem; }
+      .bar a, .bar button {
+        min-height: 44px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink);
+        padding: 0 .9rem; font: inherit; text-decoration: none; display: inline-flex; align-items: center;
+      }
+      .bar .now { background: var(--brand); color: #fff; border-color: var(--brand); }
+      @media print {
+        body { background: #fff; }
+        .bar, .skip { display: none; }
+        .slide { min-height: auto; box-shadow: none; page-break-after: always; margin: 0; border-radius: 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#s1">Przejdź do slajdów</a>
+    <main>
+      <section class="slide" id="s1">
+        <p class="kicker">1 / 10</p>
+        <h1>Hub Innowacji Społecznych</h1>
+        <p>Małopolska: zrozum, <strong>z czego możesz skorzystać</strong> — albo zgłoś pomysł / wniosek, gdy jest nabór.</p>
+        <p class="muted">ROPS Kraków · prototyp HackYeah 2026</p>
+      </section>
+      <section class="slide" id="s2">
+        <p class="kicker">2 / 10 · Problem</p>
+        <h1>Innowacje już są. Ludzie ich nie znajdują.</h1>
+        <p>Osoba niedowidząca, mama syna z niepełnosprawnością, NGO — nie wiedzą, gdzie szukać naborów i sprawdzonych rozwiązań.</p>
+      </section>
+      <section class="slide" id="s3">
+        <p class="kicker">3 / 10 · Kto</p>
+        <h1>Jedna strona. Jedna akcja.</h1>
+        <ul>
+          <li>Halina — słaby wzrok albo słuch</li>
+          <li>Mama / osoba z niepełnosprawnością</li>
+          <li>NGO przy naborze</li>
+          <li>ROPS dokłada nabory i wiedzę</li>
+        </ul>
+      </section>
+      <section class="slide" id="s4">
+        <p class="kicker">4 / 10 · Dopasowanie</p>
+        <h1>Halina pisze. Dostaje trzy trafienia.</h1>
+        <p>Dlaczego pasuje. Dla kogo. Link do prawdziwej bazy ROPS.</p>
+        <p class="muted">Zrzut: /dopasuj</p>
+      </section>
+      <section class="slide" id="s5">
+        <p class="kicker">5 / 10 · Nabory</p>
+        <h1>NGO widzi otwarty nabór i składa wniosek.</h1>
+        <p>Osoba prywatna może zgłosić mały pomysł. Asystent pomaga uzupełnić fiszkę.</p>
+        <p class="muted">Zrzut: /kreator</p>
+      </section>
+      <section class="slide" id="s6">
+        <p class="kicker">6 / 10 · Zasobnik</p>
+        <h1>Karta prowadzi do źródła, nie do pustej fiszki.</h1>
+        <p>Biblioteka, materiały, canvas do wydruku, test i ocena rozwiązania.</p>
+      </section>
+      <section class="slide" id="s7">
+        <p class="kicker">7 / 10 · ROPS</p>
+        <h1>Pracownik karmi platformę.</h1>
+        <p>Dodaje nabór, publikuje wpis, odpowiada na wnioski. Widać, czego ludzie szukają.</p>
+      </section>
+      <section class="slide" id="s8">
+        <p class="kicker">8 / 10 · Dostępność</p>
+        <h1>WCAG 2.1 AA, sprawdzone testami.</h1>
+        <ul>
+          <li>Skip link, klawiatura, 44×44, etykiety</li>
+          <li>Duża czcionka i wysoki kontrast</li>
+          <li>Wszystko da się zrobić tekstem</li>
+          <li>Axe: 0 naruszeń na kluczowych stronach (3 tryby)</li>
+        </ul>
+      </section>
+      <section class="slide" id="s9">
+        <p class="kicker">9 / 10 · Koszt</p>
+        <h1>Hosting ok. 190–270 zł / mies.</h1>
+        <table>
+          <caption class="muted" style="text-align:left;padding-bottom:.5rem">Szkic miesięczny</caption>
+          <thead><tr><th>Pozycja</th><th>zł</th></tr></thead>
+          <tbody>
+            <tr><td>Vercel + Supabase EU + Render + LLM</td><td>ok. 193–273</td></tr>
+            <tr><td>Z czasem ROPS</td><td>ok. 1,5 tys.</td></tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="slide" id="s10">
+        <p class="kicker">10 / 10 · Dalej</p>
+        <h1>Logowanie, RLS, prawdziwe dane ROPS.</h1>
+        <p>Zespół: Ola, Hania, Jakub, Janek, Klaudia, Sylwia.</p>
+      </section>
+    </main>
+    <nav class="bar" aria-label="Slajdy">
+      <a href="#s1" class="now">1</a>
+      <a href="#s2">2</a>
+      <a href="#s3">3</a>
+      <a href="#s4">4</a>
+      <a href="#s5">5</a>
+      <a href="#s6">6</a>
+      <a href="#s7">7</a>
+      <a href="#s8">8</a>
+      <a href="#s9">9</a>
+      <a href="#s10">10</a>
+    </nav>
+    <script>
+      const ids = [...document.querySelectorAll(".slide")].map((s) => s.id);
+      function current() {
+        let id = ids[0];
+        const y = window.scrollY + innerHeight * 0.35;
+        for (const x of ids) {
+          const el = document.getElementById(x);
+          if (el && el.offsetTop <= y) id = x;
+        }
+        return id;
+      }
+      function go(delta) {
+        const i = Math.min(ids.length - 1, Math.max(0, ids.indexOf(current()) + delta));
+        document.getElementById(ids[i]).scrollIntoView({ behavior: "smooth" });
+      }
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === "PageDown") { e.preventDefault(); go(1); }
+        if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); go(-1); }
+      });
+    </script>
+  </body>
+</html>

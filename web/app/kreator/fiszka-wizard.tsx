@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { ResourceNav } from "@/components/resource-nav";
+import { KreatorAssist } from "./kreator-assist";
 import { submitFiszka } from "./actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -124,6 +125,8 @@ export function FiszkaWizard({ kind }: { kind: FiszkaKind }) {
   return (
     <div>
       <ResourceNav current="/kreator" />
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
+        <div>
       <h1 className="text-3xl font-bold">
         {kind === "idea" ? "Zgłoś pomysł" : "Podziel się dobrą praktyką"}
       </h1>
@@ -242,6 +245,27 @@ export function FiszkaWizard({ kind }: { kind: FiszkaKind }) {
           </Button>
         </div>
       </form>
+        </div>
+        <KreatorAssist
+          fiszka={{
+            title,
+            problem: values.problem,
+            solution: values.solution,
+            target_group: values.target_group,
+            stage: values.stage,
+          }}
+          onApply={(fields) => {
+            if (fields.title) setTitle(fields.title);
+            setValues((prev) => ({
+              ...prev,
+              problem: fields.problem ?? prev.problem,
+              solution: fields.solution ?? prev.solution,
+              target_group: fields.target_group ?? prev.target_group,
+              stage: fields.stage ?? prev.stage,
+            }));
+          }}
+        />
+      </div>
     </div>
   );
 }

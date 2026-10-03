@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { calls } from "@/content/catalog";
+import { grantDraft } from "@/lib/api";
 import { submitGrant } from "../actions";
 
 type BudgetRow = { item: string; category: string; amount: number };
@@ -31,6 +32,7 @@ export default function GrantPage() {
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
+  const [drafting, setDrafting] = useState(false);
 
   const total = useMemo(
     () => budget.reduce((sum, row) => sum + (Number(row.amount) || 0), 0),
@@ -54,17 +56,43 @@ export default function GrantPage() {
 
   const activeCall = openCall;
 
-  function generate() {
-    setCel(
-      `Zmniejszyć samotność i ułatwić dojazd do lekarza osobom starszym w gminie wiejskiej.`,
-    );
-    setGrupa("Seniorzy i ich sąsiedzi w gminie wiejskiej.");
-    setDzialania(
-      solution.trim() ||
-        "Sąsiedzki bus dwa razy w tygodniu i dyżur wolontariuszy przy zapisach do przychodni.",
-    );
-    setRezultaty("Co najmniej 20 osób skorzysta z kursu w pierwszym kwartale.");
-    setDrafted(true);
+  async function generate() {
+    setDrafting(true);
+    setError("");
+    try {
+      const draft = await grantDraft({
+        fiszka: {
+          title: `Wniosek: ${activeCall.name}`,
+          problem,
+          solution,
+          target_group: "seniorzy w gminie wiejskiej",
+          stage: "pomysł",
+        },
+        call: {
+          name: activeCall.name,
+          budget_max: activeCall.budget_max,
+          description: activeCall.description,
+        },
+      });
+      setCel(draft.sections.cel);
+      setGrupa(draft.sections.grupa_docelowa);
+      setDzialania(draft.sections.dzialania);
+      setRezultaty(draft.sections.rezultaty);
+      setBudget(draft.budget);
+    } catch {
+      setCel(
+        "Zmniejszyć samotność i ułatwić dojazd do lekarza osobom starszym w gminie wiejskiej.",
+      );
+      setGrupa("Seniorzy i ich sąsiedzi w gminie wiejskiej.");
+      setDzialania(
+        solution.trim() ||
+          "Sąsiedzki bus dwa razy w tygodniu i dyżur wolontariuszy przy zapisach do przychodni.",
+      );
+      setRezultaty("Co najmniej 20 osób skorzysta z kursu w pierwszym kwartale.");
+    } finally {
+      setDrafting(false);
+      setDrafted(true);
+    }
   }
 
   async function submit() {
@@ -134,7 +162,7 @@ export default function GrantPage() {
         className="mt-6 max-w-2xl space-y-4"
         onSubmit={(event) => {
           event.preventDefault();
-          if (!drafted) generate();
+          if (!drafted) void generate();
           else void submit();
         }}
       >
@@ -158,7 +186,9 @@ export default function GrantPage() {
         </div>
 
         {!drafted ? (
-          <Button type="submit">Wygeneruj szkic wniosku</Button>
+          <Button type="submit" disabled={drafting}>
+            {drafting ? "Przygotowuję szkic…" : "Wygeneruj szkic wniosku"}
+          </Button>
         ) : (
           <>
             <p role="status">Przygotowaliśmy pierwszy szkic. Sprawdź każdą odpowiedź.</p>
