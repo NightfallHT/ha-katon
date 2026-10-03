@@ -1,5 +1,6 @@
 import challengesJson from "./seed/challenges.json";
 import callsJson from "./seed/calls.json";
+import gminasJson from "./seed/gminas.json";
 import innovationsJson from "./seed/innovations.json";
 import materialsJson from "./seed/materials.json";
 import { slugify } from "./labels";
@@ -76,9 +77,22 @@ export const innovations: Innovation[] = (
 export const challenges = challengesJson as Challenge[];
 export const materials = materialsJson as Material[];
 export const calls = callsJson as Call[];
+export const gminas = gminasJson as {
+  name: string;
+  powiat: string;
+  type: string;
+  population: number;
+  population_trend: string;
+}[];
 
 export function getInnovation(id: string) {
   return innovations.find((item) => item.id === id);
+}
+
+export function findInnovationByTitle(title: string) {
+  return innovations.find(
+    (item) => item.title.trim().toLowerCase() === title.trim().toLowerCase(),
+  );
 }
 
 export function similarInnovations(item: Innovation, limit = 3) {

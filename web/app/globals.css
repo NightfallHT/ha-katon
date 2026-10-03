@@ -185,6 +185,14 @@ html[data-font="150"] {
   }
 }
 
+@media print {
+  header,
+  footer,
+  a[href="#main"] {
+    display: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
