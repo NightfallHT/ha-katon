@@ -3,12 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { chat, simplify } from "@/lib/api";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 type Source = { title: string; url: string };
 type Msg = { role: "user" | "assistant"; content: string; sources?: Source[]; handoff?: boolean };
-
-const AI_URL = process.env.NEXT_PUBLIC_AI_URL;
 
 // Floating help bot. Add <HelpBot /> once in app/layout.tsx.
 export function HelpBot() {
@@ -34,14 +33,7 @@ export function HelpBot() {
     setBusy(true);
     setStatus("Szukam odpowiedzi…");
     try {
-      if (!AI_URL) throw new Error("no ai url");
-      const res = await fetch(`${AI_URL}/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message, history, page: pathname }),
-      });
-      if (!res.ok) throw new Error("bad status");
-      const data = (await res.json()) as { reply: string; sources?: Source[]; handoff?: boolean };
+      const data = await chat({ message, history, page: pathname ?? undefined });
       setMessages((m) => [...m, { role: "assistant", content: data.reply, sources: data.sources ?? [], handoff: data.handoff }]);
       setStatus("");
     } catch {
@@ -52,6 +44,20 @@ export function HelpBot() {
       setStatus("");
     } finally {
       setBusy(false);
+    }
+  }
+
+  async function explainSimpler(index: number) {
+    const target = messages[index];
+    if (!target || busy) return;
+    setBusy(true);
+    setStatus("Upraszczam odpowiedź…");
+    try {
+      const out = await simplify({ text: target.content });
+      setMessages((m) => [...m, { role: "assistant", content: out.text }]);
+    } finally {
+      setBusy(false);
+      setStatus("");
     }
   }
 
@@ -86,6 +92,16 @@ export function HelpBot() {
                     </li>
                   ))}
                 </ul>
+              )}
+              {m.role === "assistant" && (
+                <button
+                  type="button"
+                  onClick={() => explainSimpler(i)}
+                  disabled={busy}
+                  className="mt-2 min-h-11 rounded-md border px-3 py-2 font-medium focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-60"
+                >
+                  Wyjaśnij prościej
+                </button>
               )}
               {m.handoff && (
                 <p className="mt-2">
