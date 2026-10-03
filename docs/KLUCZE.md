@@ -7,7 +7,7 @@
 ## Zasady
 
 - Sekrety trzymamy **tylko lokalnie** albo w panelu hostingu (Render / Vercel). **Nigdy** nie commitujemy ich do GitHuba.
-- W repozytorium są wyłącznie szablony: [`.env.keys.example`](../.env.keys.example), [`ai/.env.example`](../ai/.env.example) oraz (gdy Ola je doda) `web/.env.example`.
+- W repozytorium są wyłącznie szablony: [`.env.keys.example`](../.env.keys.example), [`.env.example`](../.env.example) (pełna lista zmiennych), [`ai/.env.example`](../ai/.env.example).
 - Wspólne wartości (np. jeden klucz OpenAI na hackathon) Janek przekazuje zespołowi **poza gitem** (HackTribe, Signal, 1Password — ustalcie kanał w zespole).
 
 ## Jak dodać klucz do pliku z kluczami
@@ -79,3 +79,7 @@ Bez `LLM_API_KEY` serwis nadal działa w trybie **mocków** (wystarczy na integr
 - **503 „Nie udało się uzyskać odpowiedzi”** — zły lub pusty `LLM_API_KEY`, albo limit API.
 
 Po każdej zmianie `.env.keys` zrestartuj lokalny serwer (`uvicorn`) albo zrób redeploy na Renderze.
+
+## Git push nie działa (403)
+
+Jeśli `git push` zwraca **403**, a `git pull` działa — to często **Zscaler**, nie brak tokena. Zobacz [`docs/GIT-PUSH-ZSCALER.md`](GIT-PUSH-ZSCALER.md) i skrypt `scripts/git-push-safe.sh`.
