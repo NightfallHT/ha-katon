@@ -19,7 +19,7 @@ function localSimplify(text: string) {
 
 function localReply(message: string, page?: string): { reply: string; sources: Source[]; handoff: boolean } {
   const text = message.toLowerCase();
-  if (/kontakt|człowiek|pracownik|rops|telefon/.test(text)) {
+  if (/kontakt|człowiek|pracownik|napisać do rops|napisz do rops|telefon/.test(text)) {
     return {
       reply: "Możesz napisać do pracownika ROPS przez formularz. Odpowiedź przyjdzie na e-mail z demo.",
       sources: [{ title: "Kontakt", url: "/kontakt" }],
@@ -131,15 +131,14 @@ export function HelpBot() {
       <DialogTrigger asChild>
         <button
           type="button"
-          aria-label="Otwórz pomoc"
           className="fixed bottom-4 right-4 z-40 max-w-[calc(100vw-2rem)] min-h-11 rounded-full border bg-background px-5 py-3 font-semibold shadow-lg focus-visible:ring-2 focus-visible:ring-ring"
         >
           Potrzebujesz pomocy?
         </button>
       </DialogTrigger>
-        <DialogContent className="flex max-h-[85vh] flex-col gap-3 sm:max-w-lg" aria-label="Pomoc">
+      <DialogContent className="flex max-h-[85vh] flex-col gap-3 sm:max-w-lg">
         <DialogTitle>Pomoc</DialogTitle>
-        <DialogDescription>Zadaj pytanie o platformę. Odpowiada asystent AI.</DialogDescription>
+        <DialogDescription>Zadaj pytanie o platformę.</DialogDescription>
 
         <div role="log" aria-live="polite" aria-label="Rozmowa z asystentem" className="min-h-40 flex-1 space-y-3 overflow-y-auto">
           {messages.length === 0 && <p>Napisz, w czym możemy pomóc.</p>}

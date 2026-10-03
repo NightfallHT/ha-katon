@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Atkinson_Hyperlegible, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/shell/header";
+import { HelpBot } from "@/components/help-bot";
 import "./globals.css";
 
 const sans = Atkinson_Hyperlegible({
@@ -53,9 +54,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           {children}
         </main>
-        {/* TODO(jakub): global <HelpBot /> slot */}
+        <HelpBot />
         <footer className="border-t">
-          <div className="mx-auto max-w-5xl px-4 py-6 text-sm">
+          <div className="mx-auto max-w-5xl px-4 pt-6 pb-20 text-sm">
             <p>
               Prototyp zbudowany na HackYeah 2026 dla ROPS Kraków. Dane są
               przykładowe.

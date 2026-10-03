@@ -36,7 +36,8 @@ const DEMO_NEEDS: NeedRow[] = [
   },
 ];
 
-async function loadNeeds(): Promise<{ week: NeedRow[]; latest: NeedRow[]; demo: boolean }> {
+// Demo rows only when the DB is reachable but empty; a failed query shows an alert above them.
+async function loadNeeds(): Promise<{ week: NeedRow[]; latest: NeedRow[]; demo: boolean; error: string }> {
   try {
     const weekAgo = new Date(Date.now() - 7 * 24 * 3600 * 1000).toISOString();
     const db = adminDb();
@@ -46,17 +47,22 @@ async function loadNeeds(): Promise<{ week: NeedRow[]; latest: NeedRow[]; demo: 
     ]);
     const weekRows = (week.data ?? []) as NeedRow[];
     const latestRows = (latest.data ?? []) as NeedRow[];
-    if (week.error || latest.error || (weekRows.length === 0 && latestRows.length === 0)) {
-      return { week: DEMO_NEEDS, latest: DEMO_NEEDS, demo: true };
+    const failed = week.error ?? latest.error;
+    if (failed) {
+      return { week: DEMO_NEEDS, latest: DEMO_NEEDS, demo: true, error: `Nie udało się wczytać zapytań: ${failed.message}` };
     }
-    return { week: weekRows, latest: latestRows, demo: false };
-  } catch {
-    return { week: DEMO_NEEDS, latest: DEMO_NEEDS, demo: true };
+    if (weekRows.length === 0 && latestRows.length === 0) {
+      return { week: DEMO_NEEDS, latest: DEMO_NEEDS, demo: true, error: "" };
+    }
+    return { week: weekRows, latest: latestRows, demo: false, error: "" };
+  } catch (e) {
+    const error = e instanceof Error ? e.message : "Nie udało się wczytać danych.";
+    return { week: DEMO_NEEDS, latest: DEMO_NEEDS, demo: true, error };
   }
 }
 
 export default async function TrendsPage() {
-  const { week, latest, demo } = await loadNeeds();
+  const { week, latest, demo, error } = await loadNeeds();
 
   const counts = new Map<string, number>();
   for (const n of week) counts.set(n.category ?? "inne", (counts.get(n.category ?? "inne") ?? 0) + 1);
@@ -70,6 +76,7 @@ export default async function TrendsPage() {
       <h1 id="trendy-h" className="text-2xl font-semibold">
         Trendy zapytań
       </h1>
+      {error && <p role="alert" className="mt-4 rounded-md border p-3">{error}</p>}
       <p className="mt-3 text-lg">
         {top
           ? `Najczęściej zgłaszany problem w tym tygodniu: ${top.name} (${top.count} ${top.count === 1 ? "zapytanie" : "zapytań"}).`

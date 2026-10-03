@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { HelpBot } from "@/components/help-bot";
 
 const LINKS = [
   { href: "/biblioteka", label: "Biblioteka" },
@@ -31,7 +30,6 @@ export function ResourceNav({ current }: { current: string }) {
           ))}
         </ul>
       </nav>
-      <HelpBot />
     </div>
   );
 }
