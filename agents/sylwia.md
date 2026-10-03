@@ -38,3 +38,17 @@ Inputs: Klaudia's `/docs/pitch/script.md`, `slides.md`, `opis.md`, Hania's Figma
 
 ## If time is short
 Priority: Block C > Block B > Block A. Klaudia can build the slides from `slides.md` if Block C is at risk — tell her by 07:00.
+
+## Status / TODO
+
+Last updated: 2026-10-03 18:53
+Currently working on: accessibility regression tests
+
+- [x] Persona flows, one-action-per-screen guidance and inexpensive UX ideas
+- [x] Playwright + axe harness covering key routes and accessibility modes
+- [x] Keyboard, 320 px and demo smoke scenarios drafted
+- [x] Accessibility report grouped by page/owner
+- [ ] **IN PROGRESS:** run the full test suite against the latest app and update final violation counts
+- [ ] Send top accessibility regressions to the relevant owners and verify their fixes
+- [ ] Build the final ≤10-slide PDF and ≤3-minute captioned MP4 Sunday morning
+- [ ] **BLOCKED:** final Lighthouse numbers and recording — waiting for the stable live Vercel URL

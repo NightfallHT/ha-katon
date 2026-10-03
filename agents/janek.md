@@ -72,3 +72,20 @@ Everything under `/ai`. Nothing else (ask Ola for schema/contract changes).
 ## Don't
 - Don't touch `/web`. Don't change response shapes without Ola.
 - Don't log user texts anywhere except the `needs` table.
+
+## Status / TODO
+
+Last updated: 2026-10-03 18:53
+Currently working on: live OpenAI/Supabase integration and deployment
+
+- [x] FastAPI scaffold, exact Pydantic contract, mocks, CORS and Docker/Render config
+- [x] Matchmaking extraction, hybrid ranking, reranking, low-confidence handling and demo cache
+- [x] `/simplify`, `/admin/enrich` and `/admin/reembed`
+- [x] Middleman questions/report with root causes and “Usługa wrażliwa” checklist
+- [x] Kreator assistant, grant draft and budget cap
+- [x] FAQ/RAG help bot with sources and human handoff
+- [x] OpenAI key verified locally for `gpt-4o-mini` and `text-embedding-3-small`
+- [ ] **IN PROGRESS:** test live model calls and re-embedding against the seeded Supabase project
+- [ ] Deploy `/ai`, set secrets only in hosting env and send the public URL to Ola
+- [ ] Measure live latency for exact demo inputs; keep cache responses below the demo threshold
+- [ ] **BLOCKED:** production URL/CORS — waiting for Render/Railway deployment and Ola's Vercel origin

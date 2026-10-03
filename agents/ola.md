@@ -60,3 +60,17 @@ Ola's skills: JS, HTML, SQL, architecture. She reviews everything critically —
 ## Don't
 - Don't build features owned by others; unblock them instead.
 - Don't add auth, RLS or state libraries. Server components + fetch + `useState` are enough.
+
+## Status / TODO
+
+Last updated: 2026-10-03 18:53
+Currently working on: live integration and deployment checks
+
+- [x] Bootstrap monorepo, shared types/API client, Supabase schema and seed script
+- [x] App shell, role switcher, accessibility toggles and homepage
+- [x] Matchmaking UI with local fallback and low-confidence path
+- [x] Middleman UI with report, cost table and print/PDF flow
+- [ ] **IN PROGRESS:** verify the complete demo path against live `/ai` and Supabase
+- [ ] Deploy `/web` to Vercel and share `NEXT_PUBLIC_AI_URL` / Vercel URL with Janek
+- [ ] Run the 01:00 gap review and keep `DEPENDENCIES.md` current
+- [ ] **BLOCKED:** production integration — waiting for deployed `/ai` URL and hosting environment values

@@ -61,3 +61,19 @@ Pair with Ola for the first hour.
 
 ## Don't
 - Don't modify the database schema — ask Ola. Don't touch other people's pages.
+
+## Status / TODO
+
+Last updated: 2026-10-03 18:53
+Currently working on: end-to-end admin and communication QA
+
+- [x] Admin dashboard, submissions inbox, detail view, replies and publishing flow
+- [x] Notification route with graceful no-key behavior
+- [x] Tester signup, ratings, feedback and latest reviews
+- [x] Contact form and “Moje zgłoszenia” with message threads
+- [x] Accessible help-bot dialog with sources, simplify action and human handoff
+- [x] Admin calls, library editor and trends chart with table alternative
+- [ ] **IN PROGRESS:** click through submission → admin reply → publication → library
+- [ ] Check all owned pages with keyboard, 150% font and high contrast; report exact repro steps
+- [ ] Configure Resend and `ADMIN_NOTIFY_EMAIL` in Vercel if email is included in the demo
+- [ ] **BLOCKED:** live email verification — waiting for `RESEND_API_KEY`, admin inbox and Vercel deployment

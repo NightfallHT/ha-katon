@@ -49,3 +49,18 @@ development and some Figma — explain design decisions briefly and keep compone
 - Don't add animation libraries; subtle CSS transitions only, disabled under `prefers-reduced-motion`.
 - Don't use colour as the only signal anywhere.
 - Don't edit the shell or admin pages — ask Ola/Jakub.
+
+## Status / TODO
+
+Last updated: 2026-10-03 18:53
+Currently working on: final visual and mobile polish
+
+- [x] Visual identity, high-contrast theme, font scaling and themed UI controls
+- [x] Innovation cards, library browser and innovation detail pages
+- [x] Challenges and materials pages backed by the seed catalog
+- [x] Kreator landing, idea/good-practice flow and grant application editor
+- [x] AI assistant integration and printable Social Innovation Canvas
+- [ ] **IN PROGRESS:** review key pages at 320 px, 150% font and high contrast
+- [ ] Fix visual/accessibility issues reported by Sylwia without changing page ownership boundaries
+- [ ] Prepare or hand off the five key visual frames/screenshots for the final presentation
+- [ ] **BLOCKED:** final screenshots — waiting for the stable live Vercel URL

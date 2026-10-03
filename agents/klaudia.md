@@ -62,3 +62,18 @@ hesitate → `/docs/content/user-test.md` → send top 3 issues to Ola.
 
 ### 8. Morning (07:00–10:00)
 Record voiceover, finalise PDF content with Sylwia; if Sylwia is busy, build the slides yourself from `slides.md`.
+
+## Status / TODO
+
+Last updated: 2026-10-03 18:53
+Currently working on: final pitch copy and demo inputs
+
+- [x] Mentor notes and “Usługa wrażliwa” research with cited sources
+- [x] Seed innovations, challenges, materials, gminas, calls and submissions
+- [x] Plain-language UI copy and FAQ for the help bot
+- [x] Cost assumptions and draft pitch content
+- [x] Draft HackTribe description, slides and ≤3-minute video script
+- [ ] **IN PROGRESS:** freeze exact demo inputs and verify every claim/link shown in the pitch
+- [ ] Run the hallway test with 2–3 people and save findings in `/docs/content/user-test.md`
+- [ ] Finalise voiceover and support Sylwia with PDF/MP4 assets in the morning
+- [ ] **BLOCKED:** final screenshots and video timing — waiting for the stable live app
