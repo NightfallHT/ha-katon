@@ -8,6 +8,15 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } 
 
 type Source = { title: string; url: string };
 
+function localSimplify(text: string) {
+  const parts = text
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(/(?<=[.!?])\s+/);
+  const short = parts.slice(0, 2).join(" ");
+  return short || "Krótko: napisz, czego potrzebujesz. Pomożemy krok po kroku.";
+}
+
 function localReply(message: string, page?: string): { reply: string; sources: Source[]; handoff: boolean } {
   const text = message.toLowerCase();
   if (/kontakt|człowiek|pracownik|rops|telefon/.test(text)) {
@@ -27,7 +36,21 @@ function localReply(message: string, page?: string): { reply: string; sources: S
       handoff: false,
     };
   }
-  if (/szuk|dopas|innowac|widz|syn/.test(text)) {
+  if (/test|oceń|ocen/.test(text)) {
+    return {
+      reply: "Na karcie innowacji możesz zapisać się do testów i wystawić ocenę od 1 do 5.",
+      sources: [{ title: "Biblioteka", url: "/biblioteka" }],
+      handoff: false,
+    };
+  }
+  if (/kontrast|czcion|duż|duz|widz/.test(text)) {
+    return {
+      reply: "W górze strony włącz dużą czcionkę albo wysoki kontrast. Wszystko da się zrobić z klawiatury.",
+      sources: [{ title: "Strona główna", url: "/" }],
+      handoff: false,
+    };
+  }
+  if (/szuk|dopas|innowac|syn|samot/.test(text)) {
     return {
       reply: "Na stronie głównej opisz sytuację zwykłym zdaniem. Pokażemy kilka rozwiązań i dlaczego pasują.",
       sources: [{ title: "Dopasuj", url: "/dopasuj" }],
@@ -92,6 +115,8 @@ export function HelpBot() {
     try {
       const out = await simplify({ text: target.content });
       setMessages((m) => [...m, { role: "assistant", content: out.text }]);
+    } catch {
+      setMessages((m) => [...m, { role: "assistant", content: localSimplify(target.content) }]);
     } finally {
       setBusy(false);
       setStatus("");

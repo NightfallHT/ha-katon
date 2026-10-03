@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
+import { DEMO_MESSAGES, DEMO_SUBMISSIONS } from "@/content/demo-submissions";
 import { adminDb } from "../admin/_lib/supabase";
 import { TYPE_LABELS, formatDate, label } from "../admin/_lib/labels";
 import { setDemoEmail } from "./actions";
@@ -48,14 +49,29 @@ export default async function MySubmissions() {
       msgs = m.data ?? [];
     }
   } catch {
-    error = "Nie udało się wczytać zgłoszeń. Spróbuj ponownie za chwilę.";
+    error = "Widok poglądowy — baza ROPS nie jest podłączona w tym środowisku.";
+    const demo = DEMO_SUBMISSIONS.filter((item) => item.author_email === email);
+    subs = (demo.length ? demo : DEMO_SUBMISSIONS).map((item) => ({
+      id: item.id,
+      type: item.type,
+      title: item.title,
+      status: item.status,
+      created_at: item.created_at,
+    }));
+    msgs = DEMO_MESSAGES.filter((m) => subs.some((s) => s.id === m.submission_id)).map((m) => ({
+      id: m.id,
+      submission_id: m.submission_id,
+      sender: m.sender,
+      body: m.body,
+      created_at: m.created_at,
+    }));
   }
 
   return (
     <section aria-labelledby="mz-h">
       <h1 id="mz-h" className="text-3xl font-semibold">Moje zgłoszenia</h1>
       <p className="mt-2">Zgłoszenia wysłane z adresu {email}.</p>
-      {error && <p role="alert" className="mt-4 rounded-md border p-3">{error}</p>}
+      {error && <p role="status" className="mt-4 rounded-md border p-3">{error}</p>}
       {!error && subs.length === 0 && (
         <p className="mt-4">Nie masz jeszcze zgłoszeń. <Link href="/kontakt" className="underline">Napisz do ROPS</Link>.</p>
       )}
@@ -90,7 +106,7 @@ export default async function MySubmissions() {
                 ))}
                 {thread.length === 0 && <li>Nie ma jeszcze wiadomości.</li>}
               </ul>
-              <AuthorReplyForm submissionId={s.id} />
+              {error ? null : <AuthorReplyForm submissionId={s.id} />}
             </li>
           );
         })}

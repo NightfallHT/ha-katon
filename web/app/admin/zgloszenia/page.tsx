@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DEMO_SUBMISSIONS } from "@/content/demo-submissions";
 import { adminDb } from "../_lib/supabase";
 import { STATUS_LABELS, TYPE_LABELS, formatDate, label } from "../_lib/labels";
 
@@ -22,8 +23,21 @@ export default async function SubmissionsPage({
     const res = await q;
     if (res.error) throw new Error(res.error.message);
     rows = res.data ?? [];
-  } catch (e) {
-    error = e instanceof Error ? e.message : "Nie udało się wczytać zgłoszeń.";
+  } catch {
+    error = "Lista poglądowa — baza ROPS nie jest podłączona w tym środowisku.";
+    rows = DEMO_SUBMISSIONS.filter((item) => {
+      if (status && item.status !== status) return false;
+      if (type && item.type !== type) return false;
+      return true;
+    }).map((item) => ({
+      id: item.id,
+      type: item.type,
+      title: item.title,
+      author_name: item.author_name,
+      author_email: item.author_email,
+      status: item.status,
+      created_at: item.created_at,
+    }));
   }
 
   return (
@@ -54,7 +68,7 @@ export default async function SubmissionsPage({
         </button>
       </form>
 
-      {error && <p role="alert" className="mt-4 rounded-md border p-3">{error}</p>}
+      {error && <p role="status" className="mt-4 rounded-md border p-3">{error}</p>}
 
       <div className="mt-6 overflow-x-auto">
         <table className="w-full text-left">

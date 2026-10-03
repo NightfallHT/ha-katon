@@ -86,6 +86,12 @@ export function KreatorAssist({ fiszka, onApply }: Props) {
     try {
       const out = await simplify({ text: target.content });
       setHistory((h) => [...h, { role: "assistant", content: out.text }]);
+    } catch {
+      const short = target.content.split(/(?<=[.!?])\s+/).slice(0, 2).join(" ");
+      setHistory((h) => [
+        ...h,
+        { role: "assistant", content: short || "Krótko: opisz problem zwykłym zdaniem." },
+      ]);
     } finally {
       setBusy(false);
       setStatus("");

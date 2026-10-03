@@ -240,7 +240,7 @@ export function FiszkaWizard({ kind }: { kind: FiszkaKind }) {
               <Link href="/kreator">Anuluj</Link>
             </Button>
           )}
-          <Button type="submit" disabled={sending}>
+          <Button type="submit" disabled={sending} aria-busy={sending}>
             {step < STEPS.length - 1 ? "Dalej" : sending ? "Wysyłam…" : "Wyślij zgłoszenie"}
           </Button>
         </div>
