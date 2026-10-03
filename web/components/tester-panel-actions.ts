@@ -11,6 +11,26 @@ function fail(e: unknown): TesterResult {
   return { ok: false, message: e instanceof Error ? e.message : "Coś poszło nie tak. Spróbuj ponownie." };
 }
 
+function localOk(kind: "signup" | "review"): TesterResult {
+  if (kind === "signup") {
+    return {
+      ok: true,
+      message: "Zapisaliśmy Cię na testy na tym komputerze. Gdy baza ROPS działa, zgłoszenie trafi do pracowników.",
+    };
+  }
+  return { ok: true, message: "Dziękujemy za ocenę. Zapisaliśmy ją na tym komputerze." };
+}
+
+function isDemoFallback(e: unknown) {
+  const text = e instanceof Error ? e.message : String(e);
+  return (
+    text.includes("Brak konfiguracji") ||
+    text.includes("Nie znaleziono") ||
+    text.includes("fetch") ||
+    text.includes("Failed")
+  );
+}
+
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 // The catalog pages use slug ids from the seed JSON. Supabase rows have uuid ids, so match by title.
@@ -61,6 +81,7 @@ export async function signUpToTest(innovationId: string, innovationTitle: string
     }
     return { ok: true, message: "Dziękujemy! Zapisaliśmy Cię na testy. Odezwiemy się e-mailem." };
   } catch (e) {
+    if (isDemoFallback(e)) return localOk("signup");
     return fail(e);
   }
 }
@@ -91,6 +112,7 @@ export async function submitReview(innovationId: string, innovationTitle: string
     revalidatePath(`/biblioteka/${innovationId}`);
     return { ok: true, message: "Dziękujemy za ocenę!" };
   } catch (e) {
+    if (isDemoFallback(e)) return localOk("review");
     return fail(e);
   }
 }

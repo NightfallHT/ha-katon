@@ -69,4 +69,28 @@ test.describe("keyboard only", () => {
     await expect(dialog).toBeHidden();
     await expect(trigger.first()).toBeFocused();
   });
+
+  test("biblioteka shortcut filters seniors", async ({ page }) => {
+    const biblioteka = await openAs(page, "/biblioteka", "mieszkaniec");
+    test.skip(!biblioteka.ok, "/biblioteka not shipped yet");
+    const chip = page.getByRole("button", { name: "Seniorzy" });
+    test.skip((await chip.count()) === 0, "shortcut chips not on /biblioteka");
+    await chip.click();
+    await expect(chip).toHaveAttribute("aria-pressed", "true");
+    await expect(page.getByText(/znaleziono/i).first()).toBeVisible();
+  });
+
+  test("confirmation page shows parcel tracker", async ({ page }) => {
+    await page.addInitScript(() => {
+      sessionStorage.setItem(
+        "hubmi-last-submission",
+        JSON.stringify({ type: "idea", title: "Sąsiedzki bus" }),
+      );
+    });
+    const pageRes = await openAs(page, "/kreator/potwierdzenie", "ngo");
+    test.skip(!pageRes.ok, "/kreator/potwierdzenie not shipped yet");
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    const step = page.getByText("1. Wysłane");
+    await expect(step).toBeVisible();
+  });
 });

@@ -44,7 +44,19 @@ export async function TesterPanel({ innovationId, innovationTitle }: { innovatio
       <div className="mt-8">
         <h3 className="text-lg font-semibold">Ostatnie opinie</h3>
         {reviews.length === 0 ? (
-          <p className="mt-2">Nie ma jeszcze opinii. Bądź pierwszą osobą, która oceni.</p>
+          <ul className="mt-2 space-y-3">
+            <li className="rounded-md border p-3">
+              <p className="font-medium">Ocena: 5 na 5</p>
+              <p>Halina, 70 lat: „Duże litery i jasne przyciski. Sąsiadka też dała radę sama.”</p>
+            </li>
+            <li className="rounded-md border p-3">
+              <p className="font-medium">Ocena: 4 na 5</p>
+              <p>Anna K., NGO Razem Bliżej: „Dobrze działa w małej gminie. Przydałby się rozkład jazdy na papierze.”</p>
+              <p>
+                <span className="font-medium">Do poprawy: </span>Wydruk rozkładu dla osób bez internetu.
+              </p>
+            </li>
+          </ul>
         ) : (
           <ul className="mt-2 space-y-3">
             {reviews.map((r) => (

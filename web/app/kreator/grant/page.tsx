@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { ResourceNav } from "@/components/resource-nav";
 import { Button } from "@/components/ui/button";
@@ -33,6 +34,7 @@ export default function GrantPage() {
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
   const [drafting, setDrafting] = useState(false);
+  const router = useRouter();
 
   const total = useMemo(
     () => budget.reduce((sum, row) => sum + (Number(row.amount) || 0), 0),
@@ -132,19 +134,15 @@ export default function GrantPage() {
       return;
     }
     setDone(true);
+    router.push("/kreator/potwierdzenie");
   }
 
   if (done) {
     return (
       <div>
         <ResourceNav current="/kreator" />
-        <h1 className="text-3xl font-bold">Gotowe. Wniosek został wysłany.</h1>
-        <p className="mt-3">Możesz śledzić jego status w „Moich zgłoszeniach”.</p>
-        <p className="mt-6">
-          <Link href="/moje-zgloszenia" className="underline underline-offset-4">
-            Moje zgłoszenia
-          </Link>
-        </p>
+        <h1 className="text-3xl font-bold">Gotowe. Zgłoszenie zostało zapisane.</h1>
+        <p role="status">Otwieram śledzenie zgłoszenia…</p>
       </div>
     );
   }
@@ -217,7 +215,8 @@ export default function GrantPage() {
               />
             </div>
 
-            <table className="w-full border-collapse text-left">
+            <div className="overflow-x-auto">
+            <table className="w-full min-w-0 border-collapse text-left">
               <caption className="mb-2 text-left">Budżet szkicu</caption>
               <thead>
                 <tr className="border-b">
@@ -273,6 +272,7 @@ export default function GrantPage() {
                 ))}
               </tbody>
             </table>
+            </div>
             <p>
               Suma: {total.toLocaleString("pl-PL")} zł.
               {overBudget ? (
@@ -300,7 +300,7 @@ export default function GrantPage() {
                 {error}
               </p>
             ) : null}
-            <Button type="submit" disabled={sending}>
+            <Button type="submit" disabled={sending} aria-busy={sending}>
               {sending ? "Wysyłam…" : "Wyślij zgłoszenie"}
             </Button>
           </>

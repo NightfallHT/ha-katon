@@ -41,8 +41,8 @@ Priority: Block C > Block B > Block A. Klaudia can build the slides from `slides
 
 ## Status / TODO
 
-Last updated: 2026-10-03 19:55
-Currently working on: demo status tracker and owner notes
+Last updated: 2026-10-03 20:10
+Currently working on: tester fallbacks and jury tests for shortcuts/tracker
 
 - [x] Persona flows, one-action-per-screen guidance and inexpensive UX ideas
 - [x] Playwright + axe harness covering key routes and accessibility modes

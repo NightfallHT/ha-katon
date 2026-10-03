@@ -34,6 +34,8 @@ const KEY_PAGES_320 = [
   "/wyzwania",
   "/materialy",
   "/kreator",
+  "/kreator/grant",
+  "/kreator/potwierdzenie",
   "/admin",
   "/admin/trendy",
 ];

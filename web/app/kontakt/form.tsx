@@ -26,8 +26,8 @@ export function ContactForm({ defaultName, defaultEmail, defaultMessage, default
         <label htmlFor="c-page" className="block font-medium">Strona, której dotyczy pytanie <span className="font-normal">(opcjonalne)</span></label>
         <input id="c-page" name="page" defaultValue={defaultPage} className={field} />
       </div>
-      <button type="submit" disabled={pending} className="min-h-11 rounded-md border px-5 py-2 font-medium focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-60">
-        Wyślij wiadomość
+      <button type="submit" disabled={pending} aria-busy={pending} className="min-h-11 rounded-md border px-5 py-2 font-medium focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-60">
+        {pending ? "Wysyłam wiadomość…" : "Wyślij wiadomość"}
       </button>
       <p role="status" aria-live="polite" id={state && !state.ok ? errId : undefined}>
         {pending ? "Wysyłam wiadomość…" : state?.message}
