@@ -294,6 +294,35 @@ Submission `payload` shapes (written by `/web` directly to Supabase):
 - No real personal data. Seed people are fictional ("Anna K., NGO Razem Bliżej").
 - If a task can't be finished by its checkpoint, ship the simplest working version and leave a `TODO(demo)` comment.
 
+### Progress tracking — required for every agent
+
+Every agent must keep the current status in their own brief: `agents/<name>.md`. Update it at the
+start of work, after completing a task, when the plan changes, and before handing work over. This is
+the team's shared status board — it must reflect reality, not the original plan.
+
+Add or maintain a `## Status / TODO` section at the end of your file:
+
+```md
+## Status / TODO
+
+Last updated: YYYY-MM-DD HH:MM
+Currently working on: <one concrete task, or "nothing">
+
+- [x] Completed task — result / commit / URL
+- [ ] **IN PROGRESS:** current task — expected outcome
+- [ ] Next task
+- [ ] **BLOCKED:** task — waiting for <person/input/access>
+```
+
+Rules:
+- Exactly one item should normally be marked `**IN PROGRESS:**`; use none only when idle or fully blocked.
+- Mark an item `[x]` only after implementation and proportionate verification, not when merely started.
+- A blocker must name what is missing and who can unblock it. Continue with independent work when possible.
+- Keep completed items for the hackathon, but shorten stale detail so the list stays scannable.
+- Track only your own work. Do not mark another owner's task complete; record it as a dependency instead.
+- Do not put secrets, personal data, or full API keys in status files.
+- Include a commit hash, deployed URL, test result, or handoff note when it helps the team verify progress.
+
 ## 9. Checkpoints
 | Time | Gate |
 |---|---|
