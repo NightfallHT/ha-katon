@@ -149,9 +149,22 @@ Bonus a11y (slajd 8): duża czcionka, wysoki kontrast, **Wyjaśnij prościej**, 
 
 ---
 
-## Co dalej
+## Co mamy vs czego potrzebujemy (sobota ~17:00)
 
-- Hania: Figma 5 ekranów + tokeny; na kartach zawsze grupa docelowa i link do źródła.
-- Ola: wyszukiwarka rozumie „dla mnie / dla syna / niedowidzę”; wyniki + `h1#wyniki` z focusem; chipy kategorii w tym niepełnosprawność.
-- Jakub: ROPS dodaje nabory i pozycje do zasobnika; tracker wniosków; bot tekstowy.
-- Sylwia: testy w `/tests` (axe + klawiatura + smoke). Live `BASE_URL` od Oli.
+**Mamy (nasze):** te flow, paletę, selektory, szkic slajdów i skryptu, Playwright + axe.
+
+**Mamy (kod):** placeholder `/` — skip link, `lang="pl"`, jeden `h1`, `header`/`nav`/`main`/`footer`. FastAPI mocki Janka. Copy Klaudii w `docs/content/copy.md` (jeszcze stary ton „problem / dojazd do lekarza”).
+
+**Nie ma jeszcze (blokuje demo i testy):**
+| Potrzeba | Kto | Po co |
+|---|---|---|
+| Header: kontrast, A/A+/A++, przełącznik roli, pełne menu | Ola | Halina w ogóle wchodzi na stronę |
+| Home: pole wyszukiwania + 3 kafelki (szukaj / nabory+kreator / …) | Ola | start Haliny i mamy |
+| `/dopasuj` rozumie „dla mnie / niedowidzę / dla syna” + why + link do źródła | Ola + Janek | oś jury |
+| `/biblioteka`, materiały, nabory | Hania | odesłanie do baz |
+| Kreator pomysłu i wniosku | Hania | NGO i mama |
+| Admin: dodać nabór i pozycję do zasobnika | Jakub | ROPS karmi treść |
+| `#main` z `tabIndex={-1}` (skip link nie przenosi fokusu) | Ola | a11y, 20% punktacji |
+| Seed: min. 5 innowacji pod niepełnosprawność + 1 otwarty nabór UE | Klaudia | wyszukiwarka ma co zwrócić |
+| Live URL (Vercel) | Ola | testy Sylwii i wideo |
+| Zgodność copy z tymi flow (nie tylko „samotność na wsi”) | Klaudia | jeden głos na slajdach i UI |

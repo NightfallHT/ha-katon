@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { openAs } from "./helpers";
 
 const PROBLEM =
-  "Moi starsi sąsiedzi są sami i nie mają jak dojechać do lekarza. Mieszkamy na wsi.";
+  "Słabo widzę. Chcę wiedzieć, z jakich innowacji w Małopolsce mogę skorzystać.";
 
 test.describe("keyboard only", () => {
   test.skip(({ }, testInfo) => testInfo.project.name === "mobile-320");
