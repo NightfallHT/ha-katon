@@ -1,17 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { adminDb } from "../../_lib/supabase";
-import { CATEGORY_LABELS, PAYLOAD_LABELS, STATUS_LABELS, TYPE_LABELS, formatDate, label } from "../../_lib/labels";
+import { CATEGORY_LABELS, STATUS_LABELS, TYPE_LABELS, formatDate, label } from "../../_lib/labels";
+import { PayloadView } from "./payload";
 import { EnrichButton, PublishButton, ReplyForm, StatusForm } from "./forms";
 
 export const dynamic = "force-dynamic";
-
-function show(v: unknown): string {
-  if (v === true) return "tak";
-  if (v === false) return "nie";
-  if (typeof v === "string" || typeof v === "number") return String(v);
-  return JSON.stringify(v, null, 2);
-}
 
 export default async function SubmissionDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -19,8 +13,7 @@ export default async function SubmissionDetail({ params }: { params: Promise<{ i
   const { data: s } = await db.from("submissions").select("*").eq("id", id).maybeSingle();
   if (!s) notFound();
   const { data: msgs } = await db.from("messages").select("*").eq("submission_id", id).order("created_at", { ascending: true });
-  const payload = Object.entries((s.payload ?? {}) as Record<string, unknown>);
-  const canPublish = ["idea", "good_practice"].includes(s.type) && !s.innovation_id;
+  const canPublish = ["idea", "good_practice"].includes(s.type);
 
   return (
     <article aria-labelledby="tytul">
@@ -36,15 +29,7 @@ export default async function SubmissionDetail({ params }: { params: Promise<{ i
 
       <section aria-labelledby="tresc" className="mt-8">
         <h2 id="tresc" className="text-xl font-semibold">Treść zgłoszenia</h2>
-        <dl className="mt-3 space-y-3">
-          {payload.map(([k, v]) => (
-            <div key={k}>
-              <dt className="font-medium">{PAYLOAD_LABELS[k] ?? k}</dt>
-              <dd className="whitespace-pre-wrap">{show(v)}</dd>
-            </div>
-          ))}
-          {payload.length === 0 && <p>Brak dodatkowych pól.</p>}
-        </dl>
+        <div className="mt-3"><PayloadView payload={(s.payload ?? {}) as Record<string, unknown>} /></div>
       </section>
 
       <section aria-labelledby="ai" className="mt-8">
@@ -64,7 +49,7 @@ export default async function SubmissionDetail({ params }: { params: Promise<{ i
       <section aria-labelledby="status-h" className="mt-8">
         <h2 id="status-h" className="text-xl font-semibold">Decyzja</h2>
         <div className="mt-3"><StatusForm id={id} current={s.status} /></div>
-        {canPublish && <div className="mt-4"><PublishButton id={id} /></div>}
+        {canPublish && <div className="mt-4"><PublishButton id={id} published={Boolean(s.innovation_id)} /></div>}
       </section>
 
       <section aria-labelledby="rozmowa" className="mt-8">

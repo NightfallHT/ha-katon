@@ -54,11 +54,14 @@ export function ReplyForm({ id }: { id: string }) {
   );
 }
 
-export function PublishButton({ id }: { id: string }) {
+// Stays mounted after publishing, so the result message does not vanish when the page re-renders.
+export function PublishButton({ id, published }: { id: string; published: boolean }) {
   const [state, action, pending] = useActionState(publishToLibrary.bind(null, id), null);
   return (
     <form action={action}>
-      <button type="submit" disabled={pending} className={btn}>Opublikuj w Bibliotece</button>
+      <button type="submit" disabled={pending || published} className={btn}>
+        {published ? "Opublikowano w Bibliotece" : "Opublikuj w Bibliotece"}
+      </button>
       <Result state={state} pending={pending} pendingText="Publikuję i odświeżam dopasowania…" />
     </form>
   );
