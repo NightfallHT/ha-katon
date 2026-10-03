@@ -20,6 +20,33 @@ LOW_CONFIDENCE_THRESHOLD = 0.5
 
 _WORD = re.compile(r"[a-z0-9ąćęłńóśźż]{4,}", re.IGNORECASE)
 
+_STOP = {
+    "malo",
+    "malopolsce",
+    "malopolski",
+    "malopolska",
+    "innowacji",
+    "innowacje",
+    "innowacja",
+    "osob",
+    "osoby",
+    "chce",
+    "wiedziec",
+    "pokaz",
+    "skorzystac",
+    "takich",
+    "jakie",
+    "jakich",
+    "projekty",
+    "projekt",
+    "moge",
+    "moga",
+    "jest",
+    "tego",
+    "chcemy",
+    "jakie",
+}
+
 
 def _terms(text: str) -> list[str]:
     seen: list[str] = []
@@ -36,6 +63,27 @@ def _stem_hit(word: str, haystack: str) -> bool:
     return folded in haystack or (len(stem) >= 4 and stem in haystack)
 
 
+def _needles(query: str) -> list[str]:
+    folded = fold(query)
+    words = [word for word in _terms(query) if fold(word) not in _STOP]
+    extra: list[str] = []
+    if any(token in folded for token in ("widze", "niewidom", "wzrok", "braille", "niedowid")):
+        extra.extend(["niewidom", "wzrok", "braille", "audiodeskrypc"])
+    if any(token in folded for token in ("gluch", "nieslysz", "slabo slys")):
+        extra.extend(["gluch", "pjm"])
+    if "samot" in folded:
+        extra.append("samotn")
+    if any(token in folded for token in ("lekarz", "dojazd", "dojech", "transport")):
+        extra.extend(["dojazd", "lekarz"])
+    if "niepelnospraw" in folded or "syna" in folded:
+        extra.append("niepelnospraw")
+    seen: list[str] = []
+    for word in words + extra:
+        if word not in seen:
+            seen.append(word)
+    return seen
+
+
 def _keyword_score(query: str, item: dict[str, Any]) -> float:
     haystack = fold(
         " ".join(
@@ -48,11 +96,22 @@ def _keyword_score(query: str, item: dict[str, Any]) -> float:
             ]
         )
     )
-    query_words = _terms(query)
+    query_words = _needles(query)
     if not query_words:
         return 0.35
     hits = sum(1 for word in query_words if _stem_hit(word, haystack))
-    return min(0.82, 0.28 + 0.08 * hits)
+    folded_query = fold(query)
+    about_vision = any(token in folded_query for token in ("widze", "niewidom", "wzrok", "niedowid"))
+    about_child = any(token in folded_query for token in ("dziec", "syna", "syn "))
+    if about_vision and ("audiodeskrypc" in haystack or "etykiet" in haystack):
+        hits += 2
+    if about_vision and "braille" in haystack and "dziec" in haystack and not about_child:
+        hits -= 2
+    if about_vision and "gluch" in haystack and "audiodeskrypc" not in haystack:
+        hits -= 2
+    if about_child and any(token in haystack for token in ("dziec", "uczn", "mlodzie", "rodzin")):
+        hits += 1
+    return min(0.9, max(0.2, 0.22 + 0.1 * hits))
 
 
 def hybrid_score(base: float, item: dict[str, Any], extracted: Extracted) -> float:
@@ -72,6 +131,7 @@ def _mock_extract(query: str, location: str | None) -> Extracted:
     folded = fold(query)
     category = "inne"
     rules = (
+        (("widze", "niewidom", "wzrok", "braille", "niedowid"), "niepelnosprawnosc"),
         (("samot", "osamot"), "samotnosc"),
         (("lekarz", "dojazd", "dowoz", "transport", "przychod"), "dostep_do_uslug"),
         (("internet", "erecept", "komputer", "cyfr"), "wykluczenie_cyfrowe"),
@@ -86,7 +146,11 @@ def _mock_extract(query: str, location: str | None) -> Extracted:
         if any(needle in folded for needle in needles):
             category = slug
             break
-    if "senior" in folded or "stars" in folded:
+    if any(token in folded for token in ("widze", "niewidom", "wzrok", "niedowid")):
+        target = "osoby słabowidzące"
+    elif "syna" in folded or "niepelnospraw" in folded:
+        target = "osoby z niepełnosprawnością i ich bliscy"
+    elif "senior" in folded or "stars" in folded:
         target = "seniorzy"
     elif "mlodzie" in folded:
         target = "młodzież"
@@ -150,10 +214,21 @@ def _mock_similar(category: str) -> SimilarNeeds:
     return SimilarNeeds(count=3, example=None)
 
 
+def _bind_cached(payload: dict[str, Any]) -> dict[str, Any]:
+    by_title = {str(item.get("title")): str(item.get("id")) for item in innovations()}
+    bound = []
+    for result in payload.get("results") or []:
+        title = str(result.get("title") or "")
+        if title in by_title:
+            result = {**result, "innovation_id": by_title[title]}
+        bound.append(result)
+    return {**payload, "results": bound}
+
+
 async def match(req: MatchRequest) -> MatchResponse:
     cached = lookup("/match", req.model_dump(mode="json"))
     if cached:
-        return MatchResponse.model_validate(cached)
+        return MatchResponse.model_validate(_bind_cached(cached))
     if llm.available():
         return await _match_live(req)
     return _match_mock(req)

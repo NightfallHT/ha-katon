@@ -20,6 +20,8 @@ def _read_json_lists(directory) -> list[dict[str, Any]]:
         return []
     rows: list[dict[str, Any]] = []
     for path in sorted(directory.glob("*.json")):
+        if "first-10" in path.name:
+            continue
         try:
             payload = json.loads(path.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
@@ -63,7 +65,11 @@ def _buckets() -> dict[str, list[dict[str, Any]]]:
     for item in seeded:
         kind = _kind(item)
         if kind:
-            buckets[kind].append(_with_id(item, kind))
+            titled = _with_id(item, kind)
+            key = str(titled.get("title") or titled.get("name") or titled["id"])
+            if any(str(existing.get("title") or existing.get("name")) == key for existing in buckets[kind]):
+                continue
+            buckets[kind].append(titled)
     if not buckets["innovation"]:
         fixtures = _read_json_lists(AI_ROOT / "fixtures")
         for item in fixtures:

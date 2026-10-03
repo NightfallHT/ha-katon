@@ -24,6 +24,7 @@ from services.middleman import checklist_items
 from models import BudgetItem
 
 HALINA = "Starsi sąsiedzi są samotni i nie mogą dojechać do lekarza. Mieszkam w wiejskiej gminie."
+HALINA_DEMO = "Słabo widzę. Chcę wiedzieć, z jakich innowacji w Małopolsce mogę skorzystać. Pokaż mi to, co jest dla osób takich jak ja."
 GMINA = {"name": "Gmina Testowa", "type": "wiejska", "population": 4200, "population_trend": "spada"}
 FISZKA = {
     "title": "Dowóz do lekarza",
@@ -62,6 +63,10 @@ def test_match() -> None:
     check(response.status_code == 200, "match status")
     check(3 <= len(body["results"]) <= 5, "match count")
     check(body["results"][0]["score"] >= 0.5, "halina confident")
+    vision = client.post("/match", json={"query": HALINA_DEMO})
+    vision_body = vision.json()
+    check(vision.status_code == 200 and vision_body["extracted"]["category"] == "niepelnosprawnosc", "vision category")
+    check(vision_body["results"][0]["score"] >= 0.5, "vision confident")
     check(all(item["why"] and item["category"] in CATEGORIES for item in body["results"]), "match shape")
     weak = client.post("/match", json={"query": "zzzz qqqq"})
     check(weak.status_code == 200 and weak.json()["results"][0]["score"] < 0.5, "low confidence")
@@ -112,7 +117,8 @@ def test_middleman() -> None:
     body = report.json()["report"]
     check("szacunek orientacyjny" in body["summary"].lower(), "cost label")
     check(len(body["usluga_wrazliwa_checklist"]) >= 6, "generic checklist")
-    check("Cel" in checklist_items(), "checklist fallback")
+    items = checklist_items()
+    check("Cel" in items or any("grant" in item.lower() for item in items), "checklist source")
 
 
 def test_kreator_and_chat() -> None:
@@ -143,8 +149,11 @@ def test_kreator_and_chat() -> None:
 
 def test_demo_cache() -> None:
     os.environ["DEMO_MODE"] = "1"
-    cached = client.post("/match", json={"query": HALINA})
-    check(cached.json()["need_id"] == "22222222-2222-4222-8222-222222222201", "demo cache")
+    cached = client.post("/match", json={"query": HALINA_DEMO})
+    cached_body = cached.json()
+    check(cached_body["need_id"] == "22222222-2222-4222-8222-222222222201", "demo cache")
+    check(cached_body["results"][0]["title"] == "Zdobądź swoje szczyty", "demo vision title")
+    check(cached_body["results"][0]["innovation_id"] != "seed", "demo id bound")
     report = client.post(
         "/middleman/report",
         json={

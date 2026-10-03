@@ -17,7 +17,7 @@ from models import (
     MiddlemanReportResponse,
     ServiceReport,
 )
-from util import one_question, read_prompt, read_repo_text
+from util import fold, one_question, read_prompt, read_repo_text
 
 GENERIC_CHECKLIST = (
     "Cel",
@@ -59,11 +59,11 @@ def checklist_items() -> list[str]:
 
 
 def _mark_checklist(items: list[str], blob: str) -> list[ChecklistItem]:
-    folded = blob.lower()
+    folded = fold(blob)
     marked: list[ChecklistItem] = []
     for item in items:
-        token = item.lower().split()[0]
-        marked.append(ChecklistItem(item=item, done=token in folded or item in GENERIC_CHECKLIST))
+        words = [word for word in fold(item).replace(",", " ").split() if len(word) > 4]
+        marked.append(ChecklistItem(item=item, done=any(word in folded for word in words[:4])))
     return marked
 
 
