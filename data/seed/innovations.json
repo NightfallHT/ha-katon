@@ -928,11 +928,11 @@
   },
   {
     "title": "Bajkala",
-    "summary": "Lampka z nagraniem bajki pomaga dzieciom migrantów oswoić się z polską kulturą. Bajki są po polsku i w języku dziecka.",
-    "description": "Zestaw zawiera drewnianą lampkę z odtwarzaczem bajek, książeczkę i słowniczek. Bajki z polskiego kręgu kulturowego mają podobieństwa do opowieści znanych dziecku. Pomaga to w nauce języka i budowaniu poczucia bezpieczeństwa. Może być używany w domu, szkole i ośrodku dla cudzoziemców.",
+    "summary": "Lampka z nagraniem bajki pomaga czeczeńskim dzieciom oswoić się z polską kulturą. Bajki są po polsku i po rosyjsku lub czeczeńsku.",
+    "description": "Zestaw zawiera lampkę z odtwarzaczem bajek, książeczkę i słowniczek. Polskie bajki są podobne do opowieści znanych dziecku. Test pokazał, że zachęca do słuchania bajek i daje poczucie bezpieczeństwa. Mogą z niego korzystać ośrodki dla cudzoziemców i szkoły.",
     "category": "integracja_spoleczna",
     "target_groups": [
-      "dzieci migrantów",
+      "dzieci z Czeczenii",
       "rodziny cudzoziemców"
     ],
     "tags": [
@@ -953,7 +953,7 @@
   {
     "title": "Dialog ponad kulturami",
     "summary": "Model mediacji pomaga rodzicom z różnych krajów porozumieć się w sprawie dziecka. Ma zapobiegać porwaniom rodzicielskim.",
-    "description": "Mediacja łączy wiedzę prawną, psychologiczną i międzykulturową. Dotyczy głównie miejsca pobytu dziecka i władzy rodzicielskiej. Pomaga obniżyć napięcie, zanim konflikt trafi do sądu. Z modelu mogą korzystać mediatorzy, prawnicy i służby pracujące z rodzinami.",
+    "description": "Mediacja łączy wiedzę prawną, psychologiczną i międzykulturową. Dotyczy głównie miejsca pobytu dziecka i władzy rodzicielskiej. Można ją prowadzić przed sprawą w sądzie, w jej trakcie i po jej zakończeniu. Z modelu mogą korzystać mediatorzy, prawnicy i ośrodki pomocy rodzinie.",
     "category": "rodzina_dzieci",
     "target_groups": [
       "rodziny międzykulturowe",
@@ -977,7 +977,7 @@
   {
     "title": "Wortal informacyjny",
     "summary": "Strona internetowa w języku dari tłumaczy uchodźcom z Afganistanu, jak działa życie w Polsce. Informacje są podane w kontekście ich kultury.",
-    "description": "Wortal jest podzielony na tematy, takie jak zdrowie, edukacja i urzędy. Treści nie są zwykłym tłumaczeniem, tylko wyjaśniają polskie realia. Ułatwia to samodzielne załatwianie codziennych spraw. Mogą z niego korzystać także organizacje i urzędy pomagające uchodźcom.",
+    "description": "Wortal jest podzielony na tematy, takie jak zdrowie i edukacja. Treści nie są zwykłym tłumaczeniem, tylko wyjaśniają polskie realia. Zawiera też wskazówki dla polskich lekarzy i urzędników, jak rozmawiać z Afgańczykami. Mogą z niego korzystać organizacje, urzędy i placówki medyczne.",
     "category": "integracja_spoleczna",
     "target_groups": [
       "uchodźcy z Afganistanu"
@@ -1000,7 +1000,7 @@
   {
     "title": "Komunikator dla uchodźców z Afganistanu",
     "summary": "Aplikacja pomaga uchodźcom z Afganistanu porozumieć się z Polakami. Działa po polsku i w języku dari, także z obrazkami.",
-    "description": "Komunikator zawiera najpotrzebniejsze zwroty z codziennych sytuacji. Piktogramy pomagają osobom, które nie czytają. Ułatwia rozmowę w przychodni, urzędzie czy ośrodku pomocy społecznej. Mogą z niego korzystać zarówno uchodźcy, jak i pracownicy instytucji.",
+    "description": "Zawiera słownictwo o zdrowiu, edukacji, pracy i sprawach urzędowych. Ułatwia rozmowę w przychodni, urzędzie czy ośrodku pomocy społecznej. Test pokazał, że osobom czytającym pomaga w podstawowej komunikacji. Dla osób niepiśmiennych piktogramy wymagają jeszcze zmian.",
     "category": "integracja_spoleczna",
     "target_groups": [
       "uchodźcy z Afganistanu",
@@ -1013,7 +1013,7 @@
       "piktogramy",
       "język dari"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
@@ -1024,7 +1024,7 @@
   {
     "title": "Health Guide PL",
     "summary": "Przewodnik po polskiej publicznej służbie zdrowia dla cudzoziemców. Jest dostępny po angielsku i ukraińsku.",
-    "description": "Przewodnik wyjaśnia, jak zapisać się do lekarza i korzystać z podstawowej opieki zdrowotnej. Ma wersję drukowaną, PDF i aplikację na telefon. Pomaga osobom, które mają ubezpieczenie, ale nie znają języka i systemu. Przyda się pracownikom, studentom i rodzinom z innych krajów.",
+    "description": "Przewodnik wyjaśnia, jak działa podstawowa opieka zdrowotna w Polsce. Pomaga wybrać lekarza pierwszego kontaktu i poznać kalendarz szczepień dzieci. Ma wersję drukowaną, PDF i aplikację na Androida. Przyda się cudzoziemcom i personelowi placówek zdrowia.",
     "category": "dostep_do_uslug",
     "target_groups": [
       "cudzoziemcy",
@@ -1073,7 +1073,7 @@
   {
     "title": "Uniodzież",
     "summary": "Nieprzemakalne okrycie przeciwdeszczowe dla osób na wózku. Modułowa budowa pozwala dopasować je do użytkownika.",
-    "description": "Okrycie zostało zaprojektowane z myślą o osobach poruszających się na wózku. Chroni przed deszczem bez krępowania ruchów. Elementy można łączyć zależnie od potrzeb. Ułatwia samodzielne wychodzenie z domu przy złej pogodzie.",
+    "description": "Okrycie zostało zaprojektowane z myślą o osobach poruszających się na wózku. Elementy można łączyć zależnie od potrzeb. Powstało według zasad projektowania uniwersalnego, więc sprawdzi się też u innych osób. Ułatwia wychodzenie z domu przy złej pogodzie.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby na wózku"
@@ -1117,8 +1117,8 @@
   },
   {
     "title": "Kompleksowa pomoc dla osób po amputacji kończyny dolnej",
-    "summary": "Zespół specjalistów pomaga osobie po amputacji nogi szybciej wrócić do codziennego życia. Wsparcie zaczyna się zaraz po zabiegu.",
-    "description": "W opiece biorą udział psycholog, dietetyk i fizjoterapeuta. Praca zaczyna się od wspólnego wywiadu z pacjentem. Specjaliści ustalają plan rehabilitacji i wsparcia. Model mogą wdrożyć placówki medyczne i samorządy.",
+    "summary": "Zespół specjalistów pomaga osobie po amputacji nogi szybciej wrócić do codziennego życia. Łączy pomoc psychologa, dietetyka i fizjoterapeuty.",
+    "description": "Praca zaczyna się od wywiadu z pacjentem. Na tej podstawie powstaje indywidualny plan 12-dniowego turnusu rehabilitacyjnego. Turnus ma dwie części po 6 dni z miesięczną przerwą na samodzielne ćwiczenia. Model mogą wdrożyć szpitale, placówki opiekuńcze i samorządy.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby po amputacji"
@@ -1164,7 +1164,7 @@
   {
     "title": "Chlap Pro",
     "summary": "Ochraniacz chroni protezę nogi przed zachlapaniem. Dzięki temu proteza dłużej działa.",
-    "description": "Wiele elementów protez nie jest odpornych na wodę. Ochraniacz zabezpiecza je podczas deszczu i codziennych czynności. Powstały wersje do najpopularniejszych protez uda i podudzia. Może przedłużyć życie protezy i obniżyć koszty napraw.",
+    "description": "Wiele elementów protez nie jest odpornych na wodę. Ochraniacz zabezpiecza je podczas deszczu i przy złej pogodzie. Powstały wersje do najpopularniejszych protez uda i podudzia. Chroni protezę przed szybszym zużyciem.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby z protezą nogi"
@@ -1186,7 +1186,7 @@
   {
     "title": "Marina Pai",
     "summary": "Narzędzie pomaga przystaniom sprawdzić, czy są dostępne dla seniorów i osób z niepełnosprawnością. Wskazuje, co warto zmienić.",
-    "description": "Zawiera ankietę, ćwiczenia i wskazówki dla zarządców marin. Pomaga zrozumieć potrzeby osób o ograniczonej mobilności i słabowidzących. Zarządca sam ocenia swoją przystań i planuje zmiany. Dzięki temu żeglarstwo staje się dostępne dla większej liczby osób.",
+    "description": "Zawiera ankietę, ćwiczenia i wskazówki dla zarządców marin. Pomaga zrozumieć potrzeby seniorów i osób z niepełnosprawnością wzroku i ruchu. Test pokazał, że narzędzie dobrze inicjuje zmiany. Ich wprowadzenie wymaga jednak inwestycji w przystanie.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "zarządcy przystani",
@@ -1199,7 +1199,7 @@
       "przystań",
       "audyt"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
@@ -1210,7 +1210,7 @@
   {
     "title": "Nakręceni na aktywność",
     "summary": "Aplikacja pokazuje, które restauracje, urzędy i muzea są dostępne dla osób z niepełnosprawnością. Opinie dodają sami użytkownicy.",
-    "description": "Użytkownicy opisują m.in. podjazdy, wejścia i toalety w odwiedzonych miejscach. Pomaga to innym zaplanować wyjście lub podróż. Aplikacja zachęca do aktywnego spędzania czasu. Mogą z niej korzystać także opiekunowie i organizacje.",
+    "description": "Użytkownicy opisują m.in. nachylenie podjazdu i swobodę poruszania się w odwiedzonych miejscach. Razem tworzą mapę przyjaznych miejsc. W teście oceniono dostępność 313 obiektów. Mogą z niej korzystać także opiekunowie i organizacje.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby z niepełnosprawnością ruchową",
@@ -1234,7 +1234,7 @@
   {
     "title": "Moduły niezależności",
     "summary": "Zabudowa kamperowa dla samochodu dostawczego, przystosowana dla osób z niepełnosprawnością. Ułatwia samodzielne podróże.",
-    "description": "Model opisuje potrzebne elementy i sposób ich montażu. Samochód może przewozić osoby na wózku, niewidome i niesłyszące. Zabudowa daje im możliwość turystyki na własnych warunkach. Mogą z niej skorzystać rodziny, organizacje i firmy turystyczne.",
+    "description": "Model opisuje potrzebne elementy i sposób ich montażu. Zabudowa jest przystosowana dla osób na wózku, niewidomych i niesłyszących. Test potwierdził korzyści przede wszystkim dla osób poruszających się na wózku. Mogą z niej skorzystać producenci kamperów, wypożyczalnie i biura turystyczne.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby z niepełnosprawnością",
@@ -1258,7 +1258,7 @@
   {
     "title": "BiustSPINKA",
     "summary": "Proste i tanie urządzenie pomaga kobietom z ograniczoną sprawnością rąk założyć biustonosz. Zwiększa samodzielność przy ubieraniu.",
-    "description": "Urządzenie wykorzystuje taśmę i jest łatwe w użyciu. Przydaje się po wypadku, przy chorobie i przy sprawnym tylko jednym ramieniu. Pomaga zakładać, zapinać i zdejmować bieliznę bez pomocy innych. Mogą je polecać gabinety rehabilitacji i sklepy z bielizną.",
+    "description": "Urządzenie wykorzystuje taśmę i jest tanie. Przydaje się po wypadku, przy chorobie i przy sprawnym tylko jednym ramieniu. Test pokazał, że nie każdej użytkowniczce jest wygodne, bo wymaga mocnych i precyzyjnych ruchów. Mogą je polecać gabinety rehabilitacji i sklepy z bielizną.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "kobiety z niepełnosprawnością ruchową"
@@ -1269,7 +1269,7 @@
       "bielizna",
       "rehabilitacja"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
@@ -1280,7 +1280,7 @@
   {
     "title": "Szablony piękna",
     "summary": "Wykroje i tabele rozmiarów bielizny dla kobiet poruszających się na wózku. Bielizna jest wygodna, funkcjonalna i estetyczna.",
-    "description": "Projekty uwzględniają wygodne zapięcia i miękkie, oddychające materiały. Biorą pod uwagę niedowłady i przykurcze. Łączą funkcjonalność z aktualną modą. Mogą z nich korzystać firmy bieliźniarskie i szwalnie.",
+    "description": "Projekty uwzględniają wygodne zapięcia i miękkie, oddychające materiały. Ułatwiają samodzielne zakładanie bielizny przy niedowładzie rąk. Łączą funkcjonalność z aktualną modą. Mogą z nich korzystać firmy bieliźniarskie, sklepy i organizacje.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "kobiety na wózku"
@@ -1324,7 +1324,7 @@
   {
     "title": "Dostępny stół targowy",
     "summary": "Stół targowy dostosowany do potrzeb seniorów i osób z niepełnosprawnością. Ułatwia samodzielne zakupy na targowisku.",
-    "description": "Powstały cztery wersje stołu z różnymi udogodnieniami. Mają m.in. pochylony blat, uchwyty na torbę i kule oraz poręcze. Kupujący może wygodnie obejrzeć towar i zapłacić. Stoły mogą wprowadzić gminy i zarządcy targowisk.",
+    "description": "Powstały cztery wersje stołu z różnymi udogodnieniami. Mają m.in. pochylony blat, uchwyty na torbę, kule i laskę oraz poręcze. Mają też miejsce na monety, dodatkowe półki i siedzisko. Stoły mogą wprowadzić gminy i zarządcy targowisk.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "seniorzy",
@@ -1346,8 +1346,8 @@
   },
   {
     "title": "Cloudleg",
-    "summary": "Kosmetyczna proteza nóg dla osób na wózku po amputacji obu nóg. Poprawia wygląd i samopoczucie użytkownika.",
-    "description": "Proteza wygląda realistycznie, ale nie jest wyrobem medycznym. Można ją przyciąć do potrzebnej długości. Jest przeznaczona dla osób, które nie korzystają z protez funkcjonalnych. Może zwiększyć pewność siebie w kontaktach z innymi.",
+    "summary": "Kosmetyczna proteza nóg dla osób na wózku po amputacji obu nóg. Pełni funkcję estetyczną, a nie medyczną.",
+    "description": "Proteza wygląda realistycznie i trzyma się dzięki elastycznym szortom. Można ją przyciąć do potrzebnej długości. Jest przeznaczona dla osób, które nie korzystają z protez funkcjonalnych. Pomaga oswoić się z nowym wyglądem po utracie nóg.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby po amputacji",
@@ -1392,8 +1392,8 @@
   },
   {
     "title": "Wózek szermierczy",
-    "summary": "Lekki i tańszy wózek do szermierki dla zawodników z niepełnosprawnością. Zawodnik może obsłużyć go samodzielnie.",
-    "description": "Wózek wykonano z nowoczesnych kompozytów i aluminium. Jest lżejszy i tańszy od wózków dostępnych na rynku. Nadaje się do treningów rekreacyjnych i zawodów. Mogą z niego korzystać kluby sportowe i organizacje.",
+    "summary": "Projekt lekkiego i tańszego wózka do szermierki dla zawodników z niepełnosprawnością. Zawodnik ma obsługiwać go samodzielnie.",
+    "description": "Wózek wykonano z nowoczesnych kompozytów i aluminium. Powstał razem z platformą „Dostępna szermierka”. Prototyp spełnia większość założeń. Nie jest jednak jeszcze gotowy do stosowania.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "sportowcy na wózkach"
@@ -1414,8 +1414,8 @@
   },
   {
     "title": "Dostępna szermierka",
-    "summary": "Lekka platforma do szermierki na wózkach. Zawodnicy mogą sami przypiąć wózki i ustawić odległość.",
-    "description": "Obecny sprzęt jest ciężki, drogi i wymaga pomocy innych osób. Nowa platforma jest lekka i łatwa w transporcie. Ma niezawodny system mocowania wózków. Ułatwia organizację treningów i zawodów.",
+    "summary": "Lekka platforma do szermierki na wózkach. Ma pozwolić zawodnikom samodzielnie przypinać wózki i ustawiać odległość.",
+    "description": "Obecny sprzęt jest ciężki, drogi i wymaga pomocy innych osób. Nowa platforma jest lekka i łatwa w transporcie. Pełnej samoobsługi nie udało się jeszcze osiągnąć. Prototyp wymaga dalszego rozwoju.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "sportowcy na wózkach"
@@ -1437,7 +1437,7 @@
   {
     "title": "Szlakiem ludzi bezdomnych",
     "summary": "Mobilny punkt higieniczny daje osobom w kryzysie bezdomności dostęp do prysznica. Przyczepa dojeżdża tam, gdzie jest potrzebna.",
-    "description": "Ogrzewana przyczepa ma prysznic, umywalkę i czystą bieliznę. Zapewnia też podstawowe środki higieniczne. Pomaga zapobiegać chorobom i przywraca poczucie godności. Rozwiązanie mogą wprowadzić gminy miejskie i wiejskie.",
+    "description": "Ogrzewana przyczepa ma prysznic, umywalkę i szafkę na czystą bieliznę. Zapewnia też podstawowe środki higieniczne. Po skorzystaniu z niej uczestnicy testu podejmowali ważne decyzje, np. o wynajęciu pokoju. Rozwiązanie mogą wprowadzić gminy miejskie i wiejskie.",
     "category": "integracja_spoleczna",
     "target_groups": [
       "osoby w kryzysie bezdomności"
@@ -1459,7 +1459,7 @@
   {
     "title": "Ścieżka Feniksa – wiejski program wyjścia z bezdomności",
     "summary": "Długofalowy program pomaga osobom w kryzysie bezdomności z małych gmin. Łączy wsparcie terapeutyczne z pracą na rzecz środowiska.",
-    "description": "Wsparcie odbywa się w środowisku lokalnym, blisko miejsca zamieszkania. Uczestnicy pracują m.in. z materiałami z recyklingu. Program obejmuje terapię, aktywizację i powrót do samodzielności. Mogą go wdrożyć gminy, OPS i organizacje społeczne.",
+    "description": "Wsparcie odbywa się w małej gminie, z użyciem jej lokalnych zasobów. Uczestnicy pracują m.in. z materiałami z recyklingu i naturalnymi. W teście 9 z 11 uczestników utrzymało abstynencję. Mogą go wdrożyć gminy, OPS i organizacje społeczne.",
     "category": "integracja_spoleczna",
     "target_groups": [
       "osoby w kryzysie bezdomności",
@@ -1482,7 +1482,7 @@
   {
     "title": "Stop otyłości",
     "summary": "Metoda pomaga dorosłym z niepełnosprawnością intelektualną walczyć z otyłością. Wsparcie odbywa się w miejscu zamieszkania.",
-    "description": "Program łączy edukację, motywowanie i zmianę nawyków. Obejmuje osobę z otyłością i jej najbliższe otoczenie. Celem jest trwała zmiana stylu życia. Metodę mogą stosować placówki wsparcia i opiekunowie.",
+    "description": "Program łączy edukację, motywowanie i zmianę nawyków. Obejmuje osobę z otyłością i jej najbliższe otoczenie. W teście poprawiły się wyniki badań i spadła waga uczestników. Metodę mogą stosować placówki wsparcia i opieki.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "dorośli z niepełnosprawnością intelektualną"
@@ -1525,8 +1525,8 @@
   },
   {
     "title": "Niepełnosprawność szansą na pełnosprawność",
-    "summary": "Zajęcia przygotowują uczniów z niepełnosprawnością intelektualną do pracy i dorosłego życia. Wzmacniają samodzielność i wiarę w siebie.",
-    "description": "Model ma charakter socjoterapeutyczny i jest skierowany do szkół średnich. Uczniowie ćwiczą role społeczne i zawodowe. Zajęcia pomagają przełamać wyuczoną bezradność. Mogą je prowadzić WTZ, ŚDS, ZAZ i organizacje.",
+    "summary": "Zajęcia przygotowują uczniów z niepełnosprawnością intelektualną do pracy i dorosłego życia. Pomagają określić mocne strony i przyszłe miejsce pracy.",
+    "description": "Model ma charakter socjoterapeutyczny i jest skierowany do szkół średnich. Uczniowie poznają różne zawody i branże. Zajęcia pomagają przełamać wyuczoną bezradność. Mogą je prowadzić WTZ, ŚDS, ZAZ i organizacje.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "młodzież z niepełnosprawnością intelektualną"
@@ -1592,8 +1592,8 @@
   },
   {
     "title": "Go ahead – mów śmiało!",
-    "summary": "Aplikacja uczy osoby z niepełnosprawnością intelektualną rozmawiać z innymi. Pomaga budować relacje.",
-    "description": "Użytkownik przechodzi lekcje i quizy z sytuacjami społecznymi. Wybiera odpowiedź i widzi reakcję rozmówcy. Uczy się, jak jego słowa wpływają na innych. Aplikacja sprawdza się w WTZ i szkołach specjalnych.",
+    "summary": "Aplikacja ma uczyć osoby z niepełnosprawnością intelektualną rozmawiać z innymi. Pokazuje reakcję rozmówcy za pomocą emotikonów.",
+    "description": "Użytkownik przechodzi lekcje i quizy z sytuacjami społecznymi. Uczestnicy testu chętnie z niej korzystali. Test nie wykazał jednak wyraźnej poprawy umiejętności komunikacji. Samodzielnie obsłużą ją tylko osoby czytające ze zrozumieniem.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "młodzież z niepełnosprawnością intelektualną",
@@ -1605,7 +1605,7 @@
       "relacje",
       "nauka"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
@@ -1616,7 +1616,7 @@
   {
     "title": "AuTyzm i ja",
     "summary": "Przewodnik dla rodziców i nauczycieli dzieci w spektrum autyzmu. Podpowiada, jak wspierać dziecko w codziennym życiu.",
-    "description": "Zawiera wskazówki, jak przygotować otoczenie dziecka. Pomaga w nawiązywaniu kontaktu i rozwijaniu potencjału. Opisuje nowoczesne formy pracy z dzieckiem. Przyda się przedszkolom, szkołom i rodzinom.",
+    "description": "Zawiera wskazówki dla osób z otoczenia dziecka. Opisuje nowoczesne formy pracy z dzieckiem. Dołączono dzienniczek online do obserwacji zachowań w domu i przedszkolu. Przyda się przedszkolom, szkołom i rodzinom.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "dzieci w spektrum autyzmu",
@@ -1640,7 +1640,7 @@
   {
     "title": "Podróż poza domem w VR",
     "summary": "Aplikacja w wirtualnej rzeczywistości pomaga oswoić lęk przed wyjściem z domu. Terapia odbywa się w bezpiecznych warunkach.",
-    "description": "Jest przeznaczona dla dzieci i osób z niepełnosprawnością intelektualną. Użytkownik ćwiczy sytuacje społeczne bez wychodzenia z domu. Pomaga to stopniowo zmniejszać lęk. Mogą z niej korzystać rodzice, terapeuci i szkoły specjalne.",
+    "description": "Jest przeznaczona dla dzieci i osób z niepełnosprawnością intelektualną. Użytkownik ćwiczy sytuacje społeczne bez wychodzenia z domu. Dzięki treningom niektóre dzieci pierwszy raz weszły do pociągu czy hotelu. Mogą z niej korzystać rodzice, terapeuci i szkoły specjalne.",
     "category": "zdrowie_psychiczne",
     "target_groups": [
       "dzieci z lękiem",
@@ -1662,8 +1662,8 @@
   },
   {
     "title": "TA ścieżka",
-    "summary": "Aplikacja prowadzi osobę w spektrum autyzmu przez muzeum lub inny budynek. Dzięki temu nowe miejsce jest mniej stresujące.",
-    "description": "Nawigacja działa dzięki nadajnikom rozmieszczonym w budynku. Aplikacja podpowiada, gdzie iść i co się wydarzy. Pomaga przygotować się na nowe bodźce. Mogą ją wdrożyć instytucje kultury i organizacje.",
+    "summary": "Aplikacja prowadzi osobę w spektrum autyzmu po ścieżce w budynku. Dzięki temu nowe miejsce jest mniej stresujące.",
+    "description": "Nawigacja działa dzięki nadajnikom rozmieszczonym w budynku. Aplikacja podpowiada, gdzie iść i jaki krok zrobić dalej. Test pokazał większe poczucie bezpieczeństwa i samodzielności. Rozwiązanie wymaga jeszcze dopracowania.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby w spektrum autyzmu"
@@ -1674,7 +1674,7 @@
       "kultura",
       "aplikacja"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
@@ -1685,7 +1685,7 @@
   {
     "title": "OSA i eco puzzle",
     "summary": "Program wsparcia dla rodzin z dorosłą osobą w spektrum autyzmu. Rodziny tworzą grupę samopomocową.",
-    "description": "Program składa się z kilku uzupełniających się części. Rodziny wspólnie działają społecznie i zawodowo. Dbają też o środowisko i swoje emocje. Wzmacnia to relacje w rodzinie i poza nią.",
+    "description": "Rodziny wspólnie działają społecznie i zawodowo. Uczą się m.in. wytwarzać ekologiczne środki higieniczne i na tym zarabiać. Mają też wsparcie psychologa. Wzmacnia to relacje w rodzinie i poza nią.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "dorośli w spektrum autyzmu",
@@ -1708,7 +1708,7 @@
   {
     "title": "Rodzinny system wzajemnej pomocy",
     "summary": "Model pomaga dorosłym w spektrum autyzmu, którzy nie uczą się ani nie pracują. Wsparcie odbywa się w domu i w rodzinie.",
-    "description": "Model jest przeznaczony dla osób w wieku 20–26 lat. Wykorzystuje terapię zajęciową w warunkach domowych. Rozwija umiejętności społeczne i praktyczne. Może przygotować do pracy na otwartym rynku.",
+    "description": "Model jest przeznaczony dla osób w wieku 20–26 lat. Wykorzystuje terapię zajęciową w domach rodzin, w małych grupach. Rozwija umiejętności społeczne i zawodowe. Ma też odciążać rodziców i opiekunów.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "dorośli w spektrum autyzmu",
@@ -1731,7 +1731,7 @@
   {
     "title": "Mix AR i VR dla koordynacji ruchowej",
     "summary": "Aplikacja z rozszerzoną i wirtualną rzeczywistością pomaga dzieciom w spektrum autyzmu ćwiczyć sprawność dłoni. Zachęca do codziennych ćwiczeń.",
-    "description": "Dziecko ćwiczy chwytanie i koordynację wzrokowo-ruchową. Ćwiczenia mają formę zabawy. Do aplikacji dołączono scenariusze zajęć terapeutycznych. Mogą z niej korzystać rodzice i szkoły specjalne.",
+    "description": "Dziecko ćwiczy chwytanie i kontrolę ruchów palców. Dzięki AR i VR dzieci chętniej ćwiczą. Do aplikacji dołączono scenariusze zajęć terapeutycznych. Według testu aplikacja wymaga jeszcze dalszych prac.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "dzieci w spektrum autyzmu"
@@ -1753,7 +1753,7 @@
   {
     "title": "Wsparcie imprez masowych dla osób z niepełnosprawnością wzroku",
     "summary": "Maty naprowadzające tworzą bezpieczne ścieżki na koncertach i festiwalach. Pomagają osobom niewidomym i na wózkach.",
-    "description": "Maty mają linie prowadzące, pola uwagi i najazdy dla wózków. Można je szybko rozłożyć w plenerze i w budynku. Do zestawu dołączono poradnik dla organizatorów. Dzięki temu wydarzenia stają się dostępne dla wszystkich.",
+    "description": "Maty mają linie prowadzące, pola uwagi i najazdy dla wózków. Sprawdzają się w budynkach i w plenerze, na różnym podłożu. Są antypoślizgowe i łatwe do czyszczenia. Poradnik pokazuje organizatorom, jak przygotować dostępne wydarzenie.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby niewidome i słabowidzące",
@@ -1776,7 +1776,7 @@
   {
     "title": "Teleasystent",
     "summary": "Aplikacja pozwala asystentowi wspierać osobę niewidomą na odległość. Łączy rozmowę wideo z nawigacją w terenie.",
-    "description": "Asystent widzi otoczenie przez kamerę telefonu i podpowiada drogę. Pomaga też w kontaktach z urzędami i w codziennych sprawach. Jeden asystent może wspierać więcej osób. Test potwierdził, że rozwiązanie zwiększa samodzielność.",
+    "description": "Asystent widzi otoczenie przez kamerę telefonu i podpowiada drogę. Pomaga też w kontaktach z urzędami i w czynnościach domowych. Zakres wsparcia ustala się na podstawie potrzeb danej osoby. Test potwierdził, że rozwiązanie zwiększa samodzielność.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby niewidome"
@@ -1819,8 +1819,8 @@
   },
   {
     "title": "Blue Sea Eye",
-    "summary": "Urządzenie z aplikacją pozwala osobom niewidomym samodzielnie sterować łodzią. Podaje kurs i położenie steru głosem.",
-    "description": "Przenośny wskaźnik działa niezależnie od sprzętu na jachcie. Przekazuje informacje do aplikacji w smartfonie. Żeglarz wie, czy płynie zgodnie z kursem. Rozwiązanie otwiera żeglarstwo dla osób z niepełnosprawnością wzroku.",
+    "summary": "Urządzenie z aplikacją pozwala osobom niewidomym samodzielnie sterować łodzią. Podaje kurs i położenie steru głosem i dźwiękami.",
+    "description": "Przenośny wskaźnik działa niezależnie od sprzętu na jachcie. Przekazuje informacje do aplikacji w smartfonie. Test potwierdził samodzielne sterowanie w sprzyjającej pogodzie. Urządzenie wymaga dalszych prac nad trwałością.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby niewidome i słabowidzące"
@@ -1887,7 +1887,7 @@
   {
     "title": "Wibraap",
     "summary": "Kamizelka zamienia dźwięki w wibracje. Osoby głuche mogą poczuć muzykę ciałem.",
-    "description": "Kamizelka działa z aplikacją na komputer i telefon. Może przetwarzać dźwięk z mikrofonu lub własne nagrania. Pozwala uczestniczyć w koncertach i spektaklach. Rozwija kreatywność i wrażliwość na dźwięk.",
+    "description": "Kamizelka działa z aplikacją na komputer i telefon. Może przetwarzać dźwięk z mikrofonu, własne nagrania lub grę na instrumencie. Mogą z niej korzystać m.in. organizatorzy koncertów i spektakli. Urządzenie wymaga jeszcze dalszego rozwoju.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby głuche i słabosłyszące"
@@ -1909,7 +1909,7 @@
   {
     "title": "My way to culture",
     "summary": "Aplikacja prowadzi po muzeum osoby z niepełnosprawnością wzroku, słuchu i ruchu. Każda grupa ma własną ścieżkę zwiedzania.",
-    "description": "Nawigacja działa dzięki nadajnikom w budynku. Aplikacja wybiera trasę dostępną dla danej osoby. Podaje opisy eksponatów w dostępnej formie. Mogą ją wdrożyć muzea i galerie.",
+    "description": "Nawigacja działa dzięki nadajnikom w budynku. Aplikacja wybiera trasę dostępną dla danej osoby, np. z windą. Włącza audiodeskrypcję albo film z tłumaczeniem na PJM. Mogą ją wdrożyć muzea i galerie.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby z niepełnosprawnością"
@@ -1954,7 +1954,7 @@
   {
     "title": "Dostępny wniosek dla g/Głuchych",
     "summary": "Wzory wniosków ułatwiają osobom głuchym załatwianie spraw w urzędach. Pomagają, gdy nie ma tłumacza języka migowego.",
-    "description": "Powstały trzy wzory dokumentów o zapewnienie dostępności. Są zrozumiałe dla osób posługujących się PJM. Skracają drogę do uzyskania pomocy tłumacza. Mogą je stosować urzędy i organizacje.",
+    "description": "Powstały trzy wzory dokumentów o zapewnienie dostępności. Skracają drogę do uzyskania pomocy tłumacza. Niektórzy użytkownicy potrzebują jednak dodatkowych wyjaśnień. Działają najlepiej, gdy instytucje udostępnią je na swoich stronach.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby głuche i słabosłyszące"
@@ -1976,7 +1976,7 @@
   {
     "title": "Czytamoda",
     "summary": "Aplikacja czyta opisy ubrań na głos. Osoby niewidome mogą same wybrać i kupić odzież.",
-    "description": "Rozwiązanie dodaje audiodeskrypcję do opisów w sklepach. Opisuje krój, styl i wykonanie ubrania. Zmniejsza potrzebę asysty w trakcie zakupów. Mogą ją wdrożyć sklepy internetowe i stacjonarne.",
+    "description": "Rozwiązanie dodaje audiodeskrypcję do opisów w sklepach. Opisuje styl i wykonanie ubrania. Pozwala robić zakupy odzieżowe bez asysty. Na razie jest polecane dla mniejszych sklepów i butików.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby niewidome i słabowidzące"
@@ -1998,7 +1998,7 @@
   {
     "title": "Dostępny transport publiczny",
     "summary": "Aplikacja pomaga osobom niewidomym korzystać z komunikacji miejskiej. Pokazuje przystanki i nadjeżdżające pojazdy.",
-    "description": "To wersja na Androida aplikacji znanej z systemu iOS. Opisuje infrastrukturę przystanków i położenie pojazdów. Ułatwia bezpieczne i samodzielne podróże po mieście. Mogą ją rozwijać przewoźnicy i organizacje.",
+    "description": "To wersja na Androida aplikacji „Zaraz jadę” z systemu iOS. Opisuje infrastrukturę przystanków i wyznacza trasę do przystanku. Działa z czytnikiem ekranu TalkBack. Została przygotowana dla komunikacji miejskiej w Warszawie.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby niewidome i słabowidzące"
@@ -2020,7 +2020,7 @@
   {
     "title": "Wspinaczka dostępna dla wszystkich",
     "summary": "Metoda wspinaczki górskiej i na ściance dla osób niewidomych. Łączy sport z rehabilitacją przez wyzwanie.",
-    "description": "Zajęcia prowadzą wykwalifikowani instruktorzy. Uczestnicy ćwiczą współpracę i komunikację z przewodnikiem. Wspinaczka odbywa się w bezpiecznych warunkach. Mogą ją organizować kluby i organizacje.",
+    "description": "Zajęcia prowadzą wykwalifikowani instruktorzy. Uczestnicy ćwiczą najpierw na ściance, a potem w górach. Test pokazał, że wcześniej potrzebny jest trening kondycji. Mogą ją organizować kluby i organizacje.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby niewidome i słabowidzące"
@@ -2031,7 +2031,7 @@
       "wspinaczka",
       "niewidomi"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
@@ -2041,8 +2041,8 @@
   },
   {
     "title": "Spotkania KulturLove",
-    "summary": "Platforma łączy osoby z niepełnosprawnością z wolontariuszami, którzy idą z nimi do kina czy teatru. Ułatwia udział w kulturze.",
-    "description": "Opiekunowie nie zawsze mogą towarzyszyć w wyjściach. Platforma pozwala znaleźć towarzysza na konkretne wydarzenie. Działa na komputerze, tablecie i telefonie. Pomaga przeciwdziałać izolacji.",
+    "summary": "Platforma łączy osoby z niepełnosprawnością z „czasowymi opiekunami”, którzy idą z nimi do kina czy teatru. Ma ułatwić udział w kulturze.",
+    "description": "Opiekunowie nie zawsze mogą towarzyszyć w wyjściach. Platforma pozwala znaleźć towarzysza na konkretne wydarzenie. Działa na komputerze, tablecie i telefonie. W teście trudno było znaleźć chętnych, m.in. z powodu pandemii.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby z niepełnosprawnością",
@@ -2054,7 +2054,7 @@
       "czas wolny",
       "platforma"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
@@ -2087,7 +2087,7 @@
   {
     "title": "Kaski binauralne",
     "summary": "Wyciemniony kask z nagraniami przestrzennymi pomaga w rehabilitacji osób tracących wzrok. Uczy rozpoznawania dźwięków z codziennego życia.",
-    "description": "Nagrania pozwalają precyzyjnie określić, skąd dochodzi dźwięk. Użytkownik ćwiczy orientację w bezpiecznych warunkach. Rehabilitacja jest szybsza i bardziej skuteczna. Mogą z niego korzystać organizacje wspierające niewidomych.",
+    "description": "Nagrania pozwalają precyzyjnie określić, skąd dochodzi dźwięk. Odtwarzają czynności z codziennego życia. Testerzy zwrócili uwagę, że kask jest ciężki i nagrzewa się. Mogą z niego korzystać organizacje wspierające niewidomych.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby tracące wzrok"
@@ -2109,7 +2109,7 @@
   {
     "title": "Słownik specjalistyczny PL–PJM",
     "summary": "Aplikacja to słownik specjalistycznych słów w polskim języku migowym. Użytkownicy sami dodają nowe znaki.",
-    "description": "Każde słowo ma nagranie wideo ze znakiem. Słownik działa podobnie do Wikipedii. Pomaga ujednolicić znaki z różnych dziedzin. Przyda się osobom głuchym, tłumaczom i uczelniom.",
+    "description": "Każde słowo ma nagranie wideo ze znakiem. Słownik działa podobnie do Wikipedii. Na razie zawiera tylko kilka haseł. Przyda się osobom głuchym, tłumaczom i uczelniom.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby głuche",
@@ -2132,7 +2132,7 @@
   {
     "title": "Agencja pracy incydentalnej",
     "summary": "Agencja daje osobom w głębokim kryzysie możliwość dorywczej pracy. Zadania są dopasowane do ich możliwości.",
-    "description": "Praca odbywa się w formie nierejestrowanej działalności. Formalności są ograniczone do minimum. Model wspiera m.in. osoby w kryzysie bezdomności i psychicznym. Pomaga stopniowo wrócić na rynek pracy.",
+    "description": "Praca odbywa się w formie nierejestrowanej działalności. Nie ma stałych godzin ani skomplikowanych dokumentów. Model wspiera m.in. osoby w kryzysie bezdomności i psychicznym. W teście z możliwości pracy skorzystały 3 osoby.",
     "category": "integracja_spoleczna",
     "target_groups": [
       "osoby w kryzysie bezdomności",
@@ -2144,7 +2144,7 @@
       "kryzys",
       "reintegracja"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
@@ -2155,7 +2155,7 @@
   {
     "title": "NIEwypaleni",
     "summary": "Warsztat i broszura pomagają osobom z niepełnosprawnością intelektualną unikać wypalenia w pracy. Wspierają utrzymanie zatrudnienia.",
-    "description": "Trzydniowy warsztat uczy korzystania z broszury. Broszura jest napisana tekstem łatwym do czytania. Opisuje aktywności, które pomagają zachować siły. Mogą z niej korzystać pracodawcy i organizacje wspierające.",
+    "description": "Trzydniowy warsztat uczy korzystania z broszury. Broszura jest napisana tekstem łatwym do czytania. Opisuje objawy wypalenia i sposoby na przyjemność z pracy. Do oceny efektów potrzebne są dalsze testy.",
     "category": "niepelnosprawnosc",
     "target_groups": [
       "osoby z niepełnosprawnością intelektualną"
@@ -2166,7 +2166,7 @@
       "tekst łatwy",
       "wsparcie"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
@@ -2199,8 +2199,8 @@
   },
   {
     "title": "Mobilna giełda pracy",
-    "summary": "Mobilne giełdy pracy docierają do kobiet z małych miejscowości. Pomagają im wrócić do pracy.",
-    "description": "Samorząd współpracuje z lokalnymi firmami i urzędem pracy. Wydarzenia odbywają się blisko miejsca zamieszkania. Kobiety poznają oferty i mogą od razu porozmawiać z pracodawcą. Model mogą wdrożyć gminy i OPS.",
+    "summary": "Mobilne giełdy pracy mają docierać do kobiet z małych miejscowości. Wydarzenia odbywają się blisko ich domu.",
+    "description": "Samorząd współpracuje z lokalnymi firmami i urzędem pracy. Giełda obejmuje m.in. doradztwo zawodowe i spotkania z pracodawcami. W teście przyszło bardzo niewielu pracodawców. Efekt oceniono jako neutralny.",
     "category": "integracja_spoleczna",
     "target_groups": [
       "kobiety",
@@ -2212,7 +2212,7 @@
       "wieś",
       "aktywizacja"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
@@ -2223,7 +2223,7 @@
   {
     "title": "Oddawacze",
     "summary": "Aplikacja pozwala oddać niepotrzebne rzeczy i przy okazji wesprzeć cel charytatywny. Odbierający płaci symboliczną kwotę na wybrany cel.",
-    "description": "Oddający wskazuje, na jaki cel trafi wpłata. Osoby o niskich dochodach mogą tanio zdobyć potrzebne przedmioty. Lokalne organizacje zyskują wsparcie finansowe. Rozwiązanie ogranicza też ilość odpadów.",
+    "description": "Oddający wskazuje, na jaki cel trafi wpłata. Osoby o niskich dochodach mogą tanio zdobyć potrzebne przedmioty. Test potwierdził zainteresowanie oddających i organizacji. Platforma potrzebuje jednak większej liczby użytkowników.",
     "category": "integracja_spoleczna",
     "target_groups": [
       "osoby ubogie",
@@ -2235,7 +2235,7 @@
       "ekologia",
       "charytatywność"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
@@ -2246,7 +2246,7 @@
   {
     "title": "Therapy Set",
     "summary": "Zestaw siedmiu pomocy terapeutycznych dla seniorów, także leżących. Można go wykonać w warsztatach terapii zajęciowej.",
-    "description": "Pomoce służą do terapii i ćwiczeń przy łóżku seniora. Mogą je wytwarzać mieszkańcy DPS. Na stronie internetowej są instrukcje i filmy. Zestaw przyda się w DPS, ZOL i hospicjach.",
+    "description": "Pomoce służą do terapii i ćwiczeń przy łóżku seniora. Mogą je wytwarzać mieszkańcy DPS. Na stronie internetowej są instrukcje i scenariusze zajęć. Zestaw przyda się w DPS, ZOL i hospicjach.",
     "category": "starzenie",
     "target_groups": [
       "seniorzy",
@@ -2292,7 +2292,7 @@
   {
     "title": "Edu gra HaHaHa",
     "summary": "Gra planszowa uczy jogi śmiechu. Wspiera dobre samopoczucie seniorów i osób z niepełnosprawnością.",
-    "description": "Karty zawierają ćwiczenia rozgrzewające, śmiechowe, integrujące i oddechowe. Gra prowadzi przez całą sesję jogi śmiechu. Wspiera relacje w grupie i łagodną rehabilitację. Mogą z niej korzystać WTZ, kluby seniora i organizacje.",
+    "description": "Karty zawierają ćwiczenia rozgrzewające, śmiechowe, integrujące i oddechowe. Gra nie wyłania zwycięzców. Jej celem jest integracja grupy i dodanie energii. Mogą z niej korzystać WTZ, szkoły specjalne i organizacje.",
     "category": "zdrowie_psychiczne",
     "target_groups": [
       "seniorzy",
@@ -2362,7 +2362,7 @@
   {
     "title": "Żeglowanie w wyobraźni",
     "summary": "Gogle wirtualnej rzeczywistości pozwalają poczuć żeglowanie bez wchodzenia na jacht. Pomagają oswoić lęk przed wodą.",
-    "description": "Użytkownik steruje łodzią ruchami rąk. Seniorzy mogą bezpiecznie przygotować się do prawdziwego rejsu. Dzieci z niepełnosprawnością ruchową zdobywają żeglarskie doświadczenie. Mogą z tego korzystać ośrodki dla seniorów i organizatorzy rejsów.",
+    "description": "Użytkownik steruje łodzią ruchami rąk. Seniorzy mogą oswoić lęk przed wejściem na jacht. Dzieci z niepełnosprawnością ruchową zdobywają żeglarskie doświadczenie. Powstały też materiały szkoleniowe dla trenerów żeglarstwa.",
     "category": "starzenie",
     "target_groups": [
       "seniorzy",
@@ -2384,8 +2384,8 @@
   },
   {
     "title": "Narzędzie do spraw spadkowych dla seniorów",
-    "summary": "Prosta aplikacja pomaga seniorom uporządkować sprawy spadkowe. Pokazuje, kto dziedziczy i jak napisać testament.",
-    "description": "Narzędzie ustala krąg spadkobierców według prawa. Wyjaśnia rodzaje testamentów i ich formy. Podpowiada, kiedy potrzebny jest notariusz. Przyda się hospicjom, organizacjom i osobom prywatnym.",
+    "summary": "Aplikacja ma pomóc seniorom uporządkować sprawy spadkowe. Pokazuje, kto dziedziczy, i pomaga przygotować wzór testamentu.",
+    "description": "Narzędzie ustala krąg spadkobierców według prawa. Wyjaśnia rodzaje testamentów i podpowiada, kiedy potrzebny jest notariusz. Test pokazał, że część pojęć jest niezrozumiała. Testerzy tworzyli wadliwe dokumenty, więc aplikacja wymaga poprawek.",
     "category": "starzenie",
     "target_groups": [
       "seniorzy",
@@ -2398,7 +2398,7 @@
       "aplikacja",
       "seniorzy"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
@@ -2408,8 +2408,8 @@
   },
   {
     "title": "Korytarz wspomnień",
-    "summary": "Korytarz w DPS zamienia się w miejsce wspomnień mieszkańców. Zdjęcia i nagrania pomagają w terapii osób z demencją.",
-    "description": "Na ścianach są zdjęcia mieszkańców i ich bliskich. Przyciski odtwarzają nagrania z pytaniami i wspomnieniami. Przestrzeń zachęca do rozmowy i pracy w grupie. Rozwiązanie mogą wprowadzić domy pomocy społecznej.",
+    "summary": "Korytarz w DPS zamienia się w miejsce wspomnień mieszkańców. Zdjęcia i nagrania urozmaicają codzienność.",
+    "description": "Na ścianach są zdjęcia mieszkańców i ich opiekunów. Przyciski odtwarzają nagrania z pytaniami i odpowiedziami o osobach ze zdjęć. Test nie wykazał wpływu na pamięć mieszkańców. Rozwiązanie ma przede wszystkim charakter terapeutyczny.",
     "category": "starzenie",
     "target_groups": [
       "seniorzy",
@@ -2421,7 +2421,7 @@
       "DPS",
       "terapia"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
@@ -2431,20 +2431,19 @@
   },
   {
     "title": "Wirtualne izby pamięci",
-    "summary": "Seniorzy tworzą wirtualną galerię przedmiotów z przeszłości. Przy okazji uczą się obsługi komputera i aparatu.",
-    "description": "Model obejmuje warsztaty fotograficzne i opisywanie przedmiotów. Powstał podręcznik i pięć filmów instruktażowych. Seniorzy przekazują wiedzę młodszym pokoleniom. Wzmacnia to relacje i zmniejsza izolację.",
+    "summary": "Seniorzy tworzą wirtualną galerię przedmiotów z przeszłości. Przy okazji uczą się robić zdjęcia telefonem.",
+    "description": "Model obejmuje warsztaty fotograficzne i opisywanie przedmiotów. Powstał podręcznik i pięć filmów instruktażowych. Bez eksperta seniorom trudno było wybrać wartościowe przedmioty. Sami nie korzystali też z galerii.",
     "category": "wykluczenie_cyfrowe",
     "target_groups": [
       "seniorzy"
     ],
     "tags": [
       "kompetencje cyfrowe",
-      "pamięć",
-      "międzypokoleniowe",
+      "fotografia",
       "seniorzy",
-      "samotność"
+      "pamięć"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
@@ -2455,7 +2454,7 @@
   {
     "title": "Paszport pacjenta z chorobą rzadką",
     "summary": "Elektroniczny paszport zawiera najważniejsze informacje o chorobie rzadkiej pacjenta. Pacjent zawsze ma go przy sobie.",
-    "description": "Dane wprowadza lekarz w centrum referencyjnym. Paszport zawiera informacje o leczeniu, lekach i lekarzach. Pomaga w nagłych sytuacjach i u nowych specjalistów. Może zapobiec błędom w leczeniu.",
+    "description": "Dane wprowadza personel medyczny w centrum referencyjnym. Paszport zawiera informacje o chorobie, lekach i standardach leczenia. Pozwala lekarzom spoza specjalizacji poznać zasady leczenia danej choroby. Powstały karty trzech chorób, m.in. zespołu Marfana.",
     "category": "dostep_do_uslug",
     "target_groups": [
       "pacjenci z chorobami rzadkimi"
@@ -2477,7 +2476,7 @@
   {
     "title": "Himalaje autyzmu",
     "summary": "Metoda przygotowuje osoby w spektrum autyzmu do wizyty u lekarza. Pomaga, gdy pojawiają się trudne zachowania.",
-    "description": "Metoda ma cztery etapy i gotowe scenariusze postępowania. Pacjent stopniowo oswaja się z placówką i badaniem. Umożliwia to postawienie diagnozy i leczenie. Mogą ją stosować przychodnie, szpitale i rodziny.",
+    "description": "Metoda ma cztery etapy i gotowe scenariusze postępowania. Pozwala tak zaplanować wizytę, by ograniczyć stres. Umożliwia to postawienie diagnozy i leczenie. Mogą ją stosować przychodnie, szpitale, asystenci i rodziny.",
     "category": "dostep_do_uslug",
     "target_groups": [
       "dorośli w spektrum autyzmu",
@@ -2500,7 +2499,7 @@
   {
     "title": "Gra o zdrowie",
     "summary": "Terapeutyczna gra planszowa przygotowuje osoby w kryzysie psychicznym do pracy. Gracze wcielają się w pracownika, pracodawcę i kandydata.",
-    "description": "Gra pomaga odkryć własne mocne strony. Pozwala przećwiczyć sytuacje z rynku pracy bez stresu. Uzupełnia terapię w oddziałach dziennych i ŚDS. Wspiera powrót do aktywności zawodowej.",
+    "description": "Gra pomaga odkryć własne mocne strony. Pozwala przećwiczyć sytuacje z rynku pracy przed podjęciem prawdziwej pracy. Rozgrywkę można podzielić na kilka spotkań. Sprawdza się w oddziałach dziennych i ŚDS.",
     "category": "zdrowie_psychiczne",
     "target_groups": [
       "osoby w kryzysie psychicznym"
@@ -2546,7 +2545,7 @@
   {
     "title": "Inteligentny organizer do leków",
     "summary": "Organizer na leki przypomina o godzinie zażycia i sprawdza, czy lek został wzięty. Opiekun dostaje powiadomienie w telefonie.",
-    "description": "Pojemnik ma czujniki i sygnalizację świetlną. Opiekun ustawia godziny leków w aplikacji. Dostaje informację o pominiętej dawce. Pomaga seniorom dłużej samodzielnie przyjmować leki.",
+    "description": "Pojemnik ma czujniki i sygnalizację świetlną. Opiekun ustawia godziny leków w aplikacji. Dostaje informację o zażytej lub pominiętej dawce. Test pokazał, że urządzenie wymaga dopracowania i pomocy technicznej.",
     "category": "starzenie",
     "target_groups": [
       "seniorzy",
@@ -2558,7 +2557,7 @@
       "opiekunowie",
       "bezpieczeństwo"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
@@ -2568,8 +2567,8 @@
   },
   {
     "title": "Drogowskazy AJKUM",
-    "summary": "System nawigacji prowadzi pacjentów krok po kroku po dużym szpitalu. Nie wymaga instalowania aplikacji na telefonie.",
-    "description": "Punkty kontrolne w budynku wskazują drogę do celu. Pomaga pacjentom onkologicznym osłabionym chorobą. Zmniejsza stres i ryzyko zgubienia się. Mogą go wdrożyć szpitale i przychodnie.",
+    "summary": "System nawigacji prowadzi pacjentów krok po kroku po dużym szpitalu. Pomaga osobom osłabionym chorobą odnaleźć gabinety.",
+    "description": "Punkty kontrolne w budynku wskazują drogę do celu. Pacjenci korzystali z systemu bez wcześniejszego szkolenia. Test tylko częściowo potwierdził skuteczność, bo obejmował małą część szpitala. Mogą go wdrożyć szpitale i przychodnie.",
     "category": "dostep_do_uslug",
     "target_groups": [
       "pacjenci onkologiczni",
@@ -2581,7 +2580,7 @@
       "onkologia",
       "orientacja"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
@@ -2592,7 +2591,7 @@
   {
     "title": "Cold Box",
     "summary": "Mały pojemnik chłodzący utrzymuje leki, np. insulinę, w odpowiedniej temperaturze. Ułatwia podróżowanie osobom chorym.",
-    "description": "Pojemnik utrzymuje temperaturę od 4 do 7 stopni. Działa na baterię bez stałego zasilania. Jest szczelny i łatwy do zabrania. Mogą z niego korzystać osoby z cukrzycą i innymi chorobami.",
+    "description": "Pojemnik utrzymuje temperaturę od 4 do 7 stopni. Działa na baterię bez stałego zasilania. Jest wodoszczelny, ale wciąż za duży, by nosić go w torebce. Mogą z niego korzystać osoby z cukrzycą i innymi chorobami.",
     "category": "dostep_do_uslug",
     "target_groups": [
       "osoby z cukrzycą",
@@ -2604,7 +2603,7 @@
       "podróże",
       "zdrowie"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
@@ -2637,7 +2636,7 @@
   {
     "title": "Oncotriada",
     "summary": "Pacjentka po diagnozie raka spotyka psychoonkologa i osobę, która wyzdrowiała. Wsparcie zaczyna się przed leczeniem.",
-    "description": "Rozmowa we troje pomaga oswoić lęk po diagnozie. Wolontariuszka dzieli się własnym doświadczeniem. Psychoonkolog pomaga przygotować się do leczenia. Metodę mogą stosować poradnie i szpitale.",
+    "description": "Pacjentka rozmawia jednocześnie z psychoonkologiem i wolontariuszką w remisji. Wolontariuszka dzieli się własnym doświadczeniem. Najlepiej działa, gdy obie chorowały na ten sam rodzaj nowotworu. Test przyniósł częściowe efekty, bo część pacjentek rezygnowała.",
     "category": "zdrowie_psychiczne",
     "target_groups": [
       "pacjentki onkologiczne"
@@ -2648,7 +2647,7 @@
       "wolontariat",
       "diagnoza"
     ],
-    "stage": "wdrożona",
+    "stage": "testowana",
     "region": "cała Małopolska",
     "video_url": null,
     "image_url": null,
