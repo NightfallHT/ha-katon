@@ -2,7 +2,7 @@
 
 Sylwia + Klaudia. Jedna myśl na slajd, duże litery, zrzuty z live. Zgodne z `docs/content/flows.md`.
 
-Wizualnie: tło `#F7F1E8`, tekst `#1A2332`, brand `#1B3A6B`, akcent `#C45C26`. Font Atkinson Hyperlegible.
+Wizualnie: tło `#F3EFE8`, tekst `#142033`, brand `#0F3D6E`, akcent koralowy `#E24C1F`. Font Atkinson Hyperlegible. CTA w kształcie pigułki, karty z cienkim paskiem gradientu.
 
 ## 1. Nazwa i obietnica
 **Hub Innowacji Społecznych**  

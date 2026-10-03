@@ -22,6 +22,10 @@ export function InnovationCard({ innovation, why, compact }: Props) {
 
   return (
     <Card className="h-full">
+      <div
+        className="h-1.5 bg-gradient-to-r from-primary to-accent"
+        aria-hidden
+      />
       <CardHeader>
         {innovation.image_url ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -32,9 +36,11 @@ export function InnovationCard({ innovation, why, compact }: Props) {
           />
         ) : null}
         <p>
-          <Badge variant="outline">{categoryLabel(innovation.category)}</Badge>
+          <Badge variant="outline" className="rounded-full">
+            {categoryLabel(innovation.category)}
+          </Badge>
         </p>
-        <Heading className="font-heading text-xl font-bold leading-snug">
+        <Heading className="font-heading text-xl font-bold leading-snug tracking-tight">
           <Link
             href={`/biblioteka/${innovation.id}`}
             className="underline-offset-4 hover:underline"
@@ -50,26 +56,26 @@ export function InnovationCard({ innovation, why, compact }: Props) {
         </p>
         {why ? (
           <p
-            className="rounded-lg border-2 px-3 py-2"
+            className="rounded-2xl px-3 py-2"
             style={{
               background: "var(--why)",
-              borderColor: "var(--why-border)",
+              borderLeft: "5px solid var(--why-border)",
             }}
           >
             <strong>Dlaczego to pasuje. </strong>
             {why}
           </p>
         ) : null}
-        <p className="flex flex-wrap gap-x-4 gap-y-2">
+        <p className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
           <Link
-            className="inline-flex min-h-11 items-center font-medium underline underline-offset-4"
+            className="inline-flex min-h-11 items-center justify-center rounded-full bg-accent px-4 font-semibold text-accent-foreground"
             href={`/biblioteka/${innovation.id}`}
           >
             Zobacz szczegóły
           </Link>
           {innovation.source_url ? (
             <a
-              className="inline-flex min-h-11 items-center font-medium underline underline-offset-4"
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-border px-4 font-medium"
               href={innovation.source_url}
               rel="noreferrer"
             >

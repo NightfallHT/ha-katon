@@ -49,41 +49,41 @@
 }
 
 :root {
-  /* HubMI palette (Sylwia/Hania): warm paper + deep blue + amber CTA */
-  --background: #f7f1e8;
-  --foreground: #1a2332;
+  /* Civic + warm: airy cream, deep sea blue, coral CTA */
+  --background: #f3efe8;
+  --foreground: #142033;
   --card: #ffffff;
-  --card-foreground: #1a2332;
+  --card-foreground: #142033;
   --popover: #ffffff;
-  --popover-foreground: #1a2332;
-  --primary: #1b3a6b;
+  --popover-foreground: #142033;
+  --primary: #0f3d6e;
   --primary-foreground: #ffffff;
-  --secondary: #efe4d4;
-  --secondary-foreground: #1a2332;
-  --muted: #efe4d4;
+  --secondary: #e8efe9;
+  --secondary-foreground: #142033;
+  --muted: #e8efe9;
   --muted-foreground: #3d4a5c;
-  --accent: #c45c26;
+  --accent: #e24c1f;
   --accent-foreground: #ffffff;
   --destructive: #9b1c1c;
-  --border: #5a6a7a;
-  --input: #5a6a7a;
-  --ring: #1b3a6b;
-  --chart-1: #1b3a6b;
-  --chart-2: #c45c26;
-  --chart-3: #3d4a5c;
+  --border: #4a5a6e;
+  --input: #4a5a6e;
+  --ring: #0f3d6e;
+  --chart-1: #0f3d6e;
+  --chart-2: #e24c1f;
+  --chart-3: #1a5f8a;
   --chart-4: #2f6f4e;
   --chart-5: #6b4f1b;
-  --radius: 0.75rem;
-  --sidebar: #efe4d4;
-  --sidebar-foreground: #1a2332;
-  --sidebar-primary: #1b3a6b;
+  --radius: 1.15rem;
+  --sidebar: #e8efe9;
+  --sidebar-foreground: #142033;
+  --sidebar-primary: #0f3d6e;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #ffffff;
-  --sidebar-accent-foreground: #1a2332;
-  --sidebar-border: #5a6a7a;
-  --sidebar-ring: #1b3a6b;
-  --why: #fff4d6;
-  --why-border: #c45c26;
+  --sidebar-accent-foreground: #142033;
+  --sidebar-border: #4a5a6e;
+  --sidebar-ring: #0f3d6e;
+  --why: #fff6e8;
+  --why-border: #e24c1f;
 }
 
 .dark {
