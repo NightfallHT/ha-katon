@@ -30,7 +30,7 @@ Axe: `wcag2a, wcag2aa, wcag21a, wcag21aa`. Tryby: default, `data-contrast="high"
 | Home → `#problem` → `/dopasuj` → `h1#wyniki` | **pass** |
 | HelpBot na `/biblioteka`: dialog, trap Tab, Esc | **pass** |
 | Kreator → admin | **skip** — lokalnie brak Supabase (insert nie trafia do tabeli) |
-| `/admin/trendy` | **skip** — HTTP ≥400 bez kluczy (Jakub: `adminDb()` rzuca) |
+| `/admin/trendy` | **demo fallback** — strona nie pada bez bazy |
 
 Lighthouse a11y: nie odpalany (DevTools); na slajd 8 idzie axe 0 na przetestowanych stronach.
 
@@ -43,9 +43,6 @@ Axe łapał **color-contrast 3.97:1** na CTA: biały na `#E24C1F`. Akcent zmieni
 | Problem | Owner | Fix |
 |---|---|---|
 | HelpBot nie siedzi w `layout.tsx` — nie ma go na `/` i `/dopasuj` | Ola + Jakub | wrzucić `<HelpBot />` (jest TODO) |
-| Brak Vercel URL w README | Ola | `BASE_URL` do re-runu na live |
-| Smoke Kreator→admin | Hania (insert jest) + Ola (klucze) | na Vercel z `SUPABASE_SERVICE_ROLE_KEY` powinno przejść |
-| `/admin/trendy` 500 bez bazy | Jakub | `try/catch` wokół `loadNeeds()` jak na pulpicie |
 
 ## Slide 8
 

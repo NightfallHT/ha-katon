@@ -41,14 +41,14 @@ Priority: Block C > Block B > Block A. Klaudia can build the slides from `slides
 
 ## Status / TODO
 
-Last updated: 2026-10-03 18:53
-Currently working on: accessibility regression tests
+Last updated: 2026-10-03 19:30
+Currently working on: pitch captions and remaining clickable gaps
 
 - [x] Persona flows, one-action-per-screen guidance and inexpensive UX ideas
 - [x] Playwright + axe harness covering key routes and accessibility modes
 - [x] Keyboard, 320 px and demo smoke scenarios drafted
 - [x] Accessibility report grouped by page/owner
-- [ ] **IN PROGRESS:** run the full test suite against the latest app and update final violation counts
-- [ ] Send top accessibility regressions to the relevant owners and verify their fixes
+- [x] Local axe run: 0 violations on key routes (3 modes); smoke skips without Supabase
+- [ ] Send remaining owner notes (HelpBot in layout, live BASE_URL)
 - [ ] Build the final ≤10-slide PDF and ≤3-minute captioned MP4 Sunday morning
 - [ ] **BLOCKED:** final Lighthouse numbers and recording — waiting for the stable live Vercel URL

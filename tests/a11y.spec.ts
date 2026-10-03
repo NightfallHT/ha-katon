@@ -35,6 +35,7 @@ const KEY_PAGES_320 = [
   "/materialy",
   "/kreator",
   "/admin",
+  "/admin/trendy",
 ];
 
 async function runAxe(page: import("@playwright/test").Page) {

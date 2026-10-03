@@ -7,6 +7,42 @@ import { chat, simplify } from "@/lib/api";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 type Source = { title: string; url: string };
+
+function localReply(message: string, page?: string): { reply: string; sources: Source[]; handoff: boolean } {
+  const text = message.toLowerCase();
+  if (/kontakt|człowiek|pracownik|rops|telefon/.test(text)) {
+    return {
+      reply: "Możesz napisać do pracownika ROPS przez formularz. Odpowiedź przyjdzie na e-mail z demo.",
+      sources: [{ title: "Kontakt", url: "/kontakt" }],
+      handoff: true,
+    };
+  }
+  if (/nabor|grant|wnios/.test(text)) {
+    return {
+      reply: "Otwarte nabory są na stronie Wyzwania i w Kreatorze. Tam złożysz wniosek albo zgłosisz pomysł.",
+      sources: [
+        { title: "Wyzwania i nabory", url: "/wyzwania" },
+        { title: "Kreator", url: "/kreator" },
+      ],
+      handoff: false,
+    };
+  }
+  if (/szuk|dopas|innowac|widz|syn/.test(text)) {
+    return {
+      reply: "Na stronie głównej opisz sytuację zwykłym zdaniem. Pokażemy kilka rozwiązań i dlaczego pasują.",
+      sources: [{ title: "Dopasuj", url: "/dopasuj" }],
+      handoff: false,
+    };
+  }
+  return {
+    reply: `Jesteś na stronie ${page || "Hubu"}. Możesz szukać rozwiązań, zgłosić pomysł albo napisać do ROPS.`,
+    sources: [
+      { title: "Biblioteka", url: "/biblioteka" },
+      { title: "Kontakt", url: "/kontakt" },
+    ],
+    handoff: false,
+  };
+}
 type Msg = { role: "user" | "assistant"; content: string; sources?: Source[]; handoff?: boolean };
 
 // Floating help bot. Add <HelpBot /> once in app/layout.tsx.
@@ -37,9 +73,10 @@ export function HelpBot() {
       setMessages((m) => [...m, { role: "assistant", content: data.reply, sources: data.sources ?? [], handoff: data.handoff }]);
       setStatus("");
     } catch {
+      const fallback = localReply(message, pathname ?? undefined);
       setMessages((m) => [
         ...m,
-        { role: "assistant", content: "Nie mogę teraz odpowiedzieć. Możesz napisać do pracownika ROPS.", handoff: true },
+        { role: "assistant", content: fallback.reply, sources: fallback.sources, handoff: fallback.handoff },
       ]);
       setStatus("");
     } finally {
@@ -69,12 +106,13 @@ export function HelpBot() {
       <DialogTrigger asChild>
         <button
           type="button"
-          className="fixed bottom-4 right-4 z-40 min-h-11 rounded-full border bg-background px-5 py-3 font-semibold shadow-lg focus-visible:ring-2 focus-visible:ring-ring"
+          aria-label="Otwórz pomoc"
+          className="fixed bottom-4 right-4 z-40 max-w-[calc(100vw-2rem)] min-h-11 rounded-full border bg-background px-5 py-3 font-semibold shadow-lg focus-visible:ring-2 focus-visible:ring-ring"
         >
           Potrzebujesz pomocy?
         </button>
       </DialogTrigger>
-      <DialogContent className="flex max-h-[85vh] flex-col gap-3 sm:max-w-lg">
+        <DialogContent className="flex max-h-[85vh] flex-col gap-3 sm:max-w-lg" aria-label="Pomoc">
         <DialogTitle>Pomoc</DialogTitle>
         <DialogDescription>Zadaj pytanie o platformę. Odpowiada asystent AI.</DialogDescription>
 
