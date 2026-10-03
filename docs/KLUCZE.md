@@ -40,9 +40,37 @@
    - `ALLOWED_ORIGINS` (URL frontu na Vercel, po deployu Oli)
    - opcjonalnie `DEMO_MODE=1` na demo na żywo
 
-4. **Front** (`web/.env`) — gdy folder `/web` będzie gotowy, te same wartości Supabase (publiczne URL + anon key) i `NEXT_PUBLIC_AI_URL` skopiuj z `.env.keys` według [`AGENTS.md`](../AGENTS.md) §3.
+4. **Front** (`web/.env.local`) — `/web` już stoi. Skopiuj z `.env.keys` publiczny `SUPABASE_URL`,
+   klucz `sb_publishable_...` (patrz sekcja „Które klucze Supabase skopiować”) oraz
+   `NEXT_PUBLIC_AI_URL`, według [`AGENTS.md`](../AGENTS.md) §3. Next.js czyta `.env.local`
+   automatycznie; plik jest w `.gitignore`.
 
 5. **Hosting produkcyjny:** te same nazwy zmiennych wklej w panelu Render (serwis `/ai`) i Vercel (`/web`), nie w repozytorium.
+
+## Które klucze Supabase skopiować (ważne)
+
+W panelu Supabase, w *Settings → API Keys*, są **dwie grupy**. Bierzemy **nowe** klucze — nie
+zakładkę **Legacy API keys**. Supabase wyłącza stare `anon` / `service_role` (JWT) **do końca 2026**.
+
+| Klucz w panelu | Wklej do zmiennej | Gdzie wolno go trzymać |
+|---|---|---|
+| `sb_publishable_...` | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | przeglądarka, `web/.env.local`, Vercel |
+| `sb_secret_...` | `SUPABASE_SERVICE_ROLE_KEY` | **tylko serwer**: `ai/.env`, Render, `.env` w katalogu głównym |
+
+⚠ **Nazwy zmiennych zostały stare (`ANON`, `SERVICE_ROLE`), ale wartości są nowe.**
+Tych nazw używają już `ai/db.py`, `ai/render.yaml` i ten plik, a `/ai` jest wdrożone — zmiana nazw
+wymagałaby też zmiany zmiennej w panelu Render, czyli awarii bez żadnego zysku. Porządki po
+hackathonie. **Stare nazwy, nowe wartości `sb_...`.**
+
+Nowe klucze unieważnia się pojedynczo, więc kliknij *Create new secret key* i zrób **osobny klucz
+`sb_secret_` dla `/ai`, osobny dla `/web` i osobny dla skryptu seed** — wtedy wyciek jednego nie
+wymusza wymiany wszystkich w trakcie demo.
+
+⚠ RLS jest w prototypie **wyłączone**, więc klucz `sb_publishable_` może **czytać i zapisywać**
+każdą tabelę, a trafia do przeglądarki. To świadomy kompromis na demo (slajd „roadmap”), nie błąd.
+Klucza `sb_secret_` nigdy nie wkładamy do komponentu klienckiego.
+
+Pełna instrukcja z klikaniem po panelu: [`docs/setup-deploy.md`](setup-deploy.md) §1.2.
 
 ## Kto co uzupełnia
 
