@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { OpenCalls } from "@/components/open-calls";
 import { ResourceNav } from "@/components/resource-nav";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { challenges } from "@/content/catalog";
@@ -14,13 +15,15 @@ export default function WyzwaniaPage() {
   );
 
   return (
-    <div>
+    <div className="min-w-0">
       <ResourceNav current="/wyzwania" />
       <h1 className="text-3xl font-bold">Wyzwania społeczne w Małopolsce</h1>
       <p className="mt-3 max-w-prose">
         To obszary, w których mieszkańcy i gminy najczęściej potrzebują nowych
         rozwiązań.
       </p>
+
+      <OpenCalls />
 
       {groups.map(([category, items]) => (
         <section key={category} className="mt-10">
@@ -55,10 +58,10 @@ export default function WyzwaniaPage() {
         </section>
       ))}
 
-      <section className="mt-12">
+      <section className="mt-12 max-md:hidden">
         <h2 className="text-2xl font-bold">Te same dane w tabeli</h2>
-        <div className="mt-4 overflow-x-auto">
-          <table className="w-full min-w-[40rem] border-collapse text-left">
+        <div className="mt-4 w-full min-w-0 overflow-x-auto">
+          <table className="w-full border-collapse text-left text-sm">
             <caption className="mb-2 text-left">
               Wyzwania, wskaźniki i powiaty.
             </caption>

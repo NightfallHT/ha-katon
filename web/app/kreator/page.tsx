@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { OpenCalls } from "@/components/open-calls";
 import { ResourceNav } from "@/components/resource-nav";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { calls } from "@/content/catalog";
@@ -78,6 +79,7 @@ export default function KreatorPage() {
           </Card>
         </li>
       </ul>
+      <OpenCalls />
     </div>
   );
 }

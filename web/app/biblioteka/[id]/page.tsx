@@ -67,6 +67,7 @@ export default async function InnovationPage({
               className="inline-flex min-h-11 items-center font-medium underline underline-offset-4"
               href={item.source_url}
               rel="noreferrer"
+              data-source="innovation"
             >
               Zobacz w bazie ROPS
             </a>

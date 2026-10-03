@@ -16,6 +16,7 @@ const STATIC_ROUTES = [
   "/wyzwania",
   "/materialy",
   "/kreator",
+  "/kreator/fiszka",
   "/kontakt",
   "/moje-zgloszenia",
   "/middleman",
@@ -26,7 +27,15 @@ const STATIC_ROUTES = [
 
 const MODES: A11yMode[] = ["default", "high", "font150"];
 
-const KEY_PAGES_320 = ["/", "/dopasuj", "/biblioteka", "/kreator", "/admin"];
+const KEY_PAGES_320 = [
+  "/",
+  "/dopasuj",
+  "/biblioteka",
+  "/wyzwania",
+  "/materialy",
+  "/kreator",
+  "/admin",
+];
 
 async function runAxe(page: import("@playwright/test").Page) {
   const result = await new AxeBuilder({ page }).withTags(AXE_TAGS).analyze();

@@ -18,4 +18,4 @@ Klaudia: finalny lektor. Sylwia: MP4 niedziela 07:00–09:30. Zgodne z `docs/con
 | 6 | `/admin` | ROPS dodaje nabór albo publikuje wpis do bazy. | 140–165 |
 | 7 | Kontrast / 150% (jeśli nie było na starcie) | Działa też tak. | 165–175 |
 
-Nie pchamy wójta na siłę — tylko jeśli zostanie luz. Napisy PL. 1080p. < 3:00. Plik: `/docs/pitch/HubMI.mp4`.
+Nie pchamy wójta na siłę — tylko jeśli zostanie luz. Napisy PL: [`napisy.vtt`](napisy.vtt). 1080p. < 3:00. Plik: `/docs/pitch/HubMI.mp4`.

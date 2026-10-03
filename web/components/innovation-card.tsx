@@ -53,6 +53,9 @@ export function InnovationCard({ innovation, why, compact }: Props) {
         <p>{innovation.summary}</p>
         <p className="text-muted-foreground">
           Etap: {stageLabel(innovation.stage)}. {ratingText(innovation)}.
+          {innovation.target_groups.length
+            ? ` Dla kogo: ${innovation.target_groups.join(", ")}.`
+            : ""}
         </p>
         {why ? (
           <p
@@ -78,6 +81,7 @@ export function InnovationCard({ innovation, why, compact }: Props) {
               className="inline-flex min-h-11 items-center justify-center rounded-full border border-border px-4 font-medium"
               href={innovation.source_url}
               rel="noreferrer"
+              data-source="innovation"
             >
               Zobacz w bazie ROPS
             </a>

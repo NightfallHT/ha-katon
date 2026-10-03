@@ -12,7 +12,7 @@ export function ResourceNav({ current }: { current: string }) {
   return (
     <div className="pb-20">
       <nav aria-label="Zasobnik wiedzy" className="mb-8">
-        <ul className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
+        <ul className="flex w-full min-w-0 max-w-full gap-2 overflow-x-auto pb-1">
           {LINKS.map((item) => (
             <li key={item.href} className="shrink-0">
               {item.href === current ? (
