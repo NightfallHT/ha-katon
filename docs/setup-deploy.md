@@ -12,6 +12,8 @@ Run every command inside the dev shell: `nix-shell` from the repo root, or prefi
 
 AGENTS.md §3 requires an **EU region**. Pick `eu-central-1` (Frankfurt).
 
+### 1.1 Create the project and the tables
+
 1. Create the project at <https://supabase.com/dashboard> → *New project*
    - Region: **Central EU (Frankfurt) `eu-central-1`**
    - Save the database password somewhere safe
@@ -33,20 +35,65 @@ AGENTS.md §3 requires an **EU region**. Pick `eu-central-1` (Frankfurt).
    `submissions`, `messages`, `reviews`, `gminas` — 9 tables — and *Database → Functions* should
    show `match_innovations`.
 
-4. Copy the credentials from *Project Settings → API*:
+### 1.2 Copy the API keys — use the new ones, not the legacy tab
 
-   | Dashboard field | Env var |
-   |---|---|
-   | Project URL | `NEXT_PUBLIC_SUPABASE_URL` **and** `SUPABASE_URL` (for `/ai`) |
-   | `anon` `public` key | `NEXT_PUBLIC_SUPABASE_ANON_KEY` |
-   | `service_role` `secret` key | `SUPABASE_SERVICE_ROLE_KEY` |
+Dashboard → **Settings → API Keys**. You will see two groups. Take the **current** keys:
 
-5. Local dev — create `web/.env.local` (gitignored) from [`.env.example`](../.env.example), and a
-   root `.env` with `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` so `npm run seed` works.
+| Dashboard | Env var | Notes |
+|---|---|---|
+| Project URL | `NEXT_PUBLIC_SUPABASE_URL` **and** `SUPABASE_URL` (for `/ai`) | *Settings → Data API* |
+| **Publishable key** `sb_publishable_…` | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | browser-safe |
+| **Secret key** `sb_secret_…` | `SUPABASE_SERVICE_ROLE_KEY` | server only, bypasses RLS |
 
-> The `service_role` key bypasses all access control. It belongs in `web/.env.local`, the root
-> `.env`, and Vercel/Render env settings only. Never in a client component, never
-> `NEXT_PUBLIC_`-prefixed, never committed.
+Ignore the **Legacy API keys** tab (`anon` / `service_role` JWTs). Supabase is deprecating those
+**by the end of 2026**; the new keys have the same permissions but are short strings rather than
+JWTs, are independently rotatable, are instantly revocable, and secret keys are technically
+blocked from browser use. `@supabase/supabase-js` and the REST calls in `/ai` take them in exactly
+the same argument position, so there is nothing to change in code.
+
+> **Why the env var names still say `ANON` / `SERVICE_ROLE`.** Those names are already baked into
+> `ai/db.py`, `ai/render.yaml`, `.env.keys.example` and `docs/KLUCZE.md`, and `/ai` is deployed
+> with them. Renaming them to `…PUBLISHABLE_KEY` / `…SECRET_KEY` would mean editing Janek's files
+> *and* renaming the variable in the Render dashboard — a live breakage for zero functional gain
+> this close to submission. So: **old names, new `sb_…` values.** Worth tidying after the
+> hackathon, not during it.
+
+Click *Create new secret key* and make a **separate** secret key per consumer — one for `/web`,
+one for `/ai`, one for the seed script. They can be revoked individually, so a leak during the
+demo does not force you to rotate everything at once.
+
+> ⚠ **RLS is off in this prototype** (AGENTS.md §5), so the publishable key can read **and write**
+> every table — and it ships inside the browser bundle. That is a deliberate, documented
+> trade-off for a 24-hour demo, not an oversight; it belongs on the roadmap slide next to
+> "RLS + real auth". Do not put the **secret** key in a client component — that is a different
+> and much worse problem, because it also bypasses RLS once RLS exists.
+
+### 1.3 Where the keys actually live
+
+**Secrets are never committed.** `.gitignore` already excludes every `.env*` file except the
+empty template [`.env.example`](../.env.example), so these three files stay local:
+
+| File | Holds | Used by |
+|---|---|---|
+| `web/.env.local` | the whole `web` block | `npm run dev` |
+| `.env` (repo root) | `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` | `npm run seed` |
+| `ai/.env` | the `ai` block | Janek's FastAPI service |
+
+```bash
+cp .env.example web/.env.local     # then fill in the web block, delete the ai block
+```
+
+Prove nothing is tracked, any time:
+
+```bash
+git check-ignore -v .env web/.env.local ai/.env   # all three must print a match
+git status --short                                 # must not list any .env file
+```
+
+For the deployed app the same values are pasted into the **Vercel** (and Render, for `/ai`)
+environment-variable settings — not into files. If a key is ever pasted somewhere public,
+revoke that one key in *Settings → API Keys* and create a new one; that is exactly what the new
+key model is for.
 
 ---
 
@@ -62,8 +109,9 @@ The app is **not** at the repo root, so the root directory must be set to `web`.
 4. *Environment Variables* → add all six from the `web` block of
    [`.env.example`](../.env.example), for **Production, Preview and Development**:
    - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` — the `sb_publishable_…` key
+   - `SUPABASE_SERVICE_ROLE_KEY` — the `sb_secret_…` key; mark it **Sensitive** in Vercel so it
+     cannot be read back from the dashboard afterwards
    - `NEXT_PUBLIC_AI_URL` — Janek's Render URL; put a placeholder now, update when he ships
    - `RESEND_API_KEY` — can stay empty; `/api/notify` logs and returns ok without it
    - `ADMIN_NOTIFY_EMAIL`

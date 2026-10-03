@@ -106,6 +106,20 @@ Empty so far. Janek adds `requirements.txt` and lists packages + licences here.
 
 ## Decisions and gotchas
 
+### Supabase: current API keys, not the legacy `anon` / `service_role` JWTs
+We use `sb_publishable_…` → `NEXT_PUBLIC_SUPABASE_ANON_KEY` and `sb_secret_…` →
+`SUPABASE_SERVICE_ROLE_KEY`. Supabase deprecates the legacy `anon`/`service_role` JWTs **by the end of
+2026**, and the new keys are individually rotatable and instantly revocable — which is worth
+saying out loud on the architecture/security slide, since "implementation potential" is 20% of
+the score. `@supabase/supabase-js` 2.117.2 accepts them in the same argument position, so no code
+changes.
+
+The **env var names deliberately keep the legacy spelling**, because `ai/db.py`, `ai/render.yaml`,
+`.env.keys.example` and `docs/KLUCZE.md` already use them and `/ai` is deployed with them.
+Old names, new `sb_…` values. Renaming is a clean-up for after the hackathon; doing it now would
+also require renaming the variable in the Render dashboard.
+Details and the dashboard walkthrough: [docs/setup-deploy.md](docs/setup-deploy.md) §1.2.
+
 ### `react-leaflet` was removed — licence violation
 `react-leaflet@5` is **Hippocratic-2.1**, an ethical-source licence that is neither
 MIT/Apache/BSD nor OSI-approved, so it breaks AGENTS.md §3 and would be a problem in the

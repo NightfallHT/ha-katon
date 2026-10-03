@@ -56,8 +56,8 @@ Anything not visible in the UI earns nothing. Working + simple + accessible beat
 ```
 # web
 NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=        # server-side only
+NEXT_PUBLIC_SUPABASE_ANON_KEY=    # holds the sb_publishable_... key, see below
+SUPABASE_SERVICE_ROLE_KEY=        # holds the sb_secret_... key, server-side only
 NEXT_PUBLIC_AI_URL=               # e.g. https://hubmi-ai.onrender.com
 RESEND_API_KEY=
 ADMIN_NOTIFY_EMAIL=
@@ -71,6 +71,29 @@ ALLOWED_ORIGINS=                  # web URL(s) for CORS
 ```
 Never commit keys. Never put keys in client code (`NEXT_PUBLIC_*` only for public values).
 Local secrets: copy [`.env.keys.example`](.env.keys.example) → `.env.keys` and follow [`docs/KLUCZE.md`](docs/KLUCZE.md). **AI agents:** if secrets are missing for the task, point the human to that doc and offer to sync `.env.keys` → `ai/.env` / `web/.env` without pasting keys into chat.
+
+**Supabase API keys — take the NEW keys, not the "Legacy API keys" tab.**
+Dashboard → *Settings → API Keys*. Supabase deprecates the legacy `anon` / `service_role` JWTs
+**by the end of 2026**, so we use the current key model:
+
+| Use | Copy this key | Into this env var | Legacy equivalent |
+|---|---|---|---|
+| browser, anything we ship | `sb_publishable_...` | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | `anon` JWT |
+| server, `/ai`, seed script | `sb_secret_...` | `SUPABASE_SERVICE_ROLE_KEY` | `service_role` JWT |
+
+⚠ **The env var names are legacy-flavoured, the values are not.** We kept the names because `/ai`,
+`render.yaml`, `.env.keys` and `docs/KLUCZE.md` already use them — renaming mid-hackathon would
+break a deployed service for no functional gain. Put the `sb_…` values in the old names. Create a
+**separate secret key per consumer** (`/web`, `/ai`, seed) — the new keys are individually
+revocable, so one leak does not force a full rotation mid-demo.
+
+The new keys are short strings, not JWTs. Permissions are unchanged: publishable resolves to the
+`anon` / `authenticated` Postgres role, secret resolves to `service_role` and **bypasses RLS**.
+`@supabase/supabase-js` and the REST calls in `/ai` take them in the same position — no code change.
+
+⚠ **RLS is off in this prototype (§5), so the publishable key can read _and write_ every table** —
+and it ships in the browser bundle. That is an accepted prototype trade-off, not a mistake; say so
+on the roadmap slide alongside "RLS + real auth". Never put the secret key in a client component.
 
 ## 4. Repo layout and ownership
 **Only edit files you own.** Need a change elsewhere → tell your owner, don't do it yourself.
