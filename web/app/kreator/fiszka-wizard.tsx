@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { ResourceNav } from "@/components/resource-nav";
+import { submitFiszka } from "./actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -49,6 +50,7 @@ export function FiszkaWizard({ kind }: { kind: FiszkaKind }) {
   const searchParams = useSearchParams();
   const [step, setStep] = useState(0);
   const [errors, setErrors] = useState<string[]>([]);
+  const [sending, setSending] = useState(false);
   const [title, setTitle] = useState("");
   const [values, setValues] = useState({
     problem: searchParams.get("problem") ?? "",
@@ -80,15 +82,15 @@ export function FiszkaWizard({ kind }: { kind: FiszkaKind }) {
     setStep((n) => n + 1);
   }
 
-  function submit() {
+  async function submit() {
     if (missing.length) {
       setErrors(["Uzupełnij jeszcze kilka odpowiedzi."]);
       return;
     }
+    setSending(true);
     const payload = {
       type: kind,
       title: title.trim(),
-      author_email: "anna.k@razem-blizej.demo",
       payload: {
         problem: values.problem.trim(),
         solution: values.solution.trim(),
@@ -101,6 +103,20 @@ export function FiszkaWizard({ kind }: { kind: FiszkaKind }) {
       sessionStorage.setItem("hubmi-last-submission", JSON.stringify(payload));
     } catch {
       /* ignore */
+    }
+    const result = await submitFiszka({
+      type: kind,
+      title: title.trim(),
+      problem: values.problem,
+      solution: values.solution,
+      target_group: values.target_group,
+      stage: values.stage,
+      location: values.location,
+    });
+    setSending(false);
+    if (!result.ok) {
+      setErrors([result.message]);
+      return;
     }
     router.push("/kreator/potwierdzenie");
   }
@@ -131,7 +147,7 @@ export function FiszkaWizard({ kind }: { kind: FiszkaKind }) {
         onSubmit={(event) => {
           event.preventDefault();
           if (step < STEPS.length - 1) goNext();
-          else submit();
+          else void submit();
         }}
       >
         <h2 className="text-2xl font-bold">{current.title}</h2>
@@ -221,8 +237,8 @@ export function FiszkaWizard({ kind }: { kind: FiszkaKind }) {
               <Link href="/kreator">Anuluj</Link>
             </Button>
           )}
-          <Button type="submit">
-            {step < STEPS.length - 1 ? "Dalej" : "Wyślij zgłoszenie"}
+          <Button type="submit" disabled={sending}>
+            {step < STEPS.length - 1 ? "Dalej" : sending ? "Wysyłam…" : "Wyślij zgłoszenie"}
           </Button>
         </div>
       </form>

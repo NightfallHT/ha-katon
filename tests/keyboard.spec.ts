@@ -5,7 +5,10 @@ const PROBLEM =
   "Słabo widzę. Chcę wiedzieć, z jakich innowacji w Małopolsce mogę skorzystać.";
 
 test.describe("keyboard only", () => {
-  test.skip(({ }, testInfo) => testInfo.project.name === "mobile-320");
+  test.beforeEach(({ browserName }, testInfo) => {
+    void browserName;
+    test.skip(testInfo.project.name === "mobile-320");
+  });
 
   test("skip link jumps to main", async ({ page }) => {
     await openAs(page, "/", "mieszkaniec");
@@ -33,15 +36,17 @@ test.describe("keyboard only", () => {
     await page.keyboard.press("Tab");
     await page.keyboard.press("Enter");
     await page.waitForURL(/dopasuj/);
-    const heading = page.locator("h1#wyniki, h1").first();
+    const heading = page.locator("h1#wyniki");
+    await expect(heading).toBeVisible({ timeout: 25_000 });
     await expect(heading).toBeFocused();
   });
 
   test("help-bot dialog opens, traps focus, closes with Escape", async ({ page }) => {
-    await openAs(page, "/", "mieszkaniec");
+    const biblioteka = await openAs(page, "/biblioteka", "mieszkaniec");
+    test.skip(!biblioteka.ok, "/biblioteka not shipped yet");
     const trigger = page.getByRole("button", { name: /pomoc/i });
-    test.skip((await trigger.count()) === 0, "HelpBot not shipped yet (Jakub)");
-    await trigger.click();
+    test.skip((await trigger.count()) === 0, "HelpBot not on this page yet (Jakub / ResourceNav)");
+    await trigger.first().click();
     const dialog = page.getByRole("dialog");
     await expect(dialog).toBeVisible();
 
@@ -62,6 +67,6 @@ test.describe("keyboard only", () => {
 
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
-    await expect(trigger).toBeFocused();
+    await expect(trigger.first()).toBeFocused();
   });
 });

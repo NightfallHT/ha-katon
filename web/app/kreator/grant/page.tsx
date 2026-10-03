@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { calls } from "@/content/catalog";
+import { submitGrant } from "../actions";
 
 type BudgetRow = { item: string; category: string; amount: number };
 
@@ -29,6 +30,7 @@ export default function GrantPage() {
   const [accepted, setAccepted] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
+  const [sending, setSending] = useState(false);
 
   const total = useMemo(
     () => budget.reduce((sum, row) => sum + (Number(row.amount) || 0), 0),
@@ -65,17 +67,18 @@ export default function GrantPage() {
     setDrafted(true);
   }
 
-  function submit() {
+  async function submit() {
     if (!accepted) {
       setError("Zaznacz, że zapoznałeś się z regulaminem. To pole jest wymagane.");
       return;
     }
+    const title = `Wniosek: ${activeCall.name}`;
     try {
       sessionStorage.setItem(
         "hubmi-last-submission",
         JSON.stringify({
           type: "grant_application",
-          title: `Wniosek: ${activeCall.name}`,
+          title,
           payload: {
             sections: { cel, grupa_docelowa: grupa, dzialania, rezultaty },
             budget,
@@ -85,6 +88,20 @@ export default function GrantPage() {
       );
     } catch {
       /* ignore */
+    }
+    setSending(true);
+    const result = await submitGrant({
+      title,
+      callName: activeCall.name,
+      problem,
+      solution,
+      sections: { cel, grupa_docelowa: grupa, dzialania, rezultaty },
+      budget,
+    });
+    setSending(false);
+    if (!result.ok) {
+      setError(result.message);
+      return;
     }
     setDone(true);
   }
@@ -118,7 +135,7 @@ export default function GrantPage() {
         onSubmit={(event) => {
           event.preventDefault();
           if (!drafted) generate();
-          else submit();
+          else void submit();
         }}
       >
         <div>
@@ -253,7 +270,9 @@ export default function GrantPage() {
                 {error}
               </p>
             ) : null}
-            <Button type="submit">Wyślij zgłoszenie</Button>
+            <Button type="submit" disabled={sending}>
+              {sending ? "Wysyłam…" : "Wyślij zgłoszenie"}
+            </Button>
           </>
         )}
       </form>

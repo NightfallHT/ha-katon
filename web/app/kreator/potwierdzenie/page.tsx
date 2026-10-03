@@ -24,9 +24,9 @@ export default function PotwierdzeniePage() {
       <h1 className="text-3xl font-bold">Gotowe. Zgłoszenie zostało zapisane.</h1>
       <p className="mt-3 max-w-prose">
         {title
-          ? `Zapisaliśmy „${title}” na tym komputerze, żeby pokazać ścieżkę demo.`
-          : "Zapisaliśmy zgłoszenie na tym komputerze, żeby pokazać ścieżkę demo."}{" "}
-        Jakub podłączy wysyłkę do panelu ROPS.
+          ? `Zapisaliśmy „${title}”. Pracownicy ROPS zobaczą je na liście zgłoszeń.`
+          : "Zapisaliśmy zgłoszenie. Pracownicy ROPS zobaczą je na liście zgłoszeń."}{" "}
+        Status możesz śledzić w „Moich zgłoszeniach”.
       </p>
       <p className="mt-6">
         <Link

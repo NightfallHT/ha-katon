@@ -62,7 +62,7 @@
   --secondary-foreground: #142033;
   --muted: #e8efe9;
   --muted-foreground: #3d4a5c;
-  --accent: #e24c1f;
+  --accent: #b83a12;
   --accent-foreground: #ffffff;
   --destructive: #9b1c1c;
   --border: #4a5a6e;
@@ -83,7 +83,7 @@
   --sidebar-border: #4a5a6e;
   --sidebar-ring: #0f3d6e;
   --why: #fff6e8;
-  --why-border: #e24c1f;
+  --why-border: #b83a12;
 }
 
 .dark {

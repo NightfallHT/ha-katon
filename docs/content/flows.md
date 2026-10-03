@@ -10,14 +10,14 @@ Ciepły, regionalny, zaufany. Głęboki granat + ciepły bursztyn. Hania wkleja 
 
 | Token | Normal | High contrast | Rola |
 |---|---|---|---|
-| `--bg` | `#F7F1E8` | `#000000` | tło strony |
+| `--bg` | `#F3EFE8` | `#000000` | tło strony |
 | `--surface` | `#FFFFFF` | `#000000` | karty |
-| `--text` | `#1A2332` | `#FFFFFF` | treść |
-| `--muted` | `#3D4A5C` | `#FFFF00` | pomocniczy tekst (nie sam szary) |
-| `--brand` | `#1B3A6B` | `#FFFF00` | nagłówki, nav, focus |
-| `--accent` | `#C45C26` | `#FFFF00` | CTA, „Dlaczego to pasuje” |
-| `--border` | `#5A6A7A` | `#FFFFFF` | obramowania ≥ 3:1 |
-| `--focus` | `#1B3A6B` | `#FFFF00` | `focus-visible:ring-2` |
+| `--text` | `#142033` | `#FFFFFF` | treść |
+| `--muted` | `#3D4A5C` | `#FFE600` | pomocniczy tekst (nie sam szary) |
+| `--brand` | `#0F3D6E` | `#FFE600` | nagłówki, nav, focus |
+| `--accent` | `#B83A12` | `#FFE600` | CTA, „Dlaczego to pasuje” |
+| `--border` | `#4A5A6E` | `#FFFFFF` | obramowania ≥ 3:1 |
+| `--focus` | `#0F3D6E` | `#FFE600` | `focus-visible:ring-2` |
 
 - Font: **Atkinson Hyperlegible** (Google Fonts), fallback `system-ui`. Baza **18px**, `line-height: 1.6`, wszędzie `rem`.
 - Skala: `[data-font="125"]` → `html { font-size: 125% }`, `[data-font="150"]` → `150%`.

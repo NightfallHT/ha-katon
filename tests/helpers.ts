@@ -37,8 +37,8 @@ export async function openAs(
   const base = process.env.BASE_URL ?? "http://localhost:3000";
   const origin = new URL(base).origin;
   await page.context().addCookies([
-    { name: "role", value: resolvedRole, url: origin, path: "/" },
-    { name: "demo_email", value: DEMO_EMAIL[resolvedRole], url: origin, path: "/" },
+    { name: "role", value: resolvedRole, url: origin },
+    { name: "demo_email", value: DEMO_EMAIL[resolvedRole], url: origin },
   ]);
   const response = await page.goto(path, { waitUntil: "domcontentloaded" });
   const status = response?.status() ?? null;

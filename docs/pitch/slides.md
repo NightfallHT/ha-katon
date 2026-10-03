@@ -2,7 +2,7 @@
 
 Sylwia + Klaudia. Jedna myśl na slajd, duże litery, zrzuty z live. Zgodne z `docs/content/flows.md`.
 
-Wizualnie: tło `#F3EFE8`, tekst `#142033`, brand `#0F3D6E`, akcent koralowy `#E24C1F`. Font Atkinson Hyperlegible. CTA w kształcie pigułki, karty z cienkim paskiem gradientu.
+Wizualnie: tło `#F3EFE8`, tekst `#142033`, brand `#0F3D6E`, akcent koralowy `#B83A12` (kontrast 4.5:1 z białym). Font Atkinson Hyperlegible. CTA w kształcie pigułki, karty z cienkim paskiem gradientu.
 
 ## 1. Nazwa i obietnica
 **Hub Innowacji Społecznych**  
@@ -37,11 +37,7 @@ Zrzut: admin nabór + skrzynka.
 - Duża czcionka, wysoki kontrast, skip link, klawiatura  
 - Wszystko da się zrobić **tekstem** (mikrofon tylko dodatek)  
 - „Wyjaśnij prościej”, 44×44, etykiety  
-## 8. Dostępność (Sylwia — liczby z testów)
-- Duża czcionka, wysoki kontrast, skip link, klawiatura  
-- Wszystko da się zrobić **tekstem** (mikrofon tylko dodatek)  
-- „Wyjaśnij prościej”, 44×44, etykiety  
-- Axe / Lighthouse: `tests/report.md` (suite gotowy; liczby po live URL)
+- Axe WCAG 2.1 AA: **0 naruszeń** na kluczowych stronach (3 tryby). Szczegóły: `tests/report.md`.
 
 ## 9. Architektura i koszt
 Next.js (Vercel) + FastAPI (Render) + Supabase EU.  

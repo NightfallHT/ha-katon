@@ -37,7 +37,10 @@ async function runAxe(page: import("@playwright/test").Page) {
 }
 
 test.describe("axe WCAG 2.1 AA, three a11y modes", () => {
-  test.skip(({ }, testInfo) => testInfo.project.name === "mobile-320");
+  test.beforeEach(({ browserName }, testInfo) => {
+    void browserName;
+    test.skip(testInfo.project.name === "mobile-320");
+  });
 
   for (const route of STATIC_ROUTES) {
     for (const mode of MODES) {
@@ -62,7 +65,10 @@ test.describe("axe WCAG 2.1 AA, three a11y modes", () => {
 });
 
 test.describe("viewport 320px — no horizontal scroll", () => {
-  test.skip(({ }, testInfo) => testInfo.project.name === "desktop");
+  test.beforeEach(({ browserName }, testInfo) => {
+    void browserName;
+    test.skip(testInfo.project.name === "desktop");
+  });
 
   for (const route of KEY_PAGES_320) {
     test(route, async ({ page }) => {
