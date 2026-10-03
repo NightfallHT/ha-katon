@@ -1,0 +1,110 @@
+[
+  {
+    "title": "Samotność starszych mieszkańców wsi",
+    "description": "Rozproszone osadnictwo i trudny dojazd mogą ograniczać codzienne kontakty oraz dostęp do zajęć.",
+    "category": "samotnosc",
+    "powiat": "wadowicki",
+    "indicator_name": "udział mieszkańców 65+ (%)",
+    "indicator_value": 15.3,
+    "source": "GUS BDL, 2024; https://www.polskawliczbach.pl/gmina_Spytkowice_powiat_wadowicki"
+  },
+  {
+    "title": "Spadek liczby mieszkańców",
+    "description": "Ujemne saldo demograficzne może zwiększać presję na utrzymanie lokalnych usług.",
+    "category": "starzenie",
+    "powiat": "wadowicki",
+    "indicator_name": "zmiana liczby mieszkańców w raporcie gminy 2024 (%)",
+    "indicator_value": -0.54,
+    "source": "Raport o stanie Gminy Spytkowice 2024; https://www.spytkowice.net.pl/"
+  },
+  {
+    "title": "Starzenie się miejscowości turystycznej",
+    "description": "Rosnąca grupa osób starszych zwiększa zapotrzebowanie na usługi zdrowotne i opiekuńcze.",
+    "category": "starzenie",
+    "powiat": "tatrzański",
+    "indicator_name": "udział mieszkańców 65+ w Zakopanem (%)",
+    "indicator_value": 24.4,
+    "source": "GUS BDL, 2024; https://poland.gg/pl/populacja/malopolskie/tatrzanski/zakopane/2024"
+  },
+  {
+    "title": "Odpływ ludności z miasta",
+    "description": "Spadek populacji może pogłębiać problemy z dostępnością usług i utrzymaniem sieci wsparcia.",
+    "category": "integracja_spoleczna",
+    "powiat": "tatrzański",
+    "indicator_name": "zmiana ludności Zakopanego 2019–2024 (%)",
+    "indicator_value": -7.22,
+    "source": "GUS BDL; https://poland.gg/pl/populacja/malopolskie/tatrzanski/zakopane/2024"
+  },
+  {
+    "title": "Rosnąca grupa seniorów",
+    "description": "Wzrost liczby mieszkańców w starszych grupach wieku zwiększa znaczenie usług blisko domu.",
+    "category": "dostep_do_uslug",
+    "powiat": "proszowicki",
+    "indicator_name": "mieszkańcy 65+ w gminie Proszowice",
+    "indicator_value": 3291,
+    "source": "GUS BDL, 2024; https://poland.gg/pl/populacja/malopolskie/proszowicki/proszowice/2024"
+  },
+  {
+    "title": "Ujemny przyrost naturalny",
+    "description": "Mniej urodzeń niż zgonów zmienia strukturę potrzeb społecznych gminy.",
+    "category": "rodzina_dzieci",
+    "powiat": "oświęcimski",
+    "indicator_name": "różnica urodzenia minus zgony, gmina Kęty",
+    "indicator_value": -135,
+    "source": "GUS BDL, 2024; https://poland.gg/pl/populacja/malopolskie/oswiecimski/kety/2024"
+  },
+  {
+    "title": "Duża gmina podmiejska i rosnące potrzeby usług",
+    "description": "Szybki rozwój mieszkaniowy wymaga koordynacji usług społecznych i dostępnej informacji.",
+    "category": "wspolpraca_miedzysektorowa",
+    "powiat": "wielicki",
+    "indicator_name": "liczba mieszkańców gminy Niepołomice",
+    "indicator_value": 33602,
+    "source": "GUS BDL, 2024; https://poland.gg/pl/malopolskie/wielicki/niepolomice/2024"
+  },
+  {
+    "title": "Duża gmina wiejska wokół Krakowa",
+    "description": "Rozproszenie mieszkańców zwiększa znaczenie usług lokalnych, mobilnych i cyfrowych.",
+    "category": "dostep_do_uslug",
+    "powiat": "krakowski",
+    "indicator_name": "liczba mieszkańców gminy Zabierzów",
+    "indicator_value": 29837,
+    "source": "GUS BDL, 2024; https://poland.gg/pl/malopolskie/krakowski/zabierzow/2024"
+  },
+  {
+    "title": "Dostępność usług w rozległej gminie wiejskiej",
+    "description": "Duży obszar i rozproszone miejscowości mogą zwiększać znaczenie transportu i usług mobilnych.",
+    "category": "dostep_do_uslug",
+    "powiat": "limanowski",
+    "indicator_name": "powierzchnia gminy Mszana Dolna (km²)",
+    "indicator_value": 170,
+    "source": "GUS BDL, 2024; https://poland.gg/pl/rynek-mieszkaniowy/malopolskie/limanowski/mszana-dolna/2024"
+  },
+  {
+    "title": "Potrzeba usług dla mieszkańców małego miasta",
+    "description": "Kurczące się miasta potrzebują łatwego dostępu do opieki, aktywizacji i informacji.",
+    "category": "integracja_spoleczna",
+    "powiat": "gorlicki",
+    "indicator_name": "liczba mieszkańców miasta Gorlice",
+    "indicator_value": 25166,
+    "source": "GUS BDL, 2024; https://poland.gg/pl/malopolskie/gorlicki/gorlice-miasto/2024"
+  },
+  {
+    "title": "Wykluczenie cyfrowe jako bariera dostępu",
+    "description": "Cyfryzacja usług może utrudniać korzystanie z nich osobom o niskich kompetencjach cyfrowych.",
+    "category": "wykluczenie_cyfrowe",
+    "powiat": "cała Małopolska",
+    "indicator_name": "liczba obszarów tematycznych Biblioteki ROPS użytych w seedzie",
+    "indicator_value": 9,
+    "source": "ROPS Biblioteka Innowacji Społecznych; https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/kategorie"
+  },
+  {
+    "title": "Potrzeba rozwiązań dla wielu grup jednocześnie",
+    "description": "Problemy społeczne często łączą zdrowie, transport, samotność i dostęp do usług.",
+    "category": "inne",
+    "powiat": "cała Małopolska",
+    "indicator_name": "liczba kategorii aplikacji opisanych w AGENTS.md",
+    "indicator_value": 10,
+    "source": "AGENTS.md §5 oraz Mapa Wyzwań Społecznych ROPS"
+  }
+]

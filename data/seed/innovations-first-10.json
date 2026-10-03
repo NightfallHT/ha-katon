@@ -1,0 +1,250 @@
+[
+  {
+    "title": "Organizator kompleksowej opieki w miejscu zamieszkania",
+    "summary": "Koordynator pomaga seniorowi wrócić bezpiecznie do domu po pobycie w szpitalu. Łączy rodzinę z potrzebnymi usługami i sprzętem.",
+    "description": "Rozwiązanie wspiera osoby starsze i niesamodzielne po hospitalizacji. Koordynator ocenia potrzeby w domu i pomaga rodzinie zorganizować opiekę. Łączy wsparcie zdrowotne, społeczne i sprzętowe. Może ograniczyć chaos po wypisie oraz ryzyko ponownego pobytu w szpitalu.",
+    "category": "dostep_do_uslug",
+    "target_groups": [
+      "seniorzy",
+      "opiekunowie rodzinni",
+      "osoby niesamodzielne"
+    ],
+    "tags": [
+      "seniorzy",
+      "opieka domowa",
+      "zdrowie",
+      "koordynacja",
+      "gmina"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Senior rozmawia w domu z osobą koordynującą opiekę.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow%2Corganizator-kompleksowej-opieki-w-miejscu-zamieszkania",
+    "contact_org": "Centrum Opieki Domowej S.C."
+  },
+  {
+    "title": "Terapeuta przestrzeni",
+    "summary": "Specjaliści pomagają seniorowi bezpieczniej urządzić mieszkanie. Wykorzystują przede wszystkim rzeczy, które już są w domu.",
+    "description": "Usługa dostosowuje przestrzeń mieszkania do możliwości starszej osoby. Zespół może zaproponować zmianę ustawienia mebli, proste uchwyty i inne niedrogie usprawnienia. Senior oraz rodzina uczą się bezpiecznego korzystania z domu. Celem jest dłuższa samodzielność i ograniczenie potrzeby opieki instytucjonalnej.",
+    "category": "starzenie",
+    "target_groups": [
+      "seniorzy",
+      "opiekunowie rodzinni",
+      "osoby o ograniczonej mobilności"
+    ],
+    "tags": [
+      "seniorzy",
+      "mieszkanie",
+      "bezpieczeństwo",
+      "samodzielność",
+      "wieś"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Starsza osoba ogląda z terapeutą bezpieczne rozwiązania w mieszkaniu.",
+    "source_url": "https://rops.krakow.pl/realizowane-projekty-i-zadania/usluga-wrazliwa-upowszechnianie-innowacji-spolecznych-w-srodowiskach-lokalnych%2Cwdrazanie-innowacji-w-oparciu-o-mechanizm-grantowy-tura-ii",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Alarm Ally (Strażnik)",
+    "summary": "Aplikacja wykrywa dźwięki alarmowe i ostrzega osoby g/Głuche. Może działać także bez dostępu do internetu.",
+    "description": "Rozwiązanie wspiera osoby g/Głuche oraz osoby z czasową utratą słuchu. Telefon rozpoznaje ważne dźwięki alarmowe i przekazuje ostrzeżenie przez wibrację, światło lub inne sygnały. W razie braku reakcji możliwy jest kontakt ze wskazanym numerem. Projekt zwiększa bezpieczeństwo w domu.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby g/Głuche",
+      "osoby z niedosłuchem"
+    ],
+    "tags": [
+      "głusi",
+      "alarm",
+      "bezpieczeństwo",
+      "telefon",
+      "dostępność"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Telefon pokazuje wizualne ostrzeżenie o wykrytym alarmie.",
+    "source_url": "https://rops.krakow.pl/realizowane-projekty-i-zadania/usluga-wrazliwa-upowszechnianie-innowacji-spolecznych-w-srodowiskach-lokalnych%2Cwdrazanie-innowacji-w-oparciu-o-mechanizm-grantowy-tura-i-rozstrzygniecie-naboru",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Himalaje Autyzmu",
+    "summary": "Metoda pomaga osobom neuroatypowym przygotować się do wizyty medycznej. Wspiera też personel w spokojnej komunikacji.",
+    "description": "Model opisuje czterostopniową ścieżkę przygotowania i prowadzenia wizyty medycznej. Pomaga ograniczać bodźce i sytuacje wywołujące silny stres. Wspiera komunikację pacjenta z personelem. Może być używany w przychodniach, punktach pobrań i szpitalach.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby neuroatypowe",
+      "osoby w spektrum autyzmu",
+      "personel medyczny"
+    ],
+    "tags": [
+      "autyzm",
+      "zdrowie",
+      "wizyta",
+      "komunikacja",
+      "dostępność"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Pacjent i pracownik medyczny korzystają z prostych materiałów wspierających komunikację.",
+    "source_url": "https://rops.krakow.pl/realizowane-projekty-i-zadania/usluga-wrazliwa-upowszechnianie-innowacji-spolecznych-w-srodowiskach-lokalnych%2Cwdrazanie-innowacji-w-oparciu-o-mechanizm-grantowy-tura-i-rozstrzygniecie-naboru",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Bez presji z depresji",
+    "summary": "Materiały pomagają młodej osobie wrócić do szkoły po kryzysie psychicznym. Wsparcie obejmuje też rodzinę, klasę i nauczycieli.",
+    "description": "Pakiet zawiera karty pracy i ćwiczenia psychoedukacyjne. Jest przeznaczony dla dzieci i młodzieży wracających do codziennego funkcjonowania po dłuższym leczeniu lub terapii. Materiały pomagają przygotować otoczenie szkolne i rodzinne. Celem jest bezpieczniejszy powrót i lepsze zrozumienie kryzysu psychicznego.",
+    "category": "zdrowie_psychiczne",
+    "target_groups": [
+      "dzieci",
+      "młodzież",
+      "rodzice",
+      "nauczyciele"
+    ],
+    "tags": [
+      "depresja",
+      "młodzież",
+      "szkoła",
+      "powrót",
+      "wsparcie"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Uczeń pracuje z kartami wsparcia przy stole.",
+    "source_url": "https://rops.krakow.pl/realizowane-projekty-i-zadania/usluga-wrazliwa-upowszechnianie-innowacji-spolecznych-w-srodowiskach-lokalnych%2Cwdrazanie-innowacji-w-oparciu-o-mechanizm-grantowy-tura-i-rozstrzygniecie-naboru",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Rodzina Adopcyjna Dorasta",
+    "summary": "Narzędzie pomaga rodzicom adopcyjnym lepiej rozumieć dorastające dzieci. Podpowiada pytania, wiedzę i możliwe działania.",
+    "description": "Rozwiązanie wspiera rodziny adopcyjne w okresie dorastania dziecka. Obejmuje karty obszarów zmiany, krótkie porcje wiedzy, pytania do refleksji i propozycje działań. Pomaga rozmawiać o emocjach i zachowaniach w kontekście historii rodziny. Wzmacnia relację i świadome rodzicielstwo.",
+    "category": "rodzina_dzieci",
+    "target_groups": [
+      "rodzice adopcyjni",
+      "nastolatki",
+      "rodziny"
+    ],
+    "tags": [
+      "adopcja",
+      "rodzina",
+      "nastolatki",
+      "relacje",
+      "wsparcie"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Rodzic i nastolatek rozmawiają przy stole z kartami ćwiczeń.",
+    "source_url": "https://rops.krakow.pl/realizowane-projekty-i-zadania/usluga-wrazliwa-upowszechnianie-innowacji-spolecznych-w-srodowiskach-lokalnych%2Cwdrazanie-innowacji-w-oparciu-o-mechanizm-grantowy-tura-i-rozstrzygniecie-naboru",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Głuchy czytelnik w bibliotece",
+    "summary": "Materiały w PJM i prostym języku ułatwiają osobom g/Głuchym korzystanie z biblioteki. Pomagają też rodzinom rozwijać czytelnictwo.",
+    "description": "Publikacja wyjaśnia, czym jest biblioteka i jak z niej korzystać. Treści są dostępne w polskim języku migowym i łatwym języku polskim. Zestaw zawiera filmy, instrukcje i słownik pojęć. Rozwiązanie wspiera także rodziców w nauce czytania dzieci.",
+    "category": "wykluczenie_cyfrowe",
+    "target_groups": [
+      "osoby g/Głuche",
+      "dzieci",
+      "rodzice"
+    ],
+    "tags": [
+      "biblioteka",
+      "pjm",
+      "czytanie",
+      "dostępność",
+      "edukacja"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Osoba korzysta z materiału bibliotecznego w polskim języku migowym.",
+    "source_url": "https://rops.krakow.pl/realizowane-projekty-i-zadania/usluga-wrazliwa-upowszechnianie-innowacji-spolecznych-w-srodowiskach-lokalnych%2Cwdrazanie-innowacji-w-oparciu-o-mechanizm-grantowy-tura-i-rozstrzygniecie-naboru",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Przenośne modularne łazienki",
+    "summary": "Lekkie moduły dają dostęp do prysznica, toalety i umywalki bez dużego remontu. Można je dopasować do trudnych warunków lokalowych.",
+    "description": "System składa się z prefabrykowanych modułów sanitarnych. Może być montowany w pomieszczeniach bez typowego węzła sanitarnego. Własne rozwiązania techniczne ograniczają potrzebę kosztownej przebudowy. Celem jest poprawa higieny, samodzielności i godności osób mieszkających w trudnych warunkach.",
+    "category": "dostep_do_uslug",
+    "target_groups": [
+      "osoby w ubóstwie",
+      "osoby o ograniczonej mobilności",
+      "mieszkańcy trudnych warunków lokalowych"
+    ],
+    "tags": [
+      "łazienka",
+      "higiena",
+      "mieszkanie",
+      "dostęp",
+      "ubóstwo"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Modułowa łazienka zamontowana w niewielkim pomieszczeniu.",
+    "source_url": "https://rops.krakow.pl/realizowane-projekty-i-zadania/usluga-wrazliwa-upowszechnianie-innowacji-spolecznych-w-srodowiskach-lokalnych%2Cwdrazanie-innowacji-w-oparciu-o-mechanizm-grantowy-tura-ii",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "koMIX życiowy",
+    "summary": "Gra w formie komiksu pomaga nastolatkom w pieczy zastępczej rozmawiać o trudnych emocjach. Wspiera pracę wychowawców i psychologów.",
+    "description": "Narzędzie wykorzystuje karty i komiksową formę do rozmowy o trudnych doświadczeniach. Jest skierowane do nastolatków w pieczy zastępczej. Pomaga nazywać emocje i omawiać sytuacje związane z przemocą, stratą lub stygmatyzacją. Może być używane przez psychologów i wychowawców.",
+    "category": "rodzina_dzieci",
+    "target_groups": [
+      "młodzież w pieczy zastępczej",
+      "wychowawcy",
+      "psychologowie"
+    ],
+    "tags": [
+      "piecza zastępcza",
+      "młodzież",
+      "emocje",
+      "gra",
+      "terapia"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Nastolatek i wychowawca korzystają z kart komiksowej gry.",
+    "source_url": "https://rops.krakow.pl/realizowane-projekty-i-zadania/usluga-wrazliwa-upowszechnianie-innowacji-spolecznych-w-srodowiskach-lokalnych%2Cwdrazanie-innowacji-w-oparciu-o-mechanizm-grantowy-tura-ii",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Szlakiem ludzi bezdomnych — Mobilny Punkt Higieniczny",
+    "summary": "Mobilny prysznic dociera do osób w kryzysie bezdomności. Dostęp do higieny pomaga rozpocząć kontakt i dalsze wsparcie.",
+    "description": "Mobilny punkt higieniczny dociera do miejsc, gdzie przebywają osoby bez domu. Zapewnia możliwość skorzystania z prysznica i podstawowej higieny. Kontakt przy usłudze może pomóc zbudować zaufanie do pracowników wsparcia. To pierwszy krok do dalszej pomocy społecznej i zdrowotnej.",
+    "category": "integracja_spoleczna",
+    "target_groups": [
+      "osoby w kryzysie bezdomności"
+    ],
+    "tags": [
+      "bezdomność",
+      "higiena",
+      "mobilność",
+      "zaufanie",
+      "pomoc"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Mobilny punkt higieniczny w formie przyczepy.",
+    "source_url": "https://rops.krakow.pl/realizowane-projekty-i-zadania/usluga-wrazliwa-upowszechnianie-innowacji-spolecznych-w-srodowiskach-lokalnych%2Cwdrazanie-innowacji-w-oparciu-o-mechanizm-grantowy-tura-ii",
+    "contact_org": "ROPS Kraków"
+  }
+]

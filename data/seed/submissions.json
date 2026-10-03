@@ -1,0 +1,211 @@
+[
+  {
+    "type": "idea",
+    "title": "Telefoniczny klub sąsiedzki",
+    "author_name": "Anna K.",
+    "author_email": "anna.k@example.invalid",
+    "author_role": "ngo",
+    "payload": {
+      "problem": "Starsze osoby mieszkające samotnie mają mało regularnych kontaktów.",
+      "solution": "Koordynowane rozmowy telefoniczne i kierowanie do lokalnych aktywności.",
+      "target_group": "seniorzy",
+      "stage": "pomysł",
+      "location": "powiat wadowicki"
+    },
+    "status": "nowe",
+    "ai_summary": "Pomysł na regularny kontakt telefoniczny z samotnymi seniorami.",
+    "ai_tags": [
+      "samotność",
+      "seniorzy",
+      "telefon"
+    ],
+    "ai_category": "samotnosc"
+  },
+  {
+    "type": "good_practice",
+    "title": "Mobilny dyżur specjalistów na wsi",
+    "author_name": "Marek L.",
+    "author_email": "marek.l@example.invalid",
+    "author_role": "gmina",
+    "payload": {
+      "problem": "Mieszkańcy mają trudny dojazd do specjalistów.",
+      "solution": "Raz w tygodniu mobilny punkt konsultacyjny odwiedza sołectwa.",
+      "target_group": "seniorzy i opiekunowie",
+      "stage": "testowana",
+      "location": "powiat limanowski"
+    },
+    "status": "w_ocenie",
+    "ai_summary": "Mobilny punkt usług ograniczający barierę dojazdu.",
+    "ai_tags": [
+      "wieś",
+      "dojazd",
+      "usługi"
+    ],
+    "ai_category": "dostep_do_uslug"
+  },
+  {
+    "type": "grant_application",
+    "title": "Gminny transport na telefon – pilotaż",
+    "author_name": "Ewa P.",
+    "author_email": "ewa.p@example.invalid",
+    "author_role": "gmina",
+    "payload": {
+      "fiszka": {
+        "title": "Gminny transport na telefon",
+        "problem": "Brak dogodnego dojazdu do lekarza i urzędu.",
+        "solution": "Łączenie zgłoszonych przejazdów mieszkańców.",
+        "target_group": "seniorzy i osoby bez samochodu",
+        "stage": "pomysł"
+      },
+      "sections": {
+        "cel": "Ułatwić dostęp do podstawowych usług.",
+        "grupa_docelowa": "Mieszkańcy rozproszonych sołectw.",
+        "dzialania": "Pilotaż tras, telefoniczne zapisy, ewaluacja.",
+        "rezultaty": "Więcej zrealizowanych wizyt i spraw urzędowych."
+      },
+      "budget": [
+        {
+          "item": "koordynacja pilotażu",
+          "category": "personel",
+          "amount": 18000
+        },
+        {
+          "item": "usługa przewozowa",
+          "category": "usługi",
+          "amount": 42000
+        }
+      ],
+      "accepted_regulamin": true
+    },
+    "status": "w_ocenie",
+    "ai_summary": "Pilotaż transportu na żądanie dla rozproszonych miejscowości.",
+    "ai_tags": [
+      "transport",
+      "wieś",
+      "seniorzy"
+    ],
+    "ai_category": "dostep_do_uslug"
+  },
+  {
+    "type": "contact",
+    "title": "Pytanie o możliwość testowania innowacji",
+    "author_name": "Piotr S.",
+    "author_email": "piotr.s@example.invalid",
+    "author_role": "mieszkaniec",
+    "payload": {
+      "message": "Chcę sprawdzić, czy mogę zgłosić mamę do testu rozwiązania dla seniorów.",
+      "page": "/biblioteka"
+    },
+    "status": "nowe",
+    "ai_summary": "Mieszkaniec pyta o udział seniora w teście innowacji.",
+    "ai_tags": [
+      "tester",
+      "seniorzy"
+    ],
+    "ai_category": "starzenie"
+  },
+  {
+    "type": "test_signup",
+    "title": "Zgłoszenie do testu Mobilnego centrum pomocy",
+    "author_name": "Halina W.",
+    "author_email": "halina.w@example.invalid",
+    "author_role": "mieszkaniec",
+    "payload": {
+      "innovation_id": "demo-mobilne-centrum",
+      "motivation": "Mieszkam na wsi i trudno mi dojechać po pomoc."
+    },
+    "status": "zaakceptowane",
+    "ai_summary": "Seniorka z gminy wiejskiej chce przetestować mobilną usługę.",
+    "ai_tags": [
+      "seniorzy",
+      "wieś",
+      "tester"
+    ],
+    "ai_category": "dostep_do_uslug"
+  },
+  {
+    "type": "idea",
+    "title": "Prosty urząd online",
+    "author_name": "Joanna R.",
+    "author_email": "joanna.r@example.invalid",
+    "author_role": "ngo",
+    "payload": {
+      "problem": "Część mieszkańców boi się e-usług i formularzy.",
+      "solution": "Symulator krok po kroku bez wysyłania prawdziwych danych.",
+      "target_group": "seniorzy",
+      "stage": "pomysł",
+      "location": "powiat proszowicki"
+    },
+    "status": "zaakceptowane",
+    "ai_summary": "Trening korzystania z e-usług bez ryzyka wysłania danych.",
+    "ai_tags": [
+      "cyfrowe",
+      "urząd",
+      "seniorzy"
+    ],
+    "ai_category": "wykluczenie_cyfrowe"
+  },
+  {
+    "type": "good_practice",
+    "title": "Dyżur dostępności w bibliotece",
+    "author_name": "Tomasz D.",
+    "author_email": "tomasz.d@example.invalid",
+    "author_role": "ekspert",
+    "payload": {
+      "problem": "Mieszkańcy nie wiedzą, gdzie zgłaszać bariery dostępności.",
+      "solution": "Stały dyżur i prosty formularz zbierający bariery.",
+      "target_group": "osoby z niepełnosprawnościami",
+      "stage": "wdrożona",
+      "location": "powiat gorlicki"
+    },
+    "status": "odrzucone",
+    "ai_summary": "Lokalny punkt zbierania zgłoszeń o barierach dostępności.",
+    "ai_tags": [
+      "dostępność",
+      "biblioteka",
+      "zgłoszenia"
+    ],
+    "ai_category": "niepelnosprawnosc"
+  },
+  {
+    "type": "contact",
+    "title": "Pytanie o grant dla organizacji",
+    "author_name": "Katarzyna N.",
+    "author_email": "katarzyna.n@example.invalid",
+    "author_role": "ngo",
+    "payload": {
+      "message": "Czy mała organizacja może złożyć wniosek razem z gminą?",
+      "page": "/kreator"
+    },
+    "status": "w_ocenie",
+    "ai_summary": "NGO pyta o wspólny wniosek z gminą.",
+    "ai_tags": [
+      "grant",
+      "ngo",
+      "gmina"
+    ],
+    "ai_category": "wspolpraca_miedzysektorowa"
+  },
+  {
+    "type": "idea",
+    "title": "Mapa dostępnych usług w gminie",
+    "author_name": "Robert M.",
+    "author_email": "robert.m@example.invalid",
+    "author_role": "gmina",
+    "payload": {
+      "problem": "Informacje o pomocy są na wielu stronach.",
+      "solution": "Jedna prosta lista i mapa usług z filtrowaniem potrzeb.",
+      "target_group": "mieszkańcy",
+      "stage": "pomysł",
+      "location": "powiat krakowski"
+    },
+    "status": "nowe",
+    "ai_summary": "Jedna mapa i lista lokalnych usług społecznych.",
+    "ai_tags": [
+      "mapa",
+      "usługi",
+      "informacja"
+    ],
+    "ai_category": "inne"
+  }
+]

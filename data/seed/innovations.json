@@ -1,0 +1,929 @@
+[
+  {
+    "title": "Mobilne centrum pomocy dla osób starszych",
+    "summary": "Specjaliści dojeżdżają do seniorów mieszkających na wsi. Pomoc może obejmować zdrowie, finanse, prawo i codzienne sprawy.",
+    "description": "Usługa przenosi wsparcie bliżej domu seniora. Jest szczególnie przydatna tam, gdzie dojazd do miasta jest trudny. Zespół dobiera zakres pomocy do sytuacji konkretnej osoby. Model może być prowadzony przez gminę, OPS lub organizację społeczną.",
+    "category": "samotnosc",
+    "target_groups": [
+      "seniorzy",
+      "mieszkańcy wsi"
+    ],
+    "tags": [
+      "seniorzy",
+      "wieś",
+      "samotność",
+      "mobilna pomoc",
+      "dojazd"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Mobilne centrum pomocy dla osób starszych”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow",
+    "contact_org": "Stowarzyszenie Klucz"
+  },
+  {
+    "title": "Organizator kompleksowej opieki w miejscu zamieszkania",
+    "summary": "Koordynator pomaga rodzinie zorganizować opiekę po wypisie seniora ze szpitala. Łączy potrzebne usługi i sprzęt.",
+    "description": "Model uruchamia pomoc szybko po powrocie chorej osoby do domu. Uwzględnia stan zdrowia seniora i możliwości jego bliskich. Pomaga zorganizować opiekę pielęgniarską, sprzęt i inne potrzebne usługi. Ogranicza dezorientację rodziny w trudnym momencie.",
+    "category": "dostep_do_uslug",
+    "target_groups": [
+      "seniorzy",
+      "osoby niesamodzielne",
+      "opiekunowie rodzinni"
+    ],
+    "tags": [
+      "opieka domowa",
+      "seniorzy",
+      "szpital",
+      "koordynacja",
+      "usługi"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Organizator kompleksowej opieki w miejscu zamieszkania”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow",
+    "contact_org": "Centrum Opieki Domowej S.C."
+  },
+  {
+    "title": "Terapeuta przestrzeni",
+    "summary": "Specjalista pomaga seniorowi bezpieczniej urządzić mieszkanie. Wykorzystuje przede wszystkim proste i niedrogie zmiany.",
+    "description": "Usługa wspiera starsze osoby mieszkające samodzielnie lub z rodziną. Specjalista analizuje codzienne trudności i bariery w mieszkaniu. Proponuje zmiany ułatwiające poruszanie się i wykonywanie czynności. Celem jest dłuższa samodzielność w domu.",
+    "category": "starzenie",
+    "target_groups": [
+      "seniorzy",
+      "osoby o ograniczonej mobilności"
+    ],
+    "tags": [
+      "seniorzy",
+      "mieszkanie",
+      "bezpieczeństwo",
+      "samodzielność"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Terapeuta przestrzeni”.",
+    "source_url": "https://rops.krakow.pl/realizowane-projekty-i-zadania/usluga-wrazliwa-upowszechnianie-innowacji-spolecznych-w-srodowiskach-lokalnych%2Cwdrazanie-innowacji-w-oparciu-o-mechanizm-grantowy-tura-ii",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Senior CUDER",
+    "summary": "Gra karciana pomaga seniorom rozmawiać o zdrowiu, relacjach i codziennym funkcjonowaniu. Zachęca do aktywności i kontaktu z innymi.",
+    "description": "Gra porządkuje rozmowę wokół ważnych obszarów życia seniora. Może wspierać pamięć, motywację i relacje społeczne. Nadaje się do pracy grupowej i indywidualnej. Może być wykorzystywana w klubach seniora i placówkach wsparcia.",
+    "category": "samotnosc",
+    "target_groups": [
+      "seniorzy"
+    ],
+    "tags": [
+      "gra",
+      "relacje",
+      "seniorzy",
+      "aktywność",
+      "samotność"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Senior CUDER”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "BaWita",
+    "summary": "Drewniana tablica wspiera pamięć i sprawność dłoni u osób z demencją. Ćwiczenia są proste i angażują kilka funkcji naraz.",
+    "description": "Narzędzie zawiera ruchome elementy do ćwiczeń pamięciowych i manualnych. Może wspierać organizację dnia i pamięć proceduralną. Jest przeznaczone między innymi dla osób we wczesnym stadium zespołów otępiennych. Może być używane w domu i placówkach wsparcia.",
+    "category": "starzenie",
+    "target_groups": [
+      "seniorzy",
+      "osoby z demencją"
+    ],
+    "tags": [
+      "demencja",
+      "pamięć",
+      "rehabilitacja",
+      "seniorzy"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „BaWita”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Merkury",
+    "summary": "Symulator pomaga seniorom ćwiczyć obsługę kiosków samoobsługowych. Pozwala uczyć się bez presji i ryzyka utraty pieniędzy.",
+    "description": "Rozwiązanie odtwarza podstawowe sytuacje znane z kas i kiosków samoobsługowych. Użytkownik może wielokrotnie powtarzać kolejne kroki. Dzięki temu nabiera pewności przed użyciem prawdziwego urządzenia. Narzędzie ogranicza bariery cyfrowe w codziennych usługach.",
+    "category": "wykluczenie_cyfrowe",
+    "target_groups": [
+      "seniorzy",
+      "osoby o niskich kompetencjach cyfrowych"
+    ],
+    "tags": [
+      "seniorzy",
+      "kiosk",
+      "cyfrowe",
+      "trening",
+      "zakupy"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Merkury”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Kody QR na pomoc seniorom",
+    "summary": "Proste oznaczenia pomagają osobom z problemami pamięci dotrzeć do potrzebnych informacji. Mogą też wspierać opiekunów.",
+    "description": "Rozwiązanie wykorzystuje kody QR do przekazywania łatwo dostępnych instrukcji i informacji. Jest kierowane do starszych osób z zanikami pamięci i chorobami otępiennymi. Może wspierać wykonywanie codziennych czynności. Zakres informacji można dostosować do miejsca i użytkownika.",
+    "category": "starzenie",
+    "target_groups": [
+      "seniorzy",
+      "osoby z demencją",
+      "opiekunowie"
+    ],
+    "tags": [
+      "qr",
+      "pamięć",
+      "demencja",
+      "seniorzy",
+      "informacja"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Kody QR na pomoc seniorom”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "E-rzecznik konsumenta seniora",
+    "summary": "Senior może szybciej uzyskać prostą poradę dotyczącą praw konsumenta. Rozwiązanie ułatwia kontakt z pomocą prawną.",
+    "description": "Narzędzie wspiera starsze osoby w typowych problemach konsumenckich. Porządkuje pytania i kieruje do odpowiednich informacji lub porady. Może ograniczyć barierę dojazdu do punktu pomocy. Sprawdza się jako uzupełnienie lokalnego poradnictwa.",
+    "category": "dostep_do_uslug",
+    "target_groups": [
+      "seniorzy",
+      "konsumenci"
+    ],
+    "tags": [
+      "prawo",
+      "seniorzy",
+      "konsument",
+      "porada",
+      "online"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „E-rzecznik konsumenta seniora”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Ścieżka moto-sensoryczna",
+    "summary": "Trasa z prostymi ćwiczeniami pozwala ćwiczyć podczas codziennego spaceru. Wspiera seniorów i osoby z ograniczeniami ruchu.",
+    "description": "Stanowiska ćwiczeniowe można tworzyć w istniejącej przestrzeni publicznej. Piktogramy i materiały instruktażowe podpowiadają bezpieczne ćwiczenia. Rozwiązanie pozwala kontynuować rehabilitację poza gabinetem. Skalę i koszt ścieżki można dopasować do możliwości gminy.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "seniorzy",
+      "osoby z niepełnosprawnością ruchową"
+    ],
+    "tags": [
+      "rehabilitacja",
+      "ruch",
+      "przestrzeń",
+      "seniorzy"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Ścieżka moto-sensoryczna”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Talerze zdrowia",
+    "summary": "Proste materiały pomagają przygotować zbilansowane posiłki dla starszych osób z niepełnosprawnością. Ułatwiają codzienne decyzje żywieniowe.",
+    "description": "Materiały przekładają zasady zdrowego żywienia na prostą praktykę. Mogą być używane przez seniorów, opiekunów i placówki wsparcia. Wskazówki pomagają komponować posiłki z dostępnych produktów. Rozwiązanie łączy edukację zdrowotną z samodzielnością.",
+    "category": "starzenie",
+    "target_groups": [
+      "seniorzy",
+      "osoby z niepełnosprawnością",
+      "opiekunowie"
+    ],
+    "tags": [
+      "żywienie",
+      "seniorzy",
+      "zdrowie",
+      "samodzielność"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Talerze zdrowia”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Głuchy czytelnik w bibliotece",
+    "summary": "Materiały w PJM i prostym języku wyjaśniają, jak korzystać z biblioteki. Wspierają też rodziców w rozwijaniu czytelnictwa dzieci.",
+    "description": "Publikacja przybliża zasady korzystania z biblioteki osobom g/Głuchym. Treści przygotowano w polskim języku migowym i łatwym języku polskim. Materiały pomagają rodzicom wspierać dzieci w czytaniu. Rozwiązanie może być wdrażane przez biblioteki i szkoły.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby g/Głuche",
+      "rodzice",
+      "dzieci"
+    ],
+    "tags": [
+      "pjm",
+      "biblioteka",
+      "czytanie",
+      "dostępność"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Głuchy czytelnik w bibliotece”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/kategorie",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Strażnik",
+    "summary": "Aplikacja wykrywa dźwięk alarmu i ostrzega osobę g/Głuchą w dostępny sposób. Może użyć wibracji, światła lub połączenia.",
+    "description": "Aplikacja rozpoznaje wybrane sygnały alarmowe, na przykład czujkę dymu. Użytkownik wybiera sposób powiadomienia. Historia zdarzeń pomaga sprawdzić wcześniejsze alerty. Rozwiązanie zwiększa bezpieczeństwo w domu, hotelu lub akademiku.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby g/Głuche",
+      "osoby słabosłyszące",
+      "osoby głuchoniewidome"
+    ],
+    "tags": [
+      "alarm",
+      "głusi",
+      "bezpieczeństwo",
+      "aplikacja"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Strażnik”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/kategorie",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Zdobądź swoje szczyty",
+    "summary": "Multimedialny przewodnik opisuje górskie trasy pod kątem różnych potrzeb. Pokazuje przeszkody, nachylenia i dostępne udogodnienia.",
+    "description": "Przewodnik pomaga osobom z niepełnosprawnościami lepiej przygotować wyjście w góry. Opisuje nawierzchnię, nachylenie, szerokość trasy i bariery. Wskazuje także toalety, parkingi oraz możliwości dojazdu. Część treści może być dostępna w formie audiodeskrypcji.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby z niepełnosprawnością ruchową",
+      "osoby niewidome",
+      "osoby niesłyszące"
+    ],
+    "tags": [
+      "turystyka",
+      "góry",
+      "dostępność",
+      "przewodnik"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Zdobądź swoje szczyty”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/kategorie",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Zakupy bez barier",
+    "summary": "Klient może dyskretnie poprosić przeszkolonego pracownika sklepu o pomoc. Wsparcie jest dopasowane do konkretnej potrzeby.",
+    "description": "System umożliwia osobie zależnej wezwanie asysty w sklepie. Pracownik może pomóc znaleźć produkt, przeczytać etykietę lub sięgnąć na półkę. Rozwiązanie wspiera samodzielne zakupy bez stygmatyzowania klienta. Koordynację może wspierać samorząd lub OPS.",
+    "category": "dostep_do_uslug",
+    "target_groups": [
+      "osoby z niepełnosprawnością",
+      "seniorzy"
+    ],
+    "tags": [
+      "zakupy",
+      "asysta",
+      "dostępność",
+      "samodzielność"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Zakupy bez barier”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/kategorie",
+    "contact_org": "Gmina Kęty / OPS w Kętach"
+  },
+  {
+    "title": "Innotextil",
+    "summary": "Odzież połączona z aplikacją pomaga kontrolować ruch podczas ćwiczeń i chodzenia. Może wspierać domową rehabilitację.",
+    "description": "Rozwiązanie monitoruje sposób poruszania się użytkownika. Aplikacja może sygnalizować potrzebę korekty ruchu. Narzędzie jest kierowane między innymi do seniorów i osób po urazach. Ma wspierać utrzymywanie efektów rehabilitacji poza gabinetem.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "seniorzy",
+      "osoby z ograniczeniami ruchu"
+    ],
+    "tags": [
+      "rehabilitacja",
+      "odzież",
+      "ruch",
+      "aplikacja"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Innotextil”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/kategorie",
+    "contact_org": "Akademia Sztuk Pięknych w Krakowie"
+  },
+  {
+    "title": "Przenośne modularne łazienki",
+    "summary": "Moduł sanitarny zapewnia dostęp do prysznica i toalety bez dużego remontu. Może pomóc osobom mieszkającym w trudnych warunkach.",
+    "description": "System składa się z gotowych elementów sanitarnych, które można dopasować do istniejącego pomieszczenia. Ogranicza zakres prac budowlanych potrzebnych do uruchomienia łazienki. Rozwiązanie wspiera higienę i samodzielność. Może być używane w programach mieszkaniowych i społecznych.",
+    "category": "dostep_do_uslug",
+    "target_groups": [
+      "osoby w ubóstwie",
+      "osoby z ograniczoną mobilnością"
+    ],
+    "tags": [
+      "łazienka",
+      "higiena",
+      "mieszkanie",
+      "dostępność"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Przenośne modularne łazienki”.",
+    "source_url": "https://rops.krakow.pl/realizowane-projekty-i-zadania/usluga-wrazliwa-upowszechnianie-innowacji-spolecznych-w-srodowiskach-lokalnych%2Cwdrazanie-innowacji-w-oparciu-o-mechanizm-grantowy-tura-ii",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "koMIX życiowy",
+    "summary": "Gra w formie komiksu pomaga młodzieży w pieczy zastępczej rozmawiać o emocjach i trudnych doświadczeniach. Wspiera pracę specjalistów.",
+    "description": "Karty i komiksowa forma ułatwiają rozpoczęcie rozmowy o trudnych przeżyciach. Narzędzie jest przeznaczone dla młodzieży w pieczy zastępczej. Może być używane przez psychologów i wychowawców. Pomaga nazywać emocje i szukać sposobów reagowania.",
+    "category": "zdrowie_psychiczne",
+    "target_groups": [
+      "młodzież w pieczy zastępczej",
+      "wychowawcy",
+      "psychologowie"
+    ],
+    "tags": [
+      "młodzież",
+      "emocje",
+      "piecza zastępcza",
+      "gra"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „koMIX życiowy”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Patryk i Kropka",
+    "summary": "Opowiadania łatwe do czytania pomagają młodzieży z niepełnosprawnością intelektualną rozumieć codzienne sytuacje. Wspierają rozmowę i samodzielność.",
+    "description": "Materiały wykorzystują prosty tekst i czytelną strukturę. Bohaterowie przechodzą przez sytuacje znane z codziennego życia. Opowiadania można omawiać wspólnie z opiekunem lub nauczycielem. Narzędzie wspiera rozumienie i podejmowanie decyzji.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "młodzież z niepełnosprawnością intelektualną"
+    ],
+    "tags": [
+      "łatwy tekst",
+      "młodzież",
+      "samodzielność",
+      "edukacja"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Patryk i Kropka”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Edki – kredki terapeutyczne",
+    "summary": "Specjalnie ukształtowane kredki wspierają dzieci ze spastycznością dłoni. Terapia odbywa się podczas rysowania i zabawy.",
+    "description": "Kształt kredek zachęca dłoń do korzystniejszego ustawienia podczas pracy. Dziecko ćwiczy rękę podczas zwykłej aktywności twórczej. Narzędzie może wspierać pracę rehabilitanta, nauczyciela i rodzica. Łączy terapię z poczuciem sprawczości.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "dzieci ze spastycznością kończyny górnej"
+    ],
+    "tags": [
+      "dzieci",
+      "rehabilitacja",
+      "dłoń",
+      "kredki"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Edki – kredki terapeutyczne”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Rodzina adopcyjna dorasta",
+    "summary": "Narzędzie pomaga rodzicom adopcyjnym lepiej rozumieć emocje i zachowania nastolatków. Daje wiedzę, ćwiczenia i pytania do refleksji.",
+    "description": "Materiały można przechodzić we własnym tempie. Pomagają rodzicom łączyć bieżące zachowania z historią dziecka i rodziny. Wspierają rozmowę o emocjach i trudnych sytuacjach. Mogą być używane także przez specjalistów pracujących z rodzinami adopcyjnymi.",
+    "category": "rodzina_dzieci",
+    "target_groups": [
+      "rodzice adopcyjni",
+      "nastolatki"
+    ],
+    "tags": [
+      "adopcja",
+      "rodzina",
+      "nastolatki",
+      "emocje"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Rodzina adopcyjna dorasta”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Puzzle 3D",
+    "summary": "Zabawki przestrzenne wspierają naukę alfabetu Braille’a. Dziecko może poznawać znaki przez dotyk i zabawę.",
+    "description": "Puzzle łączą naukę z manipulowaniem elementami. Mają pomagać dzieciom i młodzieży z dysfunkcją wzroku poznawać alfabet Braille’a. Mogą być używane w domu i podczas zajęć edukacyjnych. Forma 3D wspiera naukę przez doświadczenie.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "dzieci niewidome",
+      "młodzież niewidoma"
+    ],
+    "tags": [
+      "braille",
+      "dzieci",
+      "dotyk",
+      "edukacja"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Puzzle 3D”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Hop hop – mobilny plac zabaw",
+    "summary": "Meblozabawka wspiera ruch i rehabilitację dzieci z trudnościami motorycznymi. Można ją przenosić między miejscami.",
+    "description": "Rozwiązanie łączy zabawę z ćwiczeniami ruchowymi. Jest przeznaczone dla dzieci w wieku przedszkolnym z trudnościami motorycznymi. Mobilna forma ułatwia wykorzystanie w różnych placówkach. Ćwiczenia mogą być częścią codziennej aktywności.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "dzieci z trudnościami motorycznymi"
+    ],
+    "tags": [
+      "dzieci",
+      "ruch",
+      "rehabilitacja",
+      "zabawa"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Hop hop – mobilny plac zabaw”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Mobilny pomocnik dydaktyczno-sensoryczny",
+    "summary": "Przenośne wyposażenie wspiera naukę uczniów i studentów w spektrum autyzmu. Pomaga ograniczyć przeciążenie bodźcami.",
+    "description": "Narzędzie organizuje indywidualne miejsce pracy w różnych przestrzeniach. Może ułatwiać skupienie oraz regulację sensoryczną. Jest przeznaczone dla uczniów i studentów w spektrum autyzmu. Mobilność pozwala korzystać z niego w wielu salach.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "uczniowie w spektrum autyzmu",
+      "studenci w spektrum autyzmu"
+    ],
+    "tags": [
+      "autyzm",
+      "nauka",
+      "sensoryka",
+      "szkoła"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Mobilny pomocnik dydaktyczno-sensoryczny”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Moje potrzeby – gdzie i jak je realizować?",
+    "summary": "Słowno-graficzny przewodnik pomaga osobom w spektrum autyzmu załatwiać codzienne sprawy poza domem. Pokazuje miejsca i kolejne kroki.",
+    "description": "Przewodnik opisuje typowe potrzeby oraz miejsca, w których można je zrealizować. Łączy prosty tekst z elementami graficznymi. Ma wspierać młodzież i dorosłych w samodzielnym korzystaniu z usług. Może być używany podczas treningu samodzielności.",
+    "category": "dostep_do_uslug",
+    "target_groups": [
+      "młodzież w spektrum autyzmu",
+      "dorośli w spektrum autyzmu"
+    ],
+    "tags": [
+      "autyzm",
+      "usługi",
+      "samodzielność",
+      "przewodnik"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Moje potrzeby – gdzie i jak je realizować?”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Bez presji z depresji",
+    "summary": "Materiały pomagają dzieciom i młodzieży wracać do szkoły po kryzysie psychicznym. Wsparcie obejmuje też dorosłych wokół ucznia.",
+    "description": "Pakiet zawiera proste materiały psychoedukacyjne. Może wspierać ucznia, rodzinę i szkołę w przygotowaniu bezpiecznego powrotu. Pomaga rozmawiać o emocjach i potrzebach bez stygmatyzowania. Nadaje się do pracy indywidualnej oraz z otoczeniem dziecka.",
+    "category": "zdrowie_psychiczne",
+    "target_groups": [
+      "dzieci",
+      "młodzież",
+      "rodzice",
+      "nauczyciele"
+    ],
+    "tags": [
+      "depresja",
+      "szkoła",
+      "młodzież",
+      "powrót"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Bez presji z depresji”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Bez stresu do sukcesu",
+    "summary": "Model łączy terapię neurologiczną, dogoterapię i wsparcie psychologiczne. Ma zmniejszyć stres małego dziecka podczas rehabilitacji.",
+    "description": "Rozwiązanie jest skierowane do małych dzieci z niepełnosprawnością. Łączy kilka form terapii w spójny sposób pracy. Ważnym elementem jest ograniczanie napięcia i budowanie poczucia bezpieczeństwa. Model może wspierać także rodziców w procesie terapii.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "małe dzieci z niepełnosprawnością",
+      "rodzice"
+    ],
+    "tags": [
+      "dzieci",
+      "terapia",
+      "rehabilitacja",
+      "stres"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Bez stresu do sukcesu”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Uważnione rodzeństwo",
+    "summary": "Model pomaga rodzicom wspierać zdrowe rodzeństwo dziecka z niepełnosprawnością. Zwraca uwagę na emocje i potrzeby każdego dziecka.",
+    "description": "Rodzice otrzymują wskazówki do rozmowy i codziennego działania. Model pomaga zauważyć obciążenia rodzeństwa oraz wzmacniać relacje rodzinne. Może być używany także przez specjalistów pracujących z rodziną. Celem jest równowaga i lepsza komunikacja w domu.",
+    "category": "rodzina_dzieci",
+    "target_groups": [
+      "rodziny dzieci z niepełnosprawnością",
+      "rodzeństwo"
+    ],
+    "tags": [
+      "rodzeństwo",
+      "rodzina",
+      "niepełnosprawność",
+      "relacje"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Uważnione rodzeństwo”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Brzuszkole",
+    "summary": "Proste listy i ćwiczenia pomagają rodzinom budować zdrowe nawyki żywieniowe od przedszkola. Dziecko uczy się razem z dorosłymi.",
+    "description": "Materiały porządkują codzienne decyzje dotyczące jedzenia i aktywności. Rodzice otrzymują zadania, które można wykonywać razem z dzieckiem. Narzędzie ma wspierać profilaktykę nadwagi i dobre nawyki. Może być wykorzystywane także przez przedszkola.",
+    "category": "rodzina_dzieci",
+    "target_groups": [
+      "dzieci przedszkolne",
+      "rodzice"
+    ],
+    "tags": [
+      "żywienie",
+      "dzieci",
+      "rodzina",
+      "profilaktyka"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Brzuszkole”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "To nie koniec świata – to początek świata",
+    "summary": "Materiały pomagają rodzinom odnaleźć się po diagnozie niepełnosprawności intelektualnej. Porządkują wiedzę i dostępne formy wsparcia.",
+    "description": "Pakiet daje rodzinie informacje potrzebne na początku nowej sytuacji. Pomaga nazwać potrzeby oraz znaleźć dostępne formy pomocy. Może wspierać rozmowę ze specjalistami i planowanie kolejnych kroków. Język materiałów powinien być prosty i wspierający.",
+    "category": "rodzina_dzieci",
+    "target_groups": [
+      "rodziny osób z niepełnosprawnością intelektualną"
+    ],
+    "tags": [
+      "rodzina",
+      "diagnoza",
+      "wsparcie",
+      "niepełnosprawność"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „To nie koniec świata – to początek świata”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Językołamacz",
+    "summary": "Aplikacja wykorzystuje rozszerzoną rzeczywistość do ćwiczenia mowy. Jest przeznaczona dla słyszących dzieci w spektrum autyzmu.",
+    "description": "Ćwiczenia łączą obraz, ruch i zadania językowe. Dziecko może wykonywać je w krótkich sesjach. Narzędzie ma wspierać rozwój mowy języka polskiego. Może być używane jako uzupełnienie pracy specjalisty.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "dzieci w spektrum autyzmu"
+    ],
+    "tags": [
+      "mowa",
+      "autyzm",
+      "dzieci",
+      "aplikacja"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Językołamacz”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Piosenki uczestniczące",
+    "summary": "Piosenki pomagają aktywizować dzieci z trudnościami w mowie i komunikacji. Zachęcają do reagowania i wspólnego działania.",
+    "description": "Muzyka tworzy przewidywalną strukturę do ćwiczenia komunikacji. Dziecko jest zachęcane do prostych odpowiedzi, ruchów i wyborów. Materiał może być wykorzystywany w domu, szkole lub terapii. Wspiera udział dziecka w aktywności grupowej.",
+    "category": "integracja_spoleczna",
+    "target_groups": [
+      "dzieci z trudnościami komunikacyjnymi"
+    ],
+    "tags": [
+      "muzyka",
+      "mowa",
+      "dzieci",
+      "integracja"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Piosenki uczestniczące”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Mój pomocny Virtual World",
+    "summary": "Aplikacja pomaga ukraińskim dzieciom odnaleźć się w polskiej szkole. Pokazuje sytuacje i zasady w przystępnej formie.",
+    "description": "Rozwiązanie wykorzystuje rozszerzoną rzeczywistość do nauki codziennych sytuacji szkolnych. Dziecko może bezpiecznie ćwiczyć reakcje i poznawać otoczenie. Narzędzie wspiera adaptację i komunikację. Może być używane przez szkołę jako element wsparcia integracyjnego.",
+    "category": "integracja_spoleczna",
+    "target_groups": [
+      "dzieci z Ukrainy",
+      "uczniowie cudzoziemscy"
+    ],
+    "tags": [
+      "ukraina",
+      "szkoła",
+      "integracja",
+      "adaptacja"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Mój pomocny Virtual World”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Mobilna pomoc terapeutyczna",
+    "summary": "Zespół szybko dociera do rodziny po pierwszym sygnale przemocy. Wypełnia lukę przed uruchomieniem pełnego wsparcia systemowego.",
+    "description": "Model zakłada szybką diagnozę sytuacji i pierwszą pracę z rodziną. Ma działać w okresie między zgłoszeniem problemu a uruchomieniem dostępnych usług. Pozwala wcześniej ograniczać ryzyko i kierować do właściwych specjalistów. Może uzupełniać działania OPS.",
+    "category": "rodzina_dzieci",
+    "target_groups": [
+      "rodziny w kryzysie",
+      "dzieci",
+      "osoby doświadczające przemocy"
+    ],
+    "tags": [
+      "przemoc",
+      "rodzina",
+      "interwencja",
+      "mobilna pomoc"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Mobilna pomoc terapeutyczna”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "MarimBaza!",
+    "summary": "Młodzież wspólnie buduje instrumenty i przygotowuje projekt muzyczny. Działanie rozwija współpracę, sprawczość i relacje.",
+    "description": "Model pracy wykorzystuje wspólne tworzenie marimb i przygotowanie występu. Zadania wymagają planowania oraz współpracy w grupie. Młodzi ludzie mają widoczny efekt swojej pracy. Projekt może wspierać integrację i budowanie pewności siebie.",
+    "category": "integracja_spoleczna",
+    "target_groups": [
+      "młodzież"
+    ],
+    "tags": [
+      "młodzież",
+      "muzyka",
+      "współpraca",
+      "sprawczość"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „MarimBaza!”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Nasz wspólny, rodzinny świat",
+    "summary": "Gra rodzinna i zespół szybkiego reagowania pomagają rodzinom dzieci z niepełnosprawnością. Ułatwiają diagnozę problemu i znalezienie pomocy.",
+    "description": "Model łączy narzędzie do rozmowy w rodzinie z szybkim kierowaniem do odpowiedniej instytucji lub specjalisty. Gra pomaga ujawnić trudności w relacjach i codziennym funkcjonowaniu. Zespół reagowania skraca drogę do pomocy. Rozwiązanie może być używane przez instytucje wspierające rodziny.",
+    "category": "wspolpraca_miedzysektorowa",
+    "target_groups": [
+      "rodziny dzieci z niepełnosprawnością",
+      "instytucje wsparcia"
+    ],
+    "tags": [
+      "rodzina",
+      "koordynacja",
+      "gra",
+      "wsparcie"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Nasz wspólny, rodzinny świat”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "Stowarzyszenie Pro Psyche"
+  },
+  {
+    "title": "mPatyk",
+    "summary": "Inkluzywna gra planszowa pozwala bawić się razem dzieciom o różnych możliwościach. Wspiera relacje i wspólne uczestnictwo.",
+    "description": "Mechanika gry została pomyślana tak, aby zwiększać udział dzieci i młodzieży o zróżnicowanych potrzebach. Rozgrywka tworzy okazję do współpracy oraz rozmowy. Może być używana w szkole, świetlicy lub domu. Wspiera włączenie bez wydzielania osobnej aktywności.",
+    "category": "integracja_spoleczna",
+    "target_groups": [
+      "dzieci",
+      "młodzież",
+      "dzieci z niepełnosprawnościami"
+    ],
+    "tags": [
+      "gra",
+      "integracja",
+      "dzieci",
+      "inkluzja"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „mPatyk”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Czas na aktywność!",
+    "summary": "Platforma wspiera osoby z niepełnosprawnością intelektualną w wyborze aktywności. Pomaga budować samodzielność i plan dnia.",
+    "description": "Serwis prezentuje aktywności w czytelny i prosty sposób. Użytkownik może wybierać zadania dopasowane do swoich możliwości. Narzędzie może wspierać opiekunów i terapeutów w planowaniu dnia. Celem jest większa samodzielność i udział w życiu społecznym.",
+    "category": "wykluczenie_cyfrowe",
+    "target_groups": [
+      "osoby z niepełnosprawnością intelektualną"
+    ],
+    "tags": [
+      "platforma",
+      "samodzielność",
+      "aktywność",
+      "łatwy język"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Czas na aktywność!”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Urzędowy ambaras",
+    "summary": "Gra planszowa uczy samodzielnego załatwiania spraw urzędowych. Pozwala przećwiczyć kolejne kroki w bezpiecznych warunkach.",
+    "description": "Rozgrywka pokazuje typowe sytuacje spotykane w urzędzie. Użytkownik poznaje dokumenty, role i kolejność działań. Narzędzie jest kierowane do osób z niepełnosprawnością intelektualną. Może być używane podczas treningu samodzielności.",
+    "category": "dostep_do_uslug",
+    "target_groups": [
+      "osoby z niepełnosprawnością intelektualną"
+    ],
+    "tags": [
+      "urząd",
+      "samodzielność",
+      "gra",
+      "usługi"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Urzędowy ambaras”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-intelektualna",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Pełna wokanda",
+    "summary": "Gra edukacyjna pomaga zrozumieć, jak działa sąd. Oswaja role, pojęcia i przebieg podstawowych sytuacji.",
+    "description": "Narzędzie przekłada trudne pojęcia prawne na doświadczenie gry. Użytkownik może poznać osoby uczestniczące w postępowaniu i kolejne etapy. Rozwiązanie wspiera osoby z niepełnosprawnością intelektualną. Może przygotować do realnego kontaktu z wymiarem sprawiedliwości.",
+    "category": "dostep_do_uslug",
+    "target_groups": [
+      "osoby z niepełnosprawnością intelektualną"
+    ],
+    "tags": [
+      "sąd",
+      "prawo",
+      "gra",
+      "samodzielność"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Pełna wokanda”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-intelektualna",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Mapa dostępnych usług w gminie",
+    "summary": "Prosta mapa i lista pokazują lokalne usługi społeczne w jednym miejscu. Każda pozycja ma też wersję tekstową i informacje o dostępności.",
+    "description": "To demonstracyjna koncepcja porządkująca rozproszone informacje. Użytkownik może filtrować usługi według potrzeby i grupy odbiorców. Mapa zawsze ma równoległą listę tekstową. Aktualizacją danych może zajmować się lokalny administrator.",
+    "category": "inne",
+    "target_groups": [
+      "mieszkańcy",
+      "opiekunowie",
+      "pracownicy instytucji"
+    ],
+    "tags": [
+      "mapa",
+      "usługi",
+      "informacja",
+      "dostępność"
+    ],
+    "stage": "pomysł",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Mapa dostępnych usług w gminie”.",
+    "source_url": "https://rops.krakow.pl/pliki-do-pobrania/artykul%2Cmapa-wyzwan-spolecznych%2C1048",
+    "contact_org": "Dane demo – inspirowane Mapą Wyzwań"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Spytkowice",
+    "powiat": "wadowicki",
+    "type": "wiejska",
+    "population": 10067,
+    "population_trend": "spada"
+  },
+  {
+    "name": "Zabierzów",
+    "powiat": "krakowski",
+    "type": "wiejska",
+    "population": 29837,
+    "population_trend": "rośnie"
+  },
+  {
+    "name": "Mszana Dolna",
+    "powiat": "limanowski",
+    "type": "wiejska",
+    "population": 17659,
+    "population_trend": "stabilna"
+  },
+  {
+    "name": "Niepołomice",
+    "powiat": "wielicki",
+    "type": "miejsko-wiejska",
+    "population": 33602,
+    "population_trend": "rośnie"
+  },
+  {
+    "name": "Kęty",
+    "powiat": "oświęcimski",
+    "type": "miejsko-wiejska",
+    "population": 33146,
+    "population_trend": "spada"
+  },
+  {
+    "name": "Zakopane",
+    "powiat": "tatrzański",
+    "type": "miejska",
+    "population": 25059,
+    "population_trend": "spada"
+  },
+  {
+    "name": "Gorlice",
+    "powiat": "gorlicki",
+    "type": "miejska",
+    "population": 25166,
+    "population_trend": "spada"
+  },
+  {
+    "name": "Proszowice",
+    "powiat": "proszowicki",
+    "type": "miejsko-wiejska",
+    "population": 15381,
+    "population_trend": "spada"
+  }
+]
