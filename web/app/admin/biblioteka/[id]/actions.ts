@@ -33,6 +33,10 @@ export async function saveInnovation(id: string, _prev: EditResult | null, formD
     revalidatePath("/biblioteka");
     return { ok: true, message: ok ? "Zapisano. Dopasowania zostały odświeżone." : "Zapisano. Dopasowania odświeżą się później (usługa AI jest niedostępna)." };
   } catch (e) {
-    return { ok: false, message: e instanceof Error ? e.message : "Coś poszło nie tak." };
+    const message = e instanceof Error ? e.message : "";
+    if (message.includes("Brak konfiguracji")) {
+      return { ok: false, message: "Zapis wymaga podłączonej bazy ROPS. W tym demo karta jest przykładowa." };
+    }
+    return { ok: false, message: message || "Coś poszło nie tak." };
   }
 }

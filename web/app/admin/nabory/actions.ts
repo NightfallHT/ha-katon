@@ -22,6 +22,10 @@ export async function saveCall(id: string, _prev: CallResult | null, formData: F
     revalidatePath("/kreator");
     return { ok: true, message: "Zapisano." };
   } catch (e) {
-    return { ok: false, message: e instanceof Error ? e.message : "Coś poszło nie tak." };
+    const message = e instanceof Error ? e.message : "";
+    if (message.includes("Brak konfiguracji")) {
+      return { ok: false, message: "Zapis wymaga podłączonej bazy ROPS. W tym demo nabór jest przykładowy." };
+    }
+    return { ok: false, message: message || "Coś poszło nie tak." };
   }
 }

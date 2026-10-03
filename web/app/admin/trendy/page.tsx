@@ -49,15 +49,18 @@ async function loadNeeds(): Promise<{ week: NeedRow[]; latest: NeedRow[]; demo: 
     const latestRows = (latest.data ?? []) as NeedRow[];
     const failed = week.error ?? latest.error;
     if (failed) {
-      return { week: DEMO_NEEDS, latest: DEMO_NEEDS, demo: true, error: `Nie udało się wczytać zapytań: ${failed.message}` };
+      return { week: DEMO_NEEDS, latest: DEMO_NEEDS, demo: true, error: "Nie udało się wczytać zapytań." };
     }
     if (weekRows.length === 0 && latestRows.length === 0) {
       return { week: DEMO_NEEDS, latest: DEMO_NEEDS, demo: true, error: "" };
     }
     return { week: weekRows, latest: latestRows, demo: false, error: "" };
   } catch (e) {
-    const error = e instanceof Error ? e.message : "Nie udało się wczytać danych.";
-    return { week: DEMO_NEEDS, latest: DEMO_NEEDS, demo: true, error };
+    const message = e instanceof Error ? e.message : "";
+    if (message.includes("Brak konfiguracji")) {
+      return { week: DEMO_NEEDS, latest: DEMO_NEEDS, demo: true, error: "" };
+    }
+    return { week: DEMO_NEEDS, latest: DEMO_NEEDS, demo: true, error: "Nie udało się wczytać zapytań." };
   }
 }
 

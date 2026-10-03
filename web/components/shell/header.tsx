@@ -109,36 +109,31 @@ export function Header() {
           </div>
           <fieldset>
             <legend className="mb-1 font-medium">Wielkość tekstu</legend>
-            <div className="flex gap-2">
-              <button
-                type="button"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border px-3"
-                aria-pressed={font === ""}
-                onClick={() => applyFont("")}
-              >
-                A
-              </button>
-              <button
-                type="button"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border px-3 text-lg"
-                aria-pressed={font === "125"}
-                onClick={() => applyFont("125")}
-              >
-                A+
-              </button>
-              <button
-                type="button"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border px-3 text-xl"
-                aria-pressed={font === "150"}
-                onClick={() => applyFont("150")}
-              >
-                A++
-              </button>
+            <div className="flex items-end gap-2">
+              {(
+                [
+                  ["", "A", "18px", "44px"],
+                  ["125", "A+", "22.5px", "52px"],
+                  ["150", "A++", "27px", "60px"],
+                ] as const
+              ).map(([value, label, size, height]) => (
+                <button
+                  key={label}
+                  type="button"
+                  className="inline-flex min-w-11 items-center justify-center rounded-full border bg-card px-3 leading-none aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-primary-foreground"
+                  style={{ fontSize: size, minHeight: height }}
+                  aria-pressed={font === value}
+                  onClick={() => applyFont(value)}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
           </fieldset>
           <button
             type="button"
-            className="inline-flex min-h-11 items-center rounded-lg border px-4"
+            className="inline-flex min-h-11 items-center rounded-full border-2 px-4 font-semibold"
+            style={{ background: "#000000", color: "#ffff00", borderColor: "#ffff00" }}
             aria-pressed={contrast === "high"}
             onClick={() => applyContrast(contrast !== "high")}
           >
