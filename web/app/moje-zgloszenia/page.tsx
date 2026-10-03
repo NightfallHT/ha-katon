@@ -4,6 +4,7 @@ import { adminDb } from "../admin/_lib/supabase";
 import { TYPE_LABELS, formatDate, label } from "../admin/_lib/labels";
 import { setDemoEmail } from "./actions";
 import { AuthorReplyForm } from "./reply-form";
+import { LocalLastSubmission } from "./local-last";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Moje zgłoszenia | Hub Innowacji Społecznych" };
@@ -29,6 +30,7 @@ export default async function MySubmissions() {
           <input id="mz-email" name="email" type="email" required autoComplete="email" className="mt-1 w-full rounded-md border p-3" />
           <button type="submit" className="mt-3 min-h-11 rounded-md border px-4 py-2 font-medium focus-visible:ring-2 focus-visible:ring-ring">Pokaż moje zgłoszenia</button>
         </form>
+        <LocalLastSubmission />
       </section>
     );
   }
@@ -93,6 +95,7 @@ export default async function MySubmissions() {
           );
         })}
       </ul>
+      <LocalLastSubmission />
     </section>
   );
 }

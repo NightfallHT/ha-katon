@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ResourceNav } from "@/components/resource-nav";
 
+const STEPS = ["Wysłane", "W ocenie", "Decyzja"];
+
 export default function PotwierdzeniePage() {
   const [title, setTitle] = useState<string | null>(null);
 
@@ -25,9 +27,20 @@ export default function PotwierdzeniePage() {
       <p className="mt-3 max-w-prose">
         {title
           ? `Zapisaliśmy „${title}”. Pracownicy ROPS zobaczą je na liście zgłoszeń.`
-          : "Zapisaliśmy zgłoszenie. Pracownicy ROPS zobaczą je na liście zgłoszeń."}{" "}
-        Status możesz śledzić w „Moich zgłoszeniach”.
+          : "Zapisaliśmy zgłoszenie. Pracownicy ROPS zobaczą je na liście zgłoszeń."}
       </p>
+      <ol aria-label="Etapy zgłoszenia" className="mt-6 flex flex-wrap gap-2">
+        {STEPS.map((label, index) => (
+          <li
+            key={label}
+            aria-current={index === 0 ? "step" : undefined}
+            className={`rounded-md border px-3 py-2 ${index === 0 ? "bg-foreground font-semibold text-background" : ""}`}
+          >
+            {index + 1}. {label}
+            {index === 0 ? <span className="sr-only"> (obecny etap)</span> : null}
+          </li>
+        ))}
+      </ol>
       <p className="mt-6">
         <Link
           href="/moje-zgloszenia"

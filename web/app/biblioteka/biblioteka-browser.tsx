@@ -9,6 +9,12 @@ import { categoryLabel, stageLabel } from "@/content/labels";
 
 const STAGES = ["pomysł", "testowana", "wdrożona"];
 
+const SHORTCUTS = [
+  { label: "Dla mnie — niepełnosprawność", category: "niepelnosprawnosc" },
+  { label: "Seniorzy", category: "starzenie" },
+  { label: "Samotność", category: "samotnosc" },
+];
+
 export function BibliotekaBrowser({
   items,
   initialCategory,
@@ -75,6 +81,24 @@ export function BibliotekaBrowser({
             placeholder="Wpisz temat lub potrzebę"
           />
         </div>
+
+        <p className="flex flex-col gap-2">
+          {SHORTCUTS.map((item) => (
+            <button
+              key={item.category}
+              type="button"
+              className={`inline-flex min-h-11 items-center justify-center rounded-full border px-4 text-left font-medium ${
+                categories.includes(item.category)
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border"
+              }`}
+              aria-pressed={categories.includes(item.category)}
+              onClick={() => setCategories([item.category])}
+            >
+              {item.label}
+            </button>
+          ))}
+        </p>
 
         <fieldset className="space-y-2">
           <legend className="font-medium">Temat</legend>

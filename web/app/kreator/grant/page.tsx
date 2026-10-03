@@ -186,7 +186,7 @@ export default function GrantPage() {
         </div>
 
         {!drafted ? (
-          <Button type="submit" disabled={drafting}>
+          <Button type="submit" disabled={drafting} aria-busy={drafting}>
             {drafting ? "Przygotowuję szkic…" : "Wygeneruj szkic wniosku"}
           </Button>
         ) : (
