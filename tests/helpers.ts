@@ -28,7 +28,11 @@ export const DEMO_EMAIL: Record<DemoRole, string> = {
   admin: "rops@demo.hubmi.pl",
 };
 
-export async function openAs(page: Page, path: string, role?: DemoRole) {
+export async function openAs(
+  page: Page,
+  path: string,
+  role?: DemoRole,
+): Promise<{ status: number | null; ok: boolean }> {
   const resolvedRole = role ?? roleForPath(path);
   const base = process.env.BASE_URL ?? "http://localhost:3000";
   const origin = new URL(base).origin;
@@ -36,7 +40,9 @@ export async function openAs(page: Page, path: string, role?: DemoRole) {
     { name: "role", value: resolvedRole, url: origin, path: "/" },
     { name: "demo_email", value: DEMO_EMAIL[resolvedRole], url: origin, path: "/" },
   ]);
-  await page.goto(path, { waitUntil: "networkidle" });
+  const response = await page.goto(path, { waitUntil: "domcontentloaded" });
+  const status = response?.status() ?? null;
+  return { status, ok: status !== null && status < 400 };
 }
 
 export function roleForPath(path: string): DemoRole {
@@ -67,14 +73,15 @@ export async function applyMode(page: Page, mode: A11yMode) {
   );
 }
 
-export async function firstLibraryPath(page: Page): Promise<string> {
-  await openAs(page, "/biblioteka", "mieszkaniec");
+export async function firstLibraryPath(page: Page): Promise<string | null> {
+  const { ok } = await openAs(page, "/biblioteka", "mieszkaniec");
+  if (!ok) return null;
   const link = page.locator('a[href^="/biblioteka/"]').first();
   if (await link.count()) {
     const href = await link.getAttribute("href");
     if (href) return href;
   }
-  return "/biblioteka/demo";
+  return null;
 }
 
 export async function assertNoHorizontalScroll(page: Page) {

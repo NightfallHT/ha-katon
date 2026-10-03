@@ -34,4 +34,13 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"], viewport: { width: 320, height: 720 } },
     },
   ],
+  webServer: process.env.BASE_URL
+    ? undefined
+    : {
+        command: "npm run dev",
+        cwd: "../web",
+        url: "http://localhost:3000",
+        reuseExistingServer: true,
+        timeout: 120_000,
+      },
 });

@@ -1,6 +1,8 @@
 # Flowy demo + pomysły UI (Sylwia → Hania)
 
-Handoff na makiety Figma (5 ekranów) i paletę. Jedna główna akcja na ekran — jury i seniorzy nie gubią się w opcjach.
+Handoff na makiety Figma i paletę. Jedna główna akcja na ekran — jury i osoby z niepełnosprawnościami nie gubią się w opcjach.
+
+Główna obietnica: **zrozumieć, z czego mogę skorzystać w Małopolsce** (innowacje, bazy wiedzy, linki do źródeł) albo **zgłosić własny pomysł / wniosek**, gdy jest nabór.
 
 ## Paleta i typografia (propozycja do uzgodnienia)
 
@@ -20,86 +22,106 @@ Ciepły, regionalny, zaufany. Głęboki granat + ciepły bursztyn. Hania wkleja 
 - Font: **Atkinson Hyperlegible** (Google Fonts), fallback `system-ui`. Baza **18px**, `line-height: 1.6`, wszędzie `rem`.
 - Skala: `[data-font="125"]` → `html { font-size: 125% }`, `[data-font="150"]` → `150%`.
 - Przyciski min. **44×44 px**. Nie używać koloru jako jedynego sygnału (chip kategorii ma tekst).
+- Dla niedowidzących: wysoki kontrast i duża czcionka w nagłówku, od razu widoczne. Dla niedosłyszących: wszystko da się zrobić tekstem (mikrofon tylko opcjonalny, nigdy jedyna droga).
 
-Pięć klatek Figma (Hania rysuje): home, wyniki `/dopasuj`, karta `/biblioteka/[id]`, Kreator krok 1, inbox `/admin/zgloszenia`.
+Pięć klatek Figma (Hania rysuje): home (wyszukaj, co jest dla mnie), wyniki `/dopasuj` z linkami do baz, karta `/biblioteka/[id]`, nabory + Kreator wniosku, admin: dodaj nabór / pozycję do zasobnika.
 
 ---
 
-## Persona 1 — Pani Halina, 70 lat (mieszkaniec)
+## Persona 1 — Pani Halina (niedowidzi albo niedosłyszy)
 
-Cel: opisać samotność sąsiadów i dojazd do lekarza → dostać 3 rozwiązania → przetestować jedno → zapytać bota.
+Cel: sprawdzić, **z jakich innowacji w Małopolsce może skorzystać** — co jest dla niej dostępne. Strona musi być czytelna przy słabym wzroku. Wyszukiwarka ma **zrozumieć** jej słowa i odesłać do zasobów wiedzy albo konkretnych linków z baz (Biblioteka Innowacji, materiały, `source_url`).
 
 Rola cookie: `mieszkaniec`.
 
 | # | Ekran | Jedna główna akcja |
 |---|---|---|
-| 1 | `/` — pytanie „Z jakim problemem się mierzysz?” | Wpisać / nagrać problem i wcisnąć **Szukaj rozwiązań** |
-| 2 | `/dopasuj` — wyniki + „Dlaczego to pasuje” | Otworzyć **pierwszą kartę** (nagłówek wyniku ma focus) |
-| 3 | `/biblioteka/[id]` — opis prostym językiem | **Chcę przetestować** (TesterPanel) |
-| 4 | Ten sam ekran — ocena | Oddać ocenę (radio 1–5) i wysłać |
-| 5 | Widget pomocy (dialog) | Zadać pytanie, zamknąć **Esc** |
+| 0 | Dowolny — przełączniki a11y w nagłówku | Włączyć **dużą czcionkę** i/lub **wysoki kontrast** (zostają na kolejnych stronach) |
+| 1 | `/` — „Czego szukasz? Co jest dla Ciebie?” | Wpisać własnymi słowami (albo, jeśli woli, nagrać) i wcisnąć **Szukaj** |
+| 2 | `/dopasuj` — 3–5 trafień + „Dlaczego to pasuje” | Otworzyć **pierwszą kartę**; AI mówi po prostu, że zrozumiało np. „wsparcie dla seniorek / niedowidzenie” |
+| 3 | `/biblioteka/[id]` — opis łatwym językiem | Przeczytać, **co to daje jej** + otworzyć **link do źródła / bazy** |
+| 4 | Z tej karty albo z wyników | Wejść w **więcej w zasobniku** (`/biblioteka?category=niepelnosprawnosc` lub `/materialy`) |
+| 5 | Widget pomocy (dialog, tekst) | Zapytać „gdzie to jest u mnie w gminie?”; zamknąć **Esc** |
 
 Demo input (do cache’u Janka):  
-„Moi starsi sąsiedzi są sami i nie mają jak dojechać do lekarza. Mieszkamy na wsi.”
+„Słabo widzę. Chcę wiedzieć, z jakich innowacji w Małopolsce mogę skorzystać. Pokaż mi to, co jest dla osób takich jak ja.”
+
+Wariant (niedosłyszy, bez mikrofonu): to samo, tylko pisze. Napisy / tekst zamiast dźwięku.
 
 ---
 
 ## Persona 2 — NGO (lokalne stowarzyszenie)
 
-Cel: zgłosić pomysł w Kreatorze, przy otwartym naborze wygenerować szkic wniosku.
+Cel: zobaczyć **aktualne nabory / projekty z UE**, pod które może wymyślić innowację i **złożyć wniosek**.
 
 Rola cookie: `ngo`.
 
 | # | Ekran | Jedna główna akcja |
 |---|---|---|
-| 1 | `/kreator` — trzy wybory | **Zgłoś pomysł (fiszka)** |
-| 2 | Krok 1/4 — problem | Opisać problem (prefill z `?problem=` jeśli z matchmakingu) |
-| 3 | Krok 2/4 — pomysł | Opisać rozwiązanie |
-| 4 | Krok 3/4 — dla kogo | Wybrać grupę (np. seniorzy, gmina wiejska) |
-| 5 | Krok 4/4 — etap i miejsce | Zapisać i **wyślij zgłoszenie** |
-| 6 | Potwierdzenie | Otworzyć **Moje zgłoszenia** (tracker statusu) |
-| 7 | (opcjonalnie) Wniosek o grant | **Wygeneruj szkic wniosku** → edycja → akceptacja regulaminu → wyślij |
+| 1 | `/wyzwania` albo kafelek na home **„Aktualne nabory”** | Otworzyć listę otwartych naborów (np. z UE / ROPS) |
+| 2 | Karta naboru (`calls`, `is_open`) | Przeczytać, **na co można składać** i do kiedy |
+| 3 | `/kreator` | **Złóż wniosek o grant** (albo najpierw **Zgłoś pomysł**, jeśli jeszcze nie ma fiszki) |
+| 4 | Szkic wniosku (AI) | **Wygeneruj szkic** → poprawić sekcje i budżet |
+| 5 | Regulamin + wyślij | Zaznaczyć regulamin i **wyślij wniosek** |
+| 6 | `/moje-zgloszenia` | Zobaczyć status (Nowe → W ocenie → …) jak śledzenie paczki |
+
+Przykład: nabór na innowacje dla osób z niepełnosprawnościami i wykluczonych cyfrowo → NGO składa wniosek o sąsiedzkie wsparcie asystenckie.
 
 ---
 
 ## Persona 3 — Pracownik ROPS
 
-Cel: mail → admin → odpowiedź → publikacja do biblioteki → trend samotność / gminy wiejskie.
+Cel: **dokładać aktualne projekty z UE**, z których można składać wnioski, oraz **poszerzać zasobnik wiedzy** o usprawnieniach dla osób wykluczonych (w tym z niepełnosprawnościami).
 
 Rola cookie: `admin`.
 
 | # | Ekran | Jedna główna akcja |
 |---|---|---|
-| 1 | `/admin` — kafelki liczb | Wejść w **Nowe zgłoszenia** |
-| 2 | `/admin/zgloszenia` — tabela | Otworzyć najnowsze zgłoszenie NGO |
-| 3 | `/admin/zgloszenia/[id]` | **Odpowiedz** autorowi (plus „Uzupełnij przez AI”) |
-| 4 | Ten sam ekran | **Opublikuj w Bibliotece** |
-| 5 | `/admin/trendy` | Zobaczyć wzrost „samotność / gminy wiejskie” |
+| 1 | `/admin` | Wejść w **Nabory** albo **Zasobnik** |
+| 2 | Formularz naboru | **Dodać nabór** (nazwa, opis, deadline, budżet, link do regulaminu, `is_open`) |
+| 3 | Zasobnik / publikacja | **Dodać lub opublikować** innowację, materiał albo dobrą praktykę (dla kogo, kategoria `niepelnosprawnosc` / `integracja_spoleczna`, link do bazy) |
+| 4 | `/admin/zgloszenia` | Otworzyć wniosek NGO albo pomysł mamy |
+| 5 | Karta zgłoszenia | **Odpowiedz** i ewentualnie **Opublikuj w Bibliotece** |
+| 6 | `/admin/trendy` | Zobaczyć, że ludzie szukają wsparcia dla osób z niepełnosprawnościami |
+
+To nie jest tylko „odpowiedz na mail”. ROPS **karmi platformę treścią**, żeby Halina i mama syna mieli co znaleźć.
 
 ---
 
-## Persona 4 — Wójt (gmina)
+## Persona 4 — Mama syna z niepełnosprawnością (osoba prywatna)
 
-Cel: z innowacji zrobić projekt usługi (transport / wykluczenie) pod „Usługę wrażliwą”, PDF.
+Cel: zobaczyć, **co w Małopolsce jest dla jej syna**; ewentualnie **sama zgłosić małą innowację** (nie musi być NGO).
 
-Rola cookie: `gmina`.
+Rola cookie: `mieszkaniec`.
 
 | # | Ekran | Jedna główna akcja |
 |---|---|---|
-| 1 | `/middleman` — wybór | Wybrać innowację + gminę wiejską |
-| 2 | Czat Middleman | Odpowiadać na pytania AI (min. 3 tury) |
-| 3 | Raport usługi | **Mam dość informacji — przygotuj projekt usługi** |
-| 4 | Raport (przyczyny, koszt, checklista) | **Pobierz PDF** (`window.print`) |
+| 1 | `/` | Wpisać sytuację syna i **Szukaj** |
+| 2 | `/dopasuj` | Otworzyć rozwiązanie **dla opiekunów / osób z niepełnosprawnościami** |
+| 3 | `/biblioteka/[id]` + podobne | Sprawdzić, czy można z tego skorzystać; kliknąć **źródło** |
+| 4 | (ścieżka B) `/kreator` | **Zgłoś pomysł** — mała innowacja od osoby prywatnej |
+| 5 | Potwierdzenie | Śledzić w **Moje zgłoszenia** |
+
+Demo input:  
+„Mam syna z niepełnosprawnością. Jakie projekty i innowacje w Małopolsce mogą nam pomóc? Chcę też zgłosić mały pomysł z naszej gminy.”
+
+Ta sama ścieżka wyszukiwania służy **osobom z niepełnosprawnościami**, które chcą same sprawdzić ofertę (nie tylko przez opiekuna): filtr / chip „dla mnie — niepełnosprawność”, kategoria `niepelnosprawnosc`, język prosty, kontrast.
+
+---
+
+## Persona 5 — Wójt (moduł zostaje w produkcie, nie jest osią jury)
+
+Jeśli pokazujemy `/middleman`: gmina bierze innowację z biblioteki (np. asysta, transport) i dostaje szkic usługi. To dodatek, nie zamiast Haliny / mamy / NGO.
 
 ---
 
 ## 3 tanie, zapamiętywalne pomysły UI
 
-1. **„Dlaczego to pasuje”** — żółty/bursztynowy pasek na karcie wyniku, jedno zdanie z `/match.why`. Zero nowej logiki, duży efekt na jury.
-2. **Mikrofon na home i `/dopasuj`** — Web Speech API `pl-PL`; jeśli brak wsparcia, przycisk ukryty. Halina mówi zamiast pisać.
-3. **Tracker zgłoszenia jak paczka** — na `/moje-zgloszenia`: Nowe → W ocenie → Zaakceptowane / Odrzucone, duży tekst statusu + data. Jakub, jeden komponent listy kroków.
+1. **„Dlaczego to pasuje” + „Dla kogo”** — na karcie wyniku jedno zdanie z `/match.why` i jawna grupa (np. „osoby niedowidzące”, „opiekunowie”). Zero nowej logiki.
+2. **Odsyłacz do bazy / źródła** — duży link „Zobacz w Bibliotece Innowacji” / materiał ROPS (`source_url`). Halina wychodzi z platformy do prawdziwego zasobu, nie zostaje na pustej fiszce.
+3. **Nabory jak lista ogłoszeń** — na home i `/wyzwania`: „Możesz składać do …”, data, dla kogo. NGO i ROPS widzą to samo; ROPS może dodać pozycję z panelu.
 
-Bonus (już w regułach a11y, warto pokazać na slajdzie 8): przycisk **Wyjaśnij prościej** przy każdej odpowiedzi AI i na kartach wyników.
+Bonus a11y (slajd 8): duża czcionka, wysoki kontrast, **Wyjaśnij prościej**, wszystko klawiaturą, mikrofon tylko jako dodatek (Halina niedosłysząca pisze).
 
 ---
 
@@ -113,19 +135,23 @@ Bonus (już w regułach a11y, warto pokazać na slajdzie 8): przycisk **Wyjaśni
 | Pytanie na home | `#problem` (textarea) |
 | Szukaj | `button[type="submit"]` w formularzu home / dopasuj |
 | Nagłówek wyników | `h1#wyniki` (dostaje `tabIndex={-1}` i `.focus()`) |
+| Link do źródła / bazy | `a[data-source="innovation"]` |
+| Lista naborów | `[data-calls]` / linki do otwartych `calls` |
 | Help bot trigger | `button[aria-label="Otwórz pomoc"]` |
 | Help bot dialog | `[role="dialog"][aria-label="Pomoc"]` |
-| Kreator: zgłoś pomysł | `a[href="/kreator/fiszka"]` lub `button` o nazwie „Zgłoś pomysł” |
+| Kreator: zgłoś pomysł | `a[href="/kreator/fiszka"]` albo przycisk „Zgłoś pomysł” |
+| Kreator: wniosek | przycisk / link „Złóż wniosek o grant” |
 | Pole problemu w kreatorze | `#problem` |
 | Wysyłka fiszki | `button[type="submit"]` na ostatnim kroku |
-| Admin lista | `table` na `/admin/zgloszenia` |
+| Admin: dodaj nabór | `a[href="/admin/nabory"]` albo formularz naboru |
+| Admin lista zgłoszeń | `table` na `/admin/zgloszenia` |
 | Toggles a11y | `html[data-contrast]`, `html[data-font]` |
 
 ---
 
 ## Co dalej
 
-- Hania: Figma 5 ekranów + tokeny w CSS.
-- Ola: skip link, focus na `h1` wyników, mikrofon, `data-*` na `<html>`.
-- Jakub: tracker statusu + dialog bota (pułapka fokusu, Esc).
+- Hania: Figma 5 ekranów + tokeny; na kartach zawsze grupa docelowa i link do źródła.
+- Ola: wyszukiwarka rozumie „dla mnie / dla syna / niedowidzę”; wyniki + `h1#wyniki` z focusem; chipy kategorii w tym niepełnosprawność.
+- Jakub: ROPS dodaje nabory i pozycje do zasobnika; tracker wniosków; bot tekstowy.
 - Sylwia: testy w `/tests` (axe + klawiatura + smoke). Live `BASE_URL` od Oli.
