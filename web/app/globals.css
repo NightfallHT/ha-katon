@@ -49,38 +49,41 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* HubMI palette (Sylwia/Hania): warm paper + deep blue + amber CTA */
+  --background: #f7f1e8;
+  --foreground: #1a2332;
+  --card: #ffffff;
+  --card-foreground: #1a2332;
+  --popover: #ffffff;
+  --popover-foreground: #1a2332;
+  --primary: #1b3a6b;
+  --primary-foreground: #ffffff;
+  --secondary: #efe4d4;
+  --secondary-foreground: #1a2332;
+  --muted: #efe4d4;
+  --muted-foreground: #3d4a5c;
+  --accent: #c45c26;
+  --accent-foreground: #ffffff;
+  --destructive: #9b1c1c;
+  --border: #5a6a7a;
+  --input: #5a6a7a;
+  --ring: #1b3a6b;
+  --chart-1: #1b3a6b;
+  --chart-2: #c45c26;
+  --chart-3: #3d4a5c;
+  --chart-4: #2f6f4e;
+  --chart-5: #6b4f1b;
+  --radius: 0.75rem;
+  --sidebar: #efe4d4;
+  --sidebar-foreground: #1a2332;
+  --sidebar-primary: #1b3a6b;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ffffff;
+  --sidebar-accent-foreground: #1a2332;
+  --sidebar-border: #5a6a7a;
+  --sidebar-ring: #1b3a6b;
+  --why: #fff4d6;
+  --why-border: #c45c26;
 }
 
 .dark {
@@ -117,6 +120,55 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+[data-contrast="high"] {
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #000000;
+  --card-foreground: #ffffff;
+  --popover: #000000;
+  --popover-foreground: #ffffff;
+  --primary: #ffff00;
+  --primary-foreground: #000000;
+  --secondary: #000000;
+  --secondary-foreground: #ffff00;
+  --muted: #000000;
+  --muted-foreground: #ffff00;
+  --accent: #ffff00;
+  --accent-foreground: #000000;
+  --destructive: #ff6b6b;
+  --border: #ffffff;
+  --input: #ffffff;
+  --ring: #ffff00;
+  --chart-1: #ffff00;
+  --chart-2: #ffffff;
+  --chart-3: #ffff00;
+  --chart-4: #ffffff;
+  --chart-5: #ffff00;
+  --sidebar: #000000;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ffff00;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #000000;
+  --sidebar-accent-foreground: #ffff00;
+  --sidebar-border: #ffffff;
+  --sidebar-ring: #ffff00;
+  --why: #000000;
+  --why-border: #ffff00;
+}
+
+html {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+html[data-font="125"] {
+  font-size: 22.5px;
+}
+
+html[data-font="150"] {
+  font-size: 27px;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -126,5 +178,20 @@
   }
   html {
     @apply font-sans;
+  }
+  :focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

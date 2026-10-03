@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Małopolskie Mikrogranty Społeczne – demo 2026",
+    "description": "Fikcyjny nabór demonstracyjny na szybkie testy lokalnych innowacji społecznych. Dane służą wyłącznie do prototypu.",
+    "is_open": true,
+    "deadline": "2026-11-15",
+    "budget_max": 80000,
+    "regulamin_url": "/demo/regulamin-mikrogranty-2026.pdf"
+  },
+  {
+    "name": "Lokalne Usługi Blisko Domu – demo 2027",
+    "description": "Fikcyjny przyszły nabór demonstracyjny na rozwój usług mobilnych i sąsiedzkich w gminach Małopolski.",
+    "is_open": false,
+    "deadline": "2027-03-31",
+    "budget_max": 250000,
+    "regulamin_url": "/demo/regulamin-uslugi-blisko-domu-2027.pdf"
+  }
+]

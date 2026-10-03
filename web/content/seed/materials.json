@@ -1,0 +1,134 @@
+[
+  {
+    "title": "Mapa Wyzwań Społecznych",
+    "type": "raport",
+    "url": "https://rops.krakow.pl/pliki-do-pobrania/artykul%2Cmapa-wyzwan-spolecznych%2C1048",
+    "description": "Materiał ROPS porządkujący obszary problemów społecznych używany jako inspiracja do generowania i oceny innowacji.",
+    "tags": [
+      "wyzwania",
+      "diagnoza",
+      "problemy społeczne"
+    ]
+  },
+  {
+    "title": "Biblioteka Innowacji Społecznych – kategorie",
+    "type": "poradnik",
+    "url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/kategorie",
+    "description": "Punkt wejścia do publicznej biblioteki rozwiązań ROPS.",
+    "tags": [
+      "biblioteka",
+      "innowacje",
+      "rops"
+    ]
+  },
+  {
+    "title": "Innowacje dla seniorów",
+    "type": "poradnik",
+    "url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow",
+    "description": "Zestaw rozwiązań dla osób starszych, w tym usług mobilnych i narzędzi wspierających samodzielność.",
+    "tags": [
+      "seniorzy",
+      "starzenie",
+      "samodzielność"
+    ]
+  },
+  {
+    "title": "Innowacje dla dzieci, młodzieży i rodziny",
+    "type": "poradnik",
+    "url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-dzieci-mlodziezy-i-rodziny",
+    "description": "Rozwiązania dotyczące rodziny, szkoły, zdrowia psychicznego i niepełnosprawności dzieci.",
+    "tags": [
+      "dzieci",
+      "młodzież",
+      "rodzina"
+    ]
+  },
+  {
+    "title": "Innowacje dla osób z niepełnosprawnością intelektualną",
+    "type": "poradnik",
+    "url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-intelektualna",
+    "description": "Narzędzia wspierające samodzielność, edukację i udział społeczny.",
+    "tags": [
+      "niepełnosprawność",
+      "samodzielność",
+      "łatwy język"
+    ]
+  },
+  {
+    "title": "Publikacje ze świata innowacji",
+    "type": "raport",
+    "url": "https://rops.krakow.pl/innowacje-spoleczne/publikacje-ze-swiata-innowacji",
+    "description": "Publikacje ROPS opisujące doświadczenia z inkubacji i upowszechniania innowacji społecznych.",
+    "tags": [
+      "publikacje",
+      "innowacje",
+      "wdrażanie"
+    ]
+  },
+  {
+    "title": "Granty na innowacje społeczne – IWS 2.0",
+    "type": "poradnik",
+    "url": "https://rops.krakow.pl/nabory-szkolenia-granty-dotacje-wizyty-studyjne-studia-specjalizacje-superwizje/granty-na-innowacje-spoleczne%2Cnabor-aplikacji-wnioskow-na-innowacje-spoleczne-w-ramach-projektu-pn-inkubator-wlaczenia-spolecznego-20",
+    "description": "Strona naboru zawierająca procedury, wzór formularza oraz materiały dla innowatorów.",
+    "tags": [
+      "grant",
+      "formularz",
+      "inkubator"
+    ]
+  },
+  {
+    "title": "Usługa Wrażliwa – II tura",
+    "type": "poradnik",
+    "url": "https://rops.krakow.pl/realizowane-projekty-i-zadania/usluga-wrazliwa-upowszechnianie-innowacji-spolecznych-w-srodowiskach-lokalnych%2Cwdrazanie-innowacji-w-oparciu-o-mechanizm-grantowy-tura-ii",
+    "description": "Informacje o wdrażaniu wybranych innowacji społecznych w środowiskach lokalnych.",
+    "tags": [
+      "grant",
+      "usługa wrażliwa",
+      "wdrażanie"
+    ]
+  },
+  {
+    "title": "Połącz kropki – o sile innowacji społecznych",
+    "type": "raport",
+    "url": "https://rops.krakow.pl/innowacje-spoleczne/publikacje-ze-swiata-innowacji",
+    "description": "Publikacja prezentująca rozwiązania rozwijane w Inkubatorze Włączenia Społecznego.",
+    "tags": [
+      "włączenie",
+      "innowacje",
+      "przykłady"
+    ]
+  },
+  {
+    "title": "Innowacje społeczne dla dostępności",
+    "type": "raport",
+    "url": "https://rops.krakow.pl/innowacje-spoleczne/publikacje-ze-swiata-innowacji",
+    "description": "Publikacja o rozwiązaniach wspierających dostępność różnych usług i przestrzeni.",
+    "tags": [
+      "dostępność",
+      "niepełnosprawność",
+      "innowacje"
+    ]
+  },
+  {
+    "title": "Przewodnik po innowacjach społecznych",
+    "type": "poradnik",
+    "url": "https://rops.krakow.pl/innowacje-spoleczne/publikacje-ze-swiata-innowacji",
+    "description": "Materiał o doświadczeniach administracji publicznej w inkubowaniu innowacji społecznych.",
+    "tags": [
+      "administracja",
+      "inkubacja",
+      "przewodnik"
+    ]
+  },
+  {
+    "title": "Standardy tworzenia dostępnych dokumentów i treści ROPS",
+    "type": "poradnik",
+    "url": "https://rops.krakow.pl/",
+    "description": "Materiał ROPS pomocny przy projektowaniu treści i materiałów dostępnych dla różnych odbiorców.",
+    "tags": [
+      "dostępność",
+      "wcag",
+      "treść"
+    ]
+  }
+]
