@@ -63,13 +63,27 @@
         outline: 3px solid var(--brand);
         outline-offset: 3px;
       }
+      .skip {
+        position: absolute;
+        left: 0.75rem;
+        top: 0.75rem;
+        z-index: 10;
+        padding: 0.6rem 0.9rem;
+        background: var(--brand);
+        color: #fff;
+        border-radius: 999px;
+        text-decoration: none;
+        transform: translateY(-160%);
+      }
+      .skip:focus { transform: none; }
       .shell {
+        width: 100%;
         max-width: 28rem;
         margin: 0 auto;
         min-height: 100dvh;
         display: flex;
         flex-direction: column;
-        background: color-mix(in srgb, var(--card) 70%, transparent);
+        background: color-mix(in srgb, var(--card) 82%, transparent);
       }
       @media (min-width: 720px) {
         .shell {
@@ -121,7 +135,7 @@
         padding-bottom: 0.2rem;
         -webkit-overflow-scrolling: touch;
       }
-      nav a, nav span[aria-current] {
+      nav a {
         flex: 0 0 auto;
         min-height: 44px;
         display: inline-flex;
@@ -134,12 +148,12 @@
         background: var(--card);
         white-space: nowrap;
       }
-      nav span[aria-current] {
+      nav a[aria-current="page"] {
         background: var(--brand);
         color: #fff;
         border-color: var(--brand);
       }
-      html[data-contrast="high"] nav span[aria-current] {
+      html[data-contrast="high"] nav a[aria-current="page"] {
         color: #000;
       }
       .tools {
@@ -164,7 +178,7 @@
         border-color: var(--brand);
       }
       html[data-contrast="high"] .tools button[aria-pressed="true"] { color: #000; }
-      main { padding: 1.25rem var(--pad) 6.5rem; flex: 1; }
+      main { padding: 1.25rem var(--pad) 1.5rem; flex: 1; }
       h1 { font-size: 1.65rem; line-height: 1.25; letter-spacing: -0.03em; margin: 0 0 0.6rem; }
       .kicker {
         display: inline-flex;
@@ -249,6 +263,7 @@
       }
       .screen { display: none; }
       .screen.on { display: block; }
+      .screen[hidden] { display: none !important; }
       .steps {
         display: flex;
         gap: 0.35rem;
@@ -268,12 +283,19 @@
         color: var(--brand);
       }
       html[data-contrast="high"] .stat { color: #ffe600; }
-      .fab {
-        position: fixed;
-        right: max(1rem, env(safe-area-inset-right));
-        bottom: max(1rem, env(safe-area-inset-bottom));
+      .dock {
+        position: sticky;
+        bottom: 0;
         z-index: 5;
+        padding: 0.7rem var(--pad);
+        padding-bottom: max(0.7rem, env(safe-area-inset-bottom));
+        background: color-mix(in srgb, var(--card) 94%, transparent);
+        backdrop-filter: blur(12px);
+        border-top: 1px solid color-mix(in srgb, var(--line) 28%, var(--card));
+      }
+      .fab {
         min-height: 48px;
+        width: 100%;
         border-radius: 999px;
         border: 0;
         padding: 0 1.15rem;
@@ -281,11 +303,11 @@
         color: #fff;
         font: inherit;
         font-weight: 700;
-        box-shadow: var(--shadow);
       }
       html[data-contrast="high"] .fab { color: #000; }
-      footer.note {
-        padding: 0  var(--pad) 1.2rem;
+      .note {
+        margin: 0;
+        padding: 0 var(--pad) 1rem;
         color: var(--muted);
         font-size: 0.95rem;
       }
@@ -295,6 +317,7 @@
     </style>
   </head>
   <body>
+    <a class="skip" href="#main">Przejdź do treści</a>
     <div class="shell">
       <header class="top">
         <div class="brand">
@@ -305,7 +328,7 @@
           </div>
         </div>
         <nav aria-label="Główne miejsca">
-          <span aria-current="page">Start</span>
+          <a href="#home" aria-current="page">Start</a>
           <a href="#dopasuj">Dopasuj</a>
           <a href="#karta">Biblioteka</a>
           <a href="#kreator">Kreator</a>
@@ -322,7 +345,7 @@
       <main id="main">
         <section class="screen on" id="home">
           <p class="kicker">Dla Ciebie</p>
-          <h1>Opisz, z czym jest trudno. Pokażemy, co już działa.</h1>
+          <h1 tabindex="-1">Opisz, z czym jest trudno. Pokażemy, co już działa.</h1>
           <p class="muted">Nie musisz znać nazw programów. Napisz zwykłym zdaniem — albo wybierz przykład.</p>
           <label for="q"><span class="visually-hidden">Twoja sytuacja</span></label>
           <textarea id="q">Słabo widzę. Chcę wiedzieć, z jakich innowacji w Małopolsce mogę skorzystać.</textarea>
@@ -334,9 +357,9 @@
           </div>
         </section>
 
-        <section class="screen" id="dopasuj">
+        <section class="screen" id="dopasuj" hidden>
           <p class="kicker">Dopasowanie</p>
-          <h1>Trzy rozwiązania pasujące do Twojej sytuacji</h1>
+          <h1 tabindex="-1">Trzy rozwiązania pasujące do Twojej sytuacji</h1>
           <p class="muted">Zrozumieliśmy: wsparcie dla osób słabowidzących, Małopolska.</p>
           <article class="card" style="margin-top:1rem">
             <div class="bar"></div>
@@ -353,9 +376,9 @@
           </article>
         </section>
 
-        <section class="screen" id="karta">
+        <section class="screen" id="karta" hidden>
           <p class="kicker">Biblioteka</p>
-          <h1>Zdobądź swoje szczyty</h1>
+          <h1 tabindex="-1">Zdobądź swoje szczyty</h1>
           <p>Multimedialny przewodnik opisuje trasy pod kątem różnych potrzeb. Pokazuje nachylenia, przeszkody i udogodnienia.</p>
           <p class="muted">Dla kogo: osoby z niepełnosprawnościami · Etap: wdrożona</p>
           <div class="row">
@@ -364,9 +387,9 @@
           </div>
         </section>
 
-        <section class="screen" id="kreator">
+        <section class="screen" id="kreator" hidden>
           <p class="kicker">Kreator</p>
-          <h1>Jaki problem chcesz rozwiązać?</h1>
+          <h1 tabindex="-1">Jaki problem chcesz rozwiązać?</h1>
           <div class="steps" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
           <p class="muted">Krok 1 z 4. Jedno pytanie. Potem pomysł, dla kogo i etap.</p>
           <textarea>Sąsiedzi seniorzy są sami i nie dojadą do przychodni.</textarea>
@@ -376,9 +399,9 @@
           </div>
         </section>
 
-        <section class="screen" id="admin">
+        <section class="screen" id="admin" hidden>
           <p class="kicker">ROPS</p>
-          <h1>Pulpit zgłoszeń</h1>
+          <h1 tabindex="-1">Pulpit zgłoszeń</h1>
           <div class="tiles">
             <article class="card"><div class="bar"></div><div class="in"><div class="stat">8</div><p>Nowe wnioski</p></div></article>
             <article class="card"><div class="bar"></div><div class="in"><div class="stat">3</div><p>W ocenie</p></div></article>
@@ -387,9 +410,10 @@
           <p class="muted" style="margin-top:1rem">Status zawsze słowami: Nowe, W ocenie, Zaakceptowane. Nie sama kropka.</p>
         </section>
       </main>
-      <p class="note">Przyciski 48 px, kontrast da się włączyć, na wąskim ekranie menu się przesuwa palcem. To propozycja wyglądu — Ola składa to w prawdziwym headerze.</p>
+      <div class="dock">
+        <button class="fab" type="button">Potrzebujesz pomocy?</button>
+      </div>
     </div>
-    <button class="fab" type="button">Potrzebujesz pomocy?</button>
     <style>
       .visually-hidden {
         position: absolute;
@@ -418,15 +442,18 @@
         document.getElementById("hc").setAttribute("aria-pressed", on ? "false" : "true");
       });
       function show(id) {
-        document.querySelectorAll(".screen").forEach((s) => s.classList.toggle("on", s.id === id));
-        const map = { home: "Start", dopasuj: "Dopasuj", karta: "Biblioteka", kreator: "Kreator", admin: "Admin" };
-        document.querySelectorAll("nav a, nav span").forEach((el) => {
-          const label = el.textContent.trim();
-          const current = map[id] === label;
-          if (el.tagName === "SPAN" || current) {
-            /* keep structure */
-          }
+        document.querySelectorAll(".screen").forEach((s) => {
+          const on = s.id === id;
+          s.classList.toggle("on", on);
+          s.hidden = !on;
         });
+        document.querySelectorAll("nav a").forEach((el) => {
+          const current = el.getAttribute("href") === "#" + id;
+          if (current) el.setAttribute("aria-current", "page");
+          else el.removeAttribute("aria-current");
+        });
+        const heading = document.querySelector("#" + id + " h1");
+        if (heading) heading.focus({ preventScroll: true });
       }
       document.querySelectorAll("[data-go]").forEach((b) =>
         b.addEventListener("click", () => show(b.getAttribute("data-go"))),
