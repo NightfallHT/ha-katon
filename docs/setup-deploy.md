@@ -99,64 +99,50 @@ key model is for.
 
 ## 2. Vercel
 
-The Next.js app lives in `web/`, not at the repo root. Vercel reads `vercel.json` **from whatever
-the Root Directory is**, so there are two configs in the repo and **only one is ever used**:
-
-| Root Directory | Config Vercel reads | The other file |
-|---|---|---|
-| `web` ← preferred | [`web/vercel.json`](../web/vercel.json) | root one ignored |
-| repo root | [`vercel.json`](../vercel.json) | `web/` one ignored |
-
-They cannot conflict — pick either, the unused file is inert.
-
-### Option A — Root Directory = `web` (preferred)
-
-This is Vercel's supported mechanism for monorepos, and `web/vercel.json` then needs only one line:
+The Next.js app lives in `web/`, not at the repo root. **Set Root Directory to `web`** and let
+Vercel auto-detect everything else. The only config file is
+[`web/vercel.json`](../web/vercel.json), and it holds one line:
 
 ```json
 { "regions": ["fra1"] }
 ```
 
-Everything else auto-detects, which means far fewer things to get wrong.
+`fra1` is `eu-central-1`, Frankfurt — **the same region as Supabase**. Vercel defaults functions to
+`iad1` (Washington DC), which would put server code in the US querying an EU database: slower on
+every admin page, and it undercuts the EU-data-residency claim on the architecture slide.
 
-**Where the setting actually is** — it is not a text field, which is why it is easy to conclude it
-cannot be changed:
+**Where the Root Directory setting is** — it is not a free-text field, which is why it is easy to
+conclude it cannot be changed:
 
 - **During import:** an **Edit** button next to *Root Directory*, which opens a directory picker.
-- **After import:** *Project* → **Settings** → **Build and Deployment** → scroll to
-  **Root Directory** → type `web` → *Save* → **Redeploy**.
+- **After import:** *Project* → **Settings** → **Build and Deployment** → **Root Directory** →
+  `web` → *Save* → **Redeploy**.
 
-### Option B — Root Directory = repo root (fallback)
+### ⚠ Clear the command overrides at the same time
 
-Use this only if Option A is genuinely unavailable. It needs the full root
-[`vercel.json`](../vercel.json):
+On the same **Build and Deployment** settings page, **Install Command**, **Build Command** and
+**Output Directory** must all be **empty / default**. Vercel only falls back to `vercel.json` and
+framework auto-detection when these are unset, and a stale value here silently beats the repo.
 
-```json
-{
-  "framework": "nextjs",
-  "installCommand": "npm install && cd web && npm install",
-  "buildCommand": "cd web && npm run build",
-  "outputDirectory": "web/.next",
-  "regions": ["fra1"]
-}
+This bites hard. A saved `cd web && npm install` from an earlier attempt produces, once Root
+Directory is `web`:
+
+```
+Running "install" command: `cd web && npm install`...
+sh: line 1: cd: web: No such file or directory
+Error: Command "cd web && npm install" exited with 1
 ```
 
-| Key | Why |
-|---|---|
-| `framework: "nextjs"` | No Next.js at the repo root means auto-detection fails and the app ships as static files. This forces Vercel's Next.js builder — the thing that turns `/admin/*`, `/api/notify`, `/api/submit`, `/biblioteka` and `/kontakt` into real server functions. |
-| `installCommand` | Installs **both** package roots. The leading `npm install` is not redundant: Vercel resolves `next` from the Root Directory, so the repo root needs its own copy. |
-| `buildCommand` | Runs from the repo root in a fresh shell, hence `cd web &&`. |
-| `outputDirectory` | Where Vercel reads `BUILD_ID`, `routes-manifest.json` and `required-server-files.json`. |
-| `regions: ["fra1"]` | `fra1` is `eu-central-1`, Frankfurt — **the same region as Supabase**. Vercel defaults functions to `iad1` (Washington DC), which would put server code in the US querying an EU database: slower, and it undercuts the EU-data-residency claim on the architecture slide. |
+— because the build already starts inside `web/`, so `cd web` looks for `web/web`. The giveaway is
+that the command in the log matches no file in the repo. Blank the three fields, Save, Redeploy.
 
-⚠ **Option B also requires `next` in the root `package.json`.** Vercel checks the Root Directory's
-`package.json` for a `next` dependency *before* it builds, and fails with
-*"No Next.js version detected"* if it is absent — `framework: "nextjs"` does not bypass that check.
-So the root manifest pins `"next": "16.3.8"`, duplicating `web/package.json`.
-
-> **If you bump Next.js in `web/package.json`, bump it in the root `package.json` too.**
-> They must match. This duplication exists only to satisfy Option B; it disappears the moment you
-> switch to Option A, and the root pin can then be deleted.
+> There is deliberately **no `vercel.json` at the repo root**. An earlier revision had one, for
+> running with Root Directory left at the repo root; it needed `framework`, `installCommand`,
+> `buildCommand`, `outputDirectory`, *and* a duplicated `"next"` pin in the root `package.json`
+> (Vercel checks the Root Directory's manifest for `next` before building and fails with
+> *"No Next.js version detected"* otherwise — `framework: "nextjs"` does not bypass it). That is
+> five moving parts and a version that must be kept in sync by hand, versus one line. If you ever
+> genuinely cannot set Root Directory, that config is recoverable from this file's git history.
 
 ### Keeping the upload small
 
@@ -199,23 +185,20 @@ nix-shell --run 'npx vercel --prod'
 
 | Symptom | Cause |
 |---|---|
-| `No Next.js version detected` | Root Directory is the repo root but the root `package.json` has no `next` dependency. Either switch to Option A, or keep `"next": "16.3.8"` in the root manifest. `framework: "nextjs"` alone is **not** enough — the check runs before the build. |
-| `Couldn't find any pages or app directory` | Option A chosen but Root Directory is still the repo root, so Vercel is looking for `app/` where there is only `web/app/`. |
-| Build succeeds, every page 404s | Both set at once: Root Directory = `web` **and** the root-style `vercel.json` in `web/`, so paths resolve twice (`web/web/.next`). |
-| Pages render but `/admin/*` and `/api/*` 404 | Option B without `framework: "nextjs"` — the app deployed as static files, so nothing became a server function. |
+| `cd: web: No such file or directory` | A stale **Install/Build Command** override in Project Settings still says `cd web && …`, but the build already runs inside `web/`. Blank the three fields. |
+| `No Next.js version detected` | Root Directory is still the repo root, where `package.json` has no `next`. Set it to `web`. |
+| `Couldn't find any pages or app directory` | Same cause — Vercel is looking for `app/` where there is only `web/app/`. |
+| Build succeeds, every page 404s | An **Output Directory** override of `web/.next` while Root Directory is already `web`, so it resolves to `web/web/.next`. |
+| Pages render but `/admin/*` and `/api/*` 404 | Vercel did not detect Next.js and shipped the app as static files, so nothing became a server function. Check the build log says `Next.js` was detected. |
+| The command in the log matches no file in the repo | It is a Project Settings override. Always trust the log over the repo. |
 
-Reproduce either path locally before pushing:
+Reproduce the build locally before pushing — with Root Directory = `web`, Vercel effectively runs:
 
 ```bash
-# Option A (Root Directory = web)
 nix-shell --run 'cd web && npm install && npm run build'
-
-# Option B (Root Directory = repo root) — exactly what Vercel runs
-nix-shell --run 'npm install && cd web && npm install'
-nix-shell --run 'cd web && npm run build'
 ```
 
-Both must end with `web/.next/BUILD_ID` and `web/.next/required-server-files.json` present.
+It must end with `web/.next/BUILD_ID` and `web/.next/required-server-files.json` present.
 
 ### After the first deploy
 

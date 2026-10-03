@@ -9,8 +9,7 @@
     "check:supabase": "tsx scripts/check-supabase.ts"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.117.2",
-    "next": "16.3.8"
+    "@supabase/supabase-js": "^2.117.2"
   },
   "devDependencies": {
     "@types/node": "^20",
