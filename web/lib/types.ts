@@ -100,6 +100,15 @@ export type ChatResponse = {
   handoff: boolean;
 };
 
+export type KnowledgeReport = {
+  title: string;
+  summary: string;
+  metrics: { value: string; label: string }[];
+  what_works: string[];
+  innovations: { innovation_id: string; title: string; summary: string }[];
+  materials: { title: string; url: string; description: string }[];
+};
+
 export type EnrichResponse = {
   summary: string;
   tags: string[];

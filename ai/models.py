@@ -270,6 +270,37 @@ class ChatResponse(BaseModel):
     handoff: bool
 
 
+class KnowledgeReportRequest(BaseModel):
+    query: str
+    audience: Literal["person", "institution"] = "person"
+
+
+class KnowledgeMetric(BaseModel):
+    value: str
+    label: str
+
+
+class KnowledgeInnovation(BaseModel):
+    innovation_id: str
+    title: str
+    summary: str
+
+
+class KnowledgeMaterial(BaseModel):
+    title: str
+    url: str
+    description: str
+
+
+class KnowledgeReportResponse(BaseModel):
+    title: str
+    summary: str
+    metrics: list[KnowledgeMetric]
+    what_works: list[str]
+    innovations: list[KnowledgeInnovation]
+    materials: list[KnowledgeMaterial]
+
+
 class EnrichRequest(BaseModel):
     text: str
 

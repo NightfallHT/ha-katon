@@ -3,8 +3,8 @@
 import { useActionState } from "react";
 import { signUpToTest, submitReview, type TesterResult } from "./tester-panel-actions";
 
-const btn = "min-h-11 rounded-md border px-4 py-2 font-medium focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-60";
-const field = "mt-1 w-full rounded-md border p-3";
+const btn = "tester-form__submit";
+const field = "tester-form__field";
 
 function Status({ state, pending, pendingText }: { state: TesterResult | null; pending: boolean; pendingText: string }) {
   return (
@@ -17,16 +17,22 @@ function Status({ state, pending, pendingText }: { state: TesterResult | null; p
 export function SignUpForm({ innovationId, innovationTitle, defaultEmail }: { innovationId: string; innovationTitle: string; defaultEmail: string }) {
   const [state, action, pending] = useActionState(signUpToTest.bind(null, innovationId, innovationTitle), null);
   return (
-    <form action={action} className="space-y-3">
-      <div>
-        <label htmlFor="t-email" className="block font-medium">Twój e-mail <span className="font-normal">(wymagane)</span></label>
-        <input id="t-email" name="email" type="email" required defaultValue={defaultEmail} autoComplete="email" className={field} />
+    <form action={action} className="tester-form">
+      <div className="tester-form__grid">
+        <div>
+          <label htmlFor="t-first-name">Imię <span>(wymagane)</span></label>
+          <input id="t-first-name" name="first_name" required autoComplete="given-name" className={field} />
+        </div>
+        <div>
+          <label htmlFor="t-last-name">Nazwisko <span>(wymagane)</span></label>
+          <input id="t-last-name" name="last_name" required autoComplete="family-name" className={field} />
+        </div>
+        <div className="tester-form__wide">
+          <label htmlFor="t-email">E-mail <span>(wymagane)</span></label>
+          <input id="t-email" name="email" type="email" required defaultValue={defaultEmail} autoComplete="email" className={field} />
+        </div>
       </div>
-      <div>
-        <label htmlFor="t-motivation" className="block font-medium">Dlaczego chcesz to przetestować? <span className="font-normal">(wymagane)</span></label>
-        <textarea id="t-motivation" name="motivation" required rows={3} className={field} />
-      </div>
-      <button type="submit" disabled={pending} className={btn}>Chcę przetestować</button>
+      <button type="submit" disabled={pending} className={btn}>Wyślij zapis</button>
       <Status state={state} pending={pending} pendingText="Wysyłam zgłoszenie…" />
     </form>
   );
@@ -35,32 +41,39 @@ export function SignUpForm({ innovationId, innovationTitle, defaultEmail }: { in
 export function ReviewForm({ innovationId, innovationTitle, defaultEmail }: { innovationId: string; innovationTitle: string; defaultEmail: string }) {
   const [state, action, pending] = useActionState(submitReview.bind(null, innovationId, innovationTitle), null);
   return (
-    <form action={action} className="space-y-4">
-      <input type="hidden" name="email" value={defaultEmail} />
-      <fieldset>
-        <legend className="font-medium">Twoja ocena <span className="font-normal">(wymagane)</span></legend>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {[1, 2, 3, 4, 5].map((n) => (
-            <div key={n}>
-              <input id={`rating-${n}`} type="radio" name="rating" value={n} required className="peer sr-only" />
-              <label
-                htmlFor={`rating-${n}`}
-                className="flex min-h-11 min-w-11 cursor-pointer items-center justify-center gap-1 rounded-md border px-3 py-2 text-lg peer-checked:bg-foreground peer-checked:text-background peer-focus-visible:ring-2 peer-focus-visible:ring-ring"
-              >
-                <span aria-hidden="true">{n} ★</span>
-                <span className="sr-only">{n} {n === 1 ? "gwiazdka" : n < 5 ? "gwiazdki" : "gwiazdek"}</span>
-              </label>
-            </div>
-          ))}
-        </div>
-      </fieldset>
+    <form action={action} className="tester-form">
       <div>
-        <label htmlFor="r-feedback" className="block font-medium">Jak oceniasz to rozwiązanie?</label>
-        <textarea id="r-feedback" name="feedback" rows={3} className={field} />
+        <label htmlFor="r-occasion">
+          Przy jakiej okazji testowałeś tę inicjatywę? <span>(wymagane)</span>
+        </label>
+        <textarea id="r-occasion" name="occasion" rows={5} required className={field} />
       </div>
-      <div>
-        <label htmlFor="r-improvement" className="block font-medium">Co można poprawić?</label>
-        <textarea id="r-improvement" name="improvement" rows={3} className={field} />
+      <div className="tester-form__grid">
+        <div>
+          <label htmlFor="r-first-name">Imię <span>(wymagane)</span></label>
+          <input id="r-first-name" name="first_name" required autoComplete="given-name" className={field} />
+        </div>
+        <div>
+          <label htmlFor="r-last-name">Nazwisko <span>(wymagane)</span></label>
+          <input id="r-last-name" name="last_name" required autoComplete="family-name" className={field} />
+        </div>
+        <div>
+          <label htmlFor="r-email">E-mail <span>(wymagane)</span></label>
+          <input id="r-email" name="email" type="email" required defaultValue={defaultEmail} autoComplete="email" className={field} />
+        </div>
+        <div>
+          <label htmlFor="r-rating">Ocena w skali 1–5 <span>(wymagane)</span></label>
+          <select id="r-rating" name="rating" required defaultValue="" className={field}>
+            <option value="" disabled>Wybierz ocenę</option>
+            {[1, 2, 3, 4, 5].map((rating) => (
+              <option key={rating} value={rating}>{rating} / 5</option>
+            ))}
+          </select>
+        </div>
+        <div className="tester-form__wide">
+          <label htmlFor="r-feedback">Ocena <span>(wymagane)</span></label>
+          <textarea id="r-feedback" name="feedback" rows={5} required className={field} />
+        </div>
       </div>
       <button type="submit" disabled={pending} className={btn}>Wyślij ocenę</button>
       <Status state={state} pending={pending} pendingText="Zapisuję ocenę…" />

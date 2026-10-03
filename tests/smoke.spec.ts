@@ -38,7 +38,7 @@ test("demo story happy path: Kreator → submit → visible in admin", async ({
   const location = page.locator("#location, input[name='location']").first();
   if (await location.count()) await location.fill("gmina wiejska, Małopolska");
 
-  await page.getByRole("button", { name: /wyślij|zgłoś|zapisz/i }).click();
+  await page.getByRole("button", { name: "Wyślij zgłoszenie" }).click();
   await expect(page.getByText(/zgłoszenie|dziękujemy|wysłan|gotowe/i).first()).toBeVisible();
 
   await openAs(page, "/admin/zgloszenia", "admin");

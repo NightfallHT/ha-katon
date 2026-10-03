@@ -49,7 +49,9 @@ export default function WyzwaniaPage() {
                       Powiat: {item.powiat}. {item.indicator_name}:{" "}
                       {String(item.indicator_value).replace(".", ",")}.
                     </p>
-                    <p className="text-muted-foreground">Źródło: {item.source}</p>
+                    <p className="break-all text-muted-foreground">
+                      Źródło: {item.source}
+                    </p>
                   </CardContent>
                 </Card>
               </li>

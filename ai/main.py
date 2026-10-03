@@ -22,6 +22,8 @@ from models import (
     GrantDraftRequest,
     GrantDraftResponse,
     HealthResponse,
+    KnowledgeReportRequest,
+    KnowledgeReportResponse,
     KreatorAssistRequest,
     KreatorAssistResponse,
     MatchRequest,
@@ -36,6 +38,7 @@ from models import (
 )
 from services.admin import enrich, reembed
 from services.chat import chat
+from services.knowledge import report as knowledge_report
 from services.kreator import assist, grant_draft
 from services.match import match
 from services.middleman import chat as middleman_chat
@@ -137,6 +140,13 @@ async def chat_route(body: ChatRequest):
     if not body.message.strip():
         raise HTTPException(status_code=400, detail="Napisz pytanie o platformę albo o innowacje.")
     return await chat(body)
+
+
+@app.post("/knowledge/report", response_model=KnowledgeReportResponse)
+async def knowledge_report_route(body: KnowledgeReportRequest):
+    if not body.query.strip():
+        raise HTTPException(status_code=400, detail="Wpisz temat, o którym mam przygotować raport.")
+    return await knowledge_report(body)
 
 
 @app.post("/admin/enrich", response_model=EnrichResponse)

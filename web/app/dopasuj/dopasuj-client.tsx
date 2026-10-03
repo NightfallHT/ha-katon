@@ -41,13 +41,16 @@ export function DopasujClient() {
   const [simpleWhy, setSimpleWhy] = useState<Record<number, string>>({});
 
   useEffect(() => {
-    const Ctor = (window as unknown as {
-      SpeechRecognition?: SpeechCtor;
-      webkitSpeechRecognition?: SpeechCtor;
-    }).SpeechRecognition ??
-      (window as unknown as { webkitSpeechRecognition?: SpeechCtor })
-        .webkitSpeechRecognition;
-    setVoice(Boolean(Ctor));
+    const frame = requestAnimationFrame(() => {
+      const Ctor = (window as unknown as {
+        SpeechRecognition?: SpeechCtor;
+        webkitSpeechRecognition?: SpeechCtor;
+      }).SpeechRecognition ??
+        (window as unknown as { webkitSpeechRecognition?: SpeechCtor })
+          .webkitSpeechRecognition;
+      setVoice(Boolean(Ctor));
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {

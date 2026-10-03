@@ -6,7 +6,7 @@ import { currentRole, ROLES, writeCookie, type Role } from "@/lib/demo-session";
 
 const BASE_LINKS = [
   { href: "/dopasuj", label: "Dopasuj" },
-  { href: "/biblioteka", label: "Biblioteka" },
+  { href: "/zasobnik", label: "Zasobnik" },
   { href: "/wyzwania", label: "Wyzwania" },
   { href: "/kreator", label: "Kreator" },
   { href: "/kontakt", label: "Kontakt" },
@@ -14,45 +14,11 @@ const BASE_LINKS = [
 
 export function Header() {
   const [role, setRole] = useState<Role>("mieszkaniec");
-  const [font, setFont] = useState("");
-  const [contrast, setContrast] = useState("");
 
   useEffect(() => {
-    setRole(currentRole());
-    try {
-      setFont(localStorage.getItem("font") ?? "");
-      setContrast(localStorage.getItem("contrast") ?? "");
-    } catch {
-      /* ignore */
-    }
+    const frame = requestAnimationFrame(() => setRole(currentRole()));
+    return () => cancelAnimationFrame(frame);
   }, []);
-
-  function applyFont(next: string) {
-    setFont(next);
-    const html = document.documentElement;
-    if (next) html.setAttribute("data-font", next);
-    else html.removeAttribute("data-font");
-    try {
-      if (next) localStorage.setItem("font", next);
-      else localStorage.removeItem("font");
-    } catch {
-      /* ignore */
-    }
-  }
-
-  function applyContrast(on: boolean) {
-    const next = on ? "high" : "";
-    setContrast(next);
-    const html = document.documentElement;
-    if (next) html.setAttribute("data-contrast", next);
-    else html.removeAttribute("data-contrast");
-    try {
-      if (next) localStorage.setItem("contrast", next);
-      else localStorage.removeItem("contrast");
-    } catch {
-      /* ignore */
-    }
-  }
 
   function changeRole(next: Role) {
     const meta = ROLES.find((item) => item.value === next)!;
@@ -68,18 +34,21 @@ export function Header() {
   ];
 
   return (
-    <header className="border-b">
-      <div className="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-4">
-        <div className="flex flex-wrap items-center gap-4">
-          <Link href="/" className="font-semibold">
+    <header className="site-header">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 pb-5 pt-28 md:px-8 md:pt-5 lg:pr-[22rem]">
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+          <Link href="/" className="font-bold no-underline">
+            <span className="block text-xs uppercase tracking-[0.18em] text-muted-foreground">
+              Małopolska
+            </span>
             Hub Innowacji Społecznych
           </Link>
-          <nav aria-label="Menu główne" className="flex-1">
-            <ul className="flex flex-wrap gap-x-4 gap-y-2">
+          <nav aria-label="Menu główne" className="min-w-0 flex-1">
+            <ul className="flex flex-wrap gap-x-6 gap-y-2">
               {links.map((item) => (
                 <li key={item.href}>
                   <Link
-                    className="inline-flex min-h-11 items-center underline underline-offset-4"
+                    className="inline-flex min-h-11 items-center font-semibold underline-offset-8 hover:underline"
                     href={item.href}
                   >
                     {item.label}
@@ -88,17 +57,14 @@ export function Header() {
               ))}
             </ul>
           </nav>
-        </div>
-        <div className="flex flex-wrap items-end gap-4">
-          <div>
-            <label htmlFor="role" className="mb-1 block font-medium">
-              Oglądasz jako:
-            </label>
+          <label className="flex min-h-11 items-center gap-2 text-sm font-semibold" htmlFor="role">
+            <span className="sr-only md:not-sr-only">Widok:</span>
             <select
               id="role"
-              className="h-11 min-h-11 rounded-lg border border-input bg-card px-3"
+              className="h-11 rounded-full border border-input bg-card px-4"
               value={role}
               onChange={(event) => changeRole(event.target.value as Role)}
+              aria-label="Oglądasz jako"
             >
               {ROLES.map((item) => (
                 <option key={item.value} value={item.value}>
@@ -106,39 +72,7 @@ export function Header() {
                 </option>
               ))}
             </select>
-          </div>
-          <fieldset>
-            <legend className="mb-1 font-medium">Wielkość tekstu</legend>
-            <div className="flex items-end gap-2">
-              {(
-                [
-                  ["", "A", "18px", "44px"],
-                  ["125", "A+", "22.5px", "52px"],
-                  ["150", "A++", "27px", "60px"],
-                ] as const
-              ).map(([value, label, size, height]) => (
-                <button
-                  key={label}
-                  type="button"
-                  className="inline-flex min-w-11 items-center justify-center rounded-full border bg-card px-3 leading-none aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-primary-foreground"
-                  style={{ fontSize: size, minHeight: height }}
-                  aria-pressed={font === value}
-                  onClick={() => applyFont(value)}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-          </fieldset>
-          <button
-            type="button"
-            className="inline-flex min-h-11 items-center rounded-full border-2 px-4 font-semibold"
-            style={{ background: "#000000", color: "#ffff00", borderColor: "#ffff00" }}
-            aria-pressed={contrast === "high"}
-            onClick={() => applyContrast(contrast !== "high")}
-          >
-            {contrast === "high" ? "Wyłącz wysoki kontrast" : "Wysoki kontrast"}
-          </button>
+          </label>
         </div>
       </div>
     </header>

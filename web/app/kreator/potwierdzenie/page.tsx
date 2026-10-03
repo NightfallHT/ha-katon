@@ -10,14 +10,17 @@ export default function PotwierdzeniePage() {
   const [title, setTitle] = useState<string | null>(null);
 
   useEffect(() => {
-    try {
-      const raw = sessionStorage.getItem("hubmi-last-submission");
-      if (!raw) return;
-      const parsed = JSON.parse(raw) as { title?: string };
-      setTitle(parsed.title ?? "Twoje zgłoszenie");
-    } catch {
-      setTitle("Twoje zgłoszenie");
-    }
+    const frame = requestAnimationFrame(() => {
+      try {
+        const raw = sessionStorage.getItem("hubmi-last-submission");
+        if (!raw) return;
+        const parsed = JSON.parse(raw) as { title?: string };
+        setTitle(parsed.title ?? "Twoje zgłoszenie");
+      } catch {
+        setTitle("Twoje zgłoszenie");
+      }
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   return (

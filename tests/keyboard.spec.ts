@@ -35,10 +35,26 @@ test.describe("keyboard only", () => {
     await page.keyboard.type(PROBLEM);
     await page.keyboard.press("Tab");
     await page.keyboard.press("Enter");
-    await page.waitForURL(/dopasuj/);
     const heading = page.locator("h1#wyniki");
     await expect(heading).toBeVisible({ timeout: 25_000 });
     await expect(heading).toBeFocused();
+  });
+
+  test("example prompt fills the search and selects the first gap", async ({ page }) => {
+    await openAs(page, "/", "mieszkaniec");
+    await page
+      .getByRole("button", { name: /Szukam wsparcia dla/ })
+      .click();
+    const field = page.locator("#problem");
+    await expect(field).toHaveValue(/_____/);
+    const selected = await field.evaluate((element) => {
+      const textarea = element as HTMLTextAreaElement;
+      return textarea.value.slice(
+        textarea.selectionStart,
+        textarea.selectionEnd,
+      );
+    });
+    expect(selected).toBe("_____");
   });
 
   test("help-bot dialog opens, traps focus, closes with Escape", async ({ page }) => {

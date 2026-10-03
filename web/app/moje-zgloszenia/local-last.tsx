@@ -10,13 +10,16 @@ export function LocalLastSubmission() {
   const [item, setItem] = useState<Stored | null>(null);
 
   useEffect(() => {
-    try {
-      const raw = sessionStorage.getItem("hubmi-last-submission");
-      if (!raw) return;
-      setItem(JSON.parse(raw) as Stored);
-    } catch {
-      /* ignore */
-    }
+    const frame = requestAnimationFrame(() => {
+      try {
+        const raw = sessionStorage.getItem("hubmi-last-submission");
+        if (!raw) return;
+        setItem(JSON.parse(raw) as Stored);
+      } catch {
+        /* ignore */
+      }
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   if (!item?.title) return null;

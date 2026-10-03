@@ -4,12 +4,14 @@ import type {
   EnrichResponse,
   Fiszka,
   GrantDraftResponse,
+  KnowledgeReport,
   KreatorAssistResponse,
   MatchResponse,
   MiddlemanChatResponse,
   MiddlemanReport,
   SimplifyResponse,
 } from "./types";
+import { localKnowledgeReport } from "./local-knowledge";
 import { localMatch } from "./local-match";
 
 const TIMEOUT_MS = 30_000;
@@ -132,6 +134,17 @@ export function middlemanReport(input: {
 
 export function chat(input: { message: string; history: ChatTurn[]; page?: string }) {
   return request<ChatResponse>("/chat", input);
+}
+
+export async function knowledgeReport(input: {
+  query: string;
+  audience?: "person" | "institution";
+}): Promise<KnowledgeReport> {
+  try {
+    return await request<KnowledgeReport>("/knowledge/report", input);
+  } catch {
+    return localKnowledgeReport(input.query, input.audience ?? "person");
+  }
 }
 
 export function adminEnrich(input: { text: string }) {

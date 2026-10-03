@@ -36,15 +36,20 @@ export default async function AdminHome() {
     error = "Dane poglądowe — baza ROPS nie jest podłączona w tym środowisku.";
   }
   return (
-    <section aria-labelledby="pulpit">
-      <h1 id="pulpit" className="text-2xl font-semibold">Pulpit pracownika ROPS</h1>
+    <section aria-labelledby="pulpit" className="admin-dashboard">
+      <div className="admin-dashboard__heading">
+        <p className="eyebrow">Przegląd</p>
+        <h1 id="pulpit">Pulpit pracownika ROPS</h1>
+        <p>Najważniejsze sprawy i treści w jednym miejscu.</p>
+      </div>
       {error && <p role="status" className="mt-4 rounded-md border p-3">{error}</p>}
-      <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+      <ul className="admin-dashboard__tiles">
         {tiles.map((t) => (
           <li key={t.text}>
-            <Link href={t.href} className="block rounded-lg border p-5 focus-visible:ring-2 focus-visible:ring-ring">
-              <span className="block text-4xl font-bold">{t.value}</span>
-              <span className="mt-1 block text-lg">{t.text}</span>
+            <Link href={t.href}>
+              <span>{t.value}</span>
+              <strong>{t.text}</strong>
+              <small>Otwórz widok</small>
             </Link>
           </li>
         ))}

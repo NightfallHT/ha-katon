@@ -38,7 +38,8 @@ export function MiddlemanClient() {
   );
 
   useEffect(() => {
-    setRole(currentRole());
+    const frame = requestAnimationFrame(() => setRole(currentRole()));
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   if (role !== "gmina") {

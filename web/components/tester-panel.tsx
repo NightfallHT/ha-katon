@@ -28,20 +28,30 @@ export async function TesterPanel({ innovationId, innovationTitle }: { innovatio
   }
 
   return (
-    <section aria-labelledby="tester-h" className="mt-10 rounded-lg border p-5">
-      <h2 id="tester-h" className="text-xl font-semibold">Przetestuj i oceń</h2>
-
-      <div className="mt-5">
-        <h3 className="text-lg font-semibold">Zapisz się do testów</h3>
-        <div className="mt-2"><SignUpForm innovationId={innovationId} innovationTitle={innovationTitle} defaultEmail={email} /></div>
+    <section aria-labelledby="tester-h" className="tester-panel">
+      <div className="tester-panel__heading">
+        <p className="eyebrow">Weź udział</p>
+        <h2 id="tester-h">Przetestuj i oceń inicjatywę</h2>
+        <p>Każde pole oznaczone jako wymagane musi być wypełnione.</p>
       </div>
 
-      <div className="mt-8">
-        <h3 className="text-lg font-semibold">Oceń rozwiązanie</h3>
-        <div className="mt-2"><ReviewForm innovationId={innovationId} innovationTitle={innovationTitle} defaultEmail={email} /></div>
+      <div className="tester-panel__forms">
+        <section aria-labelledby="signup-heading">
+          <span className="tester-panel__step" aria-hidden="true">01</span>
+          <h3 id="signup-heading">Zapisz się do testowania</h3>
+          <p>Podaj dane kontaktowe. Zespół odezwie się z informacją o następnym teście.</p>
+          <SignUpForm innovationId={innovationId} innovationTitle={innovationTitle} defaultEmail={email} />
+        </section>
+
+        <section aria-labelledby="review-heading">
+          <span className="tester-panel__step" aria-hidden="true">02</span>
+          <h3 id="review-heading">Oceń, jeśli testowałeś</h3>
+          <p>Napisz, w jakiej sytuacji korzystałeś z rozwiązania i co o nim myślisz.</p>
+          <ReviewForm innovationId={innovationId} innovationTitle={innovationTitle} defaultEmail={email} />
+        </section>
       </div>
 
-      <div className="mt-8">
+      <div className="tester-panel__reviews">
         <h3 className="text-lg font-semibold">Ostatnie opinie</h3>
         {reviews.length === 0 ? (
           <ul className="mt-2 space-y-3">

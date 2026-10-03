@@ -93,6 +93,10 @@ def materials() -> list[dict[str, Any]]:
     return list(_buckets()["material"])
 
 
+def challenges() -> list[dict[str, Any]]:
+    return list(_buckets()["challenge"])
+
+
 def innovation_by_id(innovation_id: str) -> dict[str, Any] | None:
     for item in innovations():
         if str(item.get("id")) == innovation_id:

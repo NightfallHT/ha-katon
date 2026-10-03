@@ -20,13 +20,14 @@ async function countNew() {
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   if (!(await isAdmin())) {
     return (
-      <section aria-labelledby="admin-gate">
-        <h1 id="admin-gate" className="text-2xl font-semibold">
+      <section aria-labelledby="admin-gate" className="admin-gate">
+        <p className="eyebrow">Panel administratora</p>
+        <h1 id="admin-gate">
           Ta część jest dla pracowników ROPS
         </h1>
         <p className="mt-3">Przełącz się na rolę pracownika ROPS, aby zobaczyć panel.</p>
         <form action={becomeAdmin} className="mt-4">
-          <button type="submit" className="min-h-11 rounded-md border px-4 py-2 font-medium focus-visible:ring-2 focus-visible:ring-ring">
+          <button type="submit" className="admin-primary-action">
             Przełącz na pracownika ROPS
           </button>
         </form>
@@ -44,12 +45,19 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   ];
 
   return (
-    <div>
-      <nav aria-label="Panel administratora" className="mb-8 border-b pb-3">
+    <div className="admin-shell">
+      <header className="admin-shell__masthead">
+        <div>
+          <p className="eyebrow">Strefa pracownika</p>
+          <p>Panel ROPS</p>
+        </div>
+        <p>Zarządzaj zgłoszeniami, bazą wiedzy i naborami.</p>
+      </header>
+      <nav aria-label="Panel administratora" className="admin-shell__nav">
         <ul className="flex flex-wrap gap-2">
           {links.map((l) => (
             <li key={l.href}>
-              <Link href={l.href} className="inline-flex min-h-11 items-center rounded-md px-3 py-2 underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-ring">
+              <Link href={l.href}>
                 {l.text}
                 {l.href === "/admin/zgloszenia" && newCount > 0 && (
                   <span className="ml-2 rounded-full border px-2 text-sm font-semibold">
