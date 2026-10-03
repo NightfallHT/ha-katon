@@ -14,5 +14,93 @@
     "deadline": "2027-03-31",
     "budget_max": 250000,
     "regulamin_url": "/demo/regulamin-uslugi-blisko-domu-2027.pdf"
+  },
+  {
+    "name": "II nabór wniosków na pilotażowe wdrożenie usług społecznych – „Usługa Wrażliwa”",
+    "description": "Granty na pilotażowe wdrożenie usług społecznych bazujących na innowacyjnych rozwiązaniach. Grant pokrywa 100% kosztów, bez wkładu własnego.",
+    "is_open": false,
+    "deadline": "2026-06-30",
+    "budget_max": 600000,
+    "regulamin_url": "https://rops.krakow.pl/pliki-do-pobrania/artykul,regulamin-udzielania-grantow-w-ramach-projektu-usluga-wrazliwa,1461"
+  },
+  {
+    "name": "Nabór wniosków na pilotażowe wdrożenie usług społecznych – „Usługa Wrażliwa”",
+    "description": "Granty na pilotażowe wdrożenie usług społecznych bazujących na innowacyjnych rozwiązaniach. Grant pokrywa 100% kosztów, bez wkładu własnego.",
+    "is_open": false,
+    "deadline": "2026-02-20",
+    "budget_max": 600000,
+    "regulamin_url": "https://rops.krakow.pl/pliki-do-pobrania/artykul,regulamin-udzielania-grantow-w-ramach-projektu-usluga-wrazliwa,1369"
+  },
+  {
+    "name": "Nabór aplikacji na innowacje społeczne – „Inkubator Włączenia Społecznego 2.0”",
+    "description": "Granty na opracowanie i przetestowanie innowacji społecznej. Mogą aplikować osoby, organizacje, firmy i grupy nieformalne. Bez wkładu własnego.",
+    "is_open": false,
+    "deadline": "2024-12-13",
+    "budget_max": 120000,
+    "regulamin_url": "https://rops.krakow.pl/nabory-szkolenia-granty-dotacje-wizyty-studyjne-studia-specjalizacje-superwizje/granty-na-innowacje-spoleczne,nabor-aplikacji-wnioskow-na-innowacje-spoleczne-w-ramach-projektu-pn-inkubator-wlaczenia-spolecznego-20"
+  },
+  {
+    "name": "Dotacje celowe „Mobilna Piecza Zastępcza w Małopolsce”",
+    "description": "Dotacje celowe dla małopolskich powiatów i miast na prawach powiatu.",
+    "is_open": false,
+    "deadline": "2026-05-27",
+    "budget_max": null,
+    "regulamin_url": "https://rops.krakow.pl/nabory-szkolenia-granty-dotacje-wizyty-studyjne-studia-specjalizacje-superwizje/dotacje,dotacje-celowe-dla-malopolskich-powiatow-i-miast-na-prawach-powiatu-w-ramach-zadania-pn-mobilna-piecza-zastepcza-w-malopolsce"
+  },
+  {
+    "name": "Dotacje celowe dla gmin „Małopolska Niania 3.0” (2024–2026)",
+    "description": "Dotacje celowe dla gmin na lata 2024–2026. Łączna pula: 2 971 560 zł.",
+    "is_open": false,
+    "deadline": null,
+    "budget_max": null,
+    "regulamin_url": "https://rops.krakow.pl/nabory-szkolenia-granty-dotacje-wizyty-studyjne-studia-specjalizacje-superwizje/dotacje,dotacje-celowe-dla-gmin-na-lata-2024-2026-w-ramach-zadania-malopolska-niania-30"
+  },
+  {
+    "name": "Otwarty konkurs ofert „Małopolska Rodzina na Plus” (2026–2027)",
+    "description": "Konkurs dla organizacji pozarządowych, formuła dwuletnia. Łączna pula: 1 451 000 zł.",
+    "is_open": false,
+    "deadline": "2026-03-31",
+    "budget_max": null,
+    "regulamin_url": "https://rops.krakow.pl/pliki-do-pobrania/artykul,zalacznik-nr-1-do-uchwaly-zwm-nr-51426-regulamin-otwartego-konkursu-ofert,1398"
+  },
+  {
+    "name": "Otwarty konkurs ofert „Rodzinna Małopolska” (2025–2026)",
+    "description": "Konkurs dla organizacji pozarządowych, formuła dwuletnia. Łączna pula: 1 000 000 zł.",
+    "is_open": false,
+    "deadline": "2025-03-12",
+    "budget_max": null,
+    "regulamin_url": "https://rops.krakow.pl/pliki-do-pobrania/artykul,zalacznik-nr-1-do-uchwaly-zwm-nr-33025-regulamin-otwartego-konkursu-ofert,1138"
+  },
+  {
+    "name": "Otwarty konkurs ofert „Małopolska uczy i pomaga przez całe życie” (2025–2026)",
+    "description": "Konkurs dla organizacji pozarządowych, formuła dwuletnia. Łączna pula: 2 000 000 zł.",
+    "is_open": false,
+    "deadline": "2025-03-05",
+    "budget_max": null,
+    "regulamin_url": "https://rops.krakow.pl/pliki-do-pobrania/artykul,zalacznik-nr-1-do-uchwaly-zwm-nr-29525-regulamin-otwartego-konkursu-ofert,1131"
+  },
+  {
+    "name": "Otwarty konkurs ofert „Aktywny Senior 2.0” (2024–2025)",
+    "description": "Konkurs dla organizacji pozarządowych, formuła dwuletnia. Łączna pula: 1 000 000 zł.",
+    "is_open": false,
+    "deadline": "2024-02-28",
+    "budget_max": null,
+    "regulamin_url": "https://rops.krakow.pl/pliki-do-pobrania/artykul,zalacznik-nr-1-do-uchwaly-zwm-regulamin-otwartego-konkursu-ofert-aktywny-senior-20,996"
+  },
+  {
+    "name": "Otwarty konkurs ofert „Aktywny Senior” (2023–2024)",
+    "description": "Konkurs dla organizacji pozarządowych, formuła dwuletnia. Łączna pula: 1 000 000 zł.",
+    "is_open": false,
+    "deadline": "2023-04-13",
+    "budget_max": null,
+    "regulamin_url": "https://rops.krakow.pl/pliki-do-pobrania/artykul,zalacznik-nr-1-do-uchwaly-zwm-regulamin-konkursu-aktywny-senior,978"
+  },
+  {
+    "name": "Otwarty konkurs ofert „Rodzinna Małopolska” (2023–2024)",
+    "description": "Konkurs dla organizacji pozarządowych, formuła dwuletnia. Łączna pula: 1 000 000 zł.",
+    "is_open": false,
+    "deadline": "2023-04-13",
+    "budget_max": null,
+    "regulamin_url": "https://rops.krakow.pl/pliki-do-pobrania/artykul,zalacznik-nr-1-do-uchwaly-zwm-regulamin-konkursu-rodzinna-malopolska,1008"
   }
 ]
