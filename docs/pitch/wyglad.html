@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HubMI — jak wygląda apka (5 ekranów)</title>
+    <style>
+      :root {
+        --bg: #f7f1e8;
+        --ink: #1a2332;
+        --brand: #1b3a6b;
+        --accent: #c45c26;
+        --card: #fff;
+        --why: #fff4d6;
+        --border: #5a6a7a;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font: 18px/1.6 "Atkinson Hyperlegible", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+      }
+      header.app {
+        background: var(--brand);
+        color: #fff;
+        padding: 1rem 1.25rem;
+      }
+      header.app strong { font-size: 1.1rem; }
+      nav { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.5rem; }
+      nav span { text-decoration: underline; }
+      main { max-width: 52rem; margin: 0 auto; padding: 1.5rem 1.25rem 4rem; }
+      h1 { font-size: 1.8rem; color: var(--brand); }
+      .lead { font-size: 1.1rem; max-width: 40rem; }
+      textarea, button, a.btn {
+        font: inherit;
+        min-height: 44px;
+      }
+      textarea {
+        width: 100%;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.6rem;
+      }
+      button, a.btn {
+        display: inline-flex;
+        align-items: center;
+        background: var(--accent);
+        color: #fff;
+        border: 0;
+        border-radius: 8px;
+        padding: 0 1rem;
+        text-decoration: none;
+      }
+      .tiles { display: grid; gap: 1rem; margin-top: 1.5rem; }
+      @media (min-width: 700px) { .tiles { grid-template-columns: 1fr 1fr 1fr; } }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1rem;
+      }
+      .why { background: var(--why); border: 2px solid var(--accent); border-radius: 8px; padding: 0.6rem 0.8rem; }
+      .chip { display: inline-block; border: 1px solid var(--border); border-radius: 999px; padding: 0.1rem 0.6rem; font-size: 0.9rem; }
+      .screen { margin: 3rem 0; padding-top: 1rem; border-top: 2px solid var(--brand); }
+      .toggles { margin-top: 0.75rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+      .toggles button { background: #fff; color: var(--ink); border: 1px solid #fff; }
+      footer { padding: 1rem 1.25rem; border-top: 1px solid var(--border); font-size: 0.95rem; }
+    </style>
+  </head>
+  <body>
+    <header class="app">
+      <strong>Hub Innowacji Społecznych</strong>
+      <nav aria-label="Przykład menu">
+        <span>Dopasuj</span><span>Biblioteka</span><span>Wyzwania</span><span>Kreator</span><span>Kontakt</span>
+      </nav>
+      <div class="toggles">
+        <button type="button">A</button>
+        <button type="button">A+</button>
+        <button type="button">A++</button>
+        <button type="button">Wysoki kontrast</button>
+      </div>
+    </header>
+    <main>
+      <p class="lead">
+        To nie makieta Figma — to <strong>ten sam wygląd co w kodzie</strong>: papierowe tło, granat, bursztynowy przycisk,
+        duży tekst, przyciski 44 px. Pięć ekranów jury.
+      </p>
+
+      <section class="screen" id="home">
+        <h1>1. Start — jedno pytanie</h1>
+        <p>Opisz swój problem. Znajdziemy rozwiązania, które mogą Ci pomóc.</p>
+        <textarea rows="3">Słabo widzę. Chcę wiedzieć, z jakich innowacji w Małopolsce mogę skorzystać.</textarea>
+        <p><button type="button">Szukaj rozwiązań</button></p>
+        <div class="tiles">
+          <div class="card"><strong>Znajdź pomoc</strong><p>Dla mieszkanki.</p></div>
+          <div class="card"><strong>Rozwiń pomysł</strong><p>Dla NGO — Kreator.</p></div>
+          <div class="card"><strong>Dla gminy</strong><p>Middleman → PDF.</p></div>
+        </div>
+      </section>
+
+      <section class="screen" id="dopasuj">
+        <h1>2. Wyniki dopasowania</h1>
+        <p>Zrozumieliśmy: niepełnosprawność, osoby słabowidzące, Małopolska.</p>
+        <div class="card">
+          <span class="chip">Niepełnosprawność</span>
+          <h2>Zdobądź swoje szczyty</h2>
+          <p class="why"><strong>Dlaczego to pasuje.</strong> Przewodnik ma audiodeskrypcję i opis barier.</p>
+          <p><a class="btn" href="#">Zobacz szczegóły</a> <a class="btn" href="#">Zobacz w bazie ROPS</a></p>
+        </div>
+      </section>
+
+      <section class="screen" id="karta">
+        <h1>3. Karta innowacji</h1>
+        <p>Prosty opis, dla kogo, link do prawdziwej Biblioteki ROPS, na dole tester (zgłoś się / oceń).</p>
+      </section>
+
+      <section class="screen" id="kreator">
+        <h1>4. Kreator — jeden krok na ekran</h1>
+        <p>Krok 1 z 4. Duże pole, Dalej / Wstecz, na końcu potwierdzenie.</p>
+      </section>
+
+      <section class="screen" id="admin">
+        <h1>5. Admin ROPS</h1>
+        <p>Ciemny granat zostaje w menu. Pulpit: liczby. Tabela zgłoszeń. Status słowami, nie samą kropką.</p>
+      </section>
+    </main>
+    <footer>HackYeah 2026 · otwórz ten plik w przeglądarce obok czatu i powiedz, co zmienić (kolor CTA, wielkość H1, układ kafelków).</footer>
+  </body>
+</html>

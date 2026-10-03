@@ -60,13 +60,22 @@ export function InnovationCard({ innovation, why, compact }: Props) {
             {why}
           </p>
         ) : null}
-        <p>
+        <p className="flex flex-wrap gap-x-4 gap-y-2">
           <Link
             className="inline-flex min-h-11 items-center font-medium underline underline-offset-4"
             href={`/biblioteka/${innovation.id}`}
           >
             Zobacz szczegóły
           </Link>
+          {innovation.source_url ? (
+            <a
+              className="inline-flex min-h-11 items-center font-medium underline underline-offset-4"
+              href={innovation.source_url}
+              rel="noreferrer"
+            >
+              Zobacz w bazie ROPS
+            </a>
+          ) : null}
         </p>
       </CardContent>
     </Card>

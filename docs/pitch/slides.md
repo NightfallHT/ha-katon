@@ -37,11 +37,15 @@ Zrzut: admin nabór + skrzynka.
 - Duża czcionka, wysoki kontrast, skip link, klawiatura  
 - Wszystko da się zrobić **tekstem** (mikrofon tylko dodatek)  
 - „Wyjaśnij prościej”, 44×44, etykiety  
-- Axe / Lighthouse: `tests/report.md` (dziś: suite gotowy, pełne liczby po shellu Oli)
+## 8. Dostępność (Sylwia — liczby z testów)
+- Duża czcionka, wysoki kontrast, skip link, klawiatura  
+- Wszystko da się zrobić **tekstem** (mikrofon tylko dodatek)  
+- „Wyjaśnij prościej”, 44×44, etykiety  
+- Axe / Lighthouse: `tests/report.md` (suite gotowy; liczby po live URL)
 
 ## 9. Architektura i koszt
-Next.js (Vercel) + FastAPI + Supabase EU.  
-Tabela z `docs/content/koszty.md`, gdy Klaudia ją doda.
+Next.js (Vercel) + FastAPI (Render) + Supabase EU.  
+Tabela: `docs/pitch/koszty.md` — hosting **~190–270 zł/mies.**, z czasem ROPS **~1,5 tys. zł/mies.**
 
 ## 10. Roadmap i zespół
 Logowanie, RLS, prawdziwe dane ROPS.  

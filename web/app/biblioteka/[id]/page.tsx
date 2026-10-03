@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { InnovationCard } from "@/components/innovation-card";
 import { ResourceNav } from "@/components/resource-nav";
+import { TesterPanel } from "@/components/tester-panel";
 import { getInnovation, similarInnovations } from "@/content/catalog";
 import { categoryLabel, stageLabel } from "@/content/labels";
 
@@ -63,24 +64,17 @@ export default async function InnovationPage({
         {item.source_url ? (
           <p>
             <a
-              className="underline underline-offset-4"
+              className="inline-flex min-h-11 items-center font-medium underline underline-offset-4"
               href={item.source_url}
               rel="noreferrer"
             >
-              Źródło
+              Zobacz w bazie ROPS
             </a>
           </p>
         ) : null}
       </section>
 
-      <section className="mt-10 rounded-xl border p-4">
-        <h2 className="text-2xl font-bold">Przetestuj i oceń</h2>
-        <p className="mt-2">
-          Formularz zgłoszenia do testu doda Jakub. Na razie możesz zapamiętać
-          to rozwiązanie i wrócić później.
-        </p>
-        {/* TODO(jakub): <TesterPanel innovationId={item.id} /> */}
-      </section>
+      <TesterPanel innovationId={item.id} innovationTitle={item.title} />
 
       {similar.length ? (
         <section className="mt-10">

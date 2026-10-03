@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HelpBot } from "@/components/help-bot";
 
 const LINKS = [
   { href: "/biblioteka", label: "Biblioteka" },
@@ -9,25 +10,28 @@ const LINKS = [
 
 export function ResourceNav({ current }: { current: string }) {
   return (
-    <nav aria-label="Zasobnik wiedzy" className="mb-8">
-      <ul className="flex flex-wrap gap-3">
-        {LINKS.map((item) => (
-          <li key={item.href}>
-            {item.href === current ? (
-              <span className="inline-flex min-h-11 items-center font-bold">
-                {item.label}
-              </span>
-            ) : (
-              <Link
-                href={item.href}
-                className="inline-flex min-h-11 items-center underline underline-offset-4"
-              >
-                {item.label}
-              </Link>
-            )}
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <>
+      <nav aria-label="Zasobnik wiedzy" className="mb-8">
+        <ul className="flex flex-wrap gap-3">
+          {LINKS.map((item) => (
+            <li key={item.href}>
+              {item.href === current ? (
+                <span className="inline-flex min-h-11 items-center font-bold">
+                  {item.label}
+                </span>
+              ) : (
+                <Link
+                  href={item.href}
+                  className="inline-flex min-h-11 items-center underline underline-offset-4"
+                >
+                  {item.label}
+                </Link>
+              )}
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <HelpBot />
+    </>
   );
 }
