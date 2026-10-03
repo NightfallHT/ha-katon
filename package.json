@@ -2,9 +2,11 @@
   "name": "ha-katon",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "description": "Małopolski Hub Innowacji Społecznych — HackYeah 2026. Root package exists only to run scripts/ (seeding). The app lives in /web.",
   "scripts": {
-    "seed": "tsx scripts/seed.ts"
+    "seed": "tsx scripts/seed.ts",
+    "check:supabase": "tsx scripts/check-supabase.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.2"

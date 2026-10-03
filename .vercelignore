@@ -1,0 +1,36 @@
+# Vercel's Root Directory stays at the repo root (see vercel.json), so without this
+# file the whole monorepo gets uploaded on every deploy. Only /web is deployed.
+#
+# /web is self-contained: nothing under web/ imports from outside web/, and it carries
+# its own seed copy in web/content/seed. Verify before adding anything here:
+#   grep -rn "\.\./\.\./\.\." web/app web/lib web/components
+
+# Janek's Python service — deployed separately on Render, and we do not want
+# Vercel discovering ai/requirements.txt and trying to build Python functions.
+ai/
+
+# Sylwia's Playwright suite — runs against the deployed URL, never inside the build
+tests/
+
+# Klaudia's seed JSON — reaches the database via scripts/seed.ts, not the bundle
+data/
+
+# Docs, briefs, SQL and helper scripts: not build inputs
+docs/
+agents/
+db/
+scripts/
+AGENTS.md
+DEPENDENCIES.md
+README.md
+shell.nix
+
+# Never upload secrets or local state
+.env
+.env.*
+.git
+node_modules
+web/node_modules
+web/.next
+tsconfig.tsbuildinfo
+web/tsconfig.tsbuildinfo

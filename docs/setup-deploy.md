@@ -39,9 +39,9 @@ AGENTS.md §3 requires an **EU region**. Pick `eu-central-1` (Frankfurt).
 
 Dashboard → **Settings → API Keys**. You will see two groups. Take the **current** keys:
 
-| Dashboard | Env var | Notes |
-|---|---|---|
-| Project URL | `NEXT_PUBLIC_SUPABASE_URL` **and** `SUPABASE_URL` (for `/ai`) | *Settings → Data API* |
+| Dashboard             | Env var                     | Notes |
+|---                    |---                          |---    |
+| Project URL           | `NEXT_PUBLIC_SUPABASE_URL` **and** `SUPABASE_URL` (for `/ai`) | *Settings → Data API* |
 | **Publishable key** `sb_publishable_…` | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | browser-safe |
 | **Secret key** `sb_secret_…` | `SUPABASE_SERVICE_ROLE_KEY` | server only, bypasses RLS |
 
@@ -99,13 +99,43 @@ key model is for.
 
 ## 2. Vercel
 
-The app is **not** at the repo root, so the root directory must be set to `web`.
+The Next.js app lives in `web/`, not at the repo root. **Leave the Root Directory at the repo
+root** — [`vercel.json`](../vercel.json) handles the subdirectory:
+
+```json
+{
+  "framework": "nextjs",
+  "installCommand": "cd web && npm install",
+  "buildCommand": "cd web && npm run build",
+  "outputDirectory": "web/.next",
+  "regions": ["fra1"]
+}
+```
+
+What each line does, so nobody "fixes" it later:
+
+| Key | Why |
+|---|---|
+| `framework: "nextjs"` | There is no Next.js at the repo root, so auto-detection fails and the app would deploy as static files. This forces Vercel's Next.js builder, which is what turns `/admin/*`, `/api/notify`, `/api/submit`, `/biblioteka` and `/kontakt` into real server functions. |
+| `installCommand` / `buildCommand` | Both run from the repo root in a fresh shell, hence `cd web &&` in each. |
+| `outputDirectory: "web/.next"` | Where Vercel reads `BUILD_ID`, `routes-manifest.json` and `required-server-files.json` from. |
+| `regions: ["fra1"]` | `fra1` is `eu-central-1`, Frankfurt — **the same region as Supabase**. Vercel defaults functions to `iad1` (Washington DC), which would put our server code in the US querying a database in the EU: slower, and it undercuts the EU-data-residency claim on the architecture slide. |
+
+[`.vercelignore`](../.vercelignore) keeps `ai/`, `tests/`, `data/`, `docs/` and friends out of the
+upload. `web/` is self-contained — nothing under it imports from outside, and it carries its own
+seed copy in `web/content/seed` — so excluding the rest is safe. If that ever changes, check with:
+
+```bash
+grep -rn "\.\./\.\./\.\." web/app web/lib web/components
+```
 
 ### Dashboard route (recommended — gives you auto-deploy on push to `main`)
 
 1. <https://vercel.com/new> → import `NightfallHT/ha-katon`
-2. **Root Directory: `web`** ← the one setting that is easy to miss
-3. Framework preset: Next.js (auto-detected). Leave build/output commands default.
+2. **Leave Root Directory as the repo root.** Do not set it to `web`; `vercel.json` already
+   points at `web/`, and setting both makes the paths resolve twice (it would look for
+   `web/web/.next`).
+3. Framework / build / output: leave everything on defaults — `vercel.json` overrides them.
 4. *Environment Variables* → add all six from the `web` block of
    [`.env.example`](../.env.example), for **Production, Preview and Development**:
    - `NEXT_PUBLIC_SUPABASE_URL`
@@ -121,8 +151,23 @@ The app is **not** at the repo root, so the root directory must be set to `web`.
 
 ```bash
 nix-shell --run 'npx vercel login'
-nix-shell --run 'npx vercel link'          # answer "web" when asked for the root directory
+nix-shell --run 'npx vercel link'     # accept the repo root; do NOT answer "web"
 nix-shell --run 'npx vercel --prod'
+```
+
+### If the build fails
+
+| Symptom | Cause |
+|---|---|
+| `No Next.js version detected` | `framework` or `installCommand` was dropped — Vercel is looking at the repo root, where there is no `next` dependency. |
+| Build succeeds, every page 404s | `outputDirectory` is wrong, or Root Directory was *also* set to `web`. |
+| Pages render but admin/API routes 404 | `framework: "nextjs"` is missing, so nothing became a server function. |
+
+You can reproduce the exact Vercel build locally before pushing:
+
+```bash
+nix-shell --run 'cd web && npm install'
+nix-shell --run 'cd web && npm run build'
 ```
 
 ### After the first deploy
