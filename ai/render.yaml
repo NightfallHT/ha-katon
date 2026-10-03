@@ -1,0 +1,28 @@
+# Render Blueprint is read from the repo root. If you use the dashboard instead,
+# set Root Directory to ai and Dockerfile path to Dockerfile.
+services:
+  - type: web
+    name: hubmi-ai
+    runtime: docker
+    dockerfilePath: ./ai/Dockerfile
+    dockerContext: ./ai
+    healthCheckPath: /health
+    envVars:
+      - key: DEMO_MODE
+        value: "1"
+      - key: ALLOWED_ORIGINS
+        value: "*"
+      - key: LLM_MODEL
+        value: gpt-4o-mini
+      - key: LLM_BASE_URL
+        value: https://api.openai.com/v1
+      - key: EMBEDDING_MODEL
+        value: text-embedding-3-small
+      - key: EMBEDDING_DIM
+        value: "1536"
+      - key: LLM_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false

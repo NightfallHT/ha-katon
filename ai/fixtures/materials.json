@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Poradnik prostego języka",
+    "type": "poradnik",
+    "url": "/materialy",
+    "description": "Jak pisać ogłoszenia i regulaminy tak, żeby zrozumiała je osoba starsza.",
+    "tags": ["prosty język", "dostępność"]
+  },
+  {
+    "title": "Canvas innowacji społecznej",
+    "type": "canvas",
+    "url": "/kreator",
+    "description": "Jedna kartka: problem, ludzie, rozwiązanie, partnerzy i sposób sprawdzenia pomysłu.",
+    "tags": ["kreator", "pomysł"]
+  }
+]

@@ -1,0 +1,139 @@
+{
+  "_comment": "Klucze by_text to dokładne zdania ze scenariusza demo (AGENTS.md §2), dopóki Klaudia nie poda skryptu. contains łapie raport i wniosek po nazwie gminy i naboru.",
+  "by_text": {
+    "/match": {
+      "Starsi sąsiedzi są samotni i nie mogą dojechać do lekarza. Mieszkam w wiejskiej gminie.": {
+        "need_id": "22222222-2222-4222-8222-222222222201",
+        "extracted": {
+          "category": "samotnosc",
+          "target_group": "seniorzy",
+          "location": "gmina wiejska",
+          "keywords": ["samotność", "lekarz", "transport", "seniorzy"]
+        },
+        "results": [
+          {
+            "innovation_id": "a1000001-0000-4000-8000-000000000001",
+            "title": "Sąsiedzki dowóz do lekarza",
+            "summary": "Wolontariusze z sąsiedztwa dowożą starsze osoby z wiosek na wizytę w przychodni i z powrotem.",
+            "category": "dostep_do_uslug",
+            "score": 0.86,
+            "why": "To pasuje, bo piszesz, że starsi sąsiedzi są samotni i nie mogą dojechać do lekarza."
+          },
+          {
+            "innovation_id": "a1000001-0000-4000-8000-000000000002",
+            "title": "Otwarte popołudnie w świetlicy",
+            "summary": "Raz w tygodniu seniorzy spotykają się w świetlicy na kawę, gry i wspólną rozmowę.",
+            "category": "samotnosc",
+            "score": 0.81,
+            "why": "To odpowiada na samotność, o której piszesz, i daje powód, żeby wyjść z domu."
+          },
+          {
+            "innovation_id": "a1000001-0000-4000-8000-000000000003",
+            "title": "Telefon do sąsiada",
+            "summary": "Wolontariusze dzwonią do samotnych starszych osób i pytają, czy potrzebują pomocy lub rozmowy.",
+            "category": "samotnosc",
+            "score": 0.74,
+            "why": "To jest prosty kontakt dla osób, które są samotne i mieszkają daleko od przychodni."
+          }
+        ],
+        "similar_needs": {
+          "count": 12,
+          "example": "Seniorzy w gminie wiejskiej nie mają transportu do przychodni."
+        }
+      }
+    },
+    "/simplify": {
+      "Innowacja społeczna polegająca na organizacji sąsiedzkiego transportu dla osób starszych, które z powodu braku komunikacji publicznej nie są w stanie samodzielnie dotrzeć do placówek ochrony zdrowia, co pogłębia ich izolację i pogarsza stan zdrowia.": {
+        "text": "Sąsiedzi podwożą starsze osoby do lekarza. We wsi nie ma autobusu. Samemu trudno dojechać. Przez to ludzie są samotni. Gorzej też znoszą chorobę."
+      }
+    },
+    "/chat": {
+      "Jak mogę zgłosić pomysł na innowację społeczną?": {
+        "reply": "Wejdź w Kreator i opisz problem zwykłymi słowami. Asystent pomoże uzupełnić fiszkę. Potem wyślij pomysł. Status zobaczysz w Moje zgłoszenia.",
+        "sources": [
+          {"title": "Kreator", "url": "/kreator"},
+          {"title": "Moje zgłoszenia", "url": "/moje-zgloszenia"}
+        ],
+        "handoff": false
+      }
+    },
+    "/kreator/assist": {
+      "Pomóż mi opisać problem samotności seniorów.": {
+        "reply": "Napisz, kto dokładnie jest samotny i co już próbowaliście. Nie wpisuję nic w fiszkę, dopóki nie powiesz „tak”.",
+        "suggestions": [
+          "Połącz dowóz do lekarza ze stałą kawą w świetlicy.",
+          "Zaproś młodzież ze szkoły do dyżuru telefonicznego dla seniorów."
+        ],
+        "updated_fields": {}
+      }
+    },
+    "/middleman/chat": {
+      "Chcę wprowadzić dowóz seniorów do lekarza. Mamy mały budżet i mało pracowników.": {
+        "reply": "Kto dokładnie w gminie najbardziej tego potrzebuje?",
+        "done": false
+      }
+    },
+    "/admin/enrich": {
+      "Mieszkańcy wsi w wieku senioralnym są samotni, bo nie mają transportu do lekarza.": {
+        "summary": "Seniorzy na wsi są samotni, bo nie mają jak dojechać do lekarza.",
+        "tags": ["seniorzy", "samotność", "transport", "wieś", "lekarz"],
+        "category": "samotnosc"
+      }
+    }
+  },
+  "contains": {
+    "/middleman/report": {
+      "Gmina Zielony Brzeg": {
+        "report": {
+          "service_name": "Sąsiedzki dowóz do lekarza",
+          "summary": "W Gminie Zielony Brzeg samotność seniorów wiąże się z brakiem dojazdu do lekarza. Koszt poniżej to szacunek orientacyjny, nie wycena.",
+          "root_causes": [
+            "Nie ma codziennego autobusu do przychodni.",
+            "Młodsi mieszkańcy wyjeżdżają, więc zostaje mniej osób, które mogą podwieźć sąsiada."
+          ],
+          "service_description": "Raz w tygodniu wolontariusze zbierają starsze osoby z wiosek i dowożą je do przychodni, a przy okazji na kawę w świetlicy.",
+          "delivery_partners": ["gmina", "OPS", "świetlica wiejska", "organizacja społeczna"],
+          "staffing": "Jedna osoba koordynująca na część etatu i kilku wolontariuszy. To założenie przy małym budżecie.",
+          "cost_estimate": [
+            {"item": "Koordynacja", "amount_pln_per_year": 18000},
+            {"item": "Paliwo i drobne naprawy", "amount_pln_per_year": 6000},
+            {"item": "Spotkania i ulotki", "amount_pln_per_year": 4000}
+          ],
+          "kpis": [
+            "Liczba seniorów, którzy dojechali do lekarza",
+            "Liczba osób na spotkaniach w świetlicy"
+          ],
+          "risks": [
+            "Za mało wolontariuszy",
+            "Brak pieniędzy po zakończeniu pilotażu"
+          ],
+          "usluga_wrazliwa_checklist": [
+            {"item": "Cel", "done": true},
+            {"item": "Grupa docelowa", "done": true},
+            {"item": "Partnerzy", "done": true},
+            {"item": "Budżet", "done": true},
+            {"item": "Wskaźniki", "done": true},
+            {"item": "Trwałość", "done": false}
+          ]
+        }
+      }
+    },
+    "/kreator/grant-draft": {
+      "Nabór innowacji społecznych — edycja demo": {
+        "sections": {
+          "cel": "Uruchomić sąsiedzki dowóz i spotkania dla samotnych seniorów w gminie wiejskiej.",
+          "grupa_docelowa": "Osoby starsze, które nie mają jak dojechać do lekarza.",
+          "dzialania": "Ustalić grafik przejazdów, znaleźć wolontariuszy i sprawdzić usługę z uczestnikami.",
+          "rezultaty": "Seniorzy dojeżdżają na wizyty i częściej spotykają sąsiadów."
+        },
+        "budget": [
+          {"item": "Koordynacja", "category": "personel", "amount": 9000},
+          {"item": "Materiały na spotkania", "category": "materiały", "amount": 3000},
+          {"item": "Dojazdy", "category": "usługi", "amount": 4000},
+          {"item": "Ogłoszenia", "category": "promocja", "amount": 2000},
+          {"item": "Rezerwa", "category": "inne", "amount": 2000}
+        ]
+      }
+    }
+  }
+}

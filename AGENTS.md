@@ -70,6 +70,7 @@ EMBEDDING_MODEL=
 ALLOWED_ORIGINS=                  # web URL(s) for CORS
 ```
 Never commit keys. Never put keys in client code (`NEXT_PUBLIC_*` only for public values).
+Local secrets: copy [`.env.keys.example`](.env.keys.example) → `.env.keys` and follow [`docs/KLUCZE.md`](docs/KLUCZE.md). **AI agents:** if secrets are missing for the task, point the human to that doc and offer to sync `.env.keys` → `ai/.env` / `web/.env` without pasting keys into chat.
 
 ## 4. Repo layout and ownership
 **Only edit files you own.** Need a change elsewhere → tell your owner, don't do it yourself.
