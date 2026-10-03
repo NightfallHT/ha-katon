@@ -1,0 +1,14 @@
+{
+  "name": "ha-katon-tests",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Playwright + axe accessibility and smoke tests. Owner: Sylwia (agents/sylwia.md Block B).",
+  "scripts": {
+    "test": "playwright test",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "1.59.1"
+  }
+}

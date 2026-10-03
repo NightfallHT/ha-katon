@@ -1,0 +1,46 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.*
+
+# next.js
+.next/
+out/
+next-env.d.ts
+
+# production
+build/
+dist/
+
+# env — never commit real keys (AGENTS.md §3)
+.env
+.env.*
+!.env.example
+
+# deploy
+.vercel/
+
+# supabase
+.branches/
+.temp/
+
+# playwright
+test-results/
+playwright-report/
+blob-report/
+.playwright/
+
+# python (/ai)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# misc
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+*.pem
+.idea/
