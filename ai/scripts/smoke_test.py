@@ -145,6 +145,10 @@ def test_kreator_and_chat() -> None:
     check(chat.status_code == 200 and chat.json()["handoff"] is False and chat.json()["sources"], "chat sources")
     person = client.post("/chat", json={"message": "Chcę rozmawiać z człowiekiem.", "history": []})
     check(person.json()["handoff"] is True, "chat handoff")
+    grant = client.post("/chat", json={"message": "Czy mogę przygotować wniosek o grant?", "history": []})
+    check(grant.json()["handoff"] is False and grant.json()["sources"][0]["url"] == "/kreator", "faq grant")
+    institution = client.post("/chat", json={"message": "Czym jest Middleman Innowacji?", "history": []})
+    check("gmin" in institution.json()["reply"].lower() and institution.json()["sources"][0]["url"] == "/middleman", "faq middleman")
 
 
 def test_demo_cache() -> None:

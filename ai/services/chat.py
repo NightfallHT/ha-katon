@@ -37,6 +37,52 @@ def _faq() -> str:
     return read_repo_text("docs/content/faq.md") or _FALLBACK_FAQ
 
 
+def _faq_pairs() -> list[tuple[str, str]]:
+    pairs: list[tuple[str, str]] = []
+    question = ""
+    body: list[str] = []
+    for line in _faq().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("## "):
+            if question and body:
+                pairs.append((question, " ".join(body)))
+            question = stripped.split(". ", 1)[-1].strip()
+            body = []
+        elif stripped and stripped != "---":
+            body.append(stripped)
+    if question and body:
+        pairs.append((question, " ".join(body)))
+    return pairs
+
+
+def _faq_source(question: str) -> Source:
+    folded = fold(question)
+    if "middleman" in folded:
+        return Source(title="Middleman", url="/middleman")
+    if any(token in folded for token in ("grant", "wniosek", "kreator", "pomysl", "praktyk")):
+        return Source(title="Kreator", url="/kreator")
+    if any(token in folded for token in ("kontakt", "pracownik")):
+        return Source(title="Kontakt", url="/kontakt")
+    if any(token in folded for token in ("zgloszen", "status")):
+        return Source(title="Moje zgłoszenia", url="/moje-zgloszenia")
+    if "test" in folded:
+        return Source(title="Biblioteka", url="/biblioteka")
+    if any(token in folded for token in ("znalezc", "pomoc", "rozwiazan")):
+        return Source(title="Znajdź pomoc", url="/dopasuj")
+    return Source(title="Materiały", url="/materialy")
+
+
+def _best_faq(message: str) -> tuple[str, str, Source] | None:
+    best: tuple[int, str, str] | None = None
+    for question, answer in _faq_pairs():
+        score = _overlap(message, question + " " + answer)
+        if best is None or score > best[0]:
+            best = (score, question, answer)
+    if best is None or best[0] < 2:
+        return None
+    return best[1], best[2], _faq_source(best[1])
+
+
 async def _context_bits() -> tuple[list[dict], list[dict]]:
     innovation_rows = innovations()
     material_rows = materials()
@@ -75,6 +121,10 @@ async def chat(req: ChatRequest) -> ChatResponse:
     picked_materials = _pick(req.message, material_rows, 2)
     module_hits = [item for item in MODULES if _overlap(req.message, item[0] + " " + item[2]) > 0][:3]
     wants_person = any(token in fold(req.message) for token in _HANDOFF)
+    faq_hit = _best_faq(req.message)
+    if faq_hit and not wants_person and not llm.available():
+        question, answer, source = faq_hit
+        return ChatResponse(reply=limit_sentences(answer, 5), sources=[source], handoff=False)
     if llm.available():
         context = _render_context(picked_innovations, picked_materials)
         raw = await llm.complete_json(

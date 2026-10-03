@@ -28,12 +28,15 @@ GENERIC_CHECKLIST = (
     "Trwałość",
 )
 
-_QUESTIONS = (
-    "Kto dokładnie w gminie najbardziej to odczuwa?",
-    "Co już u Was działa — na przykład OPS, szkoła albo grupa wolontariuszy?",
-    "Kto mógłby to prowadzić razem z gminą: CUS, organizacja społeczna, parafia albo szkoła?",
-    "Jakie macie ograniczenia: budżet i liczba osób do pracy?",
-)
+def _questions(req: MiddlemanChatRequest, innovation: dict) -> tuple[str, str, str, str]:
+    title = str(innovation.get("title") or "ta innowacja")
+    size = "małej" if req.gmina.population < 8000 else "tej"
+    return (
+        f"Kto w {size} gminie {req.gmina.name} najbardziej odczuwa problem, który ma rozwiązać „{title}”?",
+        "Co jest przyczyną, a nie tylko objawem? Na przykład brak dojazdu, wyjazd młodych albo usługa za daleko od domu.",
+        "Co już u Was działa i kto może to prowadzić: OPS, CUS, szkoła, organizacja albo parafia?",
+        "Jaki macie limit ludzi i pieniędzy na pierwszy rok tej usługi?",
+    )
 
 
 def user_turns(history_len_user: int) -> int:
@@ -105,12 +108,29 @@ async def chat(req: MiddlemanChatRequest) -> MiddlemanChatResponse:
             raise LlmError() from exc
         done = parsed.done or turn > 4
         return MiddlemanChatResponse(reply=parsed.reply, done=done)
+    innovation = await _innovation(req.innovation_id)
     if turn > 4:
         return MiddlemanChatResponse(
             reply="Mam już dość, żeby naszkicować usługę. Możesz przejść do raportu.",
             done=True,
         )
-    return MiddlemanChatResponse(reply=_QUESTIONS[min(turn, 4) - 1], done=False)
+    return MiddlemanChatResponse(reply=_questions(req, innovation)[min(turn, 4) - 1], done=False)
+
+
+def _root_causes(innovation: dict, gmina) -> list[str]:
+    causes: list[str] = []
+    if gmina.type == "wiejska" or gmina.population < 8000:
+        causes.append("We wsi pomoc jest daleko, a część młodszych mieszkańców wyjeżdża.")
+    else:
+        causes.append("W większej gminie ludzie często nie wiedzą, że pomoc już istnieje, albo czekają w kolejce.")
+    category = str(innovation.get("category") or "")
+    if category == "niepelnosprawnosc":
+        causes.append("Bariera jest w zwykłym miejscu: napis, dojście albo brak osoby, która pomoże na miejscu.")
+    elif category == "samotnosc":
+        causes.append("Samotność często bierze się z braku dojazdu i codziennego kontaktu, nie tylko z braku spotkań.")
+    else:
+        causes.append("Widać objaw, a przyczyna leży w tym, jak gmina organizuje pomoc blisko domu.")
+    return causes
 
 
 def _scale_costs(population: int) -> list[CostItem]:
@@ -162,10 +182,7 @@ async def report(req: MiddlemanReportRequest) -> MiddlemanReportResponse:
     body = ServiceReport(
         service_name=str(innovation.get("title") or "Usługa sąsiedzka"),
         summary=summary,
-        root_causes=[
-            "Brak codziennego kontaktu i wyjazdy młodszych mieszkańców.",
-            "Trudny dojazd do lekarza i urzędu z dalszych miejscowości.",
-        ],
+        root_causes=_root_causes(innovation, req.gmina),
         service_description=str(innovation.get("summary") or "Lokalna usługa prowadzona blisko domu."),
         delivery_partners=["gmina", "OPS", "organizacja społeczna", "świetlica wiejska"],
         staffing="Jedna osoba koordynująca na część etatu i kilku wolontariuszy. To założenie, dopóki gmina nie poda etatów.",

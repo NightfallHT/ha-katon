@@ -17,7 +17,7 @@ from models import (
     KreatorAssistRequest,
     KreatorAssistResponse,
 )
-from util import read_prompt
+from util import fold, read_prompt
 
 _AGREE = re.compile(
     r"\b(tak|zgoda|zgadzam|wpisz|wstaw|popraw|zmień|zmien|ustaw|dodaj|dobrze|ok|dopisz)\b",
@@ -91,14 +91,28 @@ async def assist(req: KreatorAssistRequest) -> KreatorAssistResponse:
             suggestions=suggestions,
             updated_fields=filter_updates(req.message, parsed.updated_fields),
         )
-    suggestions = [
-        "Połącz dowóz do lekarza ze stałą kawą w świetlicy — jedna trasa i dwa powody, żeby wyjść z domu.",
-        "Zaproś młodzież ze szkoły do dyżuru telefonicznego, zamiast szukać tylko dorosłych wolontariuszy.",
-    ]
+    folded = fold(req.message)
+    if any(token in folded for token in ("wniosek", "grant", "budzet")):
+        suggestions = [
+            "Rozpisz budżet na personel, materiały, usługi, promocję i rezerwę, tak żeby suma nie przekroczyła limitu naboru.",
+            "Dopisz, kto sprawdzi szkic z regulaminem, zanim wyślecie wniosek.",
+        ]
+        reply = "To ma być szkic wniosku, nie gotowy dokument. Najpierw ustal cel i grupę, potem budżet."
+    elif "praktyk" in folded:
+        suggestions = [
+            "Napisz, gdzie ta praktyka już działała i co z niej zostało po zakończeniu projektu.",
+            "Dodaj jedną rzecz, którą inna gmina może skopiować bez dużych pieniędzy.",
+        ]
+        reply = "Dobra praktyka to coś, co już było używane. Opisz, dla kogo zadziałało."
+    else:
+        suggestions = [
+            "Połącz dowóz albo asystę z jednym stałym spotkaniem w tygodniu — jeden powód, żeby wyjść z domu.",
+            "Zaproś szkołę albo OPS jako partnera, zamiast opierać wszystko na jednej osobie.",
+        ]
+        reply = "Doprecyzujmy, dla kogo to jest i co już działa w okolicy."
     updates = {}
     if _AGREE.search(req.message):
-        updates["problem"] = req.fiszka.problem or "Starsi mieszkańcy wsi są samotni i nie mają jak dojechać do lekarza."
-    reply = "Doprecyzujmy, dla kogo to jest i co już działa w okolicy."
+        updates["problem"] = req.fiszka.problem or "Mieszkańcy nie wiedzą, z jakiej pomocy w gminie mogą skorzystać."
     if updates:
         reply = "Wpisuję uzgodnione pole w fiszce. " + reply
     else:
@@ -129,7 +143,7 @@ async def grant_draft(req: GrantDraftRequest) -> GrantDraftResponse:
         cel=f"Uruchomić „{fiszka.title or 'pomysł'}” dla osób, których dotyczy problem: {fiszka.problem or 'opisany w fiszce'}.",
         grupa_docelowa=fiszka.target_group or "Mieszkańcy, których dotyczy opisany problem.",
         dzialania=fiszka.solution or "Przygotować pilotaż z lokalnymi partnerami i sprawdzić go z uczestnikami.",
-        rezultaty="Osoby z grupy docelowej korzystają z usługi, a gmina wie, czy warto ją prowadzić dalej.",
+        rezultaty="Osoby z grupy docelowej korzystają z usługi. To szkic: przed wysłaniem sprawdź go z regulaminem naboru.",
     )
     return GrantDraftResponse(sections=sections, budget=_default_budget(req.call.budget_max))
 
