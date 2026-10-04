@@ -18,6 +18,8 @@ export function GrantForm({ call: openCall }: { call: CallView | null }) {
   const [problem, setProblem] = useState("");
   const [solution, setSolution] = useState("");
   const [targetGroup, setTargetGroup] = useState("");
+  const [authorName, setAuthorName] = useState("");
+  const [authorEmail, setAuthorEmail] = useState("");
   const [drafted, setDrafted] = useState(false);
   const [cel, setCel] = useState("");
   const [grupa, setGrupa] = useState("");
@@ -93,33 +95,28 @@ export function GrantForm({ call: openCall }: { call: CallView | null }) {
   }
 
   async function submit() {
+    if (!authorName.trim()) {
+      setError("Wpisz imię i nazwisko albo nazwę organizacji.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(authorEmail.trim())) {
+      setError("Wpisz poprawny adres e-mail. Wyślemy na niego szczegóły wniosku.");
+      return;
+    }
     if (!accepted) {
       setError("Zaznacz, że zapoznałeś się z regulaminem. To pole jest wymagane.");
       return;
     }
     const title = `Wniosek: ${activeCall.name}`;
-    try {
-      sessionStorage.setItem(
-        "hubmi-last-submission",
-        JSON.stringify({
-          type: "grant_application",
-          title,
-          payload: {
-            sections: { cel, grupa_docelowa: grupa, dzialania, rezultaty },
-            budget,
-            accepted_regulamin: true,
-          },
-        }),
-      );
-    } catch {
-      /* ignore */
-    }
     setSending(true);
     const result = await submitGrant({
       title,
       callName: activeCall.name,
+      authorName,
+      authorEmail,
       problem,
       solution,
+      targetGroup,
       sections: { cel, grupa_docelowa: grupa, dzialania, rezultaty },
       budget,
     });
@@ -127,6 +124,15 @@ export function GrantForm({ call: openCall }: { call: CallView | null }) {
     if (!result.ok) {
       setError(result.message);
       return;
+    }
+    try {
+      // Read by /kreator/potwierdzenie to say where the details were emailed.
+      sessionStorage.setItem(
+        "hubmi-last-submission",
+        JSON.stringify({ type: "grant_application", title, email: authorEmail.trim(), emailSent: result.emailSent ?? false }),
+      );
+    } catch {
+      /* ignore */
     }
     setDone(true);
     router.push("/kreator/potwierdzenie");
@@ -136,7 +142,7 @@ export function GrantForm({ call: openCall }: { call: CallView | null }) {
     return (
       <div>
         <h1 className="text-3xl font-bold">Gotowe. Zgłoszenie zostało zapisane.</h1>
-        <p role="status">Otwieram śledzenie zgłoszenia…</p>
+        <p role="status">Otwieram potwierdzenie…</p>
       </div>
     );
   }
@@ -299,6 +305,34 @@ export function GrantForm({ call: openCall }: { call: CallView | null }) {
               ) : null}
             </p>
             <p>To jest szkic. Sprawdź go z regulaminem naboru.</p>
+            <fieldset className="space-y-4">
+              <legend className="font-semibold">Dane do kontaktu</legend>
+              <div>
+                <Label htmlFor="author-name">Imię i nazwisko albo nazwa organizacji (wymagane)</Label>
+                <Input
+                  id="author-name"
+                  required
+                  autoComplete="name"
+                  value={authorName}
+                  onChange={(event) => setAuthorName(event.target.value)}
+                />
+              </div>
+              <div>
+                <Label htmlFor="author-email">E-mail (wymagane)</Label>
+                <Input
+                  id="author-email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  aria-describedby="author-email-hint"
+                  value={authorEmail}
+                  onChange={(event) => setAuthorEmail(event.target.value)}
+                />
+                <p id="author-email-hint" className="mt-1 text-sm">
+                  Wyślemy na ten adres szczegóły wniosku. Pracownicy ROPS odpowiedzą także tutaj.
+                </p>
+              </div>
+            </fieldset>
             <label className="flex min-h-11 items-start gap-2">
               <input
                 type="checkbox"
@@ -319,7 +353,7 @@ export function GrantForm({ call: openCall }: { call: CallView | null }) {
               </span>
             </label>
             {error ? (
-              <p id="regulamin-error" role="alert">
+              <p id="submit-error" role="alert">
                 {error}
               </p>
             ) : null}

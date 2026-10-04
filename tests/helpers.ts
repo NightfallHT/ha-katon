@@ -13,7 +13,6 @@ export const ROLE_BY_PATH: Record<string, DemoRole> = {
   "/materialy": "mieszkaniec",
   "/kreator": "ngo",
   "/kontakt": "mieszkaniec",
-  "/moje-zgloszenia": "ngo",
   "/middleman": "gmina",
   "/admin": "admin",
   "/admin/zgloszenia": "admin",

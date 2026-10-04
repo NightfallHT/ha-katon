@@ -84,19 +84,19 @@ Na stronie wybranego rozwiązania możesz zgłosić chęć udziału w teście. M
 
 ## 14. Co dzieje się po wysłaniu zgłoszenia?
 
-Zgłoszenie trafia do pracownika ROPS. Jego status możesz sprawdzić w „Moich zgłoszeniach”. Pracownik może też wysłać Ci wiadomość w sprawie zgłoszenia.
+Zgłoszenie trafia do pracownika ROPS. Po wysłaniu wniosku o grant dostaniesz e-mail z jego szczegółami na adres podany w formularzu. Odpowiedź pracownika też przyjdzie na ten adres.
 
 ---
 
 ## 15. Jak sprawdzić status mojego zgłoszenia?
 
-Wejdź do „Moich zgłoszeń”. Zobaczysz tam aktualny status i historię wiadomości.
+Pracownik ROPS napisze do Ciebie e-mailem na adres podany w zgłoszeniu. Jeśli masz pytanie, napisz przez formularz kontaktowy.
 
 ---
 
 ## 16. Ile trwa odpowiedź na zgłoszenie?
 
-Czas odpowiedzi zależy od rodzaju sprawy i liczby zgłoszeń. Aktualny status możesz sprawdzić w „Moich zgłoszeniach”.
+Czas odpowiedzi zależy od rodzaju sprawy i liczby zgłoszeń. Odpowiedź przyjdzie na adres e-mail podany w zgłoszeniu.
 
 ---
 

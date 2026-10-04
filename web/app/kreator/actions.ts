@@ -19,17 +19,25 @@ function db() {
   return createServerClient() ?? createBrowserClient();
 }
 
-async function notify(submissionId: string) {
+/** Best effort: returns whether the email actually went out. */
+async function notify(
+  submissionId: string,
+  type: "new_submission" | "grant_receipt" = "new_submission",
+): Promise<boolean> {
   try {
-    await fetch(`${SITE_URL}/api/notify`, {
+    const res = await fetch(`${SITE_URL}/api/notify`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ type: "new_submission", submission_id: submissionId }),
+      body: JSON.stringify({ type, submission_id: submissionId }),
     });
+    const out = (await res.json()) as { sent?: boolean };
+    return Boolean(out.sent);
   } catch {
-    /* email is best effort */
+    return false;
   }
 }
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 async function author() {
   const jar = await cookies();
@@ -84,16 +92,23 @@ export async function submitFiszka(input: {
 export async function submitGrant(input: {
   title: string;
   callName: string;
+  authorName: string;
+  authorEmail: string;
   problem: string;
   solution: string;
+  targetGroup: string;
   sections: { cel: string; grupa_docelowa: string; dzialania: string; rezultaty: string };
   budget: { item: string; category: string; amount: number }[];
-}): Promise<SubmitResult> {
+}): Promise<SubmitResult & { emailSent?: boolean }> {
+  const authorName = input.authorName.trim();
+  const authorEmail = input.authorEmail.trim();
+  if (!authorName) return { ok: false, message: "Wpisz imię i nazwisko albo nazwę organizacji." };
+  if (!EMAIL_RE.test(authorEmail)) return { ok: false, message: "Wpisz poprawny adres e-mail." };
   const client = db();
   if (!client) {
     return { ok: true, message: "Zapisano na tym komputerze. Baza ROPS nie jest podłączona w tym środowisku." };
   }
-  const who = await author();
+  const who = { ...(await author()), name: authorName, email: authorEmail };
   let callId: string | undefined;
   const found = await client.from("calls").select("id").eq("name", input.callName).maybeSingle();
   if (found.data?.id) callId = found.data.id;
@@ -107,7 +122,7 @@ export async function submitGrant(input: {
       author_role: who.role,
       call_id: callId ?? null,
       payload: {
-        fiszka: { problem: input.problem, solution: input.solution },
+        fiszka: { problem: input.problem, solution: input.solution, target_group: input.targetGroup },
         sections: input.sections,
         budget: input.budget,
         accepted_regulamin: true,
@@ -119,5 +134,6 @@ export async function submitGrant(input: {
     return { ok: false, message: "Nie udało się wysłać wniosku. Spróbuj ponownie za chwilę." };
   }
   await notify(data.id);
-  return { ok: true, message: "Wniosek trafił do pracowników ROPS." };
+  const emailSent = await notify(data.id, "grant_receipt");
+  return { ok: true, message: "Wniosek trafił do pracowników ROPS.", emailSent };
 }

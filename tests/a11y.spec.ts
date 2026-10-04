@@ -18,7 +18,6 @@ const STATIC_ROUTES = [
   "/kreator",
   "/kreator/fiszka",
   "/kontakt",
-  "/moje-zgloszenia",
   "/middleman",
   "/admin",
   "/admin/zgloszenia",

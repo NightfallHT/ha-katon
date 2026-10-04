@@ -300,7 +300,7 @@ Sprawdź każdą odpowiedź przed wysłaniem.
 ### Sukces
 **Gotowe. Wniosek został wysłany.**
 
-Możesz śledzić jego status w „Moich zgłoszeniach”.
+Szczegóły wniosku wysłaliśmy na adres e-mail podany w formularzu.
 
 ---
 
@@ -354,7 +354,9 @@ Sekcje:
 
 ---
 
-## 8. Moje zgłoszenia
+## 8. Moje zgłoszenia (usunięte)
+
+_Strona `/moje-zgloszenia` została usunięta. Szczegóły wniosku i odpowiedzi ROPS przychodzą e-mailem na adres podany w formularzu. Teksty poniżej zostają tylko do wglądu._
 
 ### Nagłówek
 **Moje zgłoszenia**

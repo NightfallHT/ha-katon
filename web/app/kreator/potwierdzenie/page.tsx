@@ -6,22 +6,24 @@ import { ResourceNav } from "@/components/resource-nav";
 
 const STEPS = ["Wysłane", "W ocenie", "Decyzja"];
 
+type Stored = { title?: string; email?: string; emailSent?: boolean };
+
 export default function PotwierdzeniePage() {
-  const [title, setTitle] = useState<string | null>(null);
+  const [item, setItem] = useState<Stored | null>(null);
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
       try {
         const raw = sessionStorage.getItem("hubmi-last-submission");
-        if (!raw) return;
-        const parsed = JSON.parse(raw) as { title?: string };
-        setTitle(parsed.title ?? "Twoje zgłoszenie");
+        setItem(raw ? (JSON.parse(raw) as Stored) : {});
       } catch {
-        setTitle("Twoje zgłoszenie");
+        setItem({});
       }
     });
     return () => cancelAnimationFrame(frame);
   }, []);
+
+  const title = item?.title;
 
   return (
     <div>
@@ -32,6 +34,13 @@ export default function PotwierdzeniePage() {
           ? `Zapisaliśmy „${title}”. Pracownicy ROPS zobaczą je na liście zgłoszeń.`
           : "Zapisaliśmy zgłoszenie. Pracownicy ROPS zobaczą je na liście zgłoszeń."}
       </p>
+      {item?.email ? (
+        <p className="mt-3 max-w-prose" role="status">
+          {item.emailSent
+            ? `Szczegóły wniosku wysłaliśmy na adres ${item.email}. Odpowiedź ROPS też przyjdzie na ten adres.`
+            : `Nie udało się teraz wysłać e-maila z potwierdzeniem na adres ${item.email}. Wniosek jest zapisany, a odpowiedź ROPS przyjdzie na ten adres.`}
+        </p>
+      ) : null}
       <ol aria-label="Etapy zgłoszenia" className="mt-6 flex flex-wrap gap-2">
         {STEPS.map((label, index) => (
           <li
@@ -45,11 +54,8 @@ export default function PotwierdzeniePage() {
         ))}
       </ol>
       <p className="mt-6">
-        <Link
-          href="/moje-zgloszenia"
-          className="inline-flex min-h-11 items-center underline underline-offset-4"
-        >
-          Moje zgłoszenia
+        <Link href="/kontakt" className="inline-flex min-h-11 items-center underline underline-offset-4">
+          Masz pytanie? Napisz do ROPS
         </Link>
       </p>
     </div>
