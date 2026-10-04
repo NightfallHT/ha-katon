@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 
 const FONT_OPTIONS = [
-  { value: "", label: "A", description: "Tekst standardowy", className: "text-sm" },
-  { value: "125", label: "A+", description: "Tekst większy", className: "text-base" },
-  { value: "150", label: "A++", description: "Tekst bardzo duży", className: "text-xl" },
-  { value: "175", label: "A+++", description: "Tekst największy", className: "text-2xl" },
+  { value: "", label: "A", description: "Tekst standardowy", className: "wcag-panel__font--100" },
+  { value: "125", label: "A+", description: "Tekst większy", className: "wcag-panel__font--125" },
+  { value: "150", label: "A++", description: "Tekst bardzo duży", className: "wcag-panel__font--150" },
+  { value: "175", label: "A+++", description: "Tekst największy", className: "wcag-panel__font--175" },
 ] as const;
 
 export function AccessibilityPanel() {

@@ -204,27 +204,32 @@ html[data-font="175"] {
   backdrop-filter: blur(12px);
 }
 
+/* The panel is sized in px on purpose: it controls the html font-size (A … A+++), so
+   rem units made it grow with its own setting until it ran off a phone screen at A+++.
+   Browser zoom still scales px, so the controls stay resizable. */
 .wcag-panel {
   position: fixed;
   z-index: 60;
-  top: 0.75rem;
-  right: 0.75rem;
+  top: 12px;
+  right: 12px;
   display: grid;
   grid-template-columns: auto auto;
-  gap: 0.4rem 0.65rem;
+  gap: 7px 12px;
   align-items: center;
-  max-width: calc(100vw - 1.5rem);
-  padding: 0.55rem;
+  max-width: calc(100vw - 24px);
+  padding: 10px;
   border: 2px solid var(--border);
-  border-radius: 1rem;
+  border-radius: 18px;
   background: var(--card);
   color: var(--card-foreground);
+  font-size: 16px;
+  line-height: 1.3;
   box-shadow: 0 10px 30px rgb(20 32 51 / 0.18);
 }
 
 .wcag-panel__title {
-  padding-left: 0.25rem;
-  font-size: 0.75rem;
+  padding-left: 4px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -232,22 +237,29 @@ html[data-font="175"] {
 
 .wcag-panel__fonts {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 0.25rem;
+  gap: 4px;
 }
 
 .wcag-panel__font {
   display: inline-flex;
-  min-width: 2.45rem;
-  min-height: 2.45rem;
+  min-width: 44px;
+  min-height: 44px;
   align-items: center;
   justify-content: center;
   border: 1px solid var(--border);
-  border-radius: 0.7rem;
+  border-radius: 12px;
   background: var(--background);
   font-weight: 700;
   line-height: 1;
 }
+
+/* Each button previews its own size, in px so the preview does not scale with itself. */
+.wcag-panel__font--100 { font-size: 14px; }
+.wcag-panel__font--125 { font-size: 17px; }
+.wcag-panel__font--150 { font-size: 20px; }
+.wcag-panel__font--175 { font-size: 24px; }
 
 .wcag-panel__font[aria-pressed="true"] {
   border-color: var(--primary);
@@ -259,16 +271,16 @@ html[data-font="175"] {
 .wcag-panel__contrast {
   grid-column: 1 / -1;
   display: inline-flex;
-  min-height: 2.7rem;
+  min-height: 48px;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
+  gap: 10px;
   border: 2px solid #ffff00;
-  border-radius: 0.75rem;
+  border-radius: 14px;
   background: #000000;
-  padding: 0.35rem 0.65rem;
+  padding: 6px 12px;
   color: #ffff00;
-  font-size: 0.8rem;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -278,12 +290,12 @@ html[data-font="175"] {
 
 .wcag-panel__contrast-icon {
   display: grid;
-  width: 1.8rem;
-  height: 1.3rem;
+  width: 32px;
+  height: 23px;
   grid-template-columns: 1fr 1fr;
   overflow: hidden;
   border: 1px solid #ffff00;
-  border-radius: 0.3rem;
+  border-radius: 5px;
 }
 
 .wcag-panel__contrast-icon span:first-child {
@@ -297,7 +309,7 @@ html[data-font="175"] {
 @media (min-width: 768px) {
   .wcag-panel {
     grid-template-columns: auto auto;
-    width: 20rem;
+    width: max-content;
   }
 }
 
@@ -311,8 +323,8 @@ html[data-font="175"] {
   }
   .wcag-panel__contrast {
     grid-column: auto;
-    min-width: 2.8rem;
-    padding-inline: 0.35rem;
+    min-width: 50px;
+    padding-inline: 6px;
   }
 }
 
@@ -1318,6 +1330,8 @@ textarea.tester-form__field {
 
 .flat-form__stage label {
   display: flex;
+  min-width: 0;
+  overflow-wrap: anywhere;
   min-height: 3rem;
   align-items: center;
   gap: 0.75rem;
@@ -1940,7 +1954,18 @@ textarea.dane-field {
   }
 }
 
-@media (min-width: 900px) {
+/* Kreator layout switches on container width in rem, not viewport px: at the A+++ text
+   size (html font-size 175%) a px breakpoint kept two columns and a fixed-width
+   assistant, squeezing the form until the stage labels overflowed. */
+.flat-form {
+  container: flat-form / inline-size;
+}
+
+.flat-form__layout > form {
+  container: flat-form-main / inline-size;
+}
+
+@container flat-form-main (min-width: 34rem) {
   /* Three stages in a row: stacked under a two-column form they were a very
      long, very empty strip. */
   .flat-form__stage {
@@ -1954,8 +1979,9 @@ textarea.dane-field {
   }
 }
 
-@media (min-width: 1100px) {
+@container flat-form (min-width: 56rem) {
+  /* Assistant beside the form only when both fit; otherwise it goes below, full width. */
   .flat-form__layout {
-    grid-template-columns: minmax(0, 1fr) 22rem;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   }
 }
