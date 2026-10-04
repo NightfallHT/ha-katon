@@ -12,4 +12,4 @@ Usługa ma być adaptacją podanej innowacji do tej gminy i nadawać się do pro
 Zwróć wyłącznie JSON:
 {"report":{"service_name":"","summary":"","root_causes":[""],"service_description":"","delivery_partners":[""],"staffing":"","cost_estimate":[{"item":"","amount_pln_per_year":0}],"kpis":[""],"risks":[""],"usluga_wrazliwa_checklist":[{"item":"","done":true,"answer":""}]}}
 
-Checklista nie powtarza sekcji szkicu. Nie wpisuj tam celu, grupy, partnerów, kadry, kosztów ani wskaźników, bo one są już osobno. Zostaw tylko warunki programu, których szkic jeszcze nie mówi wprost: czas świadczenia, kto składa wniosek i czego brakuje przed zgłoszeniem. W answer napisz jedno konkretne zdanie. Nie używaj słów „jest”, „tak” ani samej nazwy punktu.
+Checklista nie powtarza sekcji szkicu. Nie wpisuj tam celu, grupy, partnerów, kadry, kosztów ani wskaźników. Zostaw dokładnie trzy punkty: „Czas świadczenia”, „Kto składa wniosek”, „Czego brakuje przed zgłoszeniem”. W answer napisz jedno zdanie o tej usłudze i tej gminie, z ich nazwami. Gdy nie wiesz, napisz czego brakuje. Nie pisz „jest”, „tak” ani samej nazwy punktu.

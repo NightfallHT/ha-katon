@@ -52,13 +52,15 @@ function localQuestion(title: string, gminaName: string, turn: number) {
   return { reply: questions[Math.min(turn, 4) - 1] ?? questions[0], done: false };
 }
 
-function checklistEntries(report: MiddlemanReport, innovationTitle: string) {
+function checklistEntries(report: MiddlemanReport, innovationTitle: string, gminaName: string) {
   const repeated = ["cel", "grup", "partner", "kadr", "koszt", "szacun", "wskaz", "adapt", "przyczyn", "ryzyk"];
   const fromReport = report.usluga_wrazliwa_checklist.filter((item) => {
     const key = item.item.toLocaleLowerCase("pl");
-    const answer = (item.answer ?? "").trim().toLocaleLowerCase("pl");
+    const answer = (item.answer ?? "").trim();
+    const plain = answer.toLocaleLowerCase("pl");
     if (repeated.some((bit) => key.includes(bit))) return false;
-    if (!answer || ["jest", "tak", "ok", "cel", "uzupełnione", "do uzupełnienia"].includes(answer)) return false;
+    if (!answer || ["jest", "tak", "ok", "cel", "uzupełnione", "do uzupełnienia"].includes(plain)) return false;
+    if (plain === key) return false;
     return true;
   });
   if (fromReport.length) return fromReport;
@@ -66,17 +68,17 @@ function checklistEntries(report: MiddlemanReport, innovationTitle: string) {
     {
       item: "Czas świadczenia",
       done: true,
-      answer: "Usługa ma być świadczona co najmniej przez rok od startu.",
+      answer: `„${innovationTitle}” w gminie ${gminaName} ma być prowadzone co najmniej przez rok od startu.`,
     },
     {
       item: "Kto składa wniosek",
       done: true,
-      answer: "Wniosek może złożyć gmina, jej jednostka albo organizacja z Małopolski.",
+      answer: `Wniosek o „${innovationTitle}” składa gmina ${gminaName}, jej jednostka albo lokalna organizacja.`,
     },
     {
       item: "Czego brakuje przed zgłoszeniem",
       done: false,
-      answer: `Trzeba jeszcze potwierdzić doświadczenie wnioskodawcy i zgodność „${innovationTitle}” z regulaminem naboru.`,
+      answer: `Przed zgłoszeniem „${innovationTitle}” w ${gminaName} trzeba potwierdzić doświadczenie wnioskodawcy i zgodność z regulaminem naboru.`,
     },
   ];
 }
@@ -116,17 +118,17 @@ function localReport(title: string, summary: string, gminaName: string, populati
       {
         item: "Czas świadczenia",
         done: true,
-        answer: "Usługa ma być świadczona co najmniej przez rok od startu.",
+        answer: `„${title}” w gminie ${gminaName} ma być prowadzone co najmniej przez rok od startu.`,
       },
       {
         item: "Kto składa wniosek",
         done: true,
-        answer: "Wniosek może złożyć gmina, jej jednostka albo organizacja z Małopolski.",
+        answer: `Wniosek o „${title}” składa gmina ${gminaName}, jej jednostka albo lokalna organizacja.`,
       },
       {
         item: "Czego brakuje przed zgłoszeniem",
         done: false,
-        answer: `Trzeba jeszcze potwierdzić doświadczenie wnioskodawcy i zgodność „${title}” z regulaminem naboru.`,
+        answer: `Przed zgłoszeniem „${title}” w ${gminaName} trzeba potwierdzić doświadczenie wnioskodawcy i zgodność z regulaminem naboru.`,
       },
     ],
   };
@@ -384,7 +386,7 @@ export function MiddlemanClient() {
         <section aria-labelledby="check-title">
           <h2 id="check-title">Checklista „Usługa wrażliwa”</h2>
           <ul className="middleman-checks">
-            {checklistEntries(report, innovation.title).map((item) => (
+            {checklistEntries(report, innovation.title, gmina.name).map((item) => (
               <li key={item.item}>
                 <strong>{item.item}</strong>
                 <p>{item.answer}</p>

@@ -26,7 +26,7 @@ GENERIC_CHECKLIST = (
 )
 
 # These are already full sections on the page. The checklist must not repeat them.
-_DUPLICATE_KEYS = ("cel", "grup", "partner", "kadr", "koszt", "szacun", "wskaz", "adapt", "przyczyn", "ryzyk", "uslug")
+_DUPLICATE_KEYS = ("cel", "grup", "partner", "kadr", "koszt", "szacun", "wskaz", "adapt", "przyczyn", "ryzyk")
 
 def _questions(req: MiddlemanChatRequest, innovation: dict) -> tuple[str, str, str, str]:
     title = str(innovation.get("title") or "ta innowacja")
@@ -132,24 +132,24 @@ def _mark_checklist(items: list[str], blob: str) -> list[ChecklistItem]:
     return marked
 
 
-def _default_programme_answers(innovation_title: str) -> list[ChecklistItem]:
+def _default_programme_answers(innovation_title: str, gmina_name: str) -> list[ChecklistItem]:
     return [
         ChecklistItem(
             item="Czas świadczenia",
             done=True,
-            answer="Usługa ma być świadczona co najmniej przez rok od startu.",
+            answer=f"„{innovation_title}” w gminie {gmina_name} ma być prowadzone co najmniej przez rok od startu.",
         ),
         ChecklistItem(
             item="Kto składa wniosek",
             done=True,
-            answer="Wniosek może złożyć gmina, jej jednostka albo organizacja z Małopolski.",
+            answer=f"Wniosek o „{innovation_title}” składa gmina {gmina_name}, jej jednostka albo lokalna organizacja.",
         ),
         ChecklistItem(
             item="Czego brakuje przed zgłoszeniem",
             done=False,
             answer=(
-                f"Trzeba jeszcze potwierdzić doświadczenie wnioskodawcy i zgodność „{innovation_title}” "
-                "z regulaminem naboru."
+                f"Przed zgłoszeniem „{innovation_title}” w {gmina_name} trzeba potwierdzić doświadczenie wnioskodawcy "
+                "i zgodność z regulaminem naboru."
             ),
         ),
     ]
@@ -162,7 +162,12 @@ def _useful_answer(text: str) -> str:
     return cleaned
 
 
-def _checklist_with_answers(items: list[ChecklistItem], report: ServiceReport, innovation_title: str) -> list[ChecklistItem]:
+def _checklist_with_answers(
+    items: list[ChecklistItem],
+    report: ServiceReport,
+    innovation_title: str,
+    gmina_name: str,
+) -> list[ChecklistItem]:
     del report
     kept: list[ChecklistItem] = []
     for item in items:
@@ -170,10 +175,10 @@ def _checklist_with_answers(items: list[ChecklistItem], report: ServiceReport, i
         if any(key in folded for key in _DUPLICATE_KEYS):
             continue
         answer = _useful_answer(item.answer)
-        if not answer:
+        if not answer or fold(answer) == folded:
             continue
         kept.append(item.model_copy(update={"answer": answer}))
-    return kept or _default_programme_answers(innovation_title)
+    return kept or _default_programme_answers(innovation_title, gmina_name)
 
 
 async def _innovation(innovation_id: str) -> dict:
@@ -300,7 +305,12 @@ async def report(req: MiddlemanReportRequest) -> MiddlemanReportResponse:
                 summary = summary.rstrip(".") + ". Koszt poniżej to szacunek orientacyjny."
             checklist = parsed.report.usluga_wrazliwa_checklist or _mark_checklist(items, summary)
             report_body = parsed.report.model_copy(update={"summary": summary})
-            checklist = _checklist_with_answers(checklist, report_body, str(innovation.get("title") or ""))
+            checklist = _checklist_with_answers(
+                checklist,
+                report_body,
+                str(innovation.get("title") or ""),
+                req.gmina.name,
+            )
             report_body = report_body.model_copy(update={"usluga_wrazliwa_checklist": checklist})
             return MiddlemanReportResponse(report=report_body)
         except (LlmError, ValidationError):
@@ -328,6 +338,7 @@ async def report(req: MiddlemanReportRequest) -> MiddlemanReportResponse:
                 _mark_checklist(items, summary),
                 body,
                 str(innovation.get("title") or ""),
+                req.gmina.name,
             )
         }
     )
