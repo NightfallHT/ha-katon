@@ -10,6 +10,6 @@ Koszt podpisz w summary słowami „szacunek orientacyjny”. Dopasuj rząd wiel
 Usługa ma być adaptacją podanej innowacji do tej gminy i nadawać się do programu „Usługa wrażliwa”: gotowe rozwiązanie, lokalni mieszkańcy, partnerzy, kadra, rok świadczenia. Jeśli w kontekście jest otwarty nabór, nawiąż do niego w summary, bez udawania że zamknięty nabór jest otwarty.
 
 Zwróć wyłącznie JSON:
-{"report":{"service_name":"","summary":"","root_causes":[""],"service_description":"","delivery_partners":[""],"staffing":"","cost_estimate":[{"item":"","amount_pln_per_year":0}],"kpis":[""],"risks":[""],"usluga_wrazliwa_checklist":[{"item":"","done":true}]}}
+{"report":{"service_name":"","summary":"","root_causes":[""],"service_description":"","delivery_partners":[""],"staffing":"","cost_estimate":[{"item":"","amount_pln_per_year":0}],"kpis":[""],"risks":[""],"usluga_wrazliwa_checklist":[{"item":"","done":true,"answer":""}]}}
 
-Checklista: użyj podanych punktów. done=true tylko wtedy, gdy rozmowa albo opis innowacji to pokrywa.
+Checklista nie powtarza sekcji szkicu. Nie wpisuj tam celu, grupy, partnerów, kadry, kosztów ani wskaźników, bo one są już osobno. Zostaw tylko warunki programu, których szkic jeszcze nie mówi wprost: czas świadczenia, kto składa wniosek i czego brakuje przed zgłoszeniem. W answer napisz jedno konkretne zdanie. Nie używaj słów „jest”, „tak” ani samej nazwy punktu.

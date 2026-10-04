@@ -9,12 +9,35 @@ import type { ChatTurn, MiddlemanReport } from "@/lib/types";
 
 const INSTITUTION_ROLES: Role[] = ["gmina", "ngo"];
 
-const SUGGESTIONS = [
-  "Najbardziej dotyczy to osób w mniejszych miejscowościach.",
-  "Przyczyną jest brak dojazdu i wyjazd młodszych, nie tylko brak spotkań.",
-  "Mamy OPS i świetlicę. Mało osób, które mogą to prowadzić.",
-  "Na pierwszy rok stać nas na część etatu koordynatora.",
-];
+function suggestionsForTurn(turn: number, gminaName: string, title: string) {
+  const sets = [
+    [
+      `W ${gminaName} najbardziej seniorzy w mniejszych sołectwach.`,
+      `Rodziny, które nie udźwigną opieki bez „${title}”.`,
+      "Osoby, które nie wyjdą z domu bez czyjejś pomocy.",
+      `Mieszkańcy, do których „${title}” pasuje najbliżej.`,
+    ],
+    [
+      `W ${gminaName} nie ma dojazdu do tej pomocy.`,
+      "Młodsi wyjechali i nie ma kto pomagać na co dzień.",
+      "Ludzie nie wiedzą, że coś takiego już jest.",
+      "Pomoc jest za daleko od domu.",
+    ],
+    [
+      `W ${gminaName} jest OPS, ale nikt nie prowadzi „${title}”.`,
+      "Świetlica i szkoła mogą użyczyć miejsca.",
+      "Jest lokalna organizacja, która robi coś podobnego.",
+      "Na miejscu prawie nic podobnego nie działa.",
+    ],
+    [
+      `${gminaName} udźwignie część etatu koordynatora.`,
+      "Mamy samych wolontariuszy, bez etatu.",
+      "Bez grantu nie wystartujemy.",
+      "Stały nas dojazd, nie cały zespół.",
+    ],
+  ];
+  return sets[Math.min(Math.max(turn, 1), 4) - 1];
+}
 
 function localQuestion(title: string, gminaName: string, turn: number) {
   const questions = [
@@ -27,6 +50,35 @@ function localQuestion(title: string, gminaName: string, turn: number) {
     return { reply: "Mam już dość, żeby naszkicować usługę dla tej gminy. Możesz przejść do projektu.", done: true };
   }
   return { reply: questions[Math.min(turn, 4) - 1] ?? questions[0], done: false };
+}
+
+function checklistEntries(report: MiddlemanReport, innovationTitle: string) {
+  const repeated = ["cel", "grup", "partner", "kadr", "koszt", "szacun", "wskaz", "adapt", "przyczyn", "ryzyk"];
+  const fromReport = report.usluga_wrazliwa_checklist.filter((item) => {
+    const key = item.item.toLocaleLowerCase("pl");
+    const answer = (item.answer ?? "").trim().toLocaleLowerCase("pl");
+    if (repeated.some((bit) => key.includes(bit))) return false;
+    if (!answer || ["jest", "tak", "ok", "cel", "uzupełnione", "do uzupełnienia"].includes(answer)) return false;
+    return true;
+  });
+  if (fromReport.length) return fromReport;
+  return [
+    {
+      item: "Czas świadczenia",
+      done: true,
+      answer: "Usługa ma być świadczona co najmniej przez rok od startu.",
+    },
+    {
+      item: "Kto składa wniosek",
+      done: true,
+      answer: "Wniosek może złożyć gmina, jej jednostka albo organizacja z Małopolski.",
+    },
+    {
+      item: "Czego brakuje przed zgłoszeniem",
+      done: false,
+      answer: `Trzeba jeszcze potwierdzić doświadczenie wnioskodawcy i zgodność „${innovationTitle}” z regulaminem naboru.`,
+    },
+  ];
 }
 
 function localReport(title: string, summary: string, gminaName: string, population: number): MiddlemanReport {
@@ -61,12 +113,21 @@ function localReport(title: string, summary: string, gminaName: string, populati
     kpis: ["Liczba osób, które skorzystały w ciągu roku", "Liczba działań blisko domu"],
     risks: ["Za mało osób do prowadzenia", "Brak stałego finansowania po pilotażu"],
     usluga_wrazliwa_checklist: [
-      { item: "Adaptacja gotowej innowacji", done: true },
-      { item: "Grupa mieszkańców", done: false },
-      { item: "Partnerzy", done: false },
-      { item: "Kadra", done: false },
-      { item: "Szacunek kosztów", done: true },
-      { item: "Wskaźniki", done: true },
+      {
+        item: "Czas świadczenia",
+        done: true,
+        answer: "Usługa ma być świadczona co najmniej przez rok od startu.",
+      },
+      {
+        item: "Kto składa wniosek",
+        done: true,
+        answer: "Wniosek może złożyć gmina, jej jednostka albo organizacja z Małopolski.",
+      },
+      {
+        item: "Czego brakuje przed zgłoszeniem",
+        done: false,
+        answer: `Trzeba jeszcze potwierdzić doświadczenie wnioskodawcy i zgodność „${title}” z regulaminem naboru.`,
+      },
     ],
   };
 }
@@ -84,6 +145,7 @@ export function MiddlemanClient() {
   const [done, setDone] = useState(false);
   const [report, setReport] = useState<MiddlemanReport | null>(null);
   const [error, setError] = useState("");
+  const [suggestions, setSuggestions] = useState<string[]>([]);
   const threadRef = useRef<HTMLDivElement>(null);
 
   const gmina = gminas.find((item) => item.name === gminaName) ?? gminas[0];
@@ -124,7 +186,6 @@ export function MiddlemanClient() {
 
   const userTurns = history.filter((item) => item.role === "user").length;
   const canDraft = done || userTurns >= 3;
-
   async function send(text: string) {
     if (!innovation || !gmina || busy) return;
     const trimmed = text.trim();
@@ -146,6 +207,12 @@ export function MiddlemanClient() {
         { role: "assistant", content: reply.reply },
       ]);
       setDone(reply.done);
+      const turn = prior.filter((item) => item.role === "user").length + 1;
+      setSuggestions(
+        reply.suggestions?.filter((item) => item.trim()).slice(0, 4).length
+          ? reply.suggestions.filter((item) => item.trim()).slice(0, 4)
+          : suggestionsForTurn(turn, gmina.name, innovation.title),
+      );
     } catch {
       const turn = prior.filter((item) => item.role === "user").length + 1;
       const fallback = localQuestion(innovation.title, gmina.name, turn);
@@ -154,6 +221,7 @@ export function MiddlemanClient() {
         { role: "user", content: trimmed },
         { role: "assistant", content: fallback.reply },
       ]);
+      setSuggestions(suggestionsForTurn(turn, gmina.name, innovation.title));
       setDone(fallback.done);
       setError("Asystent odpowiedział z lokalnej podpowiedzi. Połączenie z modelem nie doszło.");
     } finally {
@@ -316,10 +384,10 @@ export function MiddlemanClient() {
         <section aria-labelledby="check-title">
           <h2 id="check-title">Checklista „Usługa wrażliwa”</h2>
           <ul className="middleman-checks">
-            {report.usluga_wrazliwa_checklist.map((item) => (
+            {checklistEntries(report, innovation.title).map((item) => (
               <li key={item.item}>
-                <span>{item.done ? "Jest" : "Do uzupełnienia"}</span>
-                {item.item}
+                <strong>{item.item}</strong>
+                <p>{item.answer}</p>
               </li>
             ))}
           </ul>
@@ -351,6 +419,7 @@ export function MiddlemanClient() {
             setReport(null);
             setStarted(false);
             setHistory([]);
+            setSuggestions([]);
             setDone(false);
             setError("");
           }}
@@ -480,15 +549,20 @@ export function MiddlemanClient() {
             ) : null}
           </div>
           {error ? <p role="alert">{error}</p> : null}
-          <ul className="prompt-list middleman-suggestions">
-            {SUGGESTIONS.map((prompt) => (
-              <li key={prompt}>
-                <button type="button" onClick={() => void send(prompt)} disabled={busy}>
-                  {prompt}
-                </button>
-              </li>
-            ))}
-          </ul>
+          {suggestions.length ? (
+            <div>
+              <p className="middleman-suggestions__label">Odpowiedzi na to pytanie</p>
+              <ul className="prompt-list middleman-suggestions" key={suggestions.join("|")}>
+                {suggestions.map((prompt) => (
+                  <li key={prompt}>
+                    <button type="button" onClick={() => void send(prompt)} disabled={busy}>
+                      {prompt}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
           <form
             className="middleman-composer"
             onSubmit={(event) => {

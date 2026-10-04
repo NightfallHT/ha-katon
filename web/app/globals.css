@@ -2820,6 +2820,10 @@ textarea.dane-field {
   margin-top: 0.25rem;
 }
 
+.middleman-suggestions__label {
+  font-weight: 700;
+}
+
 .middleman-composer {
   display: grid;
   gap: 0.5rem;
@@ -2863,13 +2867,16 @@ textarea.dane-field {
 }
 
 .middleman-checks li {
-  display: flex;
-  gap: 0.7rem;
-  align-items: center;
+  display: grid;
+  gap: 0.25rem;
   border: 1px solid var(--border);
   border-radius: 0.8rem;
   background: var(--card);
-  padding: 0.7rem 0.9rem;
+  padding: 0.8rem 0.95rem;
+}
+
+.middleman-checks p {
+  margin: 0;
 }
 
 .middleman-checks span {

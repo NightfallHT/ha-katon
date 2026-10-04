@@ -79,7 +79,7 @@ export type GrantDraftResponse = {
   budget: { item: string; category: string; amount: number }[];
 };
 
-export type MiddlemanChatResponse = { reply: string; done: boolean };
+export type MiddlemanChatResponse = { reply: string; done: boolean; suggestions?: string[] };
 
 export type MiddlemanReport = {
   service_name: string;
@@ -91,7 +91,7 @@ export type MiddlemanReport = {
   cost_estimate: { item: string; amount_pln_per_year: number }[];
   kpis: string[];
   risks: string[];
-  usluga_wrazliwa_checklist: { item: string; done: boolean }[];
+  usluga_wrazliwa_checklist: { item: string; done: boolean; answer?: string }[];
 };
 
 export type ChatResponse = {

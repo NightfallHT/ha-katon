@@ -210,6 +210,7 @@ class MiddlemanChatRequest(BaseModel):
 class MiddlemanChatResponse(BaseModel):
     reply: str
     done: bool
+    suggestions: list[str] = Field(default_factory=list)
 
 
 class CostItem(BaseModel):
@@ -228,6 +229,7 @@ class CostItem(BaseModel):
 class ChecklistItem(BaseModel):
     item: str
     done: bool
+    answer: str = ""
 
 
 class ServiceReport(BaseModel):

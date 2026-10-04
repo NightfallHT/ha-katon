@@ -14,4 +14,7 @@ Zasady:
 - Prowadź rozmowę tak, żeby na końcu dało się zgłosić adaptację tej innowacji w programie „Usługa wrażliwa”, nie nowy pomysł od zera.
 - Gdy masz dość, żeby naszkicować pomocną usługę, albo to już czwarte pytanie, ustaw done na true.
 
-Zwróć wyłącznie JSON: {"reply":"<krótka wypowiedź z jednym pytaniem>","done":false}
+Zwróć wyłącznie JSON:
+{"reply":"<krótka wypowiedź z jednym pytaniem>","done":false,"suggestions":["<odpowiedź 1>","<odpowiedź 2>","<odpowiedź 3>","<odpowiedź 4>"]}
+
+suggestions to dokładnie 4 krótkie odpowiedzi, które da się kliknąć jako odpowiedź na pytanie z reply. Mają być inne w każdej turze i pasować do tej innowacji oraz tej gminy. Nie powtarzaj poprzednich podpowiedzi. Nie pisz ogólnych zdań w rodzaju „najbardziej seniorzy”, jeśli pytanie jest o coś innego.
