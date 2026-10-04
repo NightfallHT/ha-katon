@@ -2,10 +2,13 @@ import Link from "next/link";
 import { OpenCalls } from "@/components/open-calls";
 import { ResourceNav } from "@/components/resource-nav";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { calls } from "@/content/catalog";
+import { deadlineLabel, getCalls, openCalls } from "@/lib/calls";
 
-export default function KreatorPage() {
-  const openCall = calls.find((item) => item.is_open);
+// Re-read the calls table every 60 s; saving in /admin/nabory revalidates immediately.
+export const revalidate = 60;
+
+export default async function KreatorPage() {
+  const openCall = openCalls(await getCalls())[0];
 
   return (
     <div>
@@ -61,7 +64,7 @@ export default function KreatorPage() {
               {openCall ? (
                 <>
                   <p>
-                    {openCall.name} jest otwarty do {openCall.deadline}.
+                    {openCall.name} jest otwarty do {deadlineLabel(openCall.deadline)}.
                   </p>
                   <p className="mt-4">
                     <Link

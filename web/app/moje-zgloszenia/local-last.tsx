@@ -6,7 +6,9 @@ const STEPS = ["Wysłane", "W ocenie", "Decyzja"];
 
 type Stored = { title?: string; type?: string };
 
-export function LocalLastSubmission() {
+// Shows the last submission saved in this browser while it is not yet in the list
+// from the database. Once listed there, the list shows its real status instead.
+export function LocalLastSubmission({ listedTitles = [] }: { listedTitles?: string[] }) {
   const [item, setItem] = useState<Stored | null>(null);
 
   useEffect(() => {
@@ -22,7 +24,7 @@ export function LocalLastSubmission() {
     return () => cancelAnimationFrame(frame);
   }, []);
 
-  if (!item?.title) return null;
+  if (!item?.title || listedTitles.includes(item.title)) return null;
 
   return (
     <aside className="mt-8 rounded-2xl border p-5" aria-label="Ostatnie zgłoszenie na tym komputerze">

@@ -20,6 +20,9 @@ export async function saveCall(id: string, _prev: CallResult | null, formData: F
     if (error) throw new Error(error.message);
     revalidatePath("/admin/nabory");
     revalidatePath("/kreator");
+    revalidatePath("/kreator/grant");
+    revalidatePath("/kreator/grant/wniosek");
+    revalidatePath("/wyzwania");
     return { ok: true, message: "Zapisano." };
   } catch (e) {
     const message = e instanceof Error ? e.message : "";

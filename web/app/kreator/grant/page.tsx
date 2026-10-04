@@ -1,19 +1,25 @@
 import Link from "next/link";
-import { calls } from "@/content/catalog";
+import {
+  budgetLabel,
+  deadlineLabel,
+  getCalls,
+  openCalls,
+  pastCalls,
+  upcomingCalls,
+} from "@/lib/calls";
 
 export const metadata = {
   title: "Aktualne nabory — Hub Innowacji Społecznych",
 };
 
-function deadlineLabel(iso: string) {
-  const date = new Date(`${iso}T00:00:00`);
-  if (Number.isNaN(date.getTime())) return iso;
-  return new Intl.DateTimeFormat("pl-PL", { dateStyle: "long" }).format(date);
-}
+// Re-read the calls table every 60 s; saving in /admin/nabory revalidates immediately.
+export const revalidate = 60;
 
-export default function NaboryPage() {
-  const open = calls.filter((item) => item.is_open);
-  const closed = calls.filter((item) => !item.is_open);
+export default async function NaboryPage() {
+  const calls = await getCalls();
+  const open = openCalls(calls);
+  const upcoming = upcomingCalls(calls);
+  const past = pastCalls(calls);
 
   return (
     <div className="calls-page">
@@ -45,7 +51,7 @@ export default function NaboryPage() {
                   </div>
                   <div>
                     <dt>Maksymalna kwota</dt>
-                    <dd>{call.budget_max.toLocaleString("pl-PL")} zł</dd>
+                    <dd>{budgetLabel(call.budget_max)}</dd>
                   </div>
                 </dl>
 
@@ -56,9 +62,11 @@ export default function NaboryPage() {
                   >
                     Wniosek
                   </Link>
-                  <a href={call.regulamin_url} className="secondary-action">
-                    Regulamin
-                  </a>
+                  {call.regulamin_url ? (
+                    <a href={call.regulamin_url} className="secondary-action">
+                      Regulamin
+                    </a>
+                  ) : null}
                 </div>
               </article>
             </li>
@@ -67,17 +75,37 @@ export default function NaboryPage() {
       ) : (
         <p className="empty-result">
           Nabór jest obecnie zamknięty.
-          {closed[0] ? ` Następny termin: ${deadlineLabel(closed[0].deadline)}.` : ""}
+          {upcoming[0] ? ` Następny nabór: ${upcoming[0].name}, termin ${deadlineLabel(upcoming[0].deadline)}.` : ""}
         </p>
       )}
 
-      {open.length && closed.length ? (
-        <section aria-labelledby="zamkniete-h" className="calls-closed">
-          <h2 id="zamkniete-h">Nabory zamknięte</h2>
+      {upcoming.length ? (
+        <section aria-labelledby="planowane-h" className="calls-closed">
+          <h2 id="planowane-h">Nabory planowane</h2>
           <ul>
-            {closed.map((call) => (
+            {upcoming.map((call) => (
               <li key={call.name}>
-                <strong>{call.name}</strong> — termin minął {deadlineLabel(call.deadline)}.
+                <strong>{call.name}</strong> — termin {deadlineLabel(call.deadline)}.
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {past.length ? (
+        <section aria-labelledby="zamkniete-h" className="calls-closed">
+          <h2 id="zamkniete-h">Nabory zakończone</h2>
+          <ul>
+            {past.map((call) => (
+              <li key={call.name}>
+                <strong>{call.name}</strong> —{" "}
+                {call.deadline ? `termin minął ${deadlineLabel(call.deadline)}` : "nabór zakończony"}.
+                {call.regulamin_url ? (
+                  <>
+                    {" "}
+                    <a href={call.regulamin_url}>Regulamin</a>
+                  </>
+                ) : null}
               </li>
             ))}
           </ul>

@@ -111,7 +111,7 @@ export default async function MySubmissions() {
           );
         })}
       </ul>
-      <LocalLastSubmission />
+      <LocalLastSubmission listedTitles={subs.map((s) => s.title)} />
     </section>
   );
 }

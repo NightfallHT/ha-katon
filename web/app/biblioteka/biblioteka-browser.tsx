@@ -83,21 +83,23 @@ export function BibliotekaBrowser({
         </div>
 
         <p className="flex flex-col gap-2">
-          {SHORTCUTS.map((item) => (
-            <button
-              key={item.category}
-              type="button"
-              className={`inline-flex min-h-11 items-center justify-center rounded-full border px-4 text-left font-medium ${
-                categories.includes(item.category)
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border"
-              }`}
-              aria-pressed={categories.includes(item.category)}
-              onClick={() => setCategories([item.category])}
-            >
-              {item.label}
-            </button>
-          ))}
+          {SHORTCUTS.map((item) => {
+            // A shortcut is "on" when it is the only topic filter; pressing it again clears the filter.
+            const active = categories.length === 1 && categories[0] === item.category;
+            return (
+              <button
+                key={item.category}
+                type="button"
+                className={`inline-flex min-h-11 items-center justify-center rounded-full border px-4 text-left font-medium ${
+                  active ? "border-primary bg-primary text-primary-foreground" : "border-border"
+                }`}
+                aria-pressed={active}
+                onClick={() => setCategories(active ? [] : [item.category])}
+              >
+                {item.label}
+              </button>
+            );
+          })}
         </p>
 
         <fieldset className="space-y-2">
