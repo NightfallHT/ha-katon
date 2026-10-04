@@ -39,6 +39,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const links = [
     { href: "/admin", text: "Pulpit" },
     { href: "/admin/zgloszenia", text: "Zgłoszenia" },
+    { href: "/admin/dane", text: "Dane w bazie" },
     { href: "/admin/nabory", text: "Nabory" },
     { href: "/admin/biblioteka", text: "Biblioteka" },
     { href: "/admin/trendy", text: "Trendy" },

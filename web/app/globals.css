@@ -1232,3 +1232,321 @@ textarea.tester-form__field {
     scroll-behavior: auto !important;
   }
 }
+/* ---------------------------------------------------------------------------
+   Kreator (jeden formularz), nabory i panel danych ROPS.
+   Dołożone do istniejącego słownika klas — reużywa .tester-form, .feature-grid,
+   .section-heading i .admin-primary-action tam, gdzie się da.
+   --------------------------------------------------------------------------- */
+
+.flat-form,
+.calls-page {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.flat-form__progress {
+  align-self: end;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  padding: 0.45rem 0.9rem;
+  font-weight: 700;
+}
+
+.flat-form__layout {
+  display: grid;
+  gap: 2rem;
+  align-items: start;
+}
+
+.flat-form__hint {
+  margin: 0 0 0.4rem;
+  color: var(--muted-foreground);
+}
+
+.flat-form__summary:empty {
+  display: none;
+}
+
+.flat-form__errors {
+  border: 2px solid var(--destructive);
+  border-radius: 1rem;
+  background: var(--card);
+  padding: 1rem;
+  font-weight: 700;
+}
+
+.flat-form__errors ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.3rem;
+}
+
+.flat-form__stage {
+  display: grid;
+  gap: 0.6rem;
+  border: 0;
+  padding: 0;
+}
+
+.flat-form__stage legend {
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+}
+
+.flat-form__stage label {
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--card);
+  padding: 0.6rem 0.8rem;
+  cursor: pointer;
+}
+
+.flat-form__stage label.is-selected {
+  border-color: var(--primary);
+  background: var(--secondary);
+}
+
+.flat-form__aside {
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--card);
+  padding: 1.2rem;
+}
+
+.flat-form__aside h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.tester-form__field.is-invalid {
+  border: 2px solid var(--destructive);
+}
+
+/* --- nabory --- */
+
+.calls-list,
+.calls-closed ul {
+  display: grid;
+  gap: 1.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.call-card {
+  display: grid;
+  gap: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--card);
+  padding: 1.6rem;
+  box-shadow: 0 12px 35px rgb(20 32 51 / 0.08);
+}
+
+.call-card h2 {
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.call-card__badge {
+  justify-self: start;
+  border-radius: 999px;
+  background: var(--secondary);
+  padding: 0.3rem 0.8rem;
+  font-weight: 700;
+}
+
+.call-card__text {
+  max-width: 44rem;
+}
+
+.call-card__facts {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0;
+}
+
+.call-card__facts > div {
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  padding: 0.7rem 0.9rem;
+}
+
+.call-card__facts dt {
+  font-weight: 700;
+}
+
+.call-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.calls-closed h2 {
+  margin-bottom: 0.6rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* --- panel danych ROPS --- */
+
+.dane-grid__count {
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.dane-grid__count-label {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.dane-title {
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.dane-back-row {
+  margin-bottom: 0.8rem;
+}
+
+.dane-back {
+  font-weight: 700;
+}
+
+.dane-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 1rem;
+}
+
+.dane-search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 0.8rem;
+}
+
+.dane-search label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+}
+
+.dane-field {
+  width: 100%;
+  min-width: min(20rem, 100%);
+  min-height: 3rem;
+  border: 1px solid var(--input);
+  border-radius: 0.75rem;
+  background: var(--card);
+  padding: 0.7rem 0.8rem;
+  font-family: inherit;
+}
+
+textarea.dane-field {
+  min-height: 7rem;
+  font-family: ui-monospace, monospace;
+  resize: vertical;
+}
+
+/* Wide tables scroll inside their own box so the page never scrolls sideways. */
+.dane-table-wrap {
+  overflow-x: auto;
+}
+
+.dane-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.dane-table th,
+.dane-table td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.7rem 0.8rem;
+  vertical-align: top;
+}
+
+.dane-table thead th {
+  border-bottom: 2px solid var(--border);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.dane-table__edit {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  font-weight: 700;
+}
+
+.dane-form-wrap {
+  max-width: 48rem;
+}
+
+.dane-readonly {
+  overflow-wrap: anywhere;
+  font-family: ui-monospace, monospace;
+}
+
+.dane-check {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 700;
+}
+
+.dane-check input {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.dane-danger-zone {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 48rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+}
+
+.dane-danger-zone h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.dane-danger {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-self: start;
+  border: 2px solid var(--destructive);
+  border-radius: 0.9rem;
+  background: var(--card);
+  padding: 0.6rem 1.2rem;
+  font-weight: 700;
+}
+
+@media (min-width: 760px) {
+  .call-card__facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .flat-form__layout {
+    grid-template-columns: minmax(0, 1fr) 22rem;
+  }
+}
