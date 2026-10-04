@@ -31,7 +31,7 @@ export default async function DanePage() {
   }
 
   return (
-    <section aria-labelledby="dane-h" className="admin-shell">
+    <section aria-labelledby="dane-h" className="admin-page">
       <div className="section-heading">
         <div>
           <p className="eyebrow">Panel ROPS</p>
