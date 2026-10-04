@@ -2495,3 +2495,246 @@ textarea.dane-field {
     grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   }
 }
+
+.middleman-gate .middleman-primary,
+.middleman-primary {
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  border-radius: 0.9rem;
+  background: var(--accent);
+  padding: 0.7rem 1.2rem;
+  color: var(--accent-foreground);
+  font-weight: 700;
+}
+
+.middleman-primary:disabled,
+.middleman-picks button:disabled,
+.middleman-thread button:disabled,
+.secondary-action:disabled {
+  opacity: 0.55;
+}
+
+.middleman-setup,
+.middleman-chat {
+  display: grid;
+  gap: 1rem;
+}
+
+.middleman-setup h2,
+.middleman-chat h2 {
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  font-weight: 700;
+}
+
+.middleman-setup__grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.middleman-setup label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+.middleman-search {
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.5rem;
+  border: 2px solid var(--input);
+  border-radius: 0.9rem;
+  background: var(--card);
+  padding: 0.4rem 0.8rem;
+}
+
+.middleman-search svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.middleman-search input,
+.middleman-setup select,
+.middleman-composer textarea {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font: inherit;
+}
+
+.middleman-setup select,
+.middleman-composer textarea {
+  min-height: 3rem;
+  border: 2px solid var(--input);
+  border-radius: 0.9rem;
+  background: var(--card);
+  padding: 0.7rem 0.8rem;
+}
+
+.middleman-picks {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.middleman-picks button {
+  display: grid;
+  width: 100%;
+  gap: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  background: var(--card);
+  padding: 0.8rem 1rem;
+  text-align: left;
+}
+
+.middleman-picks button[aria-pressed="true"] {
+  border-color: var(--primary);
+  background: var(--secondary);
+}
+
+.middleman-picks span,
+.middleman-chosen {
+  color: var(--muted-foreground);
+}
+
+.middleman-gmina {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+
+.middleman-gmina div {
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: var(--card);
+  padding: 0.7rem 0.8rem;
+}
+
+.middleman-gmina dt {
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+}
+
+.middleman-gmina dd {
+  font-weight: 700;
+}
+
+.middleman-thread {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.middleman-thread > div {
+  max-width: 46rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--card);
+  padding: 0.9rem 1rem;
+}
+
+.middleman-thread .is-user {
+  justify-self: end;
+  background: var(--secondary);
+}
+
+.middleman-thread__who {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.middleman-thread button {
+  min-height: 2.75rem;
+  margin-top: 0.5rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.middleman-wait {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.middleman-wait svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.middleman-suggestions {
+  margin-top: 0.25rem;
+}
+
+.middleman-composer {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.middleman-composer label {
+  font-weight: 700;
+}
+
+.middleman-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.middleman-table-wrap {
+  overflow-x: auto;
+}
+
+.middleman-table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.middleman-table-wrap caption {
+  margin-bottom: 0.5rem;
+  text-align: left;
+  font-weight: 700;
+}
+
+.middleman-table-wrap th,
+.middleman-table-wrap td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.7rem 0.4rem;
+}
+
+.middleman-checks {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.middleman-checks li {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: var(--card);
+  padding: 0.7rem 0.9rem;
+}
+
+.middleman-checks span {
+  font-weight: 700;
+}
+
+[data-contrast="high"] .middleman-thread .is-user,
+[data-contrast="high"] .middleman-picks button[aria-pressed="true"] {
+  background: var(--background);
+}
+
+@media (min-width: 800px) {
+  .middleman-setup__grid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 0.8fr);
+  }
+}
+

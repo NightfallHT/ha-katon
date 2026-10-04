@@ -7,6 +7,7 @@ import {
   ArrowRight,
   BookOpen,
   FileCheck2,
+  Landmark,
   Lightbulb,
   LoaderCircle,
   MessageCircleMore,
@@ -51,6 +52,12 @@ const FEATURES = [
     title: "Podziel się dobrą praktyką",
     text: "Pokaż rozwiązanie, które już działa i może pomóc innym.",
     icon: Share2,
+  },
+  {
+    href: "/middleman",
+    title: "Zamień innowację w usługę",
+    text: "Dla instytucji: dopracuj gotowy pomysł pod swoją gminę i pod Usługę wrażliwą.",
+    icon: Landmark,
   },
   {
     href: "/kontakt",
