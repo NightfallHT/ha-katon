@@ -1,0 +1,30 @@
+# The /ai image is built from the repo root so it can copy data/seed (see
+# ai/Dockerfile). Without this file the build context would be ~2 GB of
+# node_modules and .next that the Python service never touches.
+node_modules
+**/node_modules
+.next
+**/.next
+.git
+.vercel
+test-results
+playwright-report
+__pycache__
+**/__pycache__
+.venv
+*.log
+
+# Never bake secrets into an image.
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.local
+
+# Not needed by the service.
+web
+tests
+docs
+scripts
+db
+agents

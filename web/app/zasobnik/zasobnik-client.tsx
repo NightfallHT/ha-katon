@@ -145,15 +145,19 @@ export function ZasobnikClient() {
             <ol className="result-title-list">
               {report.innovations.map((item, index) => {
                 const found = findInnovationByTitle(item.title);
-                const href = found ? `/biblioteka/${found.id}` : "/zasobnik";
                 return (
                   <li key={`${item.innovation_id}-${item.title}`}>
                     <span className="result-title-list__number" aria-hidden="true">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <div>
+                      {/* No page for it means no link — see the note in home-client. */}
                       <h3>
-                        <Link href={href}>{item.title}</Link>
+                        {found ? (
+                          <Link href={`/biblioteka/${found.id}`}>{item.title}</Link>
+                        ) : (
+                          item.title
+                        )}
                       </h3>
                       <p>{item.summary}</p>
                     </div>

@@ -261,21 +261,26 @@ export function HomeClient() {
               <ol className="result-title-list">
                 {response.results.map((result, index) => {
                   const innovation = findInnovationByTitle(result.title);
-                  const href = innovation
-                    ? `/biblioteka/${innovation.id}`
-                    : "/zasobnik";
                   return (
                     <li key={`${result.innovation_id}-${result.title}`}>
                       <span className="result-title-list__number" aria-hidden="true">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                       <div>
+                        {/* A result /ai knows but the bundled catalogue does not has
+                            no page to open. Sending it to /zasobnik looked like a
+                            link and silently lost the result, so it stays plain
+                            text instead. */}
                         <h2>
-                          <Link href={href}>{result.title}</Link>
+                          {innovation ? (
+                            <Link href={`/biblioteka/${innovation.id}`}>{result.title}</Link>
+                          ) : (
+                            result.title
+                          )}
                         </h2>
                         <p>{result.why}</p>
                       </div>
-                      <ArrowRight aria-hidden="true" />
+                      {innovation ? <ArrowRight aria-hidden="true" /> : null}
                     </li>
                   );
                 })}

@@ -9,7 +9,9 @@ services:
     plan: free
     region: frankfurt
     dockerfilePath: ./ai/Dockerfile
-    dockerContext: ./ai
+    # Repo root, not ./ai: the image also needs data/seed, which catalog.py reads
+    # as REPO_ROOT/data/seed. .dockerignore keeps the context small.
+    dockerContext: .
     healthCheckPath: /health
     envVars:
       - key: DEMO_MODE
