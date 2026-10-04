@@ -1,3 +1,4 @@
+import { innovations } from "@/content/catalog";
 import type { MatchResponse } from "./types";
 
 const DEMOS: { needles: string[]; response: MatchResponse }[] = [
@@ -146,21 +147,63 @@ function fold(value: string) {
     .replace(/\p{M}/gu, "");
 }
 
-export function localMatch(query: string): MatchResponse {
+const SITUATIONS: { triggers: string[]; problems: string[] }[] = [
+  { triggers: ["wytchn", "odciaz"], problems: ["wytchn", "odciaz", "wypal", "zastep", "odpocz"] },
+  { triggers: ["nieslys", "gluch", "migow"], problems: ["gluch", "pjm", "migow", "nieslys"] },
+  { triggers: ["niewid", "braille", "niedowid"], problems: ["niewid", "braille", "wzrok", "audiod"] },
+  { triggers: ["dojazd", "dojech", "lekarz", "przychod"], problems: ["dojazd", "lekarz", "przychod", "transport"] },
+  { triggers: ["samot", "osamot"], problems: ["samot", "izol", "towarz"] },
+  { triggers: ["wychodz", "boi sie"], problems: ["samot", "izol", "towarz"] },
+];
+
+function catalogMatch(query: string): MatchResponse {
   const folded = fold(query);
-  const hit = DEMOS.find((demo) =>
-    demo.needles.some((needle) => folded.includes(fold(needle))),
-  );
-  if (hit) return hit.response;
+  const words = folded.split(/\s+/).filter((word) => word.length > 3);
+  const active = SITUATIONS.filter((situation) => situation.triggers.some((trigger) => folded.includes(trigger)));
+  const ranked = innovations
+    .map((item) => {
+      const haystack = fold(
+        [item.title, item.summary, item.description, item.tags.join(" "), item.target_groups.join(" ")].join(" "),
+      );
+      const direct = words.reduce((sum, word) => sum + (haystack.includes(word.slice(0, 5)) ? 3 : 0), 0);
+      const situation = active.reduce((sum, entry) => {
+        const sameProblem = entry.problems.some((problem) => haystack.includes(problem.slice(0, 5)));
+        return sum + (sameProblem ? 8 : -6);
+      }, 0);
+      return { item, score: direct + situation };
+    })
+    .sort((a, b) => b.score - a.score);
+  const useful = ranked.filter((row) => row.score > 0).slice(0, 5);
+  const picked = useful.length >= 3 ? useful : ranked.slice(0, 5);
+
   return {
     need_id: "00000000-0000-4000-8000-000000000000",
     extracted: {
       category: "inne",
       target_group: "mieszkańcy",
       location: null,
-      keywords: query.split(/\s+/).slice(0, 5),
+      keywords: words.slice(0, 5),
     },
-    results: [],
+    results: picked.map(({ item, score }) => ({
+      innovation_id: item.id,
+      title: item.title,
+      summary: item.summary,
+      category: item.category,
+      score: Math.min(0.49, 0.2 + score * 0.08),
+      why:
+        score > 0
+          ? `To skojarzenie z Twoją sprawą: ${item.summary}`
+          : `Nie ma dokładnego trafienia. Najbliższe skojarzenie: ${item.summary}`,
+    })),
     similar_needs: { count: 0, example: null },
   };
+}
+
+export function localMatch(query: string): MatchResponse {
+  const folded = fold(query);
+  const hit = DEMOS.find((demo) =>
+    demo.needles.some((needle) => folded.includes(fold(needle))),
+  );
+  if (hit) return hit.response;
+  return catalogMatch(query);
 }

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import os
+from contextlib import asynccontextmanager
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
@@ -13,7 +14,7 @@ from fastapi.responses import JSONResponse
 
 load_dotenv()
 
-from llm import LlmError
+from llm import LlmError, llm
 from models import (
     ChatRequest,
     ChatResponse,
@@ -48,7 +49,24 @@ from services.simplify import simplify
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger("ai")
 
-app = FastAPI(title="Hub Innowacji Społecznych — AI")
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    if llm.available():
+        try:
+            await llm.complete_json(
+                "Return JSON.",
+                'Reply with json {"ok": true}',
+                timeout=40,
+                attempts=1,
+                max_tokens=20,
+            )
+            log.info("llm connection warm")
+        except LlmError:
+            log.warning("llm warmup failed")
+    yield
+
+
+app = FastAPI(title="Hub Innowacji Społecznych — AI", lifespan=lifespan)
 
 
 def _origins() -> list[str]:

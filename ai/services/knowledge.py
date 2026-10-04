@@ -204,7 +204,12 @@ async def report(body: KnowledgeReportRequest) -> KnowledgeReportResponse:
     if not llm.available():
         return local
     try:
-        raw = await llm.complete_json(read_prompt("knowledge_report.md"), _context(local, body))
+        raw = await llm.complete_json(
+            read_prompt("knowledge_report.md"),
+            _context(local, body),
+            timeout=8,
+            attempts=1,
+        )
     except LlmError:
         return local
     return _merge(local, raw)

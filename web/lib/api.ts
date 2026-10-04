@@ -14,7 +14,7 @@ import type {
 import { localKnowledgeReport } from "./local-knowledge";
 import { localMatch } from "./local-match";
 
-const TIMEOUT_MS = 30_000;
+const TIMEOUT_MS = 75_000;
 const POLISH_TIMEOUT = "Serwis odpowiedzi działa wolno. Spróbuj ponownie za chwilę.";
 
 function baseUrl() {
