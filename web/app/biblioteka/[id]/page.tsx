@@ -81,7 +81,9 @@ export default async function InnovationPage({
       ) : null}
 
       <p className="innovation-detail__back">
-        <Link href="/biblioteka">Wróć do bazy wiedzy</Link>
+        {/* The Zasobnik is the knowledge base now; /biblioteka is only the
+            address these detail pages live under. */}
+        <Link href="/zasobnik">Wróć do Zasobnika wiedzy</Link>
       </p>
     </article>
   );

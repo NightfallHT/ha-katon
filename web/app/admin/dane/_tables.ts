@@ -19,7 +19,10 @@ export type FieldKind =
 
 export type Field = {
   name: string;
+  /** Short column name — this is what the list view puts in the table header. */
   label: string;
+  /** Format rule or allowed values. Shown under the label on the edit form only. */
+  hint?: string;
   kind: FieldKind;
 };
 
@@ -42,6 +45,8 @@ export type TableDef = {
   canCreate: boolean;
 };
 
+const COMMA_HINT = "Kilka wartości rozdziel przecinkami.";
+
 const CATEGORY_HINT =
   "Slug z listy: starzenie, zdrowie_psychiczne, samotnosc, wykluczenie_cyfrowe, dostep_do_uslug, niepelnosprawnosc, integracja_spoleczna, rodzina_dzieci, wspolpraca_miedzysektorowa, inne";
 
@@ -58,16 +63,16 @@ export const TABLES: TableDef[] = [
     canCreate: true,
     fields: [
       { name: "title", label: "Tytuł", kind: "text" },
-      { name: "summary", label: "Streszczenie (1–2 zdania)", kind: "textarea" },
+      { name: "summary", label: "Streszczenie", hint: "1–2 zdania.", kind: "textarea" },
       { name: "description", label: "Opis", kind: "textarea" },
-      { name: "category", label: `Kategoria — ${CATEGORY_HINT}`, kind: "text" },
-      { name: "target_groups", label: "Grupy docelowe (po przecinku)", kind: "list" },
-      { name: "tags", label: "Tagi (po przecinku)", kind: "list" },
-      { name: "stage", label: "Etap (pomysł / testowana / wdrożona)", kind: "text" },
+      { name: "category", label: "Kategoria", hint: CATEGORY_HINT, kind: "text" },
+      { name: "target_groups", label: "Grupy docelowe", hint: COMMA_HINT, kind: "list" },
+      { name: "tags", label: "Tagi", hint: COMMA_HINT, kind: "list" },
+      { name: "stage", label: "Etap", hint: "Jedna z wartości: pomysł, testowana, wdrożona.", kind: "text" },
       { name: "region", label: "Region", kind: "text" },
       { name: "video_url", label: "Link do filmu", kind: "text" },
       { name: "image_url", label: "Link do obrazka", kind: "text" },
-      { name: "image_alt", label: "Opis obrazka (alt)", kind: "text" },
+      { name: "image_alt", label: "Opis obrazka", hint: "Tekst alternatywny czytany przez czytnik ekranu.", kind: "text" },
       { name: "source_url", label: "Źródło", kind: "text" },
       { name: "contact_org", label: "Organizacja kontaktowa", kind: "text" },
       { name: "avg_rating", label: "Średnia ocena", kind: "number" },
@@ -88,7 +93,7 @@ export const TABLES: TableDef[] = [
     fields: [
       { name: "title", label: "Tytuł", kind: "text" },
       { name: "description", label: "Opis", kind: "textarea" },
-      { name: "category", label: `Kategoria — ${CATEGORY_HINT}`, kind: "text" },
+      { name: "category", label: "Kategoria", hint: CATEGORY_HINT, kind: "text" },
       { name: "powiat", label: "Powiat", kind: "text" },
       { name: "indicator_name", label: "Nazwa wskaźnika", kind: "text" },
       { name: "indicator_value", label: "Wartość wskaźnika", kind: "number" },
@@ -106,10 +111,10 @@ export const TABLES: TableDef[] = [
     canCreate: true,
     fields: [
       { name: "title", label: "Tytuł", kind: "text" },
-      { name: "type", label: "Typ (raport / poradnik / film / canvas)", kind: "text" },
+      { name: "type", label: "Typ", hint: "Jedna z wartości: raport, poradnik, film, canvas.", kind: "text" },
       { name: "url", label: "Link", kind: "text" },
       { name: "description", label: "Opis", kind: "textarea" },
-      { name: "tags", label: "Tagi (po przecinku)", kind: "list" },
+      { name: "tags", label: "Tagi", hint: COMMA_HINT, kind: "list" },
     ],
   },
   {
@@ -126,7 +131,7 @@ export const TABLES: TableDef[] = [
       { name: "description", label: "Opis", kind: "textarea" },
       { name: "is_open", label: "Otwarty", kind: "boolean" },
       { name: "deadline", label: "Termin", kind: "date" },
-      { name: "budget_max", label: "Maksymalny budżet (zł)", kind: "number" },
+      { name: "budget_max", label: "Maksymalny budżet", hint: "Kwota w złotych, bez spacji.", kind: "number" },
       { name: "regulamin_url", label: "Link do regulaminu", kind: "text" },
     ],
   },
@@ -143,14 +148,14 @@ export const TABLES: TableDef[] = [
     fields: [
       { name: "title", label: "Tytuł", kind: "text" },
       { name: "type", label: "Typ", kind: "text" },
-      { name: "status", label: "Status (nowe / w_ocenie / zaakceptowane / odrzucone)", kind: "text" },
+      { name: "status", label: "Status", hint: "Jedna z wartości: nowe, w_ocenie, zaakceptowane, odrzucone.", kind: "text" },
       { name: "author_name", label: "Autor", kind: "text" },
       { name: "author_email", label: "E-mail autora", kind: "text" },
       { name: "author_role", label: "Rola autora", kind: "text" },
       { name: "ai_summary", label: "Streszczenie AI", kind: "textarea" },
-      { name: "ai_tags", label: "Tagi AI (po przecinku)", kind: "list" },
+      { name: "ai_tags", label: "Tagi AI", hint: COMMA_HINT, kind: "list" },
       { name: "ai_category", label: "Kategoria AI", kind: "text" },
-      { name: "payload", label: "Dane zgłoszenia (JSON)", kind: "json" },
+      { name: "payload", label: "Dane zgłoszenia", hint: "Format JSON.", kind: "json" },
       { name: "created_at", label: "Wysłano", kind: "readonly" },
     ],
   },
@@ -165,7 +170,7 @@ export const TABLES: TableDef[] = [
     orderBy: "created_at",
     canCreate: false,
     fields: [
-      { name: "sender", label: "Nadawca (admin / author)", kind: "text" },
+      { name: "sender", label: "Nadawca", hint: "Jedna z wartości: admin, author.", kind: "text" },
       { name: "body", label: "Treść", kind: "textarea" },
       { name: "submission_id", label: "Id zgłoszenia", kind: "readonly" },
       { name: "created_at", label: "Wysłano", kind: "readonly" },
@@ -182,7 +187,7 @@ export const TABLES: TableDef[] = [
     orderBy: "created_at",
     canCreate: false,
     fields: [
-      { name: "rating", label: "Ocena (1–5)", kind: "number" },
+      { name: "rating", label: "Ocena", hint: "Liczba od 1 do 5.", kind: "number" },
       { name: "feedback", label: "Opinia", kind: "textarea" },
       { name: "improvement", label: "Co poprawić", kind: "textarea" },
       { name: "author_email", label: "E-mail", kind: "text" },
@@ -205,7 +210,7 @@ export const TABLES: TableDef[] = [
       { name: "category", label: "Kategoria", kind: "text" },
       { name: "target_group", label: "Grupa docelowa", kind: "text" },
       { name: "location", label: "Lokalizacja", kind: "text" },
-      { name: "keywords", label: "Słowa kluczowe (po przecinku)", kind: "list" },
+      { name: "keywords", label: "Słowa kluczowe", hint: COMMA_HINT, kind: "list" },
       { name: "role", label: "Rola", kind: "text" },
       { name: "created_at", label: "Kiedy", kind: "readonly" },
     ],
@@ -222,9 +227,9 @@ export const TABLES: TableDef[] = [
     fields: [
       { name: "name", label: "Nazwa", kind: "text" },
       { name: "powiat", label: "Powiat", kind: "text" },
-      { name: "type", label: "Typ (miejska / wiejska / miejsko-wiejska)", kind: "text" },
+      { name: "type", label: "Typ", hint: "Jedna z wartości: miejska, wiejska, miejsko-wiejska.", kind: "text" },
       { name: "population", label: "Liczba mieszkańców", kind: "number" },
-      { name: "population_trend", label: "Trend (spada / stabilna / rośnie)", kind: "text" },
+      { name: "population_trend", label: "Trend", hint: "Jedna z wartości: spada, stabilna, rośnie.", kind: "text" },
     ],
   },
 ];

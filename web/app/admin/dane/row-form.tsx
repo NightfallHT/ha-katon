@@ -95,11 +95,18 @@ export function RowForm({
         return (
           <div key={item.name} className="admin-field">
             <label htmlFor={id}>{item.label}</label>
+            {/* The format rule belongs here, not in the list header. */}
+            {item.hint ? (
+              <p id={`${id}-hint`} className="admin-field__hint">
+                {item.hint}
+              </p>
+            ) : null}
             {item.kind === "textarea" || item.kind === "json" ? (
               <textarea
                 id={id}
                 name={item.name}
                 value={values[item.name]}
+                aria-describedby={item.hint ? `${id}-hint` : undefined}
                 onChange={(event) => set(item.name, event.target.value)}
                 rows={item.kind === "json" ? 8 : 4}
                 className="dane-field"
@@ -117,6 +124,7 @@ export function RowForm({
                 }
                 step={item.kind === "number" ? "any" : undefined}
                 value={values[item.name]}
+                aria-describedby={item.hint ? `${id}-hint` : undefined}
                 onChange={(event) => set(item.name, event.target.value)}
                 className="dane-field"
               />

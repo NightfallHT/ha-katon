@@ -145,7 +145,7 @@ export function ZasobnikClient() {
             <ol className="result-title-list">
               {report.innovations.map((item, index) => {
                 const found = findInnovationByTitle(item.title);
-                const href = found ? `/biblioteka/${found.id}` : "/biblioteka";
+                const href = found ? `/biblioteka/${found.id}` : "/zasobnik";
                 return (
                   <li key={`${item.innovation_id}-${item.title}`}>
                     <span className="result-title-list__number" aria-hidden="true">
@@ -169,7 +169,7 @@ export function ZasobnikClient() {
             <ul>
               {report.materials.map((item) => (
                 <li key={item.title}>
-                  <a href={item.url || "/materialy"}>
+                  <a href={item.url || "/zasobnik"}>
                     <span>Materiał</span>
                     <strong>{item.title}</strong>
                     <p>{item.description}</p>

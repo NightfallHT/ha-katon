@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
-import { BookOpen, FileText, Library } from "lucide-react";
+import { BookOpen, FileText, Lightbulb } from "lucide-react";
 import { ContactForm } from "./form";
 
 export const metadata = { title: "Kontakt | Hub Innowacji Społecznych" };
@@ -20,24 +20,26 @@ const STEPS = [
   },
 ];
 
+// The Zasobnik now holds both the innovations and the materials, so it is the
+// single place to send someone looking for an answer.
 const SHORTCUTS = [
   {
     href: "/zasobnik",
     label: "Zasobnik wiedzy",
-    text: "Raport o tym, co już działa w danym temacie.",
+    text: "Raport o tym, co już działa, i klikany katalog innowacji i materiałów.",
     icon: BookOpen,
   },
   {
-    href: "/biblioteka",
-    label: "Biblioteka innowacji",
-    text: "Pełna lista rozwiązań z Małopolski.",
-    icon: Library,
+    href: "/kreator/grant",
+    label: "Aktualne nabory",
+    text: "Terminy, regulaminy i formularz wniosku.",
+    icon: FileText,
   },
   {
-    href: "/materialy",
-    label: "Materiały",
-    text: "Raporty, poradniki i wzory do pobrania.",
-    icon: FileText,
+    href: "/kreator/fiszka",
+    label: "Zgłoś pomysł",
+    text: "Jeśli Twoja sprawa to pomysł, a nie pytanie.",
+    icon: Lightbulb,
   },
 ];
 

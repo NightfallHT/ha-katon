@@ -65,7 +65,7 @@ export function localKnowledgeReport(
     })),
     materials: pickedMats.map((item) => ({
       title: item.title,
-      url: item.url || "/materialy",
+      url: item.url || "/zasobnik",
       description: item.description,
     })),
   };

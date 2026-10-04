@@ -263,7 +263,7 @@ export function HomeClient() {
                   const innovation = findInnovationByTitle(result.title);
                   const href = innovation
                     ? `/biblioteka/${innovation.id}`
-                    : "/biblioteka";
+                    : "/zasobnik";
                   return (
                     <li key={`${result.innovation_id}-${result.title}`}>
                       <span className="result-title-list__number" aria-hidden="true">
@@ -296,12 +296,12 @@ export function HomeClient() {
                   <p className="eyebrow">Do przeczytania</p>
                   <h2>Pomocne materiały</h2>
                 </div>
-                <Link href="/materialy">Zobacz wszystkie materiały</Link>
+                <Link href="/zasobnik">Zobacz cały Zasobnik wiedzy</Link>
               </div>
               <ul>
                 {suggestedMaterials.map((item) => (
                   <li key={item.title}>
-                    <a href={item.url || "/materialy"}>
+                    <a href={item.url || "/zasobnik"}>
                       <span>{item.type}</span>
                       <strong>{item.title}</strong>
                       <p>{item.description}</p>

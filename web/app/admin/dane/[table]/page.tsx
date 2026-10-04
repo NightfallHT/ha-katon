@@ -62,7 +62,7 @@ export default async function TableListPage({
       <div className="dane-toolbar">
         <form method="get" className="dane-search">
           <div>
-            <label htmlFor="q" >
+            <label htmlFor="q">
               Szukaj
             </label>
             <input
@@ -120,16 +120,16 @@ export default async function TableListPage({
             </caption>
             <thead>
               <tr>
-                <th scope="col" >
+                <th scope="col">
                   {table.fields.find((f) => f.name === table.titleField)?.label ??
                     "Nazwa"}
                 </th>
                 {table.listFields.map((name) => (
-                  <th key={name} scope="col" >
+                  <th key={name} scope="col">
                     {table.fields.find((f) => f.name === name)?.label ?? name}
                   </th>
                 ))}
-                <th scope="col" >
+                <th scope="col">
                   Działanie
                 </th>
               </tr>
@@ -137,7 +137,7 @@ export default async function TableListPage({
             <tbody>
               {rows.map((row) => (
                 <tr key={String(row.id)}>
-                  <th scope="row" >
+                  <th scope="row">
                     {cell(row[table.titleField])}
                   </th>
                   {table.listFields.map((name) => (

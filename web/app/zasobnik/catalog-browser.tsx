@@ -198,7 +198,7 @@ export function CatalogBrowser() {
               <ul>
                 {filteredMaterials.map((item) => (
                   <li key={item.title}>
-                    <a href={item.url || "/materialy"}>
+                    <a href={item.url || "/zasobnik"}>
                       <span>{item.type}</span>
                       <strong>{item.title}</strong>
                       <p>{item.description}</p>
