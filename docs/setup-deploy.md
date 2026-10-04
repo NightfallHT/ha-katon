@@ -168,7 +168,9 @@ grep -rn "\.\./\.\./\.\." web/app web/lib web/components
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY` — the `sb_publishable_…` key
    - `SUPABASE_SERVICE_ROLE_KEY` — the `sb_secret_…` key; mark it **Sensitive** in Vercel so it
      cannot be read back from the dashboard afterwards
-   - `NEXT_PUBLIC_AI_URL` — Janek's Render URL; put a placeholder now, update when he ships
+   - `NEXT_PUBLIC_AI_URL` — `https://ha-katon.onrender.com`, **no trailing slash**.
+     `NEXT_PUBLIC_*` is inlined at build time, so adding it here does nothing until you
+     **Redeploy**. And the Render service must allow this app's origin — see below.
    - `RESEND_API_KEY` — can stay empty; `/api/notify` logs and returns ok without it
    - `ADMIN_NOTIFY_EMAIL`
 5. *Deploy*. Push to `main` redeploys from then on.
@@ -215,6 +217,30 @@ It must end with `web/.next/BUILD_ID` and `web/.next/required-server-files.json`
 | Item | Owner | Note |
 |---|---|---|
 | `/ai` FastAPI service on Render/Railway + `NEXT_PUBLIC_AI_URL` | Janek | mocked endpoints due by 16:00 (AGENTS.md §9) |
+
+### If every AI answer looks generic
+
+`/web` calls `/ai` **from the browser**, so the Render service decides whether the call is
+allowed. With `ALLOWED_ORIGINS` set to anything narrower than `*`, every Vercel origin is
+refused — each preview deploy has its own hostname too. The browser then falls back to local
+text: Middleman says so out loud ("Asystent odpowiedział z lokalnej podpowiedzi"), but the home
+search and the Zasobnik degrade **silently**, which is why it can look like only one screen is
+broken.
+
+Check it from anywhere:
+
+```bash
+curl -s -i -X OPTIONS https://ha-katon.onrender.com/middleman/chat \
+  -H 'Origin: https://YOUR-PROJECT.vercel.app' \
+  -H 'Access-Control-Request-Method: POST' | head -3
+```
+
+`200` is fine. `400 Disallowed CORS origin` means Render → `hubmi-ai` → *Environment* →
+`ALLOWED_ORIGINS` → `*` → *Save*, which restarts the service.
+
+A plain `curl` without an `Origin` header always succeeds, because CORS is enforced by the
+browser and not by the server's business logic — so "curl works" never clears this.
+
 | Embedding dimension in `db/schema.sql` | Janek → Ola | `vector(1536)` is provisional; changes in **two** places in the file |
 | `lib/types.ts`, `lib/api.ts`, `lib/supabase.ts`, `lib/categories.ts`, `scripts/seed.ts` | Ola | task 2 — unblocks Hania, Jakub, Janek |
 | Real header (role switcher, font-size + contrast toggles) and home page | Ola | task 3; `web/app/layout.tsx` is a placeholder with `TODO(ola, task 3)` |

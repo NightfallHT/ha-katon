@@ -58,7 +58,7 @@ Anything not visible in the UI earns nothing. Working + simple + accessible beat
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=    # holds the sb_publishable_... key, see below
 SUPABASE_SERVICE_ROLE_KEY=        # holds the sb_secret_... key, server-side only
-NEXT_PUBLIC_AI_URL=               # e.g. https://hubmi-ai.onrender.com
+NEXT_PUBLIC_AI_URL=               # live: https://ha-katon.onrender.com (no trailing slash)
 RESEND_API_KEY=
 ADMIN_NOTIFY_EMAIL=
 # ai
