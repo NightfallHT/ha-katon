@@ -1,9 +1,11 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Atkinson_Hyperlegible, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import { Header } from "@/components/shell/header";
 import { AccessibilityPanel } from "@/components/shell/accessibility-panel";
 import { BackHome } from "@/components/shell/back-home";
+import { DemoTour } from "@/components/shell/demo-tour";
 import { HelpBot } from "@/components/help-bot";
 import "./globals.css";
 
@@ -64,6 +66,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <HelpBot />
+        {/* Mounted outside <main> so navigating between steps never unmounts it. */}
+        <Suspense fallback={null}>
+          <DemoTour />
+        </Suspense>
         <footer className="border-t">
           <div className="mx-auto max-w-7xl px-5 pb-20 pt-6 text-sm md:px-8">
             <p>

@@ -2384,6 +2384,145 @@ textarea.admin-input {
 }
 
 
+/* --- prezentacja ?nagranie --- */
+
+.tour {
+  position: fixed;
+  z-index: 80;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  gap: 0;
+  pointer-events: none;
+}
+
+.tour__bar {
+  height: 4px;
+  background: color-mix(in srgb, var(--foreground) 18%, transparent);
+}
+
+.tour__bar-fill {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transition: width 400ms linear;
+}
+
+.tour__panel {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem clamp(1rem, 4vw, 3rem) 1.25rem;
+  border-top: 2px solid var(--border);
+  background: color-mix(in srgb, var(--card) 96%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 -12px 40px rgb(20 32 51 / 0.18);
+}
+
+.tour__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.9rem;
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* The three perspectives the brief is judged on, each with its own colour and
+   its name written out — colour alone never carries it. */
+.tour__role {
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  padding: 0.15rem 0.7rem;
+}
+
+.tour__role--instytucja {
+  border-color: var(--primary);
+}
+
+.tour__role--rops {
+  border-color: var(--chart-4);
+}
+
+.tour__count,
+.tour__path {
+  color: var(--muted-foreground);
+}
+
+.tour__path {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.tour__caption {
+  max-width: 62rem;
+  margin: 0;
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.3;
+  animation: tour-caption-in 420ms ease-out;
+}
+
+@keyframes tour-caption-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.6rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tour__hint {
+  margin: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.tour__hint:empty {
+  display: none;
+}
+
+.tour__stop {
+  justify-self: start;
+  min-height: 2.75rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--background);
+  padding: 0.4rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  /* The panel ignores clicks so it never blocks the page it is narrating; the
+     one control in it takes them back. */
+  pointer-events: auto;
+}
+
+/* Ring on whatever the tour is about to click, so the recording shows it. */
+.tour-highlight {
+  outline: 4px solid var(--accent) !important;
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+
+/* The page needs room to scroll clear of the panel. */
+body:has(.tour) {
+  padding-bottom: 11rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tour__caption {
+    animation: none;
+  }
+  .tour__bar-fill {
+    transition: none;
+  }
+}
+
 /* --- wniosek o grant --- */
 
 .grant-form {
