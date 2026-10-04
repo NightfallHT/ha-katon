@@ -4,12 +4,19 @@ services:
   - type: web
     name: hubmi-ai
     runtime: docker
+    # Without `plan` Render picks the paid starter tier; without `region` it
+    # picks Oregon, and AGENTS.md section 3 wants the data in the EU.
+    plan: free
+    region: frankfurt
     dockerfilePath: ./ai/Dockerfile
     dockerContext: ./ai
     healthCheckPath: /health
     envVars:
       - key: DEMO_MODE
         value: "1"
+      # "*" on purpose: /web calls this service straight from the browser, so a
+      # narrower value blocks every Vercel preview URL as well as production.
+      # Each preview deploy gets its own hostname.
       - key: ALLOWED_ORIGINS
         value: "*"
       - key: LLM_MODEL
@@ -20,6 +27,10 @@ services:
         value: text-embedding-3-small
       - key: EMBEDDING_DIM
         value: "1536"
+      # The free instance sleeps; the first call after a wake-up is slow, and 20 s
+      # was not enough for it. /web gives up at 75 s.
+      - key: LLM_TIMEOUT
+        value: "45"
       - key: LLM_API_KEY
         sync: false
       - key: SUPABASE_URL
