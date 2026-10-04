@@ -1255,6 +1255,8 @@ textarea.tester-form__field {
 
 .flat-form__layout {
   display: grid;
+  /* minmax(0, …) stops long assistant text or buttons from widening the column past the screen. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 2rem;
   align-items: start;
 }
@@ -1312,8 +1314,11 @@ textarea.tester-form__field {
 
 .flat-form__aside {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.5rem;
   align-content: start;
+  min-width: 0;
+  overflow-wrap: anywhere;
   border: 1px solid var(--border);
   border-radius: 1.4rem;
   background: var(--card);

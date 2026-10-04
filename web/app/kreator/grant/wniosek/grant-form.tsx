@@ -16,10 +16,9 @@ type BudgetRow = { item: string; category: string; amount: number };
 
 // The call is picked on the server (page.tsx) from the calls table.
 export function GrantForm({ call: openCall }: { call: CallView | null }) {
-  const [problem, setProblem] = useState(
-    "Sąsiedzi seniorzy są sami i nie dojadą do przychodni.",
-  );
+  const [problem, setProblem] = useState("");
   const [solution, setSolution] = useState("");
+  const [targetGroup, setTargetGroup] = useState("");
   const [drafted, setDrafted] = useState(false);
   const [cel, setCel] = useState("");
   const [grupa, setGrupa] = useState("");
@@ -34,6 +33,7 @@ export function GrantForm({ call: openCall }: { call: CallView | null }) {
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
   const [drafting, setDrafting] = useState(false);
+  const [aiFailed, setAiFailed] = useState(false);
   const router = useRouter();
 
   const total = useMemo(
@@ -61,13 +61,14 @@ export function GrantForm({ call: openCall }: { call: CallView | null }) {
   async function generate() {
     setDrafting(true);
     setError("");
+    setAiFailed(false);
     try {
       const draft = await grantDraft({
         fiszka: {
           title: `Wniosek: ${activeCall.name}`,
           problem,
           solution,
-          target_group: "seniorzy w gminie wiejskiej",
+          target_group: targetGroup.trim(),
           stage: "pomysł",
         },
         call: {
@@ -83,15 +84,10 @@ export function GrantForm({ call: openCall }: { call: CallView | null }) {
       setRezultaty(draft.sections.rezultaty);
       setBudget(draft.budget);
     } catch {
-      setCel(
-        "Zmniejszyć samotność i ułatwić dojazd do lekarza osobom starszym w gminie wiejskiej.",
-      );
-      setGrupa("Seniorzy i ich sąsiedzi w gminie wiejskiej.");
-      setDzialania(
-        solution.trim() ||
-          "Sąsiedzki bus dwa razy w tygodniu i dyżur wolontariuszy przy zapisach do przychodni.",
-      );
-      setRezultaty("Co najmniej 20 osób skorzysta z kursu w pierwszym kwartale.");
+      // No canned text: the applicant fills the sections in from their own answers.
+      setAiFailed(true);
+      setGrupa(targetGroup.trim());
+      setDzialania(solution.trim());
     } finally {
       setDrafting(false);
       setDrafted(true);
@@ -175,6 +171,7 @@ export function GrantForm({ call: openCall }: { call: CallView | null }) {
           <Textarea
             id="problem"
             required
+            placeholder="Np. Sąsiedzi seniorzy są sami i nie dojadą do przychodni."
             value={problem}
             onChange={(event) => setProblem(event.target.value)}
           />
@@ -184,8 +181,18 @@ export function GrantForm({ call: openCall }: { call: CallView | null }) {
           <Textarea
             id="solution"
             required
+            placeholder="Np. Sąsiedzki bus dwa razy w tygodniu i dyżur wolontariuszy przy zapisach do lekarza."
             value={solution}
             onChange={(event) => setSolution(event.target.value)}
+          />
+        </div>
+        <div>
+          <Label htmlFor="target-group">Dla kogo jest pomysł?</Label>
+          <Input
+            id="target-group"
+            placeholder="Np. seniorzy w gminie wiejskiej"
+            value={targetGroup}
+            onChange={(event) => setTargetGroup(event.target.value)}
           />
         </div>
 
@@ -195,7 +202,17 @@ export function GrantForm({ call: openCall }: { call: CallView | null }) {
           </Button>
         ) : (
           <>
-            <p role="status">Przygotowaliśmy pierwszy szkic. Sprawdź każdą odpowiedź.</p>
+            {aiFailed ? (
+              <p role="alert">
+                Asystent AI jest teraz niedostępny. Uzupełnij sekcje poniżej samodzielnie albo{" "}
+                <button type="button" className="underline" onClick={() => void generate()}>
+                  spróbuj ponownie
+                </button>
+                .
+              </p>
+            ) : (
+              <p role="status">Przygotowaliśmy pierwszy szkic. Sprawdź każdą odpowiedź.</p>
+            )}
             <div>
               <Label htmlFor="cel">Cel</Label>
               <Textarea id="cel" value={cel} onChange={(e) => setCel(e.target.value)} />

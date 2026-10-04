@@ -8,6 +8,19 @@ import { getTable, type Field } from "./_tables";
 
 export type SaveResult = { ok: boolean; message: string };
 
+// Public pages that render each table; refreshed after every save, create and delete
+// so an admin change shows up without waiting for the page's revalidate window.
+const PUBLIC_PATHS: Record<string, string[]> = {
+  calls: ["/wyzwania", "/kreator", "/kreator/grant", "/kreator/grant/wniosek"],
+};
+
+function revalidateTable(tableName: string, id?: string) {
+  revalidatePath(`/admin/dane/${tableName}`);
+  if (id) revalidatePath(`/admin/dane/${tableName}/${id}`);
+  if (tableName === "calls") revalidatePath("/admin/nabory");
+  for (const path of PUBLIC_PATHS[tableName] ?? []) revalidatePath(path);
+}
+
 /** Turn one form value into the shape Postgres expects for that column. */
 function coerce(field: Field, raw: FormDataEntryValue | null) {
   const value = typeof raw === "string" ? raw : "";
@@ -67,8 +80,7 @@ export async function saveRow(
     const { table, row } = build(tableName, formData);
     const { error } = await adminDb().from(table.name).update(row).eq("id", id);
     if (error) throw new Error(error.message);
-    revalidatePath(`/admin/dane/${table.name}`);
-    revalidatePath(`/admin/dane/${table.name}/${id}`);
+    revalidateTable(table.name, id);
     return { ok: true, message: "Zapisano zmiany." };
   } catch (error) {
     return {
@@ -95,7 +107,7 @@ export async function createRow(
       .select("id")
       .single();
     if (error || !data) throw new Error(error?.message ?? "Nie udało się dodać wiersza.");
-    revalidatePath(`/admin/dane/${table.name}`);
+    revalidateTable(table.name);
     target = `/admin/dane/${table.name}/${data.id}`;
   } catch (error) {
     return {
@@ -112,6 +124,6 @@ export async function deleteRow(tableName: string, id: string) {
   const table = getTable(tableName);
   if (!table) return;
   await adminDb().from(table.name).delete().eq("id", id);
-  revalidatePath(`/admin/dane/${table.name}`);
+  revalidateTable(table.name);
   redirect(`/admin/dane/${table.name}`);
 }

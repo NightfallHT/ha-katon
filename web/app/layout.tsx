@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Atkinson_Hyperlegible, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import { Header } from "@/components/shell/header";
 import { AccessibilityPanel } from "@/components/shell/accessibility-panel";
 import { HelpBot } from "@/components/help-bot";
@@ -38,7 +39,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${sans.variable} ${mono.variable} h-full antialiased`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: a11yBoot }} />
+        {/* Applies saved font size / contrast before first paint. A raw <script> here
+            triggers React's "script tag while rendering" warning on client re-renders. */}
+        <Script id="a11y-boot" strategy="beforeInteractive">
+          {a11yBoot}
+        </Script>
       </head>
       <body className="min-h-full flex flex-col">
         <a

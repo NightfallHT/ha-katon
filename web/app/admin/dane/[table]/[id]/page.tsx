@@ -72,12 +72,7 @@ export default async function RowPage({
           <p >
             Tego nie można cofnąć. Wiersz zniknie z bazy i ze stron publicznych.
           </p>
-          <form
-            action={async () => {
-              await deleteRow(table.name, id);
-            }}
-            
-          >
+          <form action={deleteRow.bind(null, table.name, id)}>
             <button
               type="submit"
               className="dane-danger"

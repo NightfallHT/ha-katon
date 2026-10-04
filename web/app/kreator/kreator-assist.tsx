@@ -12,35 +12,13 @@ type Props = {
   onApply: (fields: Partial<Fiszka>) => void;
 };
 
-function localAssist(fiszka: Fiszka, message: string) {
-  const agree = /tak|wpisz|zmień|dodaj|wstaw/i.test(message);
-  const suggestions = [
-    "Połącz dowóz do lekarza ze stałą kawą w świetlicy.",
-    "Zaproś młodzież ze szkoły do dyżuru telefonicznego.",
-  ];
-  if (agree) {
-    return {
-      reply: "Wstawiam krótkie uzupełnienie do fiszki. Możesz je poprawić.",
-      suggestions,
-      updated_fields: {
-        problem:
-          fiszka.problem.trim() ||
-          "Seniorzy w gminie wiejskiej są sami i nie dojadą do przychodni.",
-        target_group: fiszka.target_group.trim() || "seniorzy w gminie wiejskiej",
-      } as Partial<Fiszka>,
-    };
-  }
-  return {
-    reply:
-      "Napisz, kto dokładnie potrzebuje pomocy i co już macie. Nic nie wpisuję do fiszki, dopóki nie powiesz „tak, wpisz”.",
-    suggestions,
-    updated_fields: {} as Partial<Fiszka>,
-  };
-}
+// Shown when the AI service cannot be reached. No canned suggestions are made up.
+const OFFLINE_REPLY =
+  "Asystent AI jest teraz niedostępny. Wypełnij fiszkę samodzielnie albo spróbuj ponownie za chwilę.";
 
 export function KreatorAssist({ fiszka, onApply }: Props) {
   const [open, setOpen] = useState(true);
-  const [text, setText] = useState("Pomóż mi opisać problem samotności seniorów.");
+  const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState("");
   const [history, setHistory] = useState<ChatTurn[]>([]);
@@ -58,8 +36,7 @@ export function KreatorAssist({ fiszka, onApply }: Props) {
       const data = await kreatorAssist({ fiszka, message: trimmed, history });
       applyReply(nextHistory, data.reply, data.suggestions, data.updated_fields);
     } catch {
-      const data = localAssist(fiszka, trimmed);
-      applyReply(nextHistory, data.reply, data.suggestions, data.updated_fields);
+      applyReply(nextHistory, OFFLINE_REPLY, [], {});
     } finally {
       setBusy(false);
       setStatus("");
@@ -99,7 +76,9 @@ export function KreatorAssist({ fiszka, onApply }: Props) {
   }
 
   return (
-    <aside className="mt-10 rounded-2xl border border-border bg-card p-4 shadow-sm md:mt-0">
+    // Rendered inside the form's <aside className="flat-form__aside">, which supplies the
+    // card, heading and landmark; a second <aside> here would duplicate both.
+    <div className="min-w-0">
       <button
         type="button"
         className="flex min-h-11 w-full items-center justify-between gap-3 text-left font-semibold"
@@ -140,7 +119,12 @@ export function KreatorAssist({ fiszka, onApply }: Props) {
               <ul className="mt-2 space-y-2">
                 {suggestions.map((item) => (
                   <li key={item}>
-                    <Button type="button" variant="outline" onClick={() => void send(item)}>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="h-auto min-h-11 w-full justify-start rounded-xl py-2 text-left whitespace-normal"
+                      onClick={() => void send(item)}
+                    >
                       {item}
                     </Button>
                   </li>
@@ -171,6 +155,6 @@ export function KreatorAssist({ fiszka, onApply }: Props) {
           </form>
         </div>
       ) : null}
-    </aside>
+    </div>
   );
 }

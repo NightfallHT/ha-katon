@@ -17,56 +17,11 @@ function localSimplify(text: string) {
   return short || "Krótko: napisz, czego potrzebujesz. Pomożemy krok po kroku.";
 }
 
-function localReply(message: string, page?: string): { reply: string; sources: Source[]; handoff: boolean } {
-  const text = message.toLowerCase();
-  if (/kontakt|człowiek|pracownik|napisać do rops|napisz do rops|telefon/.test(text)) {
-    return {
-      reply: "Możesz napisać do pracownika ROPS przez formularz. Odpowiedź przyjdzie na e-mail z demo.",
-      sources: [{ title: "Kontakt", url: "/kontakt" }],
-      handoff: true,
-    };
-  }
-  if (/nabor|grant|wnios/.test(text)) {
-    return {
-      reply: "Otwarte nabory są na stronie Wyzwania i w Kreatorze. Tam złożysz wniosek albo zgłosisz pomysł.",
-      sources: [
-        { title: "Wyzwania i nabory", url: "/wyzwania" },
-        { title: "Kreator", url: "/kreator" },
-      ],
-      handoff: false,
-    };
-  }
-  if (/test|oceń|ocen/.test(text)) {
-    return {
-      reply: "Na karcie innowacji możesz zapisać się do testów i wystawić ocenę od 1 do 5.",
-      sources: [{ title: "Biblioteka", url: "/biblioteka" }],
-      handoff: false,
-    };
-  }
-  if (/kontrast|czcion|duż|duz|widz/.test(text)) {
-    return {
-      reply: "W górze strony włącz dużą czcionkę albo wysoki kontrast. Wszystko da się zrobić z klawiatury.",
-      sources: [{ title: "Strona główna", url: "/" }],
-      handoff: false,
-    };
-  }
-  if (/szuk|dopas|innowac|syn|samot/.test(text)) {
-    return {
-      reply: "Na stronie głównej opisz sytuację zwykłym zdaniem. Pokażemy kilka rozwiązań i dlaczego pasują.",
-      sources: [{ title: "Dopasuj", url: "/dopasuj" }],
-      handoff: false,
-    };
-  }
-  return {
-    reply: `Jesteś na stronie ${page || "Hubu"}. Możesz szukać rozwiązań, zgłosić pomysł albo napisać do ROPS.`,
-    sources: [
-      { title: "Biblioteka", url: "/biblioteka" },
-      { title: "Kontakt", url: "/kontakt" },
-    ],
-    handoff: false,
-  };
-}
-type Msg = { role: "user" | "assistant"; content: string; sources?: Source[]; handoff?: boolean };
+// Shown when the AI service cannot be reached: no canned answers, straight to a person.
+const OFFLINE_REPLY =
+  "Asystent AI jest teraz niedostępny. Napisz do pracownika ROPS. Twoje pytanie przeniesiemy do formularza.";
+
+type Msg = { role: "user" | "assistant"; content: string; sources?: Source[]; handoff?: boolean; offline?: boolean };
 
 // Floating help bot. Add <HelpBot /> once in app/layout.tsx.
 export function HelpBot() {
@@ -96,11 +51,7 @@ export function HelpBot() {
       setMessages((m) => [...m, { role: "assistant", content: data.reply, sources: data.sources ?? [], handoff: data.handoff }]);
       setStatus("");
     } catch {
-      const fallback = localReply(message, pathname ?? undefined);
-      setMessages((m) => [
-        ...m,
-        { role: "assistant", content: fallback.reply, sources: fallback.sources, handoff: fallback.handoff },
-      ]);
+      setMessages((m) => [...m, { role: "assistant", content: OFFLINE_REPLY, handoff: true, offline: true }]);
       setStatus("");
     } finally {
       setBusy(false);
@@ -155,7 +106,7 @@ export function HelpBot() {
                   ))}
                 </ul>
               )}
-              {m.role === "assistant" && (
+              {m.role === "assistant" && !m.offline && (
                 <button
                   type="button"
                   onClick={() => explainSimpler(i)}
@@ -184,9 +135,18 @@ export function HelpBot() {
             id="bot-input"
             value={text}
             onChange={(e) => setText(e.target.value)}
+            onKeyDown={(e) => {
+              // Enter sends, Shift+Enter adds a new line.
+              if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
+                e.preventDefault();
+                e.currentTarget.form?.requestSubmit();
+              }
+            }}
+            aria-describedby="bot-input-hint"
             rows={2}
             className="w-full rounded-md border p-3"
           />
+          <p id="bot-input-hint" className="text-sm">Enter wysyła, Shift+Enter dodaje nową linię.</p>
           <button
             type="submit"
             disabled={busy}
