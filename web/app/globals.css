@@ -367,11 +367,13 @@ input, select, textarea {
 }
 
 .home-hero h1 {
-  max-width: 14ch;
+  max-width: 18ch;
   margin-top: 0.5rem;
-  font-size: clamp(2.4rem, 5.4vw, 5.8rem);
+  font-size: clamp(2.05rem, 4.2vw, 4.4rem);
   font-weight: 700;
-  line-height: 0.98;
+  line-height: 1.08;
+  hyphens: none;
+  overflow-wrap: normal;
 }
 
 .home-hero__copy > p:last-child {
@@ -821,7 +823,7 @@ input, select, textarea {
     border-radius: 1.35rem;
   }
   .home-hero h1 {
-    font-size: 2.35rem;
+    font-size: 2rem;
   }
   .result-title-list li {
     grid-template-columns: auto 1fr;
@@ -2728,12 +2730,15 @@ textarea.dane-field {
   min-height: 3.25rem;
   align-items: center;
   justify-content: center;
-  margin-top: 1rem;
   border-radius: 0.9rem;
   background: var(--accent);
   padding: 0.7rem 1.2rem;
   color: var(--accent-foreground);
   font-weight: 700;
+}
+
+.middleman-setup > .middleman-primary {
+  justify-self: start;
 }
 
 .middleman-primary:disabled,
@@ -2874,11 +2879,15 @@ textarea.dane-field {
 }
 
 .middleman-thread button {
+  display: inline-flex;
   min-height: 2.75rem;
-  margin-top: 0.5rem;
+  align-items: center;
+  margin-top: 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--background);
+  padding: 0.35rem 0.85rem;
   font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 0.2rem;
 }
 
 .middleman-wait {
@@ -2891,6 +2900,18 @@ textarea.dane-field {
 .middleman-wait svg {
   width: 1.1rem;
   height: 1.1rem;
+}
+
+.prompt-list.middleman-suggestions {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.prompt-list.middleman-suggestions > li {
+  display: flex;
+}
+
+.prompt-list.middleman-suggestions button {
+  height: 100%;
 }
 
 .middleman-suggestions {
@@ -2911,9 +2932,39 @@ textarea.dane-field {
 }
 
 .middleman-actions {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  align-items: stretch;
   gap: 0.75rem;
+}
+
+.middleman-action {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  border: 2px solid var(--border);
+  border-radius: 0.9rem;
+  background: var(--card);
+  padding: 0.75rem 1rem;
+  color: var(--foreground);
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.middleman-action.is-primary {
+  border-color: transparent;
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.middleman-action:disabled {
+  opacity: 0.55;
 }
 
 .middleman-table-wrap {
@@ -2963,6 +3014,20 @@ textarea.dane-field {
 [data-contrast="high"] .middleman-thread .is-user,
 [data-contrast="high"] .middleman-picks button[aria-pressed="true"] {
   background: var(--background);
+}
+
+@media (min-width: 640px) {
+  .prompt-list.middleman-suggestions,
+  .middleman-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1400px) {
+  html:is([data-font="150"], [data-font="175"]) .prompt-list.middleman-suggestions,
+  html:is([data-font="150"], [data-font="175"]) .middleman-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 800px) {

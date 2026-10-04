@@ -580,12 +580,12 @@ export function MiddlemanClient() {
               onChange={(event) => setMessage(event.target.value)}
             />
             <div className="middleman-actions">
-              <button type="submit" className="middleman-primary" disabled={busy || !message.trim()}>
+              <button type="submit" className="middleman-action is-primary" disabled={busy || !message.trim()}>
                 Wyślij
               </button>
               <button
                 type="button"
-                className="secondary-action"
+                className="middleman-action"
                 disabled={busy || !canDraft}
                 onClick={() => void buildReport()}
               >
