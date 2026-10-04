@@ -87,11 +87,14 @@ export function HelpBot() {
           Potrzebujesz pomocy?
         </button>
       </DialogTrigger>
-      <DialogContent className="flex max-h-[85vh] flex-col gap-3 sm:max-w-lg">
+      {/* Fits the visible screen at any text size: the conversation shrinks first, and if
+          the question form alone is taller than the screen (A+++ on a laptop) the whole
+          dialog scrolls instead of pushing "Wyślij" below the bottom edge. */}
+      <DialogContent className="flex max-h-[calc(100dvh-2rem)] flex-col gap-3 overflow-y-auto sm:max-w-lg">
         <DialogTitle>Pomoc</DialogTitle>
         <DialogDescription>Zadaj pytanie o platformę.</DialogDescription>
 
-        <div role="log" aria-live="polite" aria-label="Rozmowa z asystentem" className="min-h-40 flex-1 space-y-3 overflow-y-auto">
+        <div role="log" aria-live="polite" aria-label="Rozmowa z asystentem" className="min-h-24 flex-1 shrink space-y-3 overflow-y-auto">
           {messages.length === 0 && <p>Napisz, w czym możemy pomóc.</p>}
           {messages.map((m, i) => (
             <div key={i} className="rounded-md border p-3">
