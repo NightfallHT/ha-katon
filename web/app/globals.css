@@ -617,12 +617,36 @@ html[data-font="175"] {
 }
 
 .result-title-list li {
+  position: relative;
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 1rem;
   align-items: center;
   padding: 1.35rem;
   border-bottom: 1px solid var(--border);
+}
+
+/* The title link stretches over its whole row, so the arrow and the rest of the row
+   open the result too, while keyboard and screen-reader users still meet one link. */
+.result-title-list h2 a::after,
+.result-title-list h3 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.result-title-list li:hover {
+  background: var(--secondary);
+}
+
+.result-title-list li:has(a:focus-visible) {
+  outline: 3px solid var(--ring);
+  outline-offset: -3px;
+}
+
+.result-title-list h2 a:focus-visible,
+.result-title-list h3 a:focus-visible {
+  outline: none;
 }
 
 .result-title-list li:last-child {
