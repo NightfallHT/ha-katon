@@ -617,17 +617,27 @@ html[data-font="175"] {
   border-bottom: 0;
 }
 
+/* The catalogue lists all 116 innovations, so a single long Polish compound
+   was setting the grid's min-content width and pushing the whole page past
+   320px. `anywhere` (not `break-word`) is what shrinks min-content. */
+.result-title-list li > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .result-title-list__number {
   color: var(--accent);
   font-weight: 700;
 }
 
-.result-title-list h2 {
+.result-title-list h2,
+.result-title-list h3 {
   font-size: 1.35rem;
   font-weight: 700;
 }
 
-.result-title-list h2 a {
+.result-title-list h2 a,
+.result-title-list h3 a {
   text-decoration-thickness: 2px;
   text-underline-offset: 0.25rem;
 }
@@ -889,6 +899,17 @@ html[data-font="175"] {
 .tester-form__grid {
   display: grid;
   gap: 1rem;
+}
+
+/* Hints differ in length, so without this the inputs in a row sit at
+   different heights. */
+.tester-form__grid > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.tester-form__grid > div > :is(input, textarea, select) {
+  margin-top: auto;
 }
 
 .tester-form label {
@@ -1334,6 +1355,375 @@ textarea.tester-form__field {
   border: 2px solid var(--destructive);
 }
 
+/* --- powrót na stronę główną (każda podstrona) --- */
+
+.back-home {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  padding: 0.5rem 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.back-home:hover {
+  border-color: var(--primary);
+  background: var(--secondary);
+}
+
+.back-home svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* --- komunikacja z ROPS --- */
+
+.contact-page {
+  display: grid;
+  gap: 3rem;
+}
+
+.contact-hero {
+  display: grid;
+  gap: 2rem;
+  align-items: end;
+  padding: clamp(1.25rem, 3.5vw, 3rem);
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  background:
+    radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 34%),
+    var(--card);
+  box-shadow: 0 24px 70px rgb(20 32 51 / 0.1);
+}
+
+.contact-hero h1 {
+  max-width: 16ch;
+  margin-top: 0.5rem;
+  font-size: clamp(2.1rem, 4vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.02;
+}
+
+.contact-hero__copy > p:last-child {
+  max-width: 38rem;
+  margin-top: 1.1rem;
+  color: var(--muted-foreground);
+  font-size: 1.1rem;
+}
+
+.contact-hero__facts {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+}
+
+.contact-hero__facts > div {
+  border-left: 3px solid var(--accent);
+  padding-left: 0.9rem;
+}
+
+.contact-hero__facts dt {
+  color: var(--muted-foreground);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contact-hero__facts dd {
+  margin: 0.15rem 0 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.contact-layout {
+  display: grid;
+  gap: 2rem;
+  align-items: start;
+}
+
+.contact-main {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.contact-form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.contact-form__group {
+  display: grid;
+  gap: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--card);
+  padding: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.contact-form__group > legend {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.contact-form__step {
+  display: inline-flex;
+  width: 2rem;
+  height: 2rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-foreground);
+  font-size: 0.95rem;
+}
+
+.contact-form__note {
+  margin: 0 0 0.3rem;
+  color: var(--muted-foreground);
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+}
+
+.contact-form label span {
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.contact-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contact-form__success {
+  margin: 0;
+  border-left: 3px solid var(--accent);
+  padding-left: 0.9rem;
+  font-weight: 700;
+}
+
+.contact-aside {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}
+
+.contact-card {
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--card);
+  padding: 1.25rem;
+}
+
+.contact-card h2 {
+  margin-bottom: 0.9rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.contact-steps {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-steps li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+.contact-steps li > span {
+  display: inline-flex;
+  width: 1.9rem;
+  height: 1.9rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.contact-steps p {
+  margin-top: 0.15rem;
+  color: var(--muted-foreground);
+  font-size: 0.95rem;
+}
+
+.contact-shortcuts {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-shortcuts a {
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 0.75rem;
+  text-decoration: none;
+}
+
+.contact-shortcuts a:hover {
+  border-color: var(--primary);
+  background: var(--secondary);
+}
+
+.contact-shortcuts svg {
+  width: 1.4rem;
+  flex: none;
+  color: var(--accent);
+}
+
+.contact-shortcuts strong {
+  display: block;
+  font-weight: 700;
+}
+
+.contact-shortcuts small {
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+}
+
+[data-contrast="high"] .contact-hero {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+@media (min-width: 760px) {
+  .contact-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.5fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .contact-layout {
+    grid-template-columns: minmax(0, 1fr) 21rem;
+  }
+}
+
+/* --- katalog klikany (zasobnik, pod raportem) --- */
+
+.catalog {
+  display: grid;
+  gap: 1.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.catalog__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.catalog__tabs button {
+  min-height: 3rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  padding: 0.6rem 1.25rem;
+  font-weight: 700;
+}
+
+.catalog__tabs button[aria-pressed="true"] {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.catalog__layout {
+  display: grid;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+.catalog__filters {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--card);
+  padding: 1.25rem;
+}
+
+.catalog__filters fieldset {
+  display: grid;
+  gap: 0.2rem;
+  border: 0;
+  padding: 0;
+}
+
+.catalog__filters legend {
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+.catalog__filters label {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+
+.catalog__filters input {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: none;
+}
+
+.catalog__count {
+  margin-bottom: 0.9rem;
+  font-weight: 700;
+}
+
+.catalog__meta {
+  margin-top: 0.45rem;
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+}
+
+/* Already separated by the catalogue's own heading. */
+.catalog__materials {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+@media (min-width: 900px) {
+  .catalog__layout {
+    grid-template-columns: 17rem minmax(0, 1fr);
+  }
+}
+
+
 /* --- nabory --- */
 
 .calls-list,
@@ -1547,6 +1937,20 @@ textarea.dane-field {
 @media (min-width: 760px) {
   .call-card__facts {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  /* Three stages in a row: stacked under a two-column form they were a very
+     long, very empty strip. */
+  .flat-form__stage {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .flat-form__stage legend {
+    grid-column: 1 / -1;
+  }
+  .flat-form__stage label {
+    align-items: flex-start;
   }
 }
 

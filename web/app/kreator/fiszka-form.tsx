@@ -20,11 +20,20 @@ type Field = {
   kind: "input" | "textarea";
 };
 
+// Order is the two-column reading order: what and for whom, then problem and
+// solution side by side, then where. Full-width fields were uncomfortably long
+// lines on a desktop screen.
 const FIELDS: Field[] = [
   {
     key: "title",
     label: "Nazwij swój pomysł",
     hint: "Krótka nazwa, na przykład „Sąsiedzki transport do lekarza”.",
+    kind: "input",
+  },
+  {
+    key: "target_group",
+    label: "Dla kogo to jest?",
+    hint: "Napisz, kto najbardziej potrzebuje pomocy.",
     kind: "input",
   },
   {
@@ -38,12 +47,6 @@ const FIELDS: Field[] = [
     label: "Na czym polega Twój pomysł?",
     hint: "Opisz najprostszy sposób działania.",
     kind: "textarea",
-  },
-  {
-    key: "target_group",
-    label: "Dla kogo to jest?",
-    hint: "Napisz, kto najbardziej potrzebuje pomocy.",
-    kind: "input",
   },
   {
     key: "location",
@@ -168,40 +171,42 @@ export function FiszkaForm({ kind }: { kind: FiszkaKind }) {
             {failure ? <p className="flat-form__errors">{failure}</p> : null}
           </div>
 
-          {FIELDS.map((field) => {
-            const invalid = errors.includes(field.key);
-            const shared = {
-              id: field.key,
-              name: field.key,
-              value: values[field.key],
-              "aria-describedby": `${field.key}-hint`,
-              "aria-invalid": invalid ? true : undefined,
-              className: invalid ? "tester-form__field is-invalid" : "tester-form__field",
-            };
-            return (
-              <div key={field.key}>
-                <label htmlFor={field.key}>
-                  {field.label} <span>(wymagane)</span>
-                </label>
-                <p id={`${field.key}-hint`} className="flat-form__hint">
-                  {field.hint}
-                </p>
-                {field.kind === "textarea" ? (
-                  <textarea
-                    {...shared}
-                    rows={4}
-                    onChange={(event) => set(field.key, event.target.value)}
-                  />
-                ) : (
-                  <input
-                    {...shared}
-                    type="text"
-                    onChange={(event) => set(field.key, event.target.value)}
-                  />
-                )}
-              </div>
-            );
-          })}
+          <div className="tester-form__grid">
+            {FIELDS.map((field) => {
+              const invalid = errors.includes(field.key);
+              const shared = {
+                id: field.key,
+                name: field.key,
+                value: values[field.key],
+                "aria-describedby": `${field.key}-hint`,
+                "aria-invalid": invalid ? true : undefined,
+                className: invalid ? "tester-form__field is-invalid" : "tester-form__field",
+              };
+              return (
+                <div key={field.key}>
+                  <label htmlFor={field.key}>
+                    {field.label} <span>(wymagane)</span>
+                  </label>
+                  <p id={`${field.key}-hint`} className="flat-form__hint">
+                    {field.hint}
+                  </p>
+                  {field.kind === "textarea" ? (
+                    <textarea
+                      {...shared}
+                      rows={4}
+                      onChange={(event) => set(field.key, event.target.value)}
+                    />
+                  ) : (
+                    <input
+                      {...shared}
+                      type="text"
+                      onChange={(event) => set(field.key, event.target.value)}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </div>
 
           <fieldset className="flat-form__stage">
             <legend>Na jakim etapie to jest?</legend>

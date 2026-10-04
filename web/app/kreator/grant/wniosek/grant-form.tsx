@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
-import { ResourceNav } from "@/components/resource-nav";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -45,7 +44,6 @@ export function GrantForm({ call: openCall }: { call: CallView | null }) {
   if (!openCall) {
     return (
       <div>
-        <ResourceNav current="/kreator" />
         <h1 className="text-3xl font-bold">Nabór jest obecnie zamknięty</h1>
         <p className="mt-3">
           <Link href="/kreator" className="underline underline-offset-4">
@@ -137,7 +135,6 @@ export function GrantForm({ call: openCall }: { call: CallView | null }) {
   if (done) {
     return (
       <div>
-        <ResourceNav current="/kreator" />
         <h1 className="text-3xl font-bold">Gotowe. Zgłoszenie zostało zapisane.</h1>
         <p role="status">Otwieram śledzenie zgłoszenia…</p>
       </div>
@@ -146,7 +143,6 @@ export function GrantForm({ call: openCall }: { call: CallView | null }) {
 
   return (
     <div>
-      <ResourceNav current="/kreator" />
       <h1 className="text-3xl font-bold">Przygotuj wniosek o grant</h1>
       <p className="mt-2">
         {openCall.name}.

@@ -3,6 +3,7 @@ import { Atkinson_Hyperlegible, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import { Header } from "@/components/shell/header";
 import { AccessibilityPanel } from "@/components/shell/accessibility-panel";
+import { BackHome } from "@/components/shell/back-home";
 import { HelpBot } from "@/components/help-bot";
 import "./globals.css";
 
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           tabIndex={-1}
           className="mx-auto w-full max-w-7xl flex-1 px-5 py-10 outline-none md:px-8 lg:py-14"
         >
+          <BackHome />
           {children}
         </main>
         <HelpBot />

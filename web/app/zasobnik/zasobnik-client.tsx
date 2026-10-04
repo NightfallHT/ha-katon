@@ -6,6 +6,7 @@ import { LoaderCircle, Search } from "lucide-react";
 import { knowledgeReport } from "@/lib/api";
 import type { KnowledgeReport } from "@/lib/types";
 import { findInnovationByTitle } from "@/content/catalog";
+import { CatalogBrowser } from "./catalog-browser";
 
 const PROMPTS = [
   "Chcę zrozumieć, co działa w temacie _____ w Małopolsce.",
@@ -198,6 +199,10 @@ export function ZasobnikClient() {
           </ul>
         </section>
       )}
+
+      {/* Always below the report: not everyone wants to describe a problem in
+          a text box, and the catalogue answers the same question by clicking. */}
+      <CatalogBrowser />
     </div>
   );
 }
