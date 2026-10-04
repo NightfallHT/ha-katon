@@ -218,9 +218,28 @@ export function HomeClient() {
                 {busy ? "Szukam…" : "Znajdź inicjatywy"}
               </button>
             </div>
-            <p className="search-panel__hint">
-              Możesz opisać osobę, miejsce, barierę albo potrzebę.
-            </p>
+            {/* Example sentences sit inside the search panel so they and the field are on
+                one screen; a separate section further down was easy to miss. */}
+            {!response ? (
+              <div className="search-panel__examples">
+                <p id="examples-title">
+                  <strong>Nie wiesz, jak zacząć?</strong> Kliknij przykład i uzupełnij luki:
+                </p>
+                <ul aria-labelledby="examples-title">
+                  {PROMPTS.map((prompt) => (
+                    <li key={prompt}>
+                      <button type="button" onClick={() => choosePrompt(prompt)}>
+                        {prompt}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <p className="search-panel__hint">
+                Możesz opisać osobę, miejsce, barierę albo potrzebę.
+              </p>
+            )}
             {error ? (
               <p id="home-search-error" role="alert" className="form-error">
                 {error}
@@ -313,25 +332,6 @@ export function HomeClient() {
           </section>
         ) : (
           <>
-            <section className="prompt-section" aria-labelledby="prompt-title">
-              <div className="section-heading">
-                <div>
-                  <p className="eyebrow">Nie wiesz, jak zacząć?</p>
-                  <h2 id="prompt-title">Uzupełnij przykładowe zdanie</h2>
-                </div>
-                <p>Kliknij przykład. Kursor zatrzyma się w pierwszej luce.</p>
-              </div>
-              <ul className="prompt-list">
-                {PROMPTS.map((prompt) => (
-                  <li key={prompt}>
-                    <button type="button" onClick={() => choosePrompt(prompt)}>
-                      {prompt}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </section>
-
             <section className="feature-section" aria-labelledby="feature-title">
               <div className="section-heading">
                 <div>

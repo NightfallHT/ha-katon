@@ -353,7 +353,7 @@ input, select, textarea {
   display: grid;
   gap: 2.5rem;
   align-items: end;
-  padding: clamp(1.5rem, 4vw, 4rem);
+  padding: clamp(1.25rem, 3vw, 3rem);
   border: 1px solid var(--border);
   border-radius: 2rem;
   background:
@@ -457,7 +457,7 @@ input, select, textarea {
 
 .search-panel textarea {
   width: 100%;
-  min-height: 9rem;
+  min-height: 7rem;
   resize: vertical;
   border: 2px solid var(--input);
   border-radius: 1rem;
@@ -509,6 +509,51 @@ input, select, textarea {
 .section-heading div > p:last-child {
   max-width: 34rem;
   color: var(--muted-foreground);
+}
+
+/* Home: example sentences inside the search panel, compact so field, button and
+   examples fit on one screen. */
+.search-panel__examples {
+  display: grid;
+  gap: 0.5rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.75rem;
+}
+
+.search-panel__examples > p {
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+}
+
+.search-panel__examples > p strong {
+  color: var(--foreground);
+}
+
+.search-panel__examples ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.search-panel__examples button {
+  max-width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: var(--card);
+  padding: 0.45rem 0.8rem;
+  text-align: left;
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.search-panel__examples button:hover {
+  border-color: var(--accent);
+}
+
+.search-panel__examples button:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 2px;
 }
 
 .prompt-section,
@@ -775,6 +820,11 @@ input, select, textarea {
 @media (min-width: 760px) {
   .home-hero {
     grid-template-columns: minmax(0, 0.95fr) minmax(24rem, 1.05fr);
+  }
+  /* Title and search panel both start at the top: the panel (with the example
+     sentences) is now taller than the copy, and bottom alignment pushed the title down. */
+  .home-hero {
+    align-items: start;
   }
   .search-panel__field {
     grid-template-columns: minmax(0, 1fr) 12rem;
