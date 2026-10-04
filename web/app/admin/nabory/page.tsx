@@ -42,14 +42,50 @@ export default async function CallsPage() {
     note = message.includes("Brak konfiguracji") ? DEMO_NOTE : "Nie udało się wczytać naborów.";
     rows = demoCalls();
   }
+  const open = rows.filter((row) => row.is_open).length;
+
   return (
-    <section aria-labelledby="nabory-h">
-      <h1 id="nabory-h" className="text-2xl font-semibold">Nabory grantowe</h1>
-      {note ? <p role="status" className="mt-4 rounded-md border p-3">{note}</p> : null}
-      <div className="mt-6 space-y-6">
-        {rows.map((c) => <CallForm key={c.id} call={c} />)}
-        {rows.length === 0 && !note ? <p>Brak naborów w bazie.</p> : null}
+    <section aria-labelledby="nabory-h" className="admin-page">
+      <div className="section-heading">
+        <div>
+          <p className="eyebrow">Granty</p>
+          <h1 id="nabory-h">Nabory grantowe</h1>
+          <p className="admin-page__lead">
+            Otwarty nabór pojawia się na stronie {"„Złóż wniosek o grant”"}{" "}
+            razem z terminem i kwotą, które tu ustawisz.
+          </p>
+        </div>
       </div>
+
+      {note ? (
+        <p role="status" className="admin-notice">
+          {note}
+        </p>
+      ) : null}
+
+      <dl className="admin-stats">
+        <div>
+          <dt>Nabory</dt>
+          <dd>{rows.length}</dd>
+        </div>
+        <div>
+          <dt>Otwarte</dt>
+          <dd>{open}</dd>
+        </div>
+        <div>
+          <dt>Zamknięte</dt>
+          <dd>{rows.length - open}</dd>
+        </div>
+      </dl>
+
+      {rows.length ? (
+        rows.map((call) => <CallForm key={call.id} call={call} />)
+      ) : (
+        <p className="admin-empty">
+          Brak naborów w bazie. Dodaj wiersz w tabeli {"„Nabory”"} w Danych
+          w bazie.
+        </p>
+      )}
     </section>
   );
 }

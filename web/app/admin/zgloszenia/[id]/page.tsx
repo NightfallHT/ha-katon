@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { demoMessagesFor, demoSubmissionById } from "@/content/demo-submissions";
 import { adminDb } from "../../_lib/supabase";
 import { CATEGORY_LABELS, STATUS_LABELS, TYPE_LABELS, formatDate, label } from "../../_lib/labels";
+import { StatusBadge } from "../../_lib/status";
 import { PayloadView } from "./payload";
 import { EnrichButton, PublishButton, ReplyForm, StatusForm } from "./forms";
 
@@ -38,67 +39,130 @@ export default async function SubmissionDetail({ params }: { params: Promise<{ i
   const canPublish = ["idea", "good_practice"].includes(String(s.type));
 
   return (
-    <article aria-labelledby="tytul">
-      <p><Link href="/admin/zgloszenia" className="underline">← Wróć do listy zgłoszeń</Link></p>
-      <h1 id="tytul" className="mt-3 text-2xl font-semibold">{String(s.title)}</h1>
+    <article aria-labelledby="tytul" className="admin-page">
+      <p>
+        <Link href="/admin/zgloszenia" className="admin-back">
+          ← Wróć do listy zgłoszeń
+        </Link>
+      </p>
+
+      <div className="section-heading">
+        <div>
+          <p className="eyebrow">{label(TYPE_LABELS, String(s.type))}</p>
+          <h1 id="tytul">{String(s.title)}</h1>
+        </div>
+        <StatusBadge status={String(s.status)} />
+      </div>
+
       {demo ? (
-        <p role="status" className="mt-2 rounded-md border p-3">
+        <p role="status" className="admin-notice">
           Widok poglądowy. Gdy baza działa, tu zapiszesz decyzję i odpowiedź.
         </p>
       ) : null}
-      <p className="mt-2">
-        {label(TYPE_LABELS, String(s.type))} · {String(s.author_name || "—")} ({String(s.author_email)}) · {formatDate(String(s.created_at))} ·{" "}
-        <span className="rounded-full border px-2 py-1 text-sm font-semibold">{label(STATUS_LABELS, String(s.status))}</span>
-      </p>
-      {s.innovation_id ? (
-        <p className="mt-2"><Link href={`/biblioteka/${String(s.innovation_id)}`} className="underline">Zobacz w Bibliotece</Link></p>
-      ) : null}
 
-      <section aria-labelledby="tresc" className="mt-8">
-        <h2 id="tresc" className="text-xl font-semibold">Treść zgłoszenia</h2>
-        <div className="mt-3"><PayloadView payload={(s.payload ?? {}) as Record<string, unknown>} /></div>
+      <dl className="admin-meta">
+        <div>
+          <dt>Autor</dt>
+          <dd>{String(s.author_name || "—")}</dd>
+        </div>
+        <div>
+          <dt>E-mail</dt>
+          <dd>{String(s.author_email)}</dd>
+        </div>
+        <div>
+          <dt>Wpłynęło</dt>
+          <dd>{formatDate(String(s.created_at))}</dd>
+        </div>
+        <div>
+          <dt>Status</dt>
+          <dd>{label(STATUS_LABELS, String(s.status))}</dd>
+        </div>
+        {s.innovation_id ? (
+          <div>
+            <dt>W Bibliotece</dt>
+            <dd>
+              <Link href={`/biblioteka/${String(s.innovation_id)}`}>Zobacz kartę</Link>
+            </dd>
+          </div>
+        ) : null}
+      </dl>
+
+      <section aria-labelledby="tresc" className="admin-card">
+        <div className="admin-card__head">
+          <h2 id="tresc">Treść zgłoszenia</h2>
+          <p className="admin-card__note">To, co wpisał autor</p>
+        </div>
+        <PayloadView payload={(s.payload ?? {}) as Record<string, unknown>} />
       </section>
 
-      <section aria-labelledby="ai" className="mt-8">
-        <h2 id="ai" className="text-xl font-semibold">Podsumowanie AI</h2>
+      <section aria-labelledby="ai" className="admin-card">
+        <div className="admin-card__head">
+          <h2 id="ai">Podsumowanie AI</h2>
+          <p className="admin-card__note">Propozycja do sprawdzenia, nie decyzja</p>
+        </div>
         {s.ai_summary ? (
-          <dl className="mt-3 space-y-2">
-            <div><dt className="font-medium">Streszczenie</dt><dd>{String(s.ai_summary)}</dd></div>
-            <div><dt className="font-medium">Kategoria</dt><dd>{label(CATEGORY_LABELS, String(s.ai_category ?? ""))}</dd></div>
-            <div><dt className="font-medium">Tagi</dt><dd>{(Array.isArray(s.ai_tags) ? s.ai_tags : []).join(", ") || "—"}</dd></div>
+          <dl className="admin-payload">
+            <div>
+              <dt>Streszczenie</dt>
+              <dd>{String(s.ai_summary)}</dd>
+            </div>
+            <div>
+              <dt>Kategoria</dt>
+              <dd>{label(CATEGORY_LABELS, String(s.ai_category ?? ""))}</dd>
+            </div>
+            <div>
+              <dt>Tagi</dt>
+              <dd>{(Array.isArray(s.ai_tags) ? s.ai_tags : []).join(", ") || "—"}</dd>
+            </div>
           </dl>
         ) : (
-          <p className="mt-2">Jeszcze nie przygotowano podsumowania.</p>
+          <p className="admin-empty">Jeszcze nie przygotowano podsumowania.</p>
         )}
-        {demo ? null : (
-          <div className="mt-3"><EnrichButton id={id} /></div>
-        )}
+        {demo ? null : <EnrichButton id={id} />}
       </section>
 
-      <section aria-labelledby="status-h" className="mt-8">
-        <h2 id="status-h" className="text-xl font-semibold">Decyzja</h2>
+      <section aria-labelledby="status-h" className="admin-card">
+        <div className="admin-card__head">
+          <h2 id="status-h">Decyzja</h2>
+          <p className="admin-card__note">Status wraca do autora e-mailem</p>
+        </div>
         {demo ? (
-          <p className="mt-3">W demo status zostaje: {label(STATUS_LABELS, String(s.status))}.</p>
+          <p className="admin-empty">
+            W demo status zostaje: {label(STATUS_LABELS, String(s.status))}.
+          </p>
         ) : (
           <>
-            <div className="mt-3"><StatusForm id={id} current={String(s.status)} /></div>
-            {canPublish ? <div className="mt-4"><PublishButton id={id} published={Boolean(s.innovation_id)} /></div> : null}
+            <StatusForm id={id} current={String(s.status)} />
+            {canPublish ? (
+              <PublishButton id={id} published={Boolean(s.innovation_id)} />
+            ) : null}
           </>
         )}
       </section>
 
-      <section aria-labelledby="rozmowa" className="mt-8">
-        <h2 id="rozmowa" className="text-xl font-semibold">Rozmowa z autorem</h2>
-        <ul className="mt-3 space-y-3">
-          {msgs.map((m) => (
-            <li key={m.id} className="rounded-md border p-3">
-              <p className="font-medium">{m.sender === "admin" ? "ROPS" : "Autor"} · {formatDate(m.created_at)}</p>
-              <p className="whitespace-pre-wrap">{m.body}</p>
-            </li>
-          ))}
-          {msgs.length === 0 && <li>Brak wiadomości.</li>}
-        </ul>
-        {demo ? null : <div className="mt-4"><ReplyForm id={id} /></div>}
+      <section aria-labelledby="rozmowa" className="admin-card">
+        <div className="admin-card__head">
+          <h2 id="rozmowa">Rozmowa z autorem</h2>
+          <p className="admin-card__note">
+            {msgs.length} {msgs.length === 1 ? "wiadomość" : "wiadomości"}
+          </p>
+        </div>
+        {msgs.length ? (
+          <ul className="admin-thread">
+            {msgs.map((m) => (
+              <li key={m.id} className={m.sender === "admin" ? "is-rops" : undefined}>
+                <p className="admin-thread__who">
+                  <span>{m.sender === "admin" ? "ROPS" : "Autor"}</span>
+                  <span>{formatDate(m.created_at)}</span>
+                </p>
+                <p className="admin-thread__body">{m.body}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="admin-empty">Nikt jeszcze nic nie napisał.</p>
+        )}
+        {demo ? null : <ReplyForm id={id} />}
       </section>
     </article>
   );

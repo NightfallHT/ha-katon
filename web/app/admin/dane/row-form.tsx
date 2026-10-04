@@ -1,13 +1,11 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
+import { SaveButton } from "../_lib/save-button";
 import { createRow, saveRow, type SaveResult } from "./actions";
-import type { TableDef } from "./_tables";
+import type { FieldKind, TableDef } from "./_tables";
 
-const field =
-  "mt-2 w-full rounded-xl border-2 border-input bg-card p-3 font-mono text-base";
-
-function display(value: unknown, kind: string) {
+function display(value: unknown, kind: FieldKind) {
   if (value === null || value === undefined) return "";
   if (kind === "list") return Array.isArray(value) ? value.join(", ") : String(value);
   if (kind === "json") return JSON.stringify(value, null, 2);
@@ -33,15 +31,35 @@ export function RowForm({
     null,
   );
 
+  const editable = table.fields.filter((item) => item.kind !== "readonly");
+  const initial: Record<string, string> = {};
+  for (const item of editable) {
+    initial[item.name] =
+      item.kind === "boolean"
+        ? String(row[item.name] === true)
+        : display(row[item.name], item.kind);
+  }
+  const [values, setValues] = useState(initial);
+
+  // A new row is "changed" from the moment anything is typed; an existing one
+  // only once a value differs from what is stored.
+  const dirty =
+    mode === "create"
+      ? editable.some((item) => values[item.name] !== "" && values[item.name] !== "false")
+      : editable.some((item) => values[item.name] !== initial[item.name]);
+
+  function set(name: string, value: string) {
+    setValues((prev) => ({ ...prev, [name]: value }));
+  }
+
   return (
-    <form action={action} className="tester-form">
+    <form action={action} className="admin-form">
       {state ? (
         <p
           role={state.ok ? "status" : "alert"}
-          aria-live="polite"
-          className={`rounded-xl border-2 bg-card p-3 font-bold ${
-            state.ok ? "border-border" : "border-destructive"
-          }`}
+          className={
+            state.ok ? "admin-notice" : "admin-notice admin-notice--alert"
+          }
         >
           {state.message}
         </p>
@@ -49,45 +67,42 @@ export function RowForm({
 
       {table.fields.map((item) => {
         const id = `f-${item.name}`;
-        const value = display(row[item.name], item.kind);
 
         if (item.kind === "readonly") {
           return mode === "create" ? null : (
-            <div key={item.name}>
-              <span >{item.label}</span>
-              <p className="dane-readonly">{value || "—"}</p>
+            <div key={item.name} className="admin-field">
+              <span>{item.label}</span>
+              <p className="dane-readonly">{display(row[item.name], item.kind) || "—"}</p>
             </div>
           );
         }
 
         if (item.kind === "boolean") {
           return (
-            <div key={item.name}>
-              <label className="dane-check">
-                <input
-                  type="checkbox"
-                  name={item.name}
-                  defaultChecked={value === "true"}
-                  
-                />
-                {item.label}
-              </label>
-            </div>
+            <label key={item.name} className="admin-check" htmlFor={id}>
+              <input
+                id={id}
+                type="checkbox"
+                name={item.name}
+                checked={values[item.name] === "true"}
+                onChange={(event) => set(item.name, String(event.target.checked))}
+              />
+              {item.label}
+            </label>
           );
         }
 
         return (
-          <div key={item.name}>
-            <label htmlFor={id} >
-              {item.label}
-            </label>
+          <div key={item.name} className="admin-field">
+            <label htmlFor={id}>{item.label}</label>
             {item.kind === "textarea" || item.kind === "json" ? (
               <textarea
                 id={id}
                 name={item.name}
-                defaultValue={value}
+                value={values[item.name]}
+                onChange={(event) => set(item.name, event.target.value)}
                 rows={item.kind === "json" ? 8 : 4}
-                className={field}
+                className="dane-field"
               />
             ) : (
               <input
@@ -101,25 +116,27 @@ export function RowForm({
                       : "text"
                 }
                 step={item.kind === "number" ? "any" : undefined}
-                defaultValue={value}
-                className={field}
+                value={values[item.name]}
+                onChange={(event) => set(item.name, event.target.value)}
+                className="dane-field"
               />
             )}
           </div>
         );
       })}
 
-      <button
-        type="submit"
-        disabled={pending}
-        className="tester-form__submit"
-      >
-        {pending
-          ? "Zapisuję…"
-          : mode === "create"
-            ? "Dodaj wiersz"
-            : "Zapisz zmiany"}
-      </button>
+      <SaveButton
+        label={mode === "create" ? "Dodaj wiersz" : "Zapisz zmiany"}
+        pendingLabel="Zapisuję…"
+        pending={pending}
+        dirty={dirty}
+        missing={[]}
+        idleHint={
+          mode === "create"
+            ? "Wypełnij przynajmniej jedno pole, żeby dodać wiersz."
+            : "Brak zmian do zapisania."
+        }
+      />
     </form>
   );
 }

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getInnovation } from "@/content/catalog";
 import { adminDb } from "../../_lib/supabase";
+import { VisibilityBadge } from "../../_lib/status";
 import { EditForm } from "./edit-form";
 
 export const dynamic = "force-dynamic";
@@ -34,9 +35,23 @@ export default async function EditInnovation({ params }: { params: Promise<{ id:
     data = { ...local, published: true };
   }
   return (
-    <section aria-labelledby="edit-h">
-      <p><Link href="/admin/biblioteka" className="underline">← Wróć do listy</Link></p>
-      <h1 id="edit-h" className="mt-3 text-2xl font-semibold">Edytuj innowację</h1>
+    <section aria-labelledby="edit-h" className="admin-page">
+      <p>
+        <Link href="/admin/biblioteka" className="admin-back">
+          ← Wróć do listy innowacji
+        </Link>
+      </p>
+      <div className="section-heading">
+        <div>
+          <p className="eyebrow">Biblioteka</p>
+          <h1 id="edit-h">{data.title}</h1>
+          <p className="admin-page__lead">
+            Edytujesz kartę innowacji. Przycisk zapisu włączy się, gdy coś
+            zmienisz.
+          </p>
+        </div>
+        <VisibilityBadge published={data.published} />
+      </div>
       <EditForm inn={data} />
     </section>
   );

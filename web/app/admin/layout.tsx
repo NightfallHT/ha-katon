@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { adminDb } from "./_lib/supabase";
 import { isAdmin } from "./_lib/guard";
 import { becomeAdmin } from "./actions";
+import { AdminNav } from "./admin-nav";
 
 export const dynamic = "force-dynamic";
 
@@ -38,7 +38,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const newCount = await countNew();
   const links = [
     { href: "/admin", text: "Pulpit" },
-    { href: "/admin/zgloszenia", text: "Zgłoszenia" },
+    { href: "/admin/zgloszenia", text: "Zgłoszenia", count: newCount },
     { href: "/admin/dane", text: "Dane w bazie" },
     { href: "/admin/nabory", text: "Nabory" },
     { href: "/admin/biblioteka", text: "Biblioteka" },
@@ -54,22 +54,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         </div>
         <p>Zarządzaj zgłoszeniami, bazą wiedzy i naborami.</p>
       </header>
-      <nav aria-label="Panel administratora" className="admin-shell__nav">
-        <ul className="flex flex-wrap gap-2">
-          {links.map((l) => (
-            <li key={l.href}>
-              <Link href={l.href}>
-                {l.text}
-                {l.href === "/admin/zgloszenia" && newCount > 0 && (
-                  <span className="ml-2 rounded-full border px-2 text-sm font-semibold">
-                    {newCount} <span className="sr-only">nowych zgłoszeń</span>
-                  </span>
-                )}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <AdminNav links={links} />
       {children}
     </div>
   );
