@@ -119,7 +119,40 @@ def _situation_delta(query: str, haystack: str) -> float:
     return delta
 
 
-def _keyword_score(query: str, item: dict[str, Any]) -> float:
+def _for_institution(role: str | None) -> bool:
+    return fold(role or "") in {"gmina", "ngo", "instytucja", "institution"}
+
+
+def _audience_delta(role: str | None, item: dict[str, Any]) -> float:
+    text = fold(
+        " ".join(
+            [
+                str(item.get("summary") or ""),
+                str(item.get("description") or ""),
+                " ".join(item.get("target_groups") or []),
+            ]
+        )
+    )
+    groups = fold(" ".join(item.get("target_groups") or []))
+    can_run = any(token in text for token in ("wdroz", "gmin", "samorz", "organizacj", " ops", "ngo", "jst", "placow"))
+    for_person = any(
+        token in groups
+        for token in ("senior", "rodzic", "mieszkan", "osob", "dziec", "rodzin", "opiekun", "niewid", "gluch", "nieslys")
+    )
+    if _for_institution(role):
+        if can_run and not for_person:
+            return 0.55
+        if can_run:
+            return 0.35
+        return -0.5
+    if for_person and not can_run:
+        return 0.45
+    if for_person:
+        return -0.05
+    return -0.35
+
+
+def _keyword_score(query: str, item: dict[str, Any], role: str | None = None) -> float:
     haystack = fold(
         " ".join(
             [
@@ -151,7 +184,7 @@ def _keyword_score(query: str, item: dict[str, Any]) -> float:
         hits += 1
     # More matching words keep ranking above a loose association. Zero hits stay visible.
     floor = 0.08 if hits <= 0 else 0.2
-    score = floor + 0.06 * max(hits, 0) + _situation_delta(query, haystack)
+    score = floor + 0.06 * max(hits, 0) + _situation_delta(query, haystack) + _audience_delta(role, item)
     return round(min(0.96, max(0.02, score)), 4)
 
 
@@ -207,14 +240,14 @@ def _mock_extract(query: str, location: str | None) -> Extracted:
 
 
 def _why(item: dict[str, Any], extracted: Extracted) -> str:
-    keyword = extracted.keywords[0] if extracted.keywords else "ten problem"
-    return f"To jest blisko tego, co opisujesz: {keyword} i {extracted.target_group}."
+    summary = " ".join(str(item.get("summary") or "").split())
+    return summary or "To rozwiązanie odpowiada na opisaną sprawę."
 
 
-def _rank_local(query: str, extracted: Extracted) -> list[tuple[float, dict[str, Any]]]:
+def _rank_local(query: str, extracted: Extracted, role: str | None = None) -> list[tuple[float, dict[str, Any]]]:
     ranked = []
     for item in innovations():
-        base = _keyword_score(query, item)
+        base = _keyword_score(query, item, role)
         ranked.append((hybrid_score(base, item, extracted), item))
     ranked.sort(key=lambda pair: pair[0], reverse=True)
     return ranked[:10]
@@ -277,7 +310,7 @@ async def match(req: MatchRequest) -> MatchResponse:
 
 def _match_mock(req: MatchRequest) -> MatchResponse:
     extracted = _mock_extract(req.query, req.location)
-    ranked = _rank_local(req.query, extracted)
+    ranked = _rank_local(req.query, extracted, req.role)
     low = not ranked or ranked[0][0] < LOW_CONFIDENCE_THRESHOLD
     return MatchResponse(
         need_id=str(uuid.uuid4()),
@@ -328,7 +361,7 @@ async def _match_live(req: MatchRequest) -> MatchResponse:
         except (asyncio.TimeoutError, LlmError):
             ranked = []
     if not ranked:
-        ranked = _rank_local(req.query, extracted)
+        ranked = _rank_local(req.query, extracted, req.role)
 
     candidates = []
     for score, item in ranked[:5]:
@@ -349,10 +382,16 @@ async def _match_live(req: MatchRequest) -> MatchResponse:
     try:
         rerank_raw = await llm.complete_json(
             read_prompt("match_rerank.md"),
-            "Zostaw tylko inicjatywy, z których ta osoba realnie skorzysta w opisanej sprawie. "
+            (
+                "Szuka instytucja, która chce to wdrożyć u siebie. "
+                "Pokazuj modele do prowadzenia przez gminę, OPS albo organizację, nie udogodnienie dla jednej osoby.\n"
+                if _for_institution(req.role)
+                else "Szuka osoba prywatna. Pokazuj to, z czego może skorzystać osobiście, nie instrukcję wdrożenia dla urzędu.\n"
+            )
+            + "Zostaw tylko inicjatywy, z których ten odbiorca realnie skorzysta w opisanej sprawie. "
             "Osobie niewidomej nie podawaj kursu dla osób głuchych. "
             "Pusta lista dopiero wtedy, gdy żaden kandydat by jej nie pomógł. "
-            "W why napisz, jak to jej pomaga.\n"
+            "W why napisz, jak to jej pomaga, bez wstępu w rodzaju „to skojarzenie”.\n"
             "SPRAWA: "
             + req.query
             + "\nKANDYDACI:\n"

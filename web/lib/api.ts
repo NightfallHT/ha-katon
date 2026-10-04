@@ -73,7 +73,7 @@ export async function match(input: {
   try {
     return await request<MatchResponse>("/match", input);
   } catch {
-    return localMatch(input.query);
+    return localMatch(input.query, input.role);
   }
 }
 

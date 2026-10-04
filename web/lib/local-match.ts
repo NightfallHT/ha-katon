@@ -156,7 +156,29 @@ const SITUATIONS: { triggers: string[]; problems: string[] }[] = [
   { triggers: ["wychodz", "boi sie"], problems: ["samot", "izol", "towarz"] },
 ];
 
-function catalogMatch(query: string): MatchResponse {
+function forInstitution(role?: string) {
+  const folded = fold(role ?? "");
+  return folded === "gmina" || folded === "ngo" || folded === "instytucja" || folded === "institution";
+}
+
+function audienceScore(role: string | undefined, haystack: string, groups: string) {
+  const canRun = ["wdroz", "gmin", "samorz", "organizacj", "ops", "ngo", "jst", "placow"].some((token) =>
+    haystack.includes(token),
+  );
+  const forPerson = ["senior", "rodzic", "mieszkan", "osob", "dziec", "rodzin", "opiekun", "niewid", "gluch", "nieslys"].some(
+    (token) => groups.includes(token),
+  );
+  if (forInstitution(role)) {
+    if (canRun && !forPerson) return 12;
+    if (canRun) return 8;
+    return -10;
+  }
+  if (forPerson && !canRun) return 10;
+  if (forPerson) return -2;
+  return -8;
+}
+
+function catalogMatch(query: string, role?: string): MatchResponse {
   const folded = fold(query);
   const words = folded.split(/\s+/).filter((word) => word.length > 3);
   const active = SITUATIONS.filter((situation) => situation.triggers.some((trigger) => folded.includes(trigger)));
@@ -165,12 +187,13 @@ function catalogMatch(query: string): MatchResponse {
       const haystack = fold(
         [item.title, item.summary, item.description, item.tags.join(" "), item.target_groups.join(" ")].join(" "),
       );
+      const groups = fold(item.target_groups.join(" "));
       const direct = words.reduce((sum, word) => sum + (haystack.includes(word.slice(0, 5)) ? 3 : 0), 0);
       const situation = active.reduce((sum, entry) => {
         const sameProblem = entry.problems.some((problem) => haystack.includes(problem.slice(0, 5)));
         return sum + (sameProblem ? 8 : -6);
       }, 0);
-      return { item, score: direct + situation };
+      return { item, score: direct + situation + audienceScore(role, haystack, groups) };
     })
     .sort((a, b) => b.score - a.score);
   const useful = ranked.filter((row) => row.score > 0).slice(0, 5);
@@ -190,20 +213,19 @@ function catalogMatch(query: string): MatchResponse {
       summary: item.summary,
       category: item.category,
       score: Math.min(0.49, 0.2 + score * 0.08),
-      why:
-        score > 0
-          ? `To skojarzenie z Twoją sprawą: ${item.summary}`
-          : `Nie ma dokładnego trafienia. Najbliższe skojarzenie: ${item.summary}`,
+      why: item.summary,
     })),
     similar_needs: { count: 0, example: null },
   };
 }
 
-export function localMatch(query: string): MatchResponse {
+export function localMatch(query: string, role?: string): MatchResponse {
   const folded = fold(query);
-  const hit = DEMOS.find((demo) =>
-    demo.needles.some((needle) => folded.includes(fold(needle))),
-  );
-  if (hit) return hit.response;
-  return catalogMatch(query);
+  if (!forInstitution(role)) {
+    const hit = DEMOS.find((demo) =>
+      demo.needles.some((needle) => folded.includes(fold(needle))),
+    );
+    if (hit) return hit.response;
+  }
+  return catalogMatch(query, role);
 }
