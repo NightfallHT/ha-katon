@@ -169,6 +169,26 @@ html[data-font="150"] {
   font-size: 27px;
 }
 
+html[data-font="175"] {
+  font-size: 31.5px;
+}
+
+/* At A++/A+++ on a phone a single long Polish word in a heading or card ("Małopolsce",
+   "niepełnosprawnością") is wider than the screen. Let text break inside words (with a
+   hyphen where the browser can) instead of widening the page. Table cells are left out:
+   admin tables scroll inside their own wrapper. */
+h1, h2, h3, h4, h5, h6, p, li, dt, dd, label, legend, figcaption, blockquote, summary {
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+/* Form controls have an intrinsic width (size="20") that grows with the text size;
+   never let them push their container wider than the screen. */
+input, select, textarea {
+  min-width: 0;
+  max-width: 100%;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -183,11 +203,1697 @@ html[data-font="150"] {
     outline: 3px solid var(--ring);
     outline-offset: 2px;
   }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--background) 94%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+/* The panel is sized in px on purpose: it controls the html font-size (A … A+++), so
+   rem units made it grow with its own setting until it ran off a phone screen at A+++.
+   Browser zoom still scales px, so the controls stay resizable. */
+.wcag-panel {
+  position: fixed;
+  z-index: 60;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 7px 12px;
+  align-items: center;
+  max-width: calc(100vw - 24px);
+  padding: 10px;
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  background: var(--card);
+  color: var(--card-foreground);
+  font-size: 16px;
+  line-height: 1.3;
+  box-shadow: 0 10px 30px rgb(20 32 51 / 0.18);
+}
+
+.wcag-panel__title {
+  padding-left: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.wcag-panel__fonts {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.wcag-panel__font {
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--background);
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Each button previews its own size, in px so the preview does not scale with itself. */
+.wcag-panel__font--100 { font-size: 14px; }
+.wcag-panel__font--125 { font-size: 17px; }
+.wcag-panel__font--150 { font-size: 20px; }
+.wcag-panel__font--175 { font-size: 24px; }
+
+.wcag-panel__font[aria-pressed="true"] {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  box-shadow: 0 0 0 2px var(--card), 0 0 0 4px var(--ring);
+}
+
+.wcag-panel__contrast {
+  grid-column: 1 / -1;
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 2px solid #ffff00;
+  border-radius: 14px;
+  background: #000000;
+  padding: 6px 12px;
+  color: #ffff00;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.wcag-panel__contrast[aria-pressed="true"] {
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+.wcag-panel__contrast-icon {
+  display: grid;
+  width: 32px;
+  height: 23px;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  border: 1px solid #ffff00;
+  border-radius: 5px;
+}
+
+.wcag-panel__contrast-icon span:first-child {
+  background: #ffffff;
+}
+
+.wcag-panel__contrast-icon span:last-child {
+  background: #000000;
+}
+
+@media (min-width: 768px) {
+  .wcag-panel {
+    grid-template-columns: auto auto;
+    width: max-content;
+  }
+}
+
+@media (max-width: 430px) {
+  .wcag-panel__title,
+  .wcag-panel__contrast span:last-child {
+    display: none;
+  }
+  .wcag-panel {
+    grid-template-columns: 1fr auto;
+  }
+  .wcag-panel__contrast {
+    grid-column: auto;
+    min-width: 50px;
+    padding-inline: 6px;
+  }
+}
+
+.home-flow {
+  display: grid;
+  gap: 4.5rem;
+}
+
+.home-hero {
+  display: grid;
+  gap: 2.5rem;
+  align-items: end;
+  padding: clamp(1.5rem, 4vw, 4rem);
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  background:
+    radial-gradient(circle at 85% 10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 32%),
+    var(--card);
+  box-shadow: 0 24px 70px rgb(20 32 51 / 0.12);
+}
+
+.home-hero__copy {
+  max-width: 50rem;
+}
+
+.home-hero h1 {
+  max-width: 14ch;
+  margin-top: 0.5rem;
+  font-size: clamp(2.4rem, 5.4vw, 5.8rem);
+  font-weight: 700;
+  line-height: 0.98;
+}
+
+.home-hero__copy > p:last-child {
+  max-width: 43rem;
+  margin-top: 1.5rem;
+  color: var(--muted-foreground);
+  font-size: 1.15rem;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.search-panel {
+  display: grid;
+  gap: 0.65rem;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--background);
+}
+
+.search-panel > label {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.search-panel > label span,
+.search-panel__hint {
+  color: var(--muted-foreground);
+  font-size: 0.88rem;
+  font-weight: 400;
+}
+
+.search-panel__field {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.audience-switch {
+  display: grid;
+  align-content: start;
+  gap: 0.45rem;
+  min-width: 11rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--card);
+  padding: 0.75rem;
+}
+
+.audience-switch legend {
+  padding-inline: 0.3rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.audience-switch label {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.55rem;
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+  padding: 0.35rem 0.55rem;
+  cursor: pointer;
+}
+
+.audience-switch label:has(input:checked) {
+  border-color: var(--primary);
+  background: var(--secondary);
+  font-weight: 700;
+}
+
+.audience-switch input {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: var(--primary);
+}
+
+.search-panel textarea {
+  width: 100%;
+  min-height: 9rem;
+  resize: vertical;
+  border: 2px solid var(--input);
+  border-radius: 1rem;
+  background: var(--card);
+  padding: 1rem 1.1rem;
+  font-size: 1.05rem;
+}
+
+.search-panel button[type="submit"] {
+  display: inline-flex;
+  min-height: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border-radius: 1rem;
+  background: var(--accent);
+  padding: 0.8rem 1.25rem;
+  color: var(--accent-foreground);
+  font-weight: 700;
+}
+
+.search-panel button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.form-error {
+  color: var(--destructive);
+  font-weight: 700;
+}
+
+.section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+}
+
+.section-heading h1,
+.section-heading h2 {
+  margin-top: 0.25rem;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 700;
+  line-height: 1.08;
+}
+
+.section-heading > p,
+.section-heading div > p:last-child {
+  max-width: 34rem;
+  color: var(--muted-foreground);
+}
+
+.prompt-section,
+.feature-section,
+.search-results,
+.materials-block {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.prompt-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.prompt-list button {
+  width: 100%;
+  min-height: 4rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--card);
+  padding: 0.9rem 1.1rem;
+  text-align: left;
+  font-size: 1.05rem;
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgb(20 32 51 / 0.06);
+}
+
+.prompt-list button:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.feature-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.feature-grid > li > a {
+  display: grid;
+  height: 100%;
+  min-height: 16rem;
+  align-content: start;
+  gap: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--card);
+  padding: 1.5rem;
+  text-decoration: none;
+  box-shadow: 0 12px 35px rgb(20 32 51 / 0.08);
+}
+
+.feature-grid > li:first-child > a {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.feature-grid > li > a:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.feature-grid__icon {
+  display: inline-flex;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, var(--accent) 15%, var(--card));
+  color: var(--accent);
+}
+
+.feature-grid__icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.feature-grid h3 {
+  margin-top: 0.3rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.feature-grid p {
+  color: var(--muted-foreground);
+}
+
+.feature-grid > li:first-child p {
+  color: color-mix(in srgb, var(--primary-foreground) 82%, transparent);
+}
+
+.feature-grid__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  align-self: end;
+  margin-top: auto;
+  font-weight: 700;
+}
+
+.feature-grid__link svg {
+  width: 1.1rem;
+}
+
+.secondary-action {
+  min-height: 2.8rem;
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: var(--card);
+  padding: 0.55rem 1rem;
+  font-weight: 700;
+}
+
+.result-title-list {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--card);
+}
+
+.result-title-list li {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.35rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* The title link stretches over its whole row, so the arrow and the rest of the row
+   open the result too, while keyboard and screen-reader users still meet one link. */
+.result-title-list h2 a::after,
+.result-title-list h3 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.result-title-list li:hover {
+  background: var(--secondary);
+}
+
+.result-title-list li:has(a:focus-visible) {
+  outline: 3px solid var(--ring);
+  outline-offset: -3px;
+}
+
+.result-title-list h2 a:focus-visible,
+.result-title-list h3 a:focus-visible {
+  outline: none;
+}
+
+.result-title-list li:last-child {
+  border-bottom: 0;
+}
+
+/* The catalogue lists all 116 innovations, so a single long Polish compound
+   was setting the grid's min-content width and pushing the whole page past
+   320px. `anywhere` (not `break-word`) is what shrinks min-content. */
+.result-title-list li > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.result-title-list__number {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.result-title-list h2,
+.result-title-list h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.result-title-list h2 a,
+.result-title-list h3 a {
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.25rem;
+}
+
+.result-title-list p {
+  margin-top: 0.25rem;
+  color: var(--muted-foreground);
+}
+
+.result-title-list svg {
+  width: 1.35rem;
+  color: var(--accent);
+}
+
+.empty-result {
+  border: 1px dashed var(--border);
+  border-radius: 1.4rem;
+  padding: 2rem;
+  background: var(--card);
+}
+
+.empty-result h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.empty-result a {
+  display: inline-flex;
+  margin-top: 1rem;
+  font-weight: 700;
+}
+
+.materials-block {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.materials-block ul {
+  display: grid;
+  gap: 1rem;
+}
+
+.materials-block li a {
+  display: block;
+  height: 100%;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--card);
+  padding: 1.25rem;
+  text-decoration: none;
+}
+
+.materials-block li a > span {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.materials-block strong {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 1.1rem;
+}
+
+.materials-block li p {
+  margin-top: 0.4rem;
+  color: var(--muted-foreground);
+}
+
+[data-contrast="high"] .home-hero,
+[data-contrast="high"] .feature-grid > li:first-child > a {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+[data-contrast="high"] .feature-grid > li:first-child p {
+  color: var(--muted-foreground);
+}
+
+@media (min-width: 760px) {
+  .home-hero {
+    grid-template-columns: minmax(0, 0.95fr) minmax(24rem, 1.05fr);
+  }
+  .search-panel__field {
+    grid-template-columns: minmax(0, 1fr) 12rem;
+    align-items: stretch;
+  }
+  .search-panel__field > textarea {
+    grid-column: 1;
+  }
+  .search-panel__field > .audience-switch {
+    grid-column: 2;
+  }
+  .search-panel__field > button[type="submit"] {
+    grid-column: 1 / -1;
+  }
+  .search-panel button[type="submit"] {
+    min-width: 12.5rem;
+  }
+  .prompt-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .feature-grid > li:first-child {
+    grid-row: span 2;
+  }
+  .materials-block ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1120px) {
+  .feature-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .home-flow {
+    gap: 3rem;
+  }
+  .home-hero {
+    padding: 1.1rem;
+    border-radius: 1.35rem;
+  }
+  .home-hero h1 {
+    font-size: 2.35rem;
+  }
+  .result-title-list li {
+    grid-template-columns: auto 1fr;
+  }
+  .result-title-list li > svg {
+    display: none;
+  }
+}
+
+.innovation-detail {
+  display: grid;
+  gap: 3rem;
+}
+
+.innovation-detail__hero {
+  max-width: 62rem;
+  padding: clamp(1.5rem, 4vw, 4rem);
+  border-radius: 2rem;
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.innovation-detail__hero .eyebrow {
+  color: color-mix(in srgb, var(--primary-foreground) 80%, var(--accent));
+}
+
+.innovation-detail__hero h1 {
+  max-width: 18ch;
+  margin-top: 0.5rem;
+  font-size: clamp(2.4rem, 5vw, 5rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.innovation-detail__summary {
+  max-width: 46rem;
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.innovation-detail__meta {
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.innovation-detail__description {
+  max-width: 55rem;
+}
+
+.innovation-detail__description h2,
+.innovation-detail__info-grid h2,
+.innovation-detail__similar > h2,
+.innovation-detail__video h2 {
+  font-size: clamp(1.55rem, 2.4vw, 2.3rem);
+  font-weight: 700;
+}
+
+.innovation-detail__description p {
+  margin-top: 0.8rem;
+  color: var(--muted-foreground);
+  font-size: 1.12rem;
+}
+
+.tester-panel {
+  display: grid;
+  gap: 1.75rem;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  background: var(--card);
+  box-shadow: 0 18px 50px rgb(20 32 51 / 0.1);
+}
+
+.tester-panel__heading {
+  max-width: 48rem;
+}
+
+.tester-panel__heading h2 {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-weight: 700;
+}
+
+.tester-panel__heading > p:last-child,
+.tester-panel__forms section > p {
+  color: var(--muted-foreground);
+}
+
+.tester-panel__forms {
+  display: grid;
+  gap: 1rem;
+}
+
+.tester-panel__forms > section {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 0.8rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  padding: 1.4rem;
+  background: var(--background);
+}
+
+.tester-panel__forms h3 {
+  max-width: 18rem;
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+.tester-panel__step {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  color: var(--accent);
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.tester-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.6rem;
+}
+
+.tester-form__grid {
+  display: grid;
+  gap: 1rem;
+}
+
+/* Hints differ in length, so without this the inputs in a row sit at
+   different heights. */
+.tester-form__grid > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.tester-form__grid > div > :is(input, textarea, select) {
+  margin-top: auto;
+}
+
+.tester-form label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+}
+
+.tester-form label span {
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.tester-form__field {
+  width: 100%;
+  min-height: 3rem;
+  border: 1px solid var(--input);
+  border-radius: 0.75rem;
+  background: var(--card);
+  padding: 0.7rem 0.8rem;
+}
+
+textarea.tester-form__field {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.tester-form__submit {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 3rem;
+  align-items: center;
+  border-radius: 0.75rem;
+  background: var(--accent);
+  padding: 0.7rem 1.15rem;
+  color: var(--accent-foreground);
+  font-weight: 700;
+}
+
+.tester-form__submit:disabled {
+  opacity: 0.6;
+}
+
+.tester-panel__reviews {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.innovation-detail__info-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.innovation-detail__info-grid > section {
+  border: 1px solid var(--border);
+  border-radius: 1.2rem;
+  background: var(--card);
+  padding: 1.4rem;
+}
+
+.innovation-detail__info-grid ul {
+  margin-top: 0.8rem;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.innovation-detail__info-grid a,
+.innovation-detail__back a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  margin-top: 0.8rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+
+.innovation-detail__similar {
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+[data-contrast="high"] .innovation-detail__hero {
+  border: 2px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+@media (min-width: 900px) {
+  .tester-panel__forms {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  }
+  .tester-form__grid,
+  .innovation-detail__info-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .tester-form__wide {
+    grid-column: 1 / -1;
+  }
+}
+
+.admin-gate {
+  max-width: 52rem;
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  background: var(--card);
+  padding: clamp(1.5rem, 4vw, 4rem);
+  box-shadow: 0 20px 60px rgb(20 32 51 / 0.1);
+}
+
+.admin-gate h1 {
+  margin-top: 0.4rem;
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.admin-gate__lead {
+  max-width: 34rem;
+  margin-top: 0.8rem;
+  color: var(--muted-foreground);
+}
+
+.admin-login {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+  max-width: 22rem;
+  margin-top: 1.5rem;
+}
+
+.admin-login .admin-field {
+  width: 100%;
+}
+
+.admin-login .admin-input {
+  width: 100%;
+}
+
+.admin-gate__demo {
+  margin-top: 1.5rem;
+  border-left: 4px solid var(--accent);
+  padding-left: 0.9rem;
+  color: var(--muted-foreground);
+}
+
+.admin-shell__masthead-end {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem 1.5rem;
+}
+
+.admin-shell__signout {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  border: 2px solid var(--primary-foreground);
+  border-radius: 999px;
+  padding: 0.45rem 1.1rem;
+  color: var(--primary-foreground);
+  font-weight: 700;
+}
+
+.admin-shell__signout:hover {
+  background: var(--primary-foreground);
+  color: var(--primary);
+}
+
+[data-contrast="high"] .admin-shell__signout {
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+[data-contrast="high"] .admin-shell__signout:hover {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.admin-primary-action {
+  min-height: 3rem;
+  border-radius: 0.8rem;
+  background: var(--accent);
+  padding: 0.7rem 1.1rem;
+  color: var(--accent-foreground);
+  font-weight: 700;
+}
+
+.admin-shell {
+  display: grid;
+  /* minmax(0, …): otherwise the column grows to a wide table's width and the table's
+     own overflow-x wrapper never scrolls, pushing the whole admin page off a phone. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+/* Grid children default to min-width:auto, so a wide table would widen the
+   page instead of scrolling inside its own box. */
+.admin-shell > * {
+  min-width: 0;
+}
+
+.admin-shell__masthead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  border-radius: 1.5rem;
+  background: var(--primary);
+  padding: 1.4rem 1.6rem;
+  color: var(--primary-foreground);
+}
+
+.admin-shell__masthead > div > p:last-child {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.admin-shell__masthead .eyebrow {
+  color: color-mix(in srgb, var(--primary-foreground) 80%, var(--accent));
+}
+
+.admin-shell__nav {
+  overflow-x: auto;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.8rem;
+}
+
+.admin-shell__nav a {
+  display: inline-flex;
+  min-height: 2.8rem;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  padding: 0.45rem 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.admin-shell__nav a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.admin-dashboard {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.admin-dashboard__heading h1 {
+  margin-top: 0.25rem;
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.admin-dashboard__heading > p:last-child {
+  margin-top: 0.7rem;
+  color: var(--muted-foreground);
+}
+
+.admin-dashboard__tiles {
+  display: grid;
+  gap: 1rem;
+}
+
+.admin-dashboard__tiles a {
+  display: grid;
+  min-height: 12rem;
+  align-content: end;
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--card);
+  padding: 1.4rem;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgb(20 32 51 / 0.08);
+}
+
+.admin-dashboard__tiles a:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.admin-dashboard__tiles span {
+  color: var(--accent);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.admin-dashboard__tiles strong {
+  margin-top: 0.6rem;
+  font-size: 1.2rem;
+}
+
+.admin-dashboard__tiles small {
+  margin-top: 0.7rem;
+  color: var(--muted-foreground);
+}
+
+.admin-shell__nav a[aria-current="page"] {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.admin-shell__nav-count {
+  margin-left: 0.5rem;
+  border-radius: 999px;
+  background: var(--accent);
+  padding: 0 0.45rem;
+  color: var(--accent-foreground);
+  font-size: 0.85rem;
+}
+
+.admin-shell__nav a[aria-current="page"] .admin-shell__nav-count {
+  background: var(--primary-foreground);
+  color: var(--primary);
+}
+
+/* --- wspólny słownik widoków panelu --- */
+
+.admin-page {
+  display: grid;
+  gap: 2rem;
+}
+
+/* Grid children default to min-width:auto, which lets a wide table push the
+   whole page sideways instead of scrolling inside its own box. */
+.admin-page > *,
+.admin-card > * {
+  min-width: 0;
+}
+
+.admin-page__lead {
+  max-width: 48rem;
+  color: var(--muted-foreground);
+}
+
+.admin-card {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--card);
+  padding: clamp(1rem, 2.5vw, 1.6rem);
+}
+
+.admin-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem 1.5rem;
+}
+
+.admin-card__head h2,
+.admin-card > h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.admin-card__head h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.admin-card__note {
+  color: var(--muted-foreground);
+}
+
+.admin-notice {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 0.9rem;
+  background: var(--card);
+  padding: 0.85rem 1rem;
+}
+
+.admin-notice--alert {
+  border-color: var(--destructive);
+  border-left-color: var(--destructive);
+  font-weight: 700;
+}
+
+.admin-stats {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+}
+
+.admin-stats > div {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 1.2rem;
+  background: var(--card);
+  padding: 1rem 1.2rem;
+}
+
+.admin-stats dt {
+  color: var(--muted-foreground);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* A stat can be a long single word ("Niepełnosprawność"), so it has to be
+   allowed to shrink and to break. */
+.admin-stats dd {
+  margin: 0.2rem 0 0;
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.admin-table-wrap,
+.dane-table-wrap {
+  /* position:relative so the .sr-only spans inside cells are laid out against
+     this box. Without a positioned ancestor their containing block is the
+     document, and an off-screen span inside a wide table scrolls the page. */
+  position: relative;
+  min-width: 0;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 1.2rem;
+  background: var(--card);
+}
+
+.admin-table,
+.dane-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.admin-table caption,
+.dane-table caption {
+  padding: 0.9rem 1rem 0;
+  color: var(--muted-foreground);
+  text-align: left;
+}
+
+.admin-table th,
+.admin-table td,
+.dane-table th,
+.dane-table td {
+  padding: 0.75rem 1rem;
+  vertical-align: top;
+}
+
+.admin-table thead th,
+.dane-table thead th {
+  border-bottom: 1px solid var(--border);
+  background: var(--secondary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.admin-table tbody tr + tr th,
+.admin-table tbody tr + tr td,
+.dane-table tbody tr + tr th,
+.dane-table tbody tr + tr td {
+  border-top: 1px solid var(--border);
+}
+
+.admin-table tbody tr:hover,
+.dane-table tbody tr:hover {
+  background: var(--secondary);
+}
+
+.admin-table tbody th {
+  font-weight: 700;
+}
+
+.admin-table a {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.admin-table__num {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Colour only in the border, so every badge keeps text contrast in all modes. */
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  padding: 0.1rem 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.admin-badge--new {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.admin-badge--review {
+  border-color: var(--primary);
+}
+
+.admin-badge--yes {
+  border-color: var(--chart-4);
+}
+
+.admin-badge--no {
+  border-color: var(--destructive);
+}
+
+.admin-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 0.9rem;
+}
+
+/* A select is as wide as its longest option unless it is allowed to shrink;
+   "Współpraca międzysektorowa" alone was wider than a 320px screen. */
+.admin-filters > .admin-field {
+  flex: 1 1 12rem;
+}
+
+.admin-field {
+  display: grid;
+  min-width: 0;
+  gap: 0.3rem;
+}
+
+.admin-field > label,
+.admin-field > span {
+  font-weight: 700;
+}
+
+.admin-field__hint {
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+}
+
+.admin-input,
+.admin-select {
+  min-width: 0;
+  max-width: 100%;
+  min-height: 3rem;
+  border: 1px solid var(--input);
+  border-radius: 0.75rem;
+  background: var(--card);
+  padding: 0.6rem 0.8rem;
+}
+
+.admin-select {
+  width: 100%;
+}
+
+textarea.admin-input {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.admin-input--wide {
+  width: 100%;
+}
+
+.admin-check {
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+}
+
+.admin-check input {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: none;
+}
+
+.admin-form {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.admin-form__grid {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.admin-form__grid > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.admin-form__grid > div > :is(input, textarea, select) {
+  margin-top: auto;
+}
+
+/* The save state: why the button is off, and what happened after it ran. */
+.admin-save {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  padding-top: 0.3rem;
+  border-top: 1px solid var(--border);
+}
+
+.admin-save button:disabled {
+  opacity: 0.55;
+}
+
+.admin-save__hint {
+  color: var(--muted-foreground);
+}
+
+.admin-save__hint--dirty {
+  color: var(--foreground);
+  font-weight: 700;
+}
+
+.admin-save__result {
+  flex-basis: 100%;
+  margin: 0;
+  border-left: 4px solid var(--accent);
+  padding-left: 0.8rem;
+  font-weight: 700;
+}
+
+.admin-save__result--bad {
+  border-left-color: var(--destructive);
+}
+
+.admin-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.75rem;
+  margin: 0;
+}
+
+.admin-meta dt {
+  color: var(--muted-foreground);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.admin-meta dd {
+  margin: 0.1rem 0 0;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.admin-list {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.admin-list > li {
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--card);
+  padding: 0.9rem 1.1rem;
+}
+
+.admin-list__meta {
+  margin-top: 0.35rem;
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+}
+
+.admin-thread {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.admin-thread > li {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--border);
+  border-radius: 1rem;
+  background: var(--card);
+  padding: 0.9rem 1.1rem;
+}
+
+.admin-thread > li.is-rops {
+  border-left-color: var(--accent);
+  background: var(--secondary);
+}
+
+.admin-thread__who {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.admin-thread__body {
+  margin-top: 0.4rem;
+  white-space: pre-wrap;
+}
+
+.admin-payload {
+  display: grid;
+  gap: 1.25rem;
+}
+
+/* so the budget table scrolls inside its own box instead of widening the page */
+.admin-payload > div {
+  min-width: 0;
+}
+
+.admin-payload dl {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.admin-payload dt {
+  color: var(--muted-foreground);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.admin-payload dd {
+  margin: 0.15rem 0 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.admin-payload h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.admin-payload__raw {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Buttons that act immediately: no dirty state to report, just a result. */
+.admin-action {
+  display: grid;
+  gap: 0.6rem;
+  justify-items: start;
+}
+
+.admin-empty {
+  border: 1px dashed var(--border);
+  border-radius: 1.2rem;
+  background: var(--card);
+  padding: 1.5rem;
+  color: var(--muted-foreground);
+}
+
+.admin-back-row {
+  margin-bottom: 0.5rem;
+}
+
+/* Same pill as .back-home so it is just as easy to spot, accent border so the
+   two are not mistaken for each other. */
+.admin-back {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  border: 2px solid var(--accent);
+  border-radius: 999px;
+  background: var(--card);
+  padding: 0.5rem 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.admin-back:hover {
+  background: var(--secondary);
+}
+
+.admin-back svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--accent);
+}
+
+@media (min-width: 640px) {
+  /* auto-fit, so a view with three stats does not leave a hole */
+  .admin-stats {
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .admin-form__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .admin-form__grid > .admin-form__wide {
+    grid-column: 1 / -1;
+  }
+}
+
+[data-contrast="high"] .admin-shell__masthead {
+  border: 2px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+[data-contrast="high"] .admin-table thead th,
+[data-contrast="high"] .dane-table thead th,
+[data-contrast="high"] .admin-table tbody tr:hover,
+[data-contrast="high"] .dane-table tbody tr:hover,
+[data-contrast="high"] .admin-thread > li.is-rops {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+[data-contrast="high"] .admin-shell__masthead .eyebrow,
+[data-contrast="high"] .innovation-detail__hero .eyebrow {
+  color: var(--primary);
+}
+
+@media (min-width: 700px) {
+  .admin-dashboard__tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .admin-dashboard__tiles {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.search-panel__field--simple {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.search-panel__field--simple > button[type="submit"] {
+  justify-self: start;
+}
+
+.knowledge-report {
+  display: grid;
+  gap: 2rem;
+}
+
+.knowledge-report h2 {
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+}
+
+.knowledge-report__brief {
+  display: grid;
+  gap: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--card);
+  padding: 1.4rem;
+}
+
+.knowledge-report__metrics {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.knowledge-report__metrics li {
+  display: grid;
+  gap: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--background);
+  padding: 1rem 1.1rem;
+}
+
+.knowledge-report__metrics strong {
+  color: var(--accent);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.knowledge-report__list {
+  margin-top: 0.8rem;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.knowledge-report__list li + li {
+  margin-top: 0.6rem;
+}
+
+@media (min-width: 760px) {
+  .search-panel__field--simple {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .search-panel__field--simple > button[type="submit"] {
+    grid-column: 1;
+  }
+  .knowledge-report__metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media print {
   header,
   footer,
+  .wcag-panel,
   a[href="#main"] {
     display: none !important;
   }
@@ -201,5 +1907,1094 @@ html[data-font="150"] {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+/* ---------------------------------------------------------------------------
+   Kreator (jeden formularz), nabory i panel danych ROPS.
+   Dołożone do istniejącego słownika klas — reużywa .tester-form, .feature-grid,
+   .section-heading i .admin-primary-action tam, gdzie się da.
+   --------------------------------------------------------------------------- */
+
+.flat-form,
+.calls-page {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.flat-form__progress {
+  align-self: end;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  padding: 0.45rem 0.9rem;
+  font-weight: 700;
+}
+
+.flat-form__layout {
+  display: grid;
+  /* minmax(0, …) stops long assistant text or buttons from widening the column past the screen. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.flat-form__hint {
+  margin: 0 0 0.4rem;
+  color: var(--muted-foreground);
+}
+
+.flat-form__summary:empty {
+  display: none;
+}
+
+.flat-form__errors {
+  border: 2px solid var(--destructive);
+  border-radius: 1rem;
+  background: var(--card);
+  padding: 1rem;
+  font-weight: 700;
+}
+
+.flat-form__errors ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.3rem;
+}
+
+.flat-form__stage {
+  display: grid;
+  gap: 0.6rem;
+  border: 0;
+  padding: 0;
+}
+
+.flat-form__stage legend {
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+}
+
+.flat-form__stage label {
+  display: flex;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--card);
+  padding: 0.6rem 0.8rem;
+  cursor: pointer;
+}
+
+.flat-form__stage label.is-selected {
+  border-color: var(--primary);
+  background: var(--secondary);
+}
+
+.flat-form__aside {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.5rem;
+  align-content: start;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--card);
+  padding: 1.2rem;
+}
+
+.flat-form__aside h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.tester-form__field.is-invalid {
+  border: 2px solid var(--destructive);
+}
+
+/* --- powrót na stronę główną (każda podstrona) --- */
+
+.back-home {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  padding: 0.5rem 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.back-home:hover {
+  border-color: var(--primary);
+  background: var(--secondary);
+}
+
+.back-home svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* --- komunikacja z ROPS --- */
+
+.contact-page {
+  display: grid;
+  gap: 3rem;
+}
+
+.contact-hero {
+  display: grid;
+  gap: 2rem;
+  align-items: end;
+  padding: clamp(1.25rem, 3.5vw, 3rem);
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  background:
+    radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 34%),
+    var(--card);
+  box-shadow: 0 24px 70px rgb(20 32 51 / 0.1);
+}
+
+.contact-hero h1 {
+  max-width: 16ch;
+  margin-top: 0.5rem;
+  font-size: clamp(2.1rem, 4vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.02;
+}
+
+.contact-hero__copy > p:last-child {
+  max-width: 38rem;
+  margin-top: 1.1rem;
+  color: var(--muted-foreground);
+  font-size: 1.1rem;
+}
+
+.contact-hero__facts {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+}
+
+.contact-hero__facts > div {
+  border-left: 3px solid var(--accent);
+  padding-left: 0.9rem;
+}
+
+.contact-hero__facts dt {
+  color: var(--muted-foreground);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contact-hero__facts dd {
+  margin: 0.15rem 0 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.contact-layout {
+  display: grid;
+  gap: 2rem;
+  align-items: start;
+}
+
+.contact-main {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.contact-form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.contact-form__group {
+  display: grid;
+  gap: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--card);
+  padding: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.contact-form__group > legend {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.contact-form__step {
+  display: inline-flex;
+  width: 2rem;
+  height: 2rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-foreground);
+  font-size: 0.95rem;
+}
+
+.contact-form__note {
+  margin: 0 0 0.3rem;
+  color: var(--muted-foreground);
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+}
+
+.contact-form label span {
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.contact-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contact-form__success {
+  margin: 0;
+  border-left: 3px solid var(--accent);
+  padding-left: 0.9rem;
+  font-weight: 700;
+}
+
+.contact-aside {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+}
+
+.contact-card {
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--card);
+  padding: 1.25rem;
+}
+
+.contact-card h2 {
+  margin-bottom: 0.9rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.contact-steps {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-steps li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+.contact-steps li > span {
+  display: inline-flex;
+  width: 1.9rem;
+  height: 1.9rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.contact-steps p {
+  margin-top: 0.15rem;
+  color: var(--muted-foreground);
+  font-size: 0.95rem;
+}
+
+.contact-shortcuts {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-shortcuts a {
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 0.75rem;
+  text-decoration: none;
+}
+
+.contact-shortcuts a:hover {
+  border-color: var(--primary);
+  background: var(--secondary);
+}
+
+.contact-shortcuts svg {
+  width: 1.4rem;
+  flex: none;
+  color: var(--accent);
+}
+
+.contact-shortcuts strong {
+  display: block;
+  font-weight: 700;
+}
+
+.contact-shortcuts small {
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+}
+
+[data-contrast="high"] .contact-hero {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+@media (min-width: 760px) {
+  .contact-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.5fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .contact-layout {
+    grid-template-columns: minmax(0, 1fr) 21rem;
+  }
+}
+
+/* --- katalog klikany (zasobnik, pod raportem) --- */
+
+.catalog {
+  display: grid;
+  gap: 1.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.catalog__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.catalog__tabs button {
+  min-height: 3rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  padding: 0.6rem 1.25rem;
+  font-weight: 700;
+}
+
+.catalog__tabs button[aria-pressed="true"] {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.catalog__layout {
+  display: grid;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+.catalog__filters {
+  display: grid;
+  gap: 1.25rem;
+  align-content: start;
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--card);
+  padding: 1.25rem;
+}
+
+.catalog__filters fieldset {
+  display: grid;
+  gap: 0.2rem;
+  border: 0;
+  padding: 0;
+}
+
+.catalog__filters legend {
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+.catalog__filters label {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+
+.catalog__filters input {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: none;
+}
+
+.catalog__count {
+  margin-bottom: 0.9rem;
+  font-weight: 700;
+}
+
+.catalog__meta {
+  margin-top: 0.45rem;
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+}
+
+/* Already separated by the catalogue's own heading. */
+.catalog__materials {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+@media (min-width: 900px) {
+  .catalog__layout {
+    grid-template-columns: 17rem minmax(0, 1fr);
+  }
+}
+
+
+/* --- wniosek o grant --- */
+
+.grant-form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grant-step {
+  display: grid;
+  min-width: 0;
+  gap: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--card);
+  padding: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.grant-step > * {
+  min-width: 0;
+}
+
+.grant-step h2 {
+  margin-bottom: 0.4rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.grant-note {
+  border-left: 4px solid var(--accent);
+  padding-left: 0.9rem;
+  font-weight: 700;
+}
+
+.grant-retry {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.grant-budget-wrap {
+  position: relative;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.grant-budget {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.grant-budget caption {
+  padding-bottom: 0.6rem;
+  color: var(--muted-foreground);
+  text-align: left;
+}
+
+.grant-budget th,
+.grant-budget td {
+  padding: 0.4rem 0.6rem 0.4rem 0;
+  vertical-align: middle;
+}
+
+.grant-budget thead th {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.grant-budget__num {
+  text-align: right;
+}
+
+.grant-budget td input {
+  min-width: 7rem;
+}
+
+.grant-total {
+  font-weight: 700;
+}
+
+.grant-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--background);
+  padding: 0.8rem;
+  cursor: pointer;
+}
+
+.grant-consent.is-selected {
+  border-color: var(--primary);
+  background: var(--secondary);
+}
+
+.grant-consent input {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: none;
+  margin-top: 0.25rem;
+}
+
+.grant-consent a {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.grant-consent__req {
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+}
+
+/* --- nabory --- */
+
+.calls-list,
+.calls-closed ul {
+  display: grid;
+  gap: 1.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.call-card {
+  display: grid;
+  gap: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--card);
+  padding: 1.6rem;
+  box-shadow: 0 12px 35px rgb(20 32 51 / 0.08);
+}
+
+.call-card h2 {
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.call-card__badge {
+  justify-self: start;
+  border-radius: 999px;
+  background: var(--secondary);
+  padding: 0.3rem 0.8rem;
+  font-weight: 700;
+}
+
+.call-card__text {
+  max-width: 44rem;
+}
+
+.call-card__facts {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0;
+}
+
+.call-card__facts > div {
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  padding: 0.7rem 0.9rem;
+}
+
+.call-card__facts dt {
+  font-weight: 700;
+}
+
+.call-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.calls-closed h2 {
+  margin-bottom: 0.6rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* --- panel danych ROPS --- */
+
+.dane-grid__count {
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.dane-grid__count-label {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.dane-title {
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+/* .dane-back-row / .dane-back are gone: the data panel uses the shared
+   .admin-back pill like every other panel subpage. */
+
+.dane-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 1rem;
+}
+
+.dane-search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 0.8rem;
+}
+
+.dane-search label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+}
+
+.dane-field {
+  width: 100%;
+  min-width: min(20rem, 100%);
+  min-height: 3rem;
+  border: 1px solid var(--input);
+  border-radius: 0.75rem;
+  background: var(--card);
+  padding: 0.7rem 0.8rem;
+  font-family: inherit;
+}
+
+textarea.dane-field {
+  min-height: 7rem;
+  font-family: ui-monospace, monospace;
+  resize: vertical;
+}
+
+/* .dane-table and .dane-table-wrap are now styled together with .admin-table
+   above, so the data panel and the other admin views look the same. */
+.dane-table__edit {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  font-weight: 700;
+}
+
+.dane-form-wrap {
+  max-width: 48rem;
+}
+
+.dane-readonly {
+  overflow-wrap: anywhere;
+  font-family: ui-monospace, monospace;
+}
+
+.dane-check {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 700;
+}
+
+.dane-check input {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.dane-danger-zone {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 48rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+}
+
+.dane-danger-zone h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.dane-danger {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-self: start;
+  border: 2px solid var(--destructive);
+  border-radius: 0.9rem;
+  background: var(--card);
+  padding: 0.6rem 1.2rem;
+  font-weight: 700;
+}
+
+@media (min-width: 760px) {
+  .call-card__facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Kreator layout switches on container width in rem, not viewport px: at the A+++ text
+   size (html font-size 175%) a px breakpoint kept two columns and a fixed-width
+   assistant, squeezing the form until the stage labels overflowed. */
+.flat-form {
+  container: flat-form / inline-size;
+}
+
+.flat-form__layout > form {
+  container: flat-form-main / inline-size;
+}
+
+@container flat-form-main (min-width: 34rem) {
+  /* Three stages in a row: stacked under a two-column form they were a very
+     long, very empty strip. */
+  .flat-form__stage {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .flat-form__stage legend {
+    grid-column: 1 / -1;
+  }
+  .flat-form__stage label {
+    align-items: flex-start;
+  }
+}
+
+@container flat-form (min-width: 56rem) {
+  /* Assistant beside the form only when both fit; otherwise it goes below, full width. */
+  .flat-form__layout {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  }
+}
+
+.middleman-gate .middleman-primary,
+.middleman-primary {
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  border-radius: 0.9rem;
+  background: var(--accent);
+  padding: 0.7rem 1.2rem;
+  color: var(--accent-foreground);
+  font-weight: 700;
+}
+
+.middleman-primary:disabled,
+.middleman-picks button:disabled,
+.middleman-thread button:disabled,
+.secondary-action:disabled {
+  opacity: 0.55;
+}
+
+.middleman-setup,
+.middleman-chat {
+  display: grid;
+  gap: 1rem;
+}
+
+.middleman-setup h2,
+.middleman-chat h2 {
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  font-weight: 700;
+}
+
+.middleman-setup__grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.middleman-setup label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+.middleman-search {
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.5rem;
+  border: 2px solid var(--input);
+  border-radius: 0.9rem;
+  background: var(--card);
+  padding: 0.4rem 0.8rem;
+}
+
+.middleman-search svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.middleman-search input,
+.middleman-setup select,
+.middleman-composer textarea {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font: inherit;
+}
+
+.middleman-setup select,
+.middleman-composer textarea {
+  min-height: 3rem;
+  border: 2px solid var(--input);
+  border-radius: 0.9rem;
+  background: var(--card);
+  padding: 0.7rem 0.8rem;
+}
+
+.middleman-picks {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.middleman-picks button {
+  display: grid;
+  width: 100%;
+  gap: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  background: var(--card);
+  padding: 0.8rem 1rem;
+  text-align: left;
+}
+
+.middleman-picks button[aria-pressed="true"] {
+  border-color: var(--primary);
+  background: var(--secondary);
+}
+
+.middleman-picks span,
+.middleman-chosen {
+  color: var(--muted-foreground);
+}
+
+.middleman-gmina {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+
+.middleman-gmina div {
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: var(--card);
+  padding: 0.7rem 0.8rem;
+}
+
+.middleman-gmina dt {
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+}
+
+.middleman-gmina dd {
+  font-weight: 700;
+}
+
+.middleman-thread {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.middleman-thread > div {
+  max-width: 46rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--card);
+  padding: 0.9rem 1rem;
+}
+
+.middleman-thread .is-user {
+  justify-self: end;
+  background: var(--secondary);
+}
+
+.middleman-thread__who {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.middleman-thread button {
+  min-height: 2.75rem;
+  margin-top: 0.5rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.middleman-wait {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.middleman-wait svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.middleman-suggestions {
+  margin-top: 0.25rem;
+}
+
+.middleman-suggestions__label {
+  font-weight: 700;
+}
+
+.middleman-composer {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.middleman-composer label {
+  font-weight: 700;
+}
+
+.middleman-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.middleman-table-wrap {
+  overflow-x: auto;
+}
+
+.middleman-table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.middleman-table-wrap caption {
+  margin-bottom: 0.5rem;
+  text-align: left;
+  font-weight: 700;
+}
+
+.middleman-table-wrap th,
+.middleman-table-wrap td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.7rem 0.4rem;
+}
+
+.middleman-checks {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.middleman-checks li {
+  display: grid;
+  gap: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: var(--card);
+  padding: 0.8rem 0.95rem;
+}
+
+.middleman-checks p {
+  margin: 0;
+}
+
+.middleman-checks span {
+  font-weight: 700;
+}
+
+[data-contrast="high"] .middleman-thread .is-user,
+[data-contrast="high"] .middleman-picks button[aria-pressed="true"] {
+  background: var(--background);
+}
+
+@media (min-width: 800px) {
+  .middleman-setup__grid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 0.8fr);
+  }
+}
+
+/* Reflow at A++/A+++ (WCAG 1.4.10). The multi-column layouts above switch on viewport
+   px, which does not grow with the text size, so at 150–175% their columns got too
+   narrow and text spilled out of cards, tiles and form fields. Below 1400px wide, these
+   modes stack every layout grid into one column. */
+@media (max-width: 1400px) {
+  html:is([data-font="150"], [data-font="175"])
+    :is(
+      .home-hero,
+      .search-panel__field,
+      .prompt-list,
+      .feature-grid,
+      .materials-block ul,
+      .tester-panel__forms,
+      .tester-form__grid,
+      .innovation-detail__info-grid,
+      .admin-dashboard__tiles,
+      .knowledge-report__metrics,
+      .contact-hero,
+      .contact-layout,
+      .call-card__facts
+    ),
+  html:is([data-font="150"], [data-font="175"])
+    main
+    :is([class*="md:grid-cols-"], [class*="lg:grid-cols-"]) {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

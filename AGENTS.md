@@ -31,7 +31,7 @@ Anything not visible in the UI earns nothing. Working + simple + accessible beat
 | II | Zasobnik wiedzy: library, challenges, materials, admin trends | `/biblioteka`, `/wyzwania`, `/materialy`, `/admin/trendy` | Hania (+ Jakub for trends) |
 | III | Kreator pomysłów: fiszka, good practice, grant application, AI assistant | `/kreator` | Hania (UI) + Janek (assistant) |
 | IV | Tester innowacji: sign up to test, rate, feedback | component on `/biblioteka/[id]` | Jakub |
-| V | Komunikacja: contact form, AI help bot, "Moje zgłoszenia", email notifications | `/kontakt`, `/moje-zgloszenia`, global bot widget | Jakub + Janek (bot) |
+| V | Komunikacja: contact form, AI help bot, email notifications (grant receipt with full details, admin replies) | `/kontakt`, global bot widget | Jakub + Janek (bot) |
 | VI | Panel administratora | `/admin/*` | Jakub + Ola |
 | VII | Middleman Innowacji (institutions only) | `/middleman` | Janek (AI) + Ola (UI) |
 
@@ -107,7 +107,7 @@ on the roadmap slide alongside "RLS + real auth". Never put the secret key in a 
   app/biblioteka/*, app/wyzwania/*, app/materialy/*     Hania
   app/kreator/*                                         Hania
   components/innovation-card.tsx                        Hania
-  app/admin/*, app/kontakt/*, app/moje-zgloszenia/*     Jakub
+  app/admin/*, app/kontakt/*, app/api/notify/*             Jakub
   components/tester-panel.tsx                           Jakub (Hania embeds it on /biblioteka/[id])
   components/help-bot.tsx                               Jakub (UI) — calls /ai/chat
   app/api/notify/route.ts (emails)                      Jakub

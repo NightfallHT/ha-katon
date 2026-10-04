@@ -8,22 +8,20 @@ test("demo story happy path: Kreator → submit → visible in admin", async ({
 
   const titleStamp = `Pomysł demo ${Date.now()}`;
 
-  const kreator = await openAs(page, "/kreator", "ngo");
-  test.skip(!kreator.ok, `/kreator not shipped yet (HTTP ${kreator.status})`);
+  // The Kreator is a single flat form now (the four-step wizard with
+  // "Dalej" buttons is gone), so fill every field on one screen.
+  const kreator = await openAs(page, "/kreator/fiszka", "ngo");
+  test.skip(!kreator.ok, `/kreator/fiszka not shipped yet (HTTP ${kreator.status})`);
 
-  const start = page.getByRole("link", { name: /zgłoś pomysł/i }).or(
-    page.getByRole("button", { name: /zgłoś pomysł/i }),
-  );
-  test.skip((await start.count()) === 0, "Kreator landing choices not shipped yet (Hania)");
-  await start.first().click();
-
-  const problem = page.locator("#problem, textarea[name='problem'], input[name='problem']").first();
-  await problem.fill("Sąsiedzi seniorzy są sami i nie dojadą do przychodni.");
-  await page.getByRole("button", { name: /dalej|następn/i }).click();
-
-  const solution = page.locator("#solution, textarea[name='solution'], input[name='solution']").first();
-  await solution.fill("Sąsiedzki bus i dyżur wolontariuszy dwa razy w tygodniu.");
-  await page.getByRole("button", { name: /dalej|następn/i }).click();
+  await page.locator("#title, input[name='title']").first().fill(titleStamp);
+  await page
+    .locator("#problem, textarea[name='problem'], input[name='problem']")
+    .first()
+    .fill("Sąsiedzi seniorzy są sami i nie dojadą do przychodni.");
+  await page
+    .locator("#solution, textarea[name='solution'], input[name='solution']")
+    .first()
+    .fill("Sąsiedzki bus i dyżur wolontariuszy dwa razy w tygodniu.");
 
   const group = page.locator("#target_group, textarea[name='target_group'], select[name='target_group']").first();
   if (await group.count()) {
@@ -31,14 +29,14 @@ test("demo story happy path: Kreator → submit → visible in admin", async ({
     if (tag === "select") await group.selectOption({ index: 1 });
     else await group.fill("seniorzy w gminie wiejskiej");
   }
-  await page.getByRole("button", { name: /dalej|następn/i }).click();
 
-  const title = page.locator("#title, input[name='title']").first();
-  if (await title.count()) await title.fill(titleStamp);
   const location = page.locator("#location, input[name='location']").first();
   if (await location.count()) await location.fill("gmina wiejska, Małopolska");
 
-  await page.getByRole("button", { name: /wyślij|zgłoś|zapisz/i }).click();
+  await page
+    .getByRole("button", { name: /wyślij (do rops|zgłoszenie)/i })
+    .first()
+    .click();
   await expect(page.getByText(/zgłoszenie|dziękujemy|wysłan|gotowe/i).first()).toBeVisible();
 
   await openAs(page, "/admin/zgloszenia", "admin");

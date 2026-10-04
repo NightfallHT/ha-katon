@@ -18,7 +18,6 @@ const STATIC_ROUTES = [
   "/kreator",
   "/kreator/fiszka",
   "/kontakt",
-  "/moje-zgloszenia",
   "/middleman",
   "/admin",
   "/admin/zgloszenia",
@@ -34,6 +33,8 @@ const KEY_PAGES_320 = [
   "/wyzwania",
   "/materialy",
   "/kreator",
+  "/kreator/grant",
+  "/kreator/potwierdzenie",
   "/admin",
   "/admin/trendy",
 ];

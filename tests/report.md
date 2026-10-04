@@ -31,6 +31,7 @@ Axe: `wcag2a, wcag2aa, wcag21a, wcag21aa`. Tryby: default, `data-contrast="high"
 | HelpBot na `/biblioteka`: dialog, trap Tab, Esc | **pass** |
 | Kreator → admin | **skip** — lokalnie brak Supabase (insert nie trafia do tabeli) |
 | `/admin/trendy` | **demo fallback** — strona nie pada bez bazy |
+| Tester / ocena | **demo fallback** — przykładowe opinie + lokalny zapis bez bazy |
 
 Lighthouse a11y: nie odpalany (DevTools); na slajd 8 idzie axe 0 na przetestowanych stronach.
 

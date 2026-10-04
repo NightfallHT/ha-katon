@@ -1,48 +1,162 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { CATEGORY_LABELS } from "../../_lib/labels";
-import { saveInnovation } from "./actions";
+import { SaveButton } from "../../_lib/save-button";
+import { saveInnovation, type InnovationValues } from "./actions";
 
-type Inn = { id: string; title: string; summary: string; description: string | null; category: string; tags: string[] | null; video_url: string | null; published: boolean };
-const field = "mt-1 w-full rounded-md border p-3";
+type Inn = {
+  id: string;
+  title: string;
+  summary: string;
+  description: string | null;
+  category: string;
+  tags: string[] | null;
+  video_url: string | null;
+  published: boolean;
+};
+
+function toValues(inn: Inn): InnovationValues {
+  return {
+    title: inn.title,
+    summary: inn.summary,
+    description: inn.description ?? "",
+    category: inn.category,
+    tags: (inn.tags ?? []).join(", "),
+    video_url: inn.video_url ?? "",
+    published: inn.published,
+  };
+}
 
 export function EditForm({ inn }: { inn: Inn }) {
+  const initial = toValues(inn);
   const [state, action, pending] = useActionState(saveInnovation.bind(null, inn.id), null);
+  const [values, setValues] = useState(initial);
+
+  // After a successful write the stored row is what we just sent, so compare
+  // against that instead of the values the page was rendered with.
+  const baseline = state?.saved ?? initial;
+  const dirty = (Object.keys(values) as (keyof InnovationValues)[]).some(
+    (key) => values[key] !== baseline[key],
+  );
+  const missing = [
+    !values.title.trim() && "Tytuł",
+    !values.summary.trim() && "Krótki opis",
+  ].filter(Boolean) as string[];
+
+  function set<K extends keyof InnovationValues>(key: K, value: InnovationValues[K]) {
+    setValues((prev) => ({ ...prev, [key]: value }));
+  }
+
   return (
-    <form action={action} className="mt-6 max-w-2xl space-y-4">
-      <div>
-        <label htmlFor="e-title" className="block font-medium">Tytuł <span className="font-normal">(wymagane)</span></label>
-        <input id="e-title" name="title" required defaultValue={inn.title} className={field} />
+    <form action={action} className="admin-card admin-form">
+      <div className="admin-card__head">
+        <h2>Karta innowacji</h2>
+        <p className="admin-card__note">Zmiany widać od razu na stronie Biblioteki.</p>
       </div>
-      <div>
-        <label htmlFor="e-summary" className="block font-medium">Krótki opis, 1 do 2 zdań <span className="font-normal">(wymagane)</span></label>
-        <textarea id="e-summary" name="summary" required rows={3} defaultValue={inn.summary} className={field} />
+
+      <div className="admin-form__grid">
+        <div className="admin-form__wide">
+          <label htmlFor="e-title">
+            Tytuł <span className="admin-field__hint">(wymagane)</span>
+          </label>
+          <input
+            id="e-title"
+            name="title"
+            required
+            value={values.title}
+            onChange={(event) => set("title", event.target.value)}
+            className="admin-input admin-input--wide"
+          />
+        </div>
+
+        <div className="admin-form__wide">
+          <label htmlFor="e-summary">
+            Krótki opis, 1 do 2 zdań <span className="admin-field__hint">(wymagane)</span>
+          </label>
+          <textarea
+            id="e-summary"
+            name="summary"
+            required
+            rows={3}
+            value={values.summary}
+            onChange={(event) => set("summary", event.target.value)}
+            className="admin-input admin-input--wide"
+          />
+        </div>
+
+        <div className="admin-form__wide">
+          <label htmlFor="e-desc">Pełny opis</label>
+          <textarea
+            id="e-desc"
+            name="description"
+            rows={6}
+            value={values.description}
+            onChange={(event) => set("description", event.target.value)}
+            className="admin-input admin-input--wide"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="e-cat">Kategoria</label>
+          <select
+            id="e-cat"
+            name="category"
+            value={values.category}
+            onChange={(event) => set("category", event.target.value)}
+            className="admin-select"
+          >
+            {Object.entries(CATEGORY_LABELS).map(([key, text]) => (
+              <option key={key} value={key}>
+                {text}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="e-tags">Tagi, rozdzielone przecinkami</label>
+          <input
+            id="e-tags"
+            name="tags"
+            value={values.tags}
+            onChange={(event) => set("tags", event.target.value)}
+            className="admin-input admin-input--wide"
+          />
+        </div>
+
+        <div className="admin-form__wide">
+          <label htmlFor="e-video">Adres filmu</label>
+          <input
+            id="e-video"
+            name="video_url"
+            type="url"
+            value={values.video_url}
+            onChange={(event) => set("video_url", event.target.value)}
+            className="admin-input admin-input--wide"
+          />
+        </div>
       </div>
-      <div>
-        <label htmlFor="e-desc" className="block font-medium">Pełny opis</label>
-        <textarea id="e-desc" name="description" rows={6} defaultValue={inn.description ?? ""} className={field} />
-      </div>
-      <div>
-        <label htmlFor="e-cat" className="block font-medium">Kategoria</label>
-        <select id="e-cat" name="category" defaultValue={inn.category} className="mt-1 min-h-11 rounded-md border px-3">
-          {Object.entries(CATEGORY_LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="e-tags" className="block font-medium">Tagi, rozdzielone przecinkami</label>
-        <input id="e-tags" name="tags" defaultValue={(inn.tags ?? []).join(", ")} className={field} />
-      </div>
-      <div>
-        <label htmlFor="e-video" className="block font-medium">Adres filmu</label>
-        <input id="e-video" name="video_url" type="url" defaultValue={inn.video_url ?? ""} className={field} />
-      </div>
-      <div className="flex min-h-11 items-center gap-2">
-        <input id="e-pub" name="published" type="checkbox" defaultChecked={inn.published} className="size-5" />
-        <label htmlFor="e-pub" className="font-medium">Opublikowana w Bibliotece</label>
-      </div>
-      <button type="submit" disabled={pending} className="min-h-11 rounded-md border px-5 py-2 font-medium focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-60">Zapisz zmiany</button>
-      <p role="status" aria-live="polite">{pending ? "Zapisuję i odświeżam dopasowania…" : state?.message}</p>
+
+      <label className="admin-check" htmlFor="e-pub">
+        <input
+          id="e-pub"
+          name="published"
+          type="checkbox"
+          checked={values.published}
+          onChange={(event) => set("published", event.target.checked)}
+        />
+        Opublikowana w Bibliotece
+      </label>
+
+      <SaveButton
+        label="Zapisz zmiany"
+        pendingLabel="Zapisuję i odświeżam dopasowania…"
+        pending={pending}
+        dirty={dirty}
+        missing={missing}
+        result={state}
+      />
     </form>
   );
 }

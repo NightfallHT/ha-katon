@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { InnovationCard } from "@/components/innovation-card";
-import { ResourceNav } from "@/components/resource-nav";
 import { TesterPanel } from "@/components/tester-panel";
 import { getInnovation, similarInnovations } from "@/content/catalog";
 import { categoryLabel, stageLabel } from "@/content/labels";
@@ -17,36 +16,46 @@ export default async function InnovationPage({
   const similar = similarInnovations(item);
 
   return (
-    <article>
-      <ResourceNav current="/biblioteka" />
-      <p className="mb-3">
-        <Link href="/biblioteka" className="underline underline-offset-4">
-          Wróć do biblioteki
-        </Link>
-      </p>
-      <h1 className="text-3xl font-bold">{item.title}</h1>
-      <p className="mt-3">
-        {categoryLabel(item.category)} · {stageLabel(item.stage)} ·{" "}
-        {item.region ?? "Małopolska"}
-      </p>
-      <p className="mt-4 text-lg">{item.summary}</p>
+    <article className="innovation-detail">
+      <header className="innovation-detail__hero">
+        <p className="eyebrow">{categoryLabel(item.category)}</p>
+        <h1>{item.title}</h1>
+        <p className="innovation-detail__summary">{item.summary}</p>
+        <p className="innovation-detail__meta">
+          {stageLabel(item.stage)} · {item.region ?? "Małopolska"}
+        </p>
+      </header>
 
-      <section className="mt-8 space-y-3">
-        <h2 className="text-2xl font-bold">Na czym polega rozwiązanie?</h2>
+      <section className="innovation-detail__description" aria-labelledby="description-heading">
+        <h2 id="description-heading">Opis inicjatywy</h2>
         <p>{item.description}</p>
       </section>
 
-      <section className="mt-8 space-y-3">
-        <h2 className="text-2xl font-bold">Komu może pomóc?</h2>
-        <ul className="list-disc pl-6">
-          {item.target_groups.map((group) => (
-            <li key={group}>{group}</li>
-          ))}
-        </ul>
-      </section>
+      <TesterPanel innovationId={item.id} innovationTitle={item.title} />
+
+      <div className="innovation-detail__info-grid">
+        <section>
+          <h2>Komu może pomóc?</h2>
+          <ul>
+            {item.target_groups.map((group) => (
+              <li key={group}>{group}</li>
+            ))}
+          </ul>
+        </section>
+
+        <section>
+          <h2>Kontakt i źródło</h2>
+          {item.contact_org ? <p>Organizacja: {item.contact_org}</p> : null}
+          {item.source_url ? (
+            <a href={item.source_url} rel="noreferrer" data-source="innovation">
+              Zobacz w bazie ROPS
+            </a>
+          ) : null}
+        </section>
+      </div>
 
       {item.video_url ? (
-        <section className="mt-8 space-y-3">
+        <section className="innovation-detail__video">
           <h2 className="text-2xl font-bold">Film</h2>
           <iframe
             title={`Film: ${item.title}`}
@@ -58,28 +67,9 @@ export default async function InnovationPage({
         </section>
       ) : null}
 
-      <section className="mt-8 space-y-2">
-        <h2 className="text-2xl font-bold">Kontakt i źródło</h2>
-        {item.contact_org ? <p>Organizacja: {item.contact_org}</p> : null}
-        {item.source_url ? (
-          <p>
-            <a
-              className="inline-flex min-h-11 items-center font-medium underline underline-offset-4"
-              href={item.source_url}
-              rel="noreferrer"
-              data-source="innovation"
-            >
-              Zobacz w bazie ROPS
-            </a>
-          </p>
-        ) : null}
-      </section>
-
-      <TesterPanel innovationId={item.id} innovationTitle={item.title} />
-
       {similar.length ? (
-        <section className="mt-10">
-          <h2 className="text-2xl font-bold">Podobne rozwiązania</h2>
+        <section className="innovation-detail__similar">
+          <h2>Podobne rozwiązania</h2>
           <ul className="mt-4 grid gap-4 md:grid-cols-2">
             {similar.map((other) => (
               <li key={other.id}>
@@ -89,6 +79,12 @@ export default async function InnovationPage({
           </ul>
         </section>
       ) : null}
+
+      <p className="innovation-detail__back">
+        {/* The Zasobnik is the knowledge base now; /biblioteka is only the
+            address these detail pages live under. */}
+        <Link href="/zasobnik">Wróć do Zasobnika wiedzy</Link>
+      </p>
     </article>
   );
 }

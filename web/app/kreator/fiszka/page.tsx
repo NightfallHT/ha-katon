@@ -1,10 +1,10 @@
 import { Suspense } from "react";
-import { FiszkaWizard } from "../fiszka-wizard";
+import { FiszkaForm } from "../fiszka-form";
 
 export default function FiszkaPage() {
   return (
     <Suspense fallback={<p>Wczytuję formularz…</p>}>
-      <FiszkaWizard kind="idea" />
+      <FiszkaForm kind="idea" />
     </Suspense>
   );
 }

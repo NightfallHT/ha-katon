@@ -116,9 +116,9 @@ def test_middleman() -> None:
     )
     body = report.json()["report"]
     check("szacunek orientacyjny" in body["summary"].lower(), "cost label")
-    check(len(body["usluga_wrazliwa_checklist"]) >= 6, "generic checklist")
+    check(len(body["usluga_wrazliwa_checklist"]) >= 3, "generic checklist")
     items = checklist_items()
-    check("Cel" in items or any("grant" in item.lower() for item in items), "checklist source")
+    check(any("świadczenia" in item.lower() or "swiadczenia" in item.lower() for item in items), "checklist source")
 
 
 def test_kreator_and_chat() -> None:

@@ -36,7 +36,8 @@ const DEMO_NEEDS: NeedRow[] = [
   },
 ];
 
-async function loadNeeds(): Promise<{ week: NeedRow[]; latest: NeedRow[]; demo: boolean }> {
+// Demo rows only when the DB is reachable but empty; a failed query shows an alert above them.
+async function loadNeeds(): Promise<{ week: NeedRow[]; latest: NeedRow[]; demo: boolean; error: string }> {
   try {
     const weekAgo = new Date(Date.now() - 7 * 24 * 3600 * 1000).toISOString();
     const db = adminDb();
@@ -46,17 +47,33 @@ async function loadNeeds(): Promise<{ week: NeedRow[]; latest: NeedRow[]; demo: 
     ]);
     const weekRows = (week.data ?? []) as NeedRow[];
     const latestRows = (latest.data ?? []) as NeedRow[];
-    if (week.error || latest.error || (weekRows.length === 0 && latestRows.length === 0)) {
-      return { week: DEMO_NEEDS, latest: DEMO_NEEDS, demo: true };
+    const failed = week.error ?? latest.error;
+    if (failed) {
+      return { week: DEMO_NEEDS, latest: DEMO_NEEDS, demo: true, error: "Nie udało się wczytać zapytań." };
     }
-    return { week: weekRows, latest: latestRows, demo: false };
-  } catch {
-    return { week: DEMO_NEEDS, latest: DEMO_NEEDS, demo: true };
+    if (weekRows.length === 0 && latestRows.length === 0) {
+      return { week: DEMO_NEEDS, latest: DEMO_NEEDS, demo: true, error: "" };
+    }
+    return { week: weekRows, latest: latestRows, demo: false, error: "" };
+  } catch (e) {
+    const message = e instanceof Error ? e.message : "";
+    if (message.includes("Brak konfiguracji")) {
+      return { week: DEMO_NEEDS, latest: DEMO_NEEDS, demo: true, error: "" };
+    }
+    return { week: DEMO_NEEDS, latest: DEMO_NEEDS, demo: true, error: "Nie udało się wczytać zapytań." };
   }
 }
 
+function queries(count: number) {
+  if (count === 1) return "zapytanie";
+  const rest = count % 10;
+  const teens = count % 100;
+  if (rest >= 2 && rest <= 4 && (teens < 12 || teens > 14)) return "zapytania";
+  return "zapytań";
+}
+
 export default async function TrendsPage() {
-  const { week, latest, demo } = await loadNeeds();
+  const { week, latest, demo, error } = await loadNeeds();
 
   const counts = new Map<string, number>();
   for (const n of week) counts.set(n.category ?? "inne", (counts.get(n.category ?? "inne") ?? 0) + 1);
@@ -64,66 +81,119 @@ export default async function TrendsPage() {
     .map(([k, count]) => ({ name: label(CATEGORY_LABELS, k), count }))
     .sort((a, b) => b.count - a.count);
   const top = rows[0];
+  const locations = new Set(week.map((n) => n.location).filter(Boolean)).size;
 
   return (
-    <section aria-labelledby="trendy-h">
-      <h1 id="trendy-h" className="text-2xl font-semibold">
-        Trendy zapytań
-      </h1>
-      <p className="mt-3 text-lg">
-        {top
-          ? `Najczęściej zgłaszany problem w tym tygodniu: ${top.name} (${top.count} ${top.count === 1 ? "zapytanie" : "zapytań"}).`
-          : "W tym tygodniu nie było jeszcze zapytań."}
-      </p>
+    <section aria-labelledby="trendy-h" className="admin-page">
+      <div className="section-heading">
+        <div>
+          <p className="eyebrow">Analiza</p>
+          <h1 id="trendy-h">Trendy zapytań</h1>
+          <p className="admin-page__lead">
+            Czego mieszkańcy szukali w ostatnich 7 dniach. Każde zapytanie
+            z wyszukiwarki trafia tutaj bez danych osobowych.
+          </p>
+        </div>
+      </div>
+
+      {error ? (
+        <p role="alert" className="admin-notice admin-notice--alert">
+          {error}
+        </p>
+      ) : null}
       {demo ? (
-        <p className="mt-2">To przykładowe zapytania z demo, gdy baza jeszcze nie zbiera potrzeb.</p>
+        <p role="status" className="admin-notice">
+          To przykładowe zapytania z demo — baza jeszcze nie zbiera potrzeb.
+        </p>
       ) : null}
 
-      {rows.length > 0 && (
-        <>
-          <div className="mt-6">
-            <TrendChart data={rows} />
-          </div>
-          <table className="mt-6 w-full max-w-lg text-left">
-            <caption className="mb-2 text-left font-medium">
-              Zapytania w ostatnich 7 dniach, według kategorii
-            </caption>
-            <thead>
-              <tr className="border-b">
-                <th scope="col" className="p-2">
-                  Kategoria
-                </th>
-                <th scope="col" className="p-2">
-                  Liczba zapytań
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((r) => (
-                <tr key={r.name} className="border-b">
-                  <th scope="row" className="p-2 font-medium">
-                    {r.name}
-                  </th>
-                  <td className="p-2">{r.count}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </>
-      )}
+      <dl className="admin-stats">
+        <div>
+          <dt>Zapytania w 7 dni</dt>
+          <dd>{week.length}</dd>
+        </div>
+        <div>
+          <dt>Kategorie</dt>
+          <dd>{rows.length}</dd>
+        </div>
+        <div>
+          <dt>Najczęstszy temat</dt>
+          <dd>{top ? top.name : "—"}</dd>
+        </div>
+        <div>
+          <dt>Różne lokalizacje</dt>
+          <dd>{locations}</dd>
+        </div>
+      </dl>
 
-      <h2 className="mt-10 text-xl font-semibold">Ostatnie 10 zapytań</h2>
-      <ul className="mt-3 space-y-2">
-        {latest.map((n) => (
-          <li key={n.id} className="rounded-md border p-3">
-            <p>{n.text}</p>
-            <p className="text-sm">
-              {label(CATEGORY_LABELS, n.category)} · {n.location || "brak lokalizacji"} · {formatDate(n.created_at)}
-            </p>
-          </li>
-        ))}
-        {latest.length === 0 && <li>Brak zapytań.</li>}
-      </ul>
+      <p className="admin-notice">
+        {top
+          ? `Najczęściej zgłaszany problem w tym tygodniu: ${top.name} — ${top.count} ${queries(top.count)}.`
+          : "W tym tygodniu nie było jeszcze zapytań."}
+      </p>
+
+      {rows.length > 0 ? (
+        <section aria-labelledby="podzial-h" className="admin-card">
+          <div className="admin-card__head">
+            <h2 id="podzial-h">Podział na kategorie</h2>
+            <p className="admin-card__note">ostatnie 7 dni</p>
+          </div>
+          <TrendChart data={rows} />
+          <div className="admin-table-wrap">
+            <table className="admin-table">
+              <caption>
+                Te same liczby w tabeli — wykres obok jest tylko ilustracją.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Kategoria</th>
+                  <th scope="col" className="admin-table__num">
+                    Liczba zapytań
+                  </th>
+                  <th scope="col" className="admin-table__num">
+                    Udział
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((r) => (
+                  <tr key={r.name}>
+                    <th scope="row">{r.name}</th>
+                    <td className="admin-table__num">{r.count}</td>
+                    <td className="admin-table__num">
+                      {Math.round((r.count / week.length) * 100)}%
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
+
+      <section aria-labelledby="ostatnie-h" className="admin-card">
+        <div className="admin-card__head">
+          <h2 id="ostatnie-h">Ostatnie zapytania</h2>
+          <p className="admin-card__note">
+            {latest.length} {latest.length === 1 ? "wpis" : "wpisów"}
+          </p>
+        </div>
+        {latest.length ? (
+          <ul className="admin-list">
+            {latest.map((n) => (
+              <li key={n.id}>
+                <p>{n.text}</p>
+                <p className="admin-list__meta">
+                  {label(CATEGORY_LABELS, n.category)} ·{" "}
+                  {n.location || "brak lokalizacji"} · {formatDate(n.created_at)}
+                </p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="admin-empty">Brak zapytań.</p>
+        )}
+      </section>
     </section>
   );
 }

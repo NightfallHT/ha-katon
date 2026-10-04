@@ -14,6 +14,8 @@ import re
 
 import httpx
 
+from util import http_verify
+
 log = logging.getLogger("ai.llm")
 
 POLISH_ERROR = "Nie udało się uzyskać odpowiedzi. Spróbuj ponownie za chwilę."
@@ -33,6 +35,7 @@ class LlmClient:
         self.embedding_dim = int(os.getenv("EMBEDDING_DIM", "1536"))
         self.base_url = os.getenv("LLM_BASE_URL", "https://api.openai.com/v1").rstrip("/")
         self.timeout = float(os.getenv("LLM_TIMEOUT", "20"))
+        self._http: httpx.AsyncClient | None = None
 
     def available(self) -> bool:
         return bool(self.api_key)
@@ -43,42 +46,65 @@ class LlmClient:
             "Content-Type": "application/json",
         }
 
-    async def _post(self, path: str, payload: dict) -> dict:
+    def _http_client(self) -> httpx.AsyncClient:
+        if self._http is None or self._http.is_closed:
+            self._http = httpx.AsyncClient(
+                timeout=httpx.Timeout(self.timeout, connect=20.0),
+                verify=http_verify(),
+            )
+        return self._http
+
+    async def _post(self, path: str, payload: dict, *, timeout: float | None = None, attempts: int = 2) -> dict:
         last_status: int | None = None
-        timeout = httpx.Timeout(self.timeout, connect=5.0)
-        for _attempt in range(2):
+        limit = self.timeout if timeout is None else timeout
+        client_timeout = httpx.Timeout(limit, connect=min(20.0, limit))
+        for _attempt in range(max(1, attempts)):
             try:
-                async with httpx.AsyncClient(timeout=timeout) as client:
-                    response = await client.post(
-                        f"{self.base_url}{path}",
-                        headers=self._headers(),
-                        json=payload,
-                    )
+                response = await self._http_client().post(
+                    f"{self.base_url}{path}",
+                    headers=self._headers(),
+                    json=payload,
+                    timeout=client_timeout,
+                )
                 if response.status_code >= 400:
                     last_status = response.status_code
                     log.warning("llm http %s", response.status_code)
                     continue
                 return response.json()
-            except (httpx.TimeoutException, httpx.HTTPError, json.JSONDecodeError):
-                log.warning("llm transport failure")
+            except (httpx.TimeoutException, httpx.HTTPError, json.JSONDecodeError) as exc:
+                log.warning("llm transport failure: %s", type(exc).__name__)
         if last_status:
             log.warning("llm gave up status %s", last_status)
         raise LlmError()
 
-    async def complete_json(self, system: str, user: str, *, temperature: float = 0.2) -> dict:
+    async def complete_json(
+        self,
+        system: str,
+        user: str,
+        *,
+        temperature: float = 0.2,
+        timeout: float | None = None,
+        attempts: int = 2,
+        max_tokens: int | None = None,
+    ) -> dict:
         if not self.available():
             raise LlmError("Brak konfiguracji modelu. Używamy odpowiedzi zastępczej.")
+        payload: dict = {
+            "model": self.model,
+            "temperature": temperature,
+            "response_format": {"type": "json_object"},
+            "messages": [
+                {"role": "system", "content": system},
+                {"role": "user", "content": user},
+            ],
+        }
+        if max_tokens is not None:
+            payload["max_tokens"] = max_tokens
         data = await self._post(
             "/chat/completions",
-            {
-                "model": self.model,
-                "temperature": temperature,
-                "response_format": {"type": "json_object"},
-                "messages": [
-                    {"role": "system", "content": system},
-                    {"role": "user", "content": user},
-                ],
-            },
+            payload,
+            timeout=timeout,
+            attempts=attempts,
         )
         try:
             content = data["choices"][0]["message"]["content"]

@@ -41,14 +41,14 @@ Priority: Block C > Block B > Block A. Klaudia can build the slides from `slides
 
 ## Status / TODO
 
-Last updated: 2026-10-03 19:55
-Currently working on: demo status tracker and owner notes
+Last updated: 2026-10-03 19:30
+Currently working on: pitch captions and remaining clickable gaps
 
 - [x] Persona flows, one-action-per-screen guidance and inexpensive UX ideas
 - [x] Playwright + axe harness covering key routes and accessibility modes
 - [x] Keyboard, 320 px and demo smoke scenarios drafted
 - [x] Accessibility report grouped by page/owner
 - [x] Local axe run: 0 violations on key routes (3 modes); smoke skips without Supabase
-- [x] Send remaining owner notes (`docs/pitch/notatka-zespol.md`)
+- [ ] Send remaining owner notes (HelpBot in layout, live BASE_URL)
 - [ ] Build the final ≤10-slide PDF and ≤3-minute captioned MP4 Sunday morning
 - [ ] **BLOCKED:** final Lighthouse numbers and recording — waiting for the stable live Vercel URL

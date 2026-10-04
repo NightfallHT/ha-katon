@@ -7,10 +7,11 @@ bundled fixtures so matchmaking and the help bot work before the seed lands.
 from __future__ import annotations
 
 import json
+import re
 import uuid
 from typing import Any
 
-from util import AI_ROOT, REPO_ROOT
+from util import AI_ROOT, REPO_ROOT, fold
 
 _NS = uuid.UUID("8f1b6c2a-4d3e-4a11-9c2b-0a6e5d7c8b90")
 
@@ -93,9 +94,23 @@ def materials() -> list[dict[str, Any]]:
     return list(_buckets()["material"])
 
 
+def challenges() -> list[dict[str, Any]]:
+    return list(_buckets()["challenge"])
+
+
+def slugify_title(title: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", fold(title)).strip("-")
+    return slug or "innowacja"
+
+
 def innovation_by_id(innovation_id: str) -> dict[str, Any] | None:
+    wanted = innovation_id.strip()
     for item in innovations():
-        if str(item.get("id")) == innovation_id:
+        if str(item.get("id")) == wanted:
+            return item
+        title = str(item.get("title") or "")
+        slug = slugify_title(title)
+        if wanted == slug or wanted.startswith(slug + "-"):
             return item
     return None
 

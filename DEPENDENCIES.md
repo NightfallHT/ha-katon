@@ -77,7 +77,8 @@ nix-shell --run 'cd web && npm run dev'
 | dotenv | 17.2.3 | MIT | loads the root `.env` |
 | typescript, @types/node | 5.x / 20.x | Apache-2.0 / MIT | types |
 
-Run with `nix-shell --run 'npm run seed'`.
+Run with `nix-shell --run 'npm run seed'`. Add `-- --dry-run` to only print what would be inserted.
+Re-running is safe: rows whose key (title, or name + powiat) is already in the database are skipped.
 
 ## `/tests` — Playwright (owner: Sylwia)
 

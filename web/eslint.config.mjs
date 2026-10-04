@@ -14,6 +14,13 @@ const eslintConfig = defineConfig([
     files: ["**/*.{js,jsx,mjs,cjs,ts,tsx}"],
     rules: jsxA11y.flatConfigs.recommended.rules,
   },
+  // Server actions used with useActionState must accept (prevState, formData);
+  // a leading underscore marks a parameter that is required but unused.
+  {
+    rules: {
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+    },
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

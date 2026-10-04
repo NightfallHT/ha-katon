@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { HelpBot } from "@/components/help-bot";
 
+// The Zasobnik replaced the separate Biblioteka and Materiały lists: it holds
+// the same innovations and materials behind one clickable catalogue.
 const LINKS = [
-  { href: "/biblioteka", label: "Biblioteka" },
+  { href: "/zasobnik", label: "Zasobnik wiedzy" },
   { href: "/wyzwania", label: "Wyzwania" },
-  { href: "/materialy", label: "Materiały" },
   { href: "/kreator", label: "Kreator" },
 ];
 
@@ -31,7 +31,6 @@ export function ResourceNav({ current }: { current: string }) {
           ))}
         </ul>
       </nav>
-      <HelpBot />
     </div>
   );
 }

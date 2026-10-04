@@ -1,311 +1,116 @@
-"use client";
-
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { ResourceNav } from "@/components/resource-nav";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { calls } from "@/content/catalog";
-import { grantDraft } from "@/lib/api";
-import { submitGrant } from "../actions";
+import {
+  budgetLabel,
+  deadlineLabel,
+  getCalls,
+  openCalls,
+  pastCalls,
+  upcomingCalls,
+} from "@/lib/calls";
 
-type BudgetRow = { item: string; category: string; amount: number };
+export const metadata = {
+  title: "Aktualne nabory — Hub Innowacji Społecznych",
+};
 
-export default function GrantPage() {
-  const openCall = calls.find((item) => item.is_open);
-  const [problem, setProblem] = useState(
-    "Sąsiedzi seniorzy są sami i nie dojadą do przychodni.",
-  );
-  const [solution, setSolution] = useState("");
-  const [drafted, setDrafted] = useState(false);
-  const [cel, setCel] = useState("");
-  const [grupa, setGrupa] = useState("");
-  const [dzialania, setDzialania] = useState("");
-  const [rezultaty, setRezultaty] = useState("");
-  const [budget, setBudget] = useState<BudgetRow[]>([
-    { item: "Koordynacja", category: "personel", amount: 20000 },
-    { item: "Dojazdy", category: "transport", amount: 15000 },
-  ]);
-  const [accepted, setAccepted] = useState(false);
-  const [done, setDone] = useState(false);
-  const [error, setError] = useState("");
-  const [sending, setSending] = useState(false);
-  const [drafting, setDrafting] = useState(false);
+// Re-read the calls table every 60 s; saving in /admin/nabory revalidates immediately.
+export const revalidate = 60;
 
-  const total = useMemo(
-    () => budget.reduce((sum, row) => sum + (Number(row.amount) || 0), 0),
-    [budget],
-  );
-  const overBudget = openCall ? total > openCall.budget_max : false;
-
-  if (!openCall) {
-    return (
-      <div>
-        <ResourceNav current="/kreator" />
-        <h1 className="text-3xl font-bold">Nabór jest obecnie zamknięty</h1>
-        <p className="mt-3">
-          <Link href="/kreator" className="underline underline-offset-4">
-            Wróć do Kreatora
-          </Link>
-        </p>
-      </div>
-    );
-  }
-
-  const activeCall = openCall;
-
-  async function generate() {
-    setDrafting(true);
-    setError("");
-    try {
-      const draft = await grantDraft({
-        fiszka: {
-          title: `Wniosek: ${activeCall.name}`,
-          problem,
-          solution,
-          target_group: "seniorzy w gminie wiejskiej",
-          stage: "pomysł",
-        },
-        call: {
-          name: activeCall.name,
-          budget_max: activeCall.budget_max,
-          description: activeCall.description,
-        },
-      });
-      setCel(draft.sections.cel);
-      setGrupa(draft.sections.grupa_docelowa);
-      setDzialania(draft.sections.dzialania);
-      setRezultaty(draft.sections.rezultaty);
-      setBudget(draft.budget);
-    } catch {
-      setCel(
-        "Zmniejszyć samotność i ułatwić dojazd do lekarza osobom starszym w gminie wiejskiej.",
-      );
-      setGrupa("Seniorzy i ich sąsiedzi w gminie wiejskiej.");
-      setDzialania(
-        solution.trim() ||
-          "Sąsiedzki bus dwa razy w tygodniu i dyżur wolontariuszy przy zapisach do przychodni.",
-      );
-      setRezultaty("Co najmniej 20 osób skorzysta z kursu w pierwszym kwartale.");
-    } finally {
-      setDrafting(false);
-      setDrafted(true);
-    }
-  }
-
-  async function submit() {
-    if (!accepted) {
-      setError("Zaznacz, że zapoznałeś się z regulaminem. To pole jest wymagane.");
-      return;
-    }
-    const title = `Wniosek: ${activeCall.name}`;
-    try {
-      sessionStorage.setItem(
-        "hubmi-last-submission",
-        JSON.stringify({
-          type: "grant_application",
-          title,
-          payload: {
-            sections: { cel, grupa_docelowa: grupa, dzialania, rezultaty },
-            budget,
-            accepted_regulamin: true,
-          },
-        }),
-      );
-    } catch {
-      /* ignore */
-    }
-    setSending(true);
-    const result = await submitGrant({
-      title,
-      callName: activeCall.name,
-      problem,
-      solution,
-      sections: { cel, grupa_docelowa: grupa, dzialania, rezultaty },
-      budget,
-    });
-    setSending(false);
-    if (!result.ok) {
-      setError(result.message);
-      return;
-    }
-    setDone(true);
-  }
-
-  if (done) {
-    return (
-      <div>
-        <ResourceNav current="/kreator" />
-        <h1 className="text-3xl font-bold">Gotowe. Wniosek został wysłany.</h1>
-        <p className="mt-3">Możesz śledzić jego status w „Moich zgłoszeniach”.</p>
-        <p className="mt-6">
-          <Link href="/moje-zgloszenia" className="underline underline-offset-4">
-            Moje zgłoszenia
-          </Link>
-        </p>
-      </div>
-    );
-  }
+export default async function NaboryPage() {
+  const calls = await getCalls();
+  const open = openCalls(calls);
+  const upcoming = upcomingCalls(calls);
+  const past = pastCalls(calls);
 
   return (
-    <div>
-      <ResourceNav current="/kreator" />
-      <h1 className="text-3xl font-bold">Przygotuj wniosek o grant</h1>
-      <p className="mt-2">
-        {openCall.name}. Termin zgłoszeń: {openCall.deadline}. Maksymalna kwota:{" "}
-        {openCall.budget_max.toLocaleString("pl-PL")} zł.
-      </p>
-
-      <form
-        className="mt-6 max-w-2xl space-y-4"
-        onSubmit={(event) => {
-          event.preventDefault();
-          if (!drafted) void generate();
-          else void submit();
-        }}
-      >
+    <div className="calls-page">
+      <div className="section-heading">
         <div>
-          <Label htmlFor="problem">Jaki problem rozwiązujesz? (wymagane)</Label>
-          <Textarea
-            id="problem"
-            required
-            value={problem}
-            onChange={(event) => setProblem(event.target.value)}
-          />
+          <p className="eyebrow">Granty</p>
+          <h1>Aktualne nabory</h1>
+          <p>
+            Tu zbieramy nabory, w których możesz złożyć wniosek. Przy każdym
+            znajdziesz opis, formularz wniosku i regulamin.
+          </p>
         </div>
-        <div>
-          <Label htmlFor="solution">Na czym polega pomysł? (wymagane)</Label>
-          <Textarea
-            id="solution"
-            required
-            value={solution}
-            onChange={(event) => setSolution(event.target.value)}
-          />
-        </div>
+      </div>
 
-        {!drafted ? (
-          <Button type="submit" disabled={drafting} aria-busy={drafting}>
-            {drafting ? "Przygotowuję szkic…" : "Wygeneruj szkic wniosku"}
-          </Button>
-        ) : (
-          <>
-            <p role="status">Przygotowaliśmy pierwszy szkic. Sprawdź każdą odpowiedź.</p>
-            <div>
-              <Label htmlFor="cel">Cel</Label>
-              <Textarea id="cel" value={cel} onChange={(e) => setCel(e.target.value)} />
-            </div>
-            <div>
-              <Label htmlFor="grupa">Grupa docelowa</Label>
-              <Textarea id="grupa" value={grupa} onChange={(e) => setGrupa(e.target.value)} />
-            </div>
-            <div>
-              <Label htmlFor="dzialania">Działania</Label>
-              <Textarea
-                id="dzialania"
-                value={dzialania}
-                onChange={(e) => setDzialania(e.target.value)}
-              />
-            </div>
-            <div>
-              <Label htmlFor="rezultaty">Rezultaty</Label>
-              <Textarea
-                id="rezultaty"
-                value={rezultaty}
-                onChange={(e) => setRezultaty(e.target.value)}
-              />
-            </div>
+      {open.length ? (
+        <ul className="calls-list">
+          {open.map((call) => (
+            <li key={call.name}>
+              {/* A list even with one call, so adding the next needs no redesign. */}
+              <article className="call-card">
+                <p className="call-card__badge">Nabór otwarty</p>
+                <h2>{call.name}</h2>
+                <p className="call-card__text">{call.description}</p>
 
-            <table className="w-full border-collapse text-left">
-              <caption className="mb-2 text-left">Budżet szkicu</caption>
-              <thead>
-                <tr className="border-b">
-                  <th scope="col" className="py-2">
-                    Pozycja
-                  </th>
-                  <th scope="col" className="py-2">
-                    Kategoria
-                  </th>
-                  <th scope="col" className="py-2">
-                    Kwota
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {budget.map((row, index) => (
-                  <tr key={index} className="border-b">
-                    <td className="py-2 pr-2">
-                      <Input
-                        aria-label={`Pozycja ${index + 1}`}
-                        value={row.item}
-                        onChange={(e) => {
-                          const next = [...budget];
-                          next[index] = { ...row, item: e.target.value };
-                          setBudget(next);
-                        }}
-                      />
-                    </td>
-                    <td className="py-2 pr-2">
-                      <Input
-                        aria-label={`Kategoria ${index + 1}`}
-                        value={row.category}
-                        onChange={(e) => {
-                          const next = [...budget];
-                          next[index] = { ...row, category: e.target.value };
-                          setBudget(next);
-                        }}
-                      />
-                    </td>
-                    <td className="py-2">
-                      <Input
-                        type="number"
-                        aria-label={`Kwota ${index + 1}`}
-                        value={row.amount}
-                        onChange={(e) => {
-                          const next = [...budget];
-                          next[index] = { ...row, amount: Number(e.target.value) };
-                          setBudget(next);
-                        }}
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <p>
-              Suma: {total.toLocaleString("pl-PL")} zł.
-              {overBudget ? (
-                <span> To przekracza maksymalną kwotę naboru.</span>
-              ) : null}
-            </p>
-            <p>To jest szkic. Sprawdź go z regulaminem naboru.</p>
-            <label className="flex min-h-11 items-start gap-2">
-              <input
-                type="checkbox"
-                className="mt-1 size-5"
-                checked={accepted}
-                onChange={(e) => setAccepted(e.target.checked)}
-              />
-              <span>
-                Zapoznałem się z{" "}
-                <a className="underline" href={openCall.regulamin_url}>
-                  regulaminem
-                </a>
-                . (wymagane)
-              </span>
-            </label>
-            {error ? (
-              <p id="regulamin-error" role="alert">
-                {error}
-              </p>
-            ) : null}
-            <Button type="submit" disabled={sending}>
-              {sending ? "Wysyłam…" : "Wyślij zgłoszenie"}
-            </Button>
-          </>
-        )}
-      </form>
+                <dl className="call-card__facts">
+                  <div>
+                    <dt>Wnioski można składać do</dt>
+                    <dd>{deadlineLabel(call.deadline)}</dd>
+                  </div>
+                  <div>
+                    <dt>Maksymalna kwota</dt>
+                    <dd>{budgetLabel(call.budget_max)}</dd>
+                  </div>
+                </dl>
+
+                <div className="call-card__actions">
+                  <Link
+                    href={`/kreator/grant/wniosek?nabor=${encodeURIComponent(call.name)}`}
+                    className="admin-primary-action"
+                  >
+                    Wniosek
+                  </Link>
+                  {call.regulamin_url ? (
+                    <a href={call.regulamin_url} className="secondary-action">
+                      Regulamin
+                    </a>
+                  ) : null}
+                </div>
+              </article>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="empty-result">
+          Nabór jest obecnie zamknięty.
+          {upcoming[0] ? ` Następny nabór: ${upcoming[0].name}, termin ${deadlineLabel(upcoming[0].deadline)}.` : ""}
+        </p>
+      )}
+
+      {upcoming.length ? (
+        <section aria-labelledby="planowane-h" className="calls-closed">
+          <h2 id="planowane-h">Nabory planowane</h2>
+          <ul>
+            {upcoming.map((call) => (
+              <li key={call.name}>
+                <strong>{call.name}</strong> — termin {deadlineLabel(call.deadline)}.
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {past.length ? (
+        <section aria-labelledby="zamkniete-h" className="calls-closed">
+          <h2 id="zamkniete-h">Nabory zakończone</h2>
+          <ul>
+            {past.map((call) => (
+              <li key={call.name}>
+                <strong>{call.name}</strong> —{" "}
+                {call.deadline ? `termin minął ${deadlineLabel(call.deadline)}` : "nabór zakończony"}.
+                {call.regulamin_url ? (
+                  <>
+                    {" "}
+                    <a href={call.regulamin_url}>Regulamin</a>
+                  </>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
     </div>
   );
 }

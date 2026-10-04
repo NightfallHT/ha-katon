@@ -20,23 +20,66 @@ from models import (
 from util import fold, one_question, read_prompt, read_repo_text
 
 GENERIC_CHECKLIST = (
-    "Cel",
-    "Grupa docelowa",
-    "Partnerzy",
-    "Budżet",
-    "Wskaźniki",
-    "Trwałość",
+    "Czas świadczenia",
+    "Kto składa wniosek",
+    "Czego brakuje przed zgłoszeniem",
 )
+
+# These are already full sections on the page. The checklist must not repeat them.
+_DUPLICATE_KEYS = ("cel", "grup", "partner", "kadr", "koszt", "szacun", "wskaz", "adapt", "przyczyn", "ryzyk")
 
 def _questions(req: MiddlemanChatRequest, innovation: dict) -> tuple[str, str, str, str]:
     title = str(innovation.get("title") or "ta innowacja")
     size = "małej" if req.gmina.population < 8000 else "tej"
     return (
         f"Kto w {size} gminie {req.gmina.name} najbardziej odczuwa problem, który ma rozwiązać „{title}”?",
-        "Co jest przyczyną, a nie tylko objawem? Na przykład brak dojazdu, wyjazd młodych albo usługa za daleko od domu.",
-        "Co już u Was działa i kto może to prowadzić: OPS, CUS, szkoła, organizacja albo parafia?",
-        "Jaki macie limit ludzi i pieniędzy na pierwszy rok tej usługi?",
+        f"Co jest przyczyną tego problemu w {req.gmina.name}, a nie tylko objawem?",
+        f"Co już działa w {req.gmina.name} i kto może prowadzić „{title}”?",
+        f"Ilu ludzi i ile pieniędzy {req.gmina.name} ma na pierwszy rok „{title}”?",
     )
+
+
+def _suggestion_sets(req: MiddlemanChatRequest, innovation: dict) -> tuple[list[str], list[str], list[str], list[str]]:
+    name = req.gmina.name
+    title = str(innovation.get("title") or "ta innowacja")
+    small = "w mniejszych sołectwach" if req.gmina.population < 15000 else "w większych miejscowościach"
+    return (
+        [
+            f"W {name} najbardziej seniorzy {small}.",
+            f"Rodziny, które nie udźwigną opieki bez „{title}”.",
+            "Osoby, które nie wyjdą z domu bez czyjejś pomocy.",
+            f"Mieszkańcy, do których „{title}” pasuje najbliżej.",
+        ],
+        [
+            f"W {name} nie ma dojazdu do tej pomocy.",
+            "Młodsi wyjechali i nie ma kto pomagać na co dzień.",
+            "Ludzie nie wiedzą, że coś takiego już jest.",
+            "Pomoc jest za daleko od domu.",
+        ],
+        [
+            f"W {name} jest OPS, ale nikt nie prowadzi „{title}”.",
+            "Świetlica i szkoła mogą użyczyć miejsca.",
+            "Jest lokalna organizacja, która robi coś podobnego.",
+            "Na miejscu prawie nic podobnego nie działa.",
+        ],
+        [
+            f"{name} udźwignie część etatu koordynatora.",
+            "Mamy samych wolontariuszy, bez etatu.",
+            "Bez grantu nie wystartujemy.",
+            "Stały nas dojazd, nie cały zespół.",
+        ],
+    )
+
+
+def _suggestions(raw: dict, fallback: list[str]) -> list[str]:
+    found: list[str] = []
+    for item in raw.get("suggestions") or []:
+        text = " ".join(str(item).split())
+        if text and text not in found:
+            found.append(text)
+        if len(found) == 4:
+            break
+    return found or fallback
 
 
 def user_turns(history_len_user: int) -> int:
@@ -48,17 +91,36 @@ def _prior_user_messages(history) -> int:
 
 
 def checklist_items() -> list[str]:
-    text = read_repo_text("docs/content/usluga-wrazliwa.md")
-    if not text:
-        return list(GENERIC_CHECKLIST)
-    found = []
-    for line in text.splitlines():
-        stripped = line.strip()
-        if stripped.startswith("- "):
-            item = stripped[2:].strip()
-            if item:
-                found.append(item)
-    return found or list(GENERIC_CHECKLIST)
+    return list(GENERIC_CHECKLIST)
+
+
+def _open_call_note() -> str:
+    import json
+
+    for relative in ("web/content/seed/calls.json", "data/seed/calls.json"):
+        raw = read_repo_text(relative)
+        if not raw:
+            continue
+        try:
+            rows = json.loads(raw)
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(rows, list):
+            continue
+        for row in rows:
+            if isinstance(row, dict) and row.get("is_open"):
+                return (
+                    f"Otwarty nabór: {row.get('name')}. "
+                    f"Termin: {row.get('deadline')}. Limit: {row.get('budget_max')} zł. "
+                    f"{row.get('description') or ''}"
+                )
+    return "Żaden nabór w katalogu nie jest teraz otwarty."
+
+
+def _program_note() -> str:
+    text = read_repo_text("docs/content/usluga-wrazliwa.md") or ""
+    lines = [line.strip() for line in text.splitlines() if line.strip() and not line.startswith("#")]
+    return " ".join(lines[:12]) or "Usługa wrażliwa: adaptacja gotowej innowacji do lokalnej usługi."
 
 
 def _mark_checklist(items: list[str], blob: str) -> list[ChecklistItem]:
@@ -70,12 +132,64 @@ def _mark_checklist(items: list[str], blob: str) -> list[ChecklistItem]:
     return marked
 
 
+def _default_programme_answers(innovation_title: str, gmina_name: str) -> list[ChecklistItem]:
+    return [
+        ChecklistItem(
+            item="Czas świadczenia",
+            done=True,
+            answer=f"„{innovation_title}” w gminie {gmina_name} ma być prowadzone co najmniej przez rok od startu.",
+        ),
+        ChecklistItem(
+            item="Kto składa wniosek",
+            done=True,
+            answer=f"Wniosek o „{innovation_title}” składa gmina {gmina_name}, jej jednostka albo lokalna organizacja.",
+        ),
+        ChecklistItem(
+            item="Czego brakuje przed zgłoszeniem",
+            done=False,
+            answer=(
+                f"Przed zgłoszeniem „{innovation_title}” w {gmina_name} trzeba potwierdzić doświadczenie wnioskodawcy "
+                "i zgodność z regulaminem naboru."
+            ),
+        ),
+    ]
+
+
+def _useful_answer(text: str) -> str:
+    cleaned = " ".join(text.split())
+    if fold(cleaned) in {"", "jest", "tak", "ok", "uzupelnione", "do uzupelnienia", "cel"}:
+        return ""
+    return cleaned
+
+
+def _checklist_with_answers(
+    items: list[ChecklistItem],
+    report: ServiceReport,
+    innovation_title: str,
+    gmina_name: str,
+) -> list[ChecklistItem]:
+    del report
+    kept: list[ChecklistItem] = []
+    for item in items:
+        folded = fold(item.item)
+        if any(key in folded for key in _DUPLICATE_KEYS):
+            continue
+        answer = _useful_answer(item.answer)
+        if not answer or fold(answer) == folded:
+            continue
+        kept.append(item.model_copy(update={"answer": answer}))
+    return kept or _default_programme_answers(innovation_title, gmina_name)
+
+
 async def _innovation(innovation_id: str) -> dict:
-    if db.enabled():
+    local = innovation_by_id(innovation_id)
+    if local:
+        return local
+    if db.enabled() and len(innovation_id) > 30:
         row = await db.get_innovation(innovation_id)
         if row:
             return row
-    return innovation_by_id(innovation_id) or {
+    return {
         "id": innovation_id,
         "title": "Wybrana innowacja",
         "summary": "Rozwiązanie wybrane przez gminę do dostosowania.",
@@ -88,33 +202,48 @@ async def chat(req: MiddlemanChatRequest) -> MiddlemanChatResponse:
     if cached:
         return MiddlemanChatResponse.model_validate(cached)
     turn = _prior_user_messages(req.history) + 1
-    if llm.available():
-        innovation = await _innovation(req.innovation_id)
-        raw = await llm.complete_json(
-            read_prompt("middleman_chat.md"),
-            "TASK:middleman_chat\n"
-            f"TURA: {turn}\n"
-            f"INNOWACJA: {innovation.get('title')} — {innovation.get('summary')}\n"
-            f"GMINA: {req.gmina.name}, typ {req.gmina.type}, mieszkańców {req.gmina.population}, trend {req.gmina.population_trend}\n"
-            f"HISTORIA: {_history(req.history)}\n"
-            f"WIADOMOŚĆ: {req.message}",
-            temperature=0.4,
-        )
-        try:
-            parsed = MiddlemanChatResponse.model_validate(
-                {"reply": one_question(str(raw.get("reply") or "")), "done": bool(raw.get("done"))}
-            )
-        except ValidationError as exc:
-            raise LlmError() from exc
-        done = parsed.done or turn > 4
-        return MiddlemanChatResponse(reply=parsed.reply, done=done)
     innovation = await _innovation(req.innovation_id)
+    if llm.available():
+        try:
+            raw = await llm.complete_json(
+                read_prompt("middleman_chat.md"),
+                "TASK:middleman_chat\n"
+                f"TURA: {turn}\n"
+                f"INNOWACJA: {innovation.get('title')} — {innovation.get('summary')}\n"
+                f"GMINA: {req.gmina.name}, typ {req.gmina.type}, mieszkańców {req.gmina.population}, trend {req.gmina.population_trend}\n"
+                f"NABÓR: {_open_call_note()}\n"
+                f"PROGRAM: {_program_note()}\n"
+                f"HISTORIA: {_history(req.history)}\n"
+                f"WIADOMOŚĆ: {req.message}",
+                temperature=0.4,
+                timeout=25,
+                attempts=1,
+                max_tokens=450,
+            )
+            fallback = _suggestion_sets(req, innovation)[min(turn, 4) - 1]
+            parsed = MiddlemanChatResponse.model_validate(
+                {
+                    "reply": one_question(str(raw.get("reply") or "")),
+                    "done": bool(raw.get("done")),
+                    "suggestions": _suggestions(raw, fallback),
+                }
+            )
+            done = parsed.done or turn > 4
+            return MiddlemanChatResponse(reply=parsed.reply, done=done, suggestions=parsed.suggestions or fallback)
+        except (LlmError, ValidationError):
+            pass
     if turn > 4:
         return MiddlemanChatResponse(
             reply="Mam już dość, żeby naszkicować usługę. Możesz przejść do raportu.",
             done=True,
+            suggestions=["Przygotuj projekt usługi na podstawie tej rozmowy."],
         )
-    return MiddlemanChatResponse(reply=_questions(req, innovation)[min(turn, 4) - 1], done=False)
+    index = min(turn, 4) - 1
+    return MiddlemanChatResponse(
+        reply=_questions(req, innovation)[index],
+        done=False,
+        suggestions=_suggestion_sets(req, innovation)[index],
+    )
 
 
 def _root_causes(innovation: dict, gmina) -> list[str]:
@@ -155,25 +284,37 @@ async def report(req: MiddlemanReportRequest) -> MiddlemanReportResponse:
     innovation = await _innovation(req.innovation_id)
     items = checklist_items()
     if llm.available():
-        raw = await llm.complete_json(
-            read_prompt("middleman_report.md"),
-            "TASK:middleman_report\n"
-            f"INNOWACJA: {innovation.get('title')} — {innovation.get('summary')}\n"
-            f"GMINA: {req.gmina.name}, typ {req.gmina.type}, mieszkańców {req.gmina.population}, trend {req.gmina.population_trend}\n"
-            f"HISTORIA: {_history(req.history)}\n"
-            f"CHECKLISTA: {items}",
-            temperature=0.4,
-        )
         try:
+            raw = await llm.complete_json(
+                read_prompt("middleman_report.md"),
+                "TASK:middleman_report\n"
+                f"INNOWACJA: {innovation.get('title')} — {innovation.get('summary')}\n"
+                f"GMINA: {req.gmina.name}, typ {req.gmina.type}, mieszkańców {req.gmina.population}, trend {req.gmina.population_trend}\n"
+                f"NABÓR: {_open_call_note()}\n"
+                f"PROGRAM: {_program_note()}\n"
+                f"HISTORIA: {_history(req.history)}\n"
+                f"CHECKLISTA: {items}",
+                temperature=0.3,
+                timeout=25,
+                attempts=1,
+                max_tokens=700,
+            )
             parsed = MiddlemanReportResponse.model_validate(raw)
-        except ValidationError as exc:
-            raise LlmError() from exc
-        summary = parsed.report.summary
-        if "szacunek orientacyjny" not in summary.lower():
-            summary = summary.rstrip(".") + ". Koszt poniżej to szacunek orientacyjny."
-        checklist = parsed.report.usluga_wrazliwa_checklist or _mark_checklist(items, summary)
-        report_body = parsed.report.model_copy(update={"summary": summary, "usluga_wrazliwa_checklist": checklist})
-        return MiddlemanReportResponse(report=report_body)
+            summary = parsed.report.summary
+            if "szacunek orientacyjny" not in summary.lower():
+                summary = summary.rstrip(".") + ". Koszt poniżej to szacunek orientacyjny."
+            checklist = parsed.report.usluga_wrazliwa_checklist or _mark_checklist(items, summary)
+            report_body = parsed.report.model_copy(update={"summary": summary})
+            checklist = _checklist_with_answers(
+                checklist,
+                report_body,
+                str(innovation.get("title") or ""),
+                req.gmina.name,
+            )
+            report_body = report_body.model_copy(update={"usluga_wrazliwa_checklist": checklist})
+            return MiddlemanReportResponse(report=report_body)
+        except (LlmError, ValidationError):
+            pass
     costs = _scale_costs(req.gmina.population)
     summary = (
         f"W {req.gmina.name} proponujemy oprzeć usługę na pomyśle „{innovation.get('title')}”. "
@@ -187,9 +328,19 @@ async def report(req: MiddlemanReportRequest) -> MiddlemanReportResponse:
         delivery_partners=["gmina", "OPS", "organizacja społeczna", "świetlica wiejska"],
         staffing="Jedna osoba koordynująca na część etatu i kilku wolontariuszy. To założenie, dopóki gmina nie poda etatów.",
         cost_estimate=costs,
-        kpis=["Liczba osób, które skorzystały w ciągu roku", "Liczba dojazdów do lekarza", "Liczba osób, które przyszły na spotkanie"],
+        kpis=["Liczba osób, które skorzystały w ciągu roku", "Liczba działań blisko domu"],
         risks=["Za mało wolontariuszy w sezonie prac polowych", "Brak stałego finansowania po pilotażu"],
-        usluga_wrazliwa_checklist=_mark_checklist(items, summary + " cel grupa partnerzy budżet wskaźniki trwałość"),
+        usluga_wrazliwa_checklist=[],
+    )
+    body = body.model_copy(
+        update={
+            "usluga_wrazliwa_checklist": _checklist_with_answers(
+                _mark_checklist(items, summary),
+                body,
+                str(innovation.get("title") or ""),
+                req.gmina.name,
+            )
+        }
     )
     return MiddlemanReportResponse(report=body)
 

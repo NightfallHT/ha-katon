@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import os
+from contextlib import asynccontextmanager
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
@@ -13,7 +14,7 @@ from fastapi.responses import JSONResponse
 
 load_dotenv()
 
-from llm import LlmError
+from llm import LlmError, llm
 from models import (
     ChatRequest,
     ChatResponse,
@@ -22,6 +23,8 @@ from models import (
     GrantDraftRequest,
     GrantDraftResponse,
     HealthResponse,
+    KnowledgeReportRequest,
+    KnowledgeReportResponse,
     KreatorAssistRequest,
     KreatorAssistResponse,
     MatchRequest,
@@ -36,6 +39,7 @@ from models import (
 )
 from services.admin import enrich, reembed
 from services.chat import chat
+from services.knowledge import report as knowledge_report
 from services.kreator import assist, grant_draft
 from services.match import match
 from services.middleman import chat as middleman_chat
@@ -45,7 +49,24 @@ from services.simplify import simplify
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger("ai")
 
-app = FastAPI(title="Hub Innowacji Społecznych — AI")
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    if llm.available():
+        try:
+            await llm.complete_json(
+                "Return JSON.",
+                'Reply with json {"ok": true}',
+                timeout=40,
+                attempts=1,
+                max_tokens=20,
+            )
+            log.info("llm connection warm")
+        except LlmError:
+            log.warning("llm warmup failed")
+    yield
+
+
+app = FastAPI(title="Hub Innowacji Społecznych — AI", lifespan=lifespan)
 
 
 def _origins() -> list[str]:
@@ -137,6 +158,13 @@ async def chat_route(body: ChatRequest):
     if not body.message.strip():
         raise HTTPException(status_code=400, detail="Napisz pytanie o platformę albo o innowacje.")
     return await chat(body)
+
+
+@app.post("/knowledge/report", response_model=KnowledgeReportResponse)
+async def knowledge_report_route(body: KnowledgeReportRequest):
+    if not body.query.strip():
+        raise HTTPException(status_code=400, detail="Wpisz temat, o którym mam przygotować raport.")
+    return await knowledge_report(body)
 
 
 @app.post("/admin/enrich", response_model=EnrichResponse)

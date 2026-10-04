@@ -7,7 +7,10 @@ import { isAdmin } from "../../_lib/guard";
 const AI_URL = process.env.NEXT_PUBLIC_AI_URL;
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
-export type ActionResult = { ok: boolean; message: string };
+// `saved`/`sentAt` let the forms reset their "changed since last save"
+// baseline without an effect: the status select goes quiet again and the
+// reply box empties once the write succeeds.
+export type ActionResult = { ok: boolean; message: string; saved?: string; sentAt?: string };
 
 async function requireAdmin() {
   if (!(await isAdmin())) throw new Error("Brak uprawnień.");
@@ -55,7 +58,7 @@ export async function updateStatus(id: string, _prev: ActionResult | null, formD
     if (error) throw new Error(error.message);
     revalidatePath(`/admin/zgloszenia/${id}`);
     revalidatePath("/admin/zgloszenia");
-    return { ok: true, message: "Status został zapisany." };
+    return { ok: true, message: "Status został zapisany.", saved: status };
   } catch (e) {
     return fail(e);
   }
@@ -79,7 +82,7 @@ export async function sendReply(id: string, _prev: ActionResult | null, formData
       /* ignore */
     }
     revalidatePath(`/admin/zgloszenia/${id}`);
-    return { ok: true, message: "Odpowiedź została wysłana." };
+    return { ok: true, message: "Odpowiedź została wysłana.", sentAt: new Date().toISOString() };
   } catch (e) {
     return fail(e);
   }

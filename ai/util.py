@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import re
 from pathlib import Path
 
@@ -9,6 +10,15 @@ AI_ROOT = Path(__file__).resolve().parent
 REPO_ROOT = AI_ROOT.parent
 
 _FOLD = str.maketrans("ąćęłńóśźżĄĆĘŁŃÓŚŹŻ", "acelnoszzACELNOSZZ")
+
+
+def http_verify() -> str | bool:
+    """Use a corporate CA bundle when one is configured. httpx otherwise trusts only certifi."""
+    for name in ("SSL_CERT_FILE", "REQUESTS_CA_BUNDLE", "CURL_CA_BUNDLE"):
+        path = os.getenv(name, "").strip()
+        if path and Path(path).is_file():
+            return path
+    return True
 
 
 def fold(value: str) -> str:

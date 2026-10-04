@@ -1,0 +1,23 @@
+[
+  {
+    "id": "256640b3-3b38-4589-afd8-bfe003b6ead1",
+    "title": "Sąsiedzki bus do lekarza",
+    "summary": "Sąsiedzki bus dwa razy w tygodniu.",
+    "description": "Sąsiedzki bus dwa razy w tygodniu. Problem, który rozwiązuje: Seniorzy na wsi nie maja dojazdu do lekarza.",
+    "category": "inne",
+    "target_groups": [
+      "seniorzy w gminie wiejskiej"
+    ],
+    "tags": [],
+    "stage": "pomysł",
+    "region": "",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": null,
+    "source_url": null,
+    "contact_org": "wojt@gmina-demo.pl",
+    "avg_rating": 0,
+    "ratings_count": 0,
+    "published": true
+  }
+]

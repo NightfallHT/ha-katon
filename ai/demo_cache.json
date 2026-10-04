@@ -127,10 +127,10 @@
     },
     "/chat": {
       "Jak mogę zgłosić pomysł na innowację społeczną?": {
-        "reply": "Wejdź w Kreator i opisz problem zwykłymi słowami. Asystent pomoże uzupełnić fiszkę. Potem wyślij pomysł. Status zobaczysz w Moje zgłoszenia.",
+        "reply": "Wejdź w Kreator i opisz problem zwykłymi słowami. Asystent pomoże uzupełnić fiszkę. Potem wyślij pomysł. Odpowiedź ROPS przyjdzie na Twój e-mail.",
         "sources": [
           {"title": "Kreator", "url": "/kreator"},
-          {"title": "Moje zgłoszenia", "url": "/moje-zgloszenia"}
+          {"title": "Kontakt", "url": "/kontakt"}
         ],
         "handoff": false
       }

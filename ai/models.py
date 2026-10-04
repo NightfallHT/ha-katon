@@ -210,6 +210,7 @@ class MiddlemanChatRequest(BaseModel):
 class MiddlemanChatResponse(BaseModel):
     reply: str
     done: bool
+    suggestions: list[str] = Field(default_factory=list)
 
 
 class CostItem(BaseModel):
@@ -228,6 +229,7 @@ class CostItem(BaseModel):
 class ChecklistItem(BaseModel):
     item: str
     done: bool
+    answer: str = ""
 
 
 class ServiceReport(BaseModel):
@@ -268,6 +270,37 @@ class ChatResponse(BaseModel):
     reply: str
     sources: list[Source] = Field(default_factory=list)
     handoff: bool
+
+
+class KnowledgeReportRequest(BaseModel):
+    query: str
+    audience: Literal["person", "institution"] = "person"
+
+
+class KnowledgeMetric(BaseModel):
+    value: str
+    label: str
+
+
+class KnowledgeInnovation(BaseModel):
+    innovation_id: str
+    title: str
+    summary: str
+
+
+class KnowledgeMaterial(BaseModel):
+    title: str
+    url: str
+    description: str
+
+
+class KnowledgeReportResponse(BaseModel):
+    title: str
+    summary: str
+    metrics: list[KnowledgeMetric]
+    what_works: list[str]
+    innovations: list[KnowledgeInnovation]
+    materials: list[KnowledgeMaterial]
 
 
 class EnrichRequest(BaseModel):

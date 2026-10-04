@@ -5,6 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { challenges } from "@/content/catalog";
 import { categoryLabel } from "@/content/labels";
 
+// <OpenCalls> reads the calls table; /admin/nabory revalidates this page on save.
+export const revalidate = 60;
+
 export default function WyzwaniaPage() {
   const groups = Object.entries(
     challenges.reduce<Record<string, typeof challenges>>((acc, item) => {
@@ -49,7 +52,9 @@ export default function WyzwaniaPage() {
                       Powiat: {item.powiat}. {item.indicator_name}:{" "}
                       {String(item.indicator_value).replace(".", ",")}.
                     </p>
-                    <p className="text-muted-foreground">Źródło: {item.source}</p>
+                    <p className="break-all text-muted-foreground">
+                      Źródło: {item.source}
+                    </p>
                   </CardContent>
                 </Card>
               </li>

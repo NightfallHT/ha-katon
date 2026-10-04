@@ -1,0 +1,62 @@
+[
+  {
+    "id": "d702ceec-ee16-4920-a38c-235ac17c6d4f",
+    "type": "contact",
+    "title": "Wiadomość od Halina",
+    "author_name": "Halina",
+    "author_email": "halina@demo.hubmi.pl",
+    "author_role": "mieszkaniec",
+    "payload": {
+      "message": "Chcę zapytać o dowóz do lekarza.",
+      "page": ""
+    },
+    "status": "nowe",
+    "ai_summary": null,
+    "ai_tags": [],
+    "ai_category": null,
+    "innovation_id": null,
+    "call_id": null,
+    "created_at": "2026-10-03T16:30:24.033Z"
+  },
+  {
+    "id": "4624fe43-2293-4afa-83ed-4f259150899d",
+    "type": "idea",
+    "title": "Sąsiedzki bus do lekarza",
+    "author_name": null,
+    "author_email": "wojt@gmina-demo.pl",
+    "author_role": "gmina",
+    "payload": {
+      "problem": "Seniorzy na wsi nie maja dojazdu do lekarza.",
+      "solution": "Sąsiedzki bus dwa razy w tygodniu.",
+      "target_group": "seniorzy w gminie wiejskiej",
+      "stage": "pomysł",
+      "location": ""
+    },
+    "status": "zaakceptowane",
+    "ai_summary": null,
+    "ai_tags": [],
+    "ai_category": null,
+    "innovation_id": "256640b3-3b38-4589-afd8-bfe003b6ead1",
+    "call_id": null,
+    "created_at": "2026-10-03T16:27:46.546Z"
+  },
+  {
+    "id": "e4259f67-e980-45c0-aaf3-1d380a285217",
+    "type": "test_signup",
+    "title": "Test: Sąsiedzki dowóz do lekarza",
+    "author_name": null,
+    "author_email": "wojt@gmina-demo.pl",
+    "author_role": "gmina",
+    "payload": {
+      "innovation_id": "a1000001-0000-4000-8000-000000000001",
+      "motivation": "Chcę sprawdzić, czy dowóz działa w mojej wsi."
+    },
+    "status": "nowe",
+    "ai_summary": null,
+    "ai_tags": [],
+    "ai_category": null,
+    "innovation_id": "a1000001-0000-4000-8000-000000000001",
+    "call_id": null,
+    "created_at": "2026-10-03T16:26:28.910Z"
+  }
+]

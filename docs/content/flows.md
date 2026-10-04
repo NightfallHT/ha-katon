@@ -63,7 +63,7 @@ Rola cookie: `ngo`.
 | 3 | `/kreator` | **Złóż wniosek o grant** (albo najpierw **Zgłoś pomysł**, jeśli jeszcze nie ma fiszki) |
 | 4 | Szkic wniosku (AI) | **Wygeneruj szkic** → poprawić sekcje i budżet |
 | 5 | Regulamin + wyślij | Zaznaczyć regulamin i **wyślij wniosek** |
-| 6 | `/moje-zgloszenia` | Zobaczyć status (Nowe → W ocenie → …) jak śledzenie paczki |
+| 6 | E-mail z potwierdzeniem | Dostać szczegóły wniosku na adres podany w formularzu |
 
 Przykład: nabór na innowacje dla osób z niepełnosprawnościami i wykluczonych cyfrowo → NGO składa wniosek o sąsiedzkie wsparcie asystenckie.
 
@@ -100,7 +100,7 @@ Rola cookie: `mieszkaniec`.
 | 2 | `/dopasuj` | Otworzyć rozwiązanie **dla opiekunów / osób z niepełnosprawnościami** |
 | 3 | `/biblioteka/[id]` + podobne | Sprawdzić, czy można z tego skorzystać; kliknąć **źródło** |
 | 4 | (ścieżka B) `/kreator` | **Zgłoś pomysł** — mała innowacja od osoby prywatnej |
-| 5 | Potwierdzenie | Śledzić w **Moje zgłoszenia** |
+| 5 | Potwierdzenie | Odpowiedź ROPS przyjdzie na e-mail |
 
 Demo input:  
 „Mam syna z niepełnosprawnością. Jakie projekty i innowacje w Małopolsce mogą nam pomóc? Chcę też zgłosić mały pomysł z naszej gminy.”

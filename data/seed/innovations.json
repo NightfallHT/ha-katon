@@ -925,5 +925,1734 @@
     "image_alt": "Ilustracja rozwiązania „Mapa dostępnych usług w gminie”.",
     "source_url": "https://rops.krakow.pl/pliki-do-pobrania/artykul%2Cmapa-wyzwan-spolecznych%2C1048",
     "contact_org": "Dane demo – inspirowane Mapą Wyzwań"
+  },
+  {
+    "title": "Bajkala",
+    "summary": "Lampka z nagraniem bajki pomaga czeczeńskim dzieciom oswoić się z polską kulturą. Bajki są po polsku i po rosyjsku lub czeczeńsku.",
+    "description": "Zestaw zawiera lampkę z odtwarzaczem bajek, książeczkę i słowniczek. Polskie bajki są podobne do opowieści znanych dziecku. Test pokazał, że zachęca do słuchania bajek i daje poczucie bezpieczeństwa. Mogą z niego korzystać ośrodki dla cudzoziemców i szkoły.",
+    "category": "integracja_spoleczna",
+    "target_groups": [
+      "dzieci z Czeczenii",
+      "rodziny cudzoziemców"
+    ],
+    "tags": [
+      "migranci",
+      "dzieci",
+      "bajki",
+      "język polski",
+      "integracja"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Bajkala”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-cudzoziemcow,bajkala",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Dialog ponad kulturami",
+    "summary": "Model mediacji pomaga rodzicom z różnych krajów porozumieć się w sprawie dziecka. Ma zapobiegać porwaniom rodzicielskim.",
+    "description": "Mediacja łączy wiedzę prawną, psychologiczną i międzykulturową. Dotyczy głównie miejsca pobytu dziecka i władzy rodzicielskiej. Można ją prowadzić przed sprawą w sądzie, w jej trakcie i po jej zakończeniu. Z modelu mogą korzystać mediatorzy, prawnicy i ośrodki pomocy rodzinie.",
+    "category": "rodzina_dzieci",
+    "target_groups": [
+      "rodziny międzykulturowe",
+      "dzieci"
+    ],
+    "tags": [
+      "mediacja",
+      "rodzina",
+      "dziecko",
+      "konflikt",
+      "cudzoziemcy"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Dialog ponad kulturami”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-cudzoziemcow,dialog-ponad-kulturami",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Wortal informacyjny",
+    "summary": "Strona internetowa w języku dari tłumaczy uchodźcom z Afganistanu, jak działa życie w Polsce. Informacje są podane w kontekście ich kultury.",
+    "description": "Wortal jest podzielony na tematy, takie jak zdrowie i edukacja. Treści nie są zwykłym tłumaczeniem, tylko wyjaśniają polskie realia. Zawiera też wskazówki dla polskich lekarzy i urzędników, jak rozmawiać z Afgańczykami. Mogą z niego korzystać organizacje, urzędy i placówki medyczne.",
+    "category": "integracja_spoleczna",
+    "target_groups": [
+      "uchodźcy z Afganistanu"
+    ],
+    "tags": [
+      "uchodźcy",
+      "informacja",
+      "język dari",
+      "integracja",
+      "strona internetowa"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Wortal informacyjny”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-cudzoziemcow,wortal-informacyjny",
+    "contact_org": "Fundacja HumanDoc"
+  },
+  {
+    "title": "Komunikator dla uchodźców z Afganistanu",
+    "summary": "Aplikacja pomaga uchodźcom z Afganistanu porozumieć się z Polakami. Działa po polsku i w języku dari, także z obrazkami.",
+    "description": "Zawiera słownictwo o zdrowiu, edukacji, pracy i sprawach urzędowych. Ułatwia rozmowę w przychodni, urzędzie czy ośrodku pomocy społecznej. Test pokazał, że osobom czytającym pomaga w podstawowej komunikacji. Dla osób niepiśmiennych piktogramy wymagają jeszcze zmian.",
+    "category": "integracja_spoleczna",
+    "target_groups": [
+      "uchodźcy z Afganistanu",
+      "pracownicy instytucji publicznych"
+    ],
+    "tags": [
+      "uchodźcy",
+      "aplikacja",
+      "komunikacja",
+      "piktogramy",
+      "język dari"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Komunikator dla uchodźców z Afganistanu”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-cudzoziemcow,dialog-ponad-kulturami-1",
+    "contact_org": "Fundacja HumanDoc"
+  },
+  {
+    "title": "Health Guide PL",
+    "summary": "Przewodnik po polskiej publicznej służbie zdrowia dla cudzoziemców. Jest dostępny po angielsku i ukraińsku.",
+    "description": "Przewodnik wyjaśnia, jak działa podstawowa opieka zdrowotna w Polsce. Pomaga wybrać lekarza pierwszego kontaktu i poznać kalendarz szczepień dzieci. Ma wersję drukowaną, PDF i aplikację na Androida. Przyda się cudzoziemcom i personelowi placówek zdrowia.",
+    "category": "dostep_do_uslug",
+    "target_groups": [
+      "cudzoziemcy",
+      "rodziny cudzoziemców"
+    ],
+    "tags": [
+      "zdrowie",
+      "cudzoziemcy",
+      "przewodnik",
+      "lekarz",
+      "aplikacja"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Health Guide PL”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-cudzoziemcow,health-guide-pl",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Zrozum moją kulturę, zrozum mnie",
+    "summary": "Gra integracyjna pomaga migrantom i Polakom lepiej poznać swoje kultury. Uczestnicy dzielą się własnymi doświadczeniami.",
+    "description": "Gra zawiera pytania o kulturę, tradycje i religię. Za odpowiedzi gracze zdobywają punkty i opowiadają o sobie. Spotkania pomagają przełamać uprzedzenia i bariery. Grę mogą prowadzić szkoły, domy kultury i organizacje społeczne.",
+    "category": "integracja_spoleczna",
+    "target_groups": [
+      "migranci",
+      "uchodźcy",
+      "społeczność lokalna"
+    ],
+    "tags": [
+      "gra",
+      "integracja",
+      "kultura",
+      "migranci",
+      "spotkania"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Zrozum moją kulturę, zrozum mnie”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-cudzoziemcow,zrozum-moja-kulture-zrozum-mnie",
+    "contact_org": "Stowarzyszenie Czas Przestrzeń Tożsamość"
+  },
+  {
+    "title": "Uniodzież",
+    "summary": "Nieprzemakalne okrycie przeciwdeszczowe dla osób na wózku. Modułowa budowa pozwala dopasować je do użytkownika.",
+    "description": "Okrycie zostało zaprojektowane z myślą o osobach poruszających się na wózku. Elementy można łączyć zależnie od potrzeb. Powstało według zasad projektowania uniwersalnego, więc sprawdzi się też u innych osób. Ułatwia wychodzenie z domu przy złej pogodzie.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby na wózku"
+    ],
+    "tags": [
+      "odzież",
+      "wózek",
+      "deszcz",
+      "samodzielność"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": "https://www.youtube-nocookie.com/embed/hBY1SnqLXV0?start=23",
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Uniodzież”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-o-ograniczonej-mobilnosci,uniodziez",
+    "contact_org": "\"Rzecz Piękna\" Fundacja Rozwoju Wydziału Form Przemysłowych ASP w Krakowie"
+  },
+  {
+    "title": "Zakupy na jednym wózku z dzieckiem z niepełnosprawnością ruchową",
+    "summary": "Wózek sklepowy z bezpiecznym siedziskiem dla dziecka z niepełnosprawnością ruchową. Rodzic może zrobić zakupy bez organizowania opieki.",
+    "description": "Siedzisko ma stabilizatory głowy i kręgosłupa oraz pasy bezpieczeństwa. Dziecko siedzi bezpiecznie i wygodnie w trakcie zakupów. Rozwiązanie zwiększa samodzielność rodziców i opiekunów. Mogą je wprowadzić sklepy wielkopowierzchniowe i markety.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "rodzice dzieci z niepełnosprawnością"
+    ],
+    "tags": [
+      "zakupy",
+      "dzieci",
+      "wózek",
+      "rodzice",
+      "dostępność"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": "https://www.youtube-nocookie.com/embed/2tUImD7I-CE",
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Zakupy na jednym wózku z dzieckiem z niepełnosprawnością ruchową”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-o-ograniczonej-mobilnosci,zakupy-na-jednym-wozku-z-dzieckiem-z-niepelnosprawnoscia-ruchowa",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Kompleksowa pomoc dla osób po amputacji kończyny dolnej",
+    "summary": "Zespół specjalistów pomaga osobie po amputacji nogi szybciej wrócić do codziennego życia. Łączy pomoc psychologa, dietetyka i fizjoterapeuty.",
+    "description": "Praca zaczyna się od wywiadu z pacjentem. Na tej podstawie powstaje indywidualny plan 12-dniowego turnusu rehabilitacyjnego. Turnus ma dwie części po 6 dni z miesięczną przerwą na samodzielne ćwiczenia. Model mogą wdrożyć szpitale, placówki opiekuńcze i samorządy.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby po amputacji"
+    ],
+    "tags": [
+      "amputacja",
+      "rehabilitacja",
+      "psycholog",
+      "powrót do zdrowia"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Kompleksowa pomoc dla osób po amputacji kończyny dolnej”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-o-ograniczonej-mobilnosci,kompleksowa-pomoc-dla-osob-po-amputacji-konczyny-dolnej",
+    "contact_org": "Fundacja Centrum Rehabilitacji Znowu w Biegu"
+  },
+  {
+    "title": "Puzzle's Ramp",
+    "summary": "Gumowe klocki, z których można szybko zbudować podjazd. Pomagają pokonać progi, krawężniki i pojedyncze schodki.",
+    "description": "Elementy łączą się jak puzzle w podjazd dowolnej wysokości. Rozwiązanie jest tanie i można je stosować na stałe lub tymczasowo. Ułatwia poruszanie się osobom na wózkach, z balkonikiem i o lasce. Mogą z niego korzystać instytucje, firmy i osoby prywatne.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby na wózku",
+      "seniorzy",
+      "osoby o ograniczonej mobilności"
+    ],
+    "tags": [
+      "podjazd",
+      "bariery architektoniczne",
+      "dostępność",
+      "wózek"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Puzzle's Ramp”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-o-ograniczonej-mobilnosci,puzzles-ramp",
+    "contact_org": "Knowledge sp. z o.o"
+  },
+  {
+    "title": "Chlap Pro",
+    "summary": "Ochraniacz chroni protezę nogi przed zachlapaniem. Dzięki temu proteza dłużej działa.",
+    "description": "Wiele elementów protez nie jest odpornych na wodę. Ochraniacz zabezpiecza je podczas deszczu i przy złej pogodzie. Powstały wersje do najpopularniejszych protez uda i podudzia. Chroni protezę przed szybszym zużyciem.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby z protezą nogi"
+    ],
+    "tags": [
+      "proteza",
+      "ochrona",
+      "woda",
+      "samodzielność"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Chlap Pro”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-o-ograniczonej-mobilnosci,chlap-pro",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Marina Pai",
+    "summary": "Narzędzie pomaga przystaniom sprawdzić, czy są dostępne dla seniorów i osób z niepełnosprawnością. Wskazuje, co warto zmienić.",
+    "description": "Zawiera ankietę, ćwiczenia i wskazówki dla zarządców marin. Pomaga zrozumieć potrzeby seniorów i osób z niepełnosprawnością wzroku i ruchu. Test pokazał, że narzędzie dobrze inicjuje zmiany. Ich wprowadzenie wymaga jednak inwestycji w przystanie.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "zarządcy przystani",
+      "seniorzy",
+      "osoby z niepełnosprawnością"
+    ],
+    "tags": [
+      "żeglarstwo",
+      "dostępność",
+      "przystań",
+      "audyt"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Marina Pai”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-o-ograniczonej-mobilnosci,marina-pai",
+    "contact_org": "Centrum Rozwoju Społeczno-Gospodarczego Przedsiębiorstwo Społeczne sp. z o.o"
+  },
+  {
+    "title": "Nakręceni na aktywność",
+    "summary": "Aplikacja pokazuje, które restauracje, urzędy i muzea są dostępne dla osób z niepełnosprawnością. Opinie dodają sami użytkownicy.",
+    "description": "Użytkownicy opisują m.in. nachylenie podjazdu i swobodę poruszania się w odwiedzonych miejscach. Razem tworzą mapę przyjaznych miejsc. W teście oceniono dostępność 313 obiektów. Mogą z niej korzystać także opiekunowie i organizacje.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby z niepełnosprawnością ruchową",
+      "opiekunowie"
+    ],
+    "tags": [
+      "aplikacja",
+      "dostępność",
+      "opinie",
+      "czas wolny",
+      "podróże"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Nakręceni na aktywność”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-o-ograniczonej-mobilnosci,nakreceni-na-aktywnosc",
+    "contact_org": "Katolickie Stowarzyszenie Osób Niepełnosprawnych i Ich przyjaciół „KLIKA”"
+  },
+  {
+    "title": "Moduły niezależności",
+    "summary": "Zabudowa kamperowa dla samochodu dostawczego, przystosowana dla osób z niepełnosprawnością. Ułatwia samodzielne podróże.",
+    "description": "Model opisuje potrzebne elementy i sposób ich montażu. Zabudowa jest przystosowana dla osób na wózku, niewidomych i niesłyszących. Test potwierdził korzyści przede wszystkim dla osób poruszających się na wózku. Mogą z niej skorzystać producenci kamperów, wypożyczalnie i biura turystyczne.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby z niepełnosprawnością",
+      "seniorzy",
+      "opiekunowie"
+    ],
+    "tags": [
+      "turystyka",
+      "kamper",
+      "transport",
+      "dostępność"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Moduły niezależności”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-o-ograniczonej-mobilnosci,moduly-niezaleznosci",
+    "contact_org": "Fundacja Polska Bez Barier"
+  },
+  {
+    "title": "BiustSPINKA",
+    "summary": "Proste i tanie urządzenie pomaga kobietom z ograniczoną sprawnością rąk założyć biustonosz. Zwiększa samodzielność przy ubieraniu.",
+    "description": "Urządzenie wykorzystuje taśmę i jest tanie. Przydaje się po wypadku, przy chorobie i przy sprawnym tylko jednym ramieniu. Test pokazał, że nie każdej użytkowniczce jest wygodne, bo wymaga mocnych i precyzyjnych ruchów. Mogą je polecać gabinety rehabilitacji i sklepy z bielizną.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "kobiety z niepełnosprawnością ruchową"
+    ],
+    "tags": [
+      "ubieranie",
+      "samodzielność",
+      "bielizna",
+      "rehabilitacja"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „BiustSPINKA”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-o-ograniczonej-mobilnosci,biustspinka",
+    "contact_org": "Karpatia Sp. z o. o"
+  },
+  {
+    "title": "Szablony piękna",
+    "summary": "Wykroje i tabele rozmiarów bielizny dla kobiet poruszających się na wózku. Bielizna jest wygodna, funkcjonalna i estetyczna.",
+    "description": "Projekty uwzględniają wygodne zapięcia i miękkie, oddychające materiały. Ułatwiają samodzielne zakładanie bielizny przy niedowładzie rąk. Łączą funkcjonalność z aktualną modą. Mogą z nich korzystać firmy bieliźniarskie, sklepy i organizacje.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "kobiety na wózku"
+    ],
+    "tags": [
+      "bielizna",
+      "odzież adaptacyjna",
+      "wózek",
+      "moda"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Szablony piękna”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-o-ograniczonej-mobilnosci,szablony-piekna",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "EV moduł do wózków inwalidzkich",
+    "summary": "Elektryczny moduł doczepiany do wózka ułatwia jazdę pod górę i po chodnikach. Zwiększa stabilność wózka.",
+    "description": "Moduł ma dwa koła, przednie i tylne. Wózek staje się stabilniejszy, a jego wymiary rosną najwyżej o 10%. Ułatwia samodzielne poruszanie się po mieście. Rozwiązaniem mogą być zainteresowani producenci wózków i ośrodki rehabilitacji.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby na wózku"
+    ],
+    "tags": [
+      "wózek",
+      "napęd elektryczny",
+      "mobilność",
+      "samodzielność"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „EV moduł do wózków inwalidzkich”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-o-ograniczonej-mobilnosci,ev-modul-do-wozkow-inwalidzkich",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Dostępny stół targowy",
+    "summary": "Stół targowy dostosowany do potrzeb seniorów i osób z niepełnosprawnością. Ułatwia samodzielne zakupy na targowisku.",
+    "description": "Powstały cztery wersje stołu z różnymi udogodnieniami. Mają m.in. pochylony blat, uchwyty na torbę, kule i laskę oraz poręcze. Mają też miejsce na monety, dodatkowe półki i siedzisko. Stoły mogą wprowadzić gminy i zarządcy targowisk.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "seniorzy",
+      "osoby z niepełnosprawnością"
+    ],
+    "tags": [
+      "zakupy",
+      "targowisko",
+      "dostępność",
+      "seniorzy"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Dostępny stół targowy”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-o-ograniczonej-mobilnosci,dostepny-stol-targowy",
+    "contact_org": "Gmina Miasta Dębica"
+  },
+  {
+    "title": "Cloudleg",
+    "summary": "Kosmetyczna proteza nóg dla osób na wózku po amputacji obu nóg. Pełni funkcję estetyczną, a nie medyczną.",
+    "description": "Proteza wygląda realistycznie i trzyma się dzięki elastycznym szortom. Można ją przyciąć do potrzebnej długości. Jest przeznaczona dla osób, które nie korzystają z protez funkcjonalnych. Pomaga oswoić się z nowym wyglądem po utracie nóg.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby po amputacji",
+      "osoby na wózku"
+    ],
+    "tags": [
+      "proteza",
+      "wygląd",
+      "amputacja",
+      "wózek",
+      "pewność siebie"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Cloudleg”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-o-ograniczonej-mobilnosci,cloudleg",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Lekki wózek aktywny",
+    "summary": "Lekki i zwrotny wózek aktywny w przystępnej cenie. Ma ułatwiać aktywne życie zawodowe i towarzyskie.",
+    "description": "Dobre wózki aktywne są drogie i trudno dostępne. Projekt zakłada lekką konstrukcję o dobrej zwrotności. Powstał częściowo działający prototyp, który potwierdził trafność pomysłu. Do wdrożenia potrzebny jest producent, np. sprzętu sportowego.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby na wózku"
+    ],
+    "tags": [
+      "wózek aktywny",
+      "mobilność",
+      "prototyp",
+      "aktywność"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Lekki wózek aktywny”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-o-ograniczonej-mobilnosci,lekki-wozek-aktywny",
+    "contact_org": "Fundacja Centrum Inicjatyw Sportowych"
+  },
+  {
+    "title": "Wózek szermierczy",
+    "summary": "Projekt lekkiego i tańszego wózka do szermierki dla zawodników z niepełnosprawnością. Zawodnik ma obsługiwać go samodzielnie.",
+    "description": "Wózek wykonano z nowoczesnych kompozytów i aluminium. Powstał razem z platformą „Dostępna szermierka”. Prototyp spełnia większość założeń. Nie jest jednak jeszcze gotowy do stosowania.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "sportowcy na wózkach"
+    ],
+    "tags": [
+      "sport",
+      "szermierka",
+      "wózek",
+      "aktywność"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Wózek szermierczy”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-o-ograniczonej-mobilnosci,wozek-szermierczy",
+    "contact_org": "Fundacja Centrum Inicjatyw Sportowych"
+  },
+  {
+    "title": "Dostępna szermierka",
+    "summary": "Lekka platforma do szermierki na wózkach. Ma pozwolić zawodnikom samodzielnie przypinać wózki i ustawiać odległość.",
+    "description": "Obecny sprzęt jest ciężki, drogi i wymaga pomocy innych osób. Nowa platforma jest lekka i łatwa w transporcie. Pełnej samoobsługi nie udało się jeszcze osiągnąć. Prototyp wymaga dalszego rozwoju.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "sportowcy na wózkach"
+    ],
+    "tags": [
+      "sport",
+      "szermierka",
+      "platforma",
+      "samodzielność"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Dostępna szermierka”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-o-ograniczonej-mobilnosci,dostepna-szermierka",
+    "contact_org": "Fundacja Centrum Inicjatyw Sportowych"
+  },
+  {
+    "title": "Szlakiem ludzi bezdomnych",
+    "summary": "Mobilny punkt higieniczny daje osobom w kryzysie bezdomności dostęp do prysznica. Przyczepa dojeżdża tam, gdzie jest potrzebna.",
+    "description": "Ogrzewana przyczepa ma prysznic, umywalkę i szafkę na czystą bieliznę. Zapewnia też podstawowe środki higieniczne. Po skorzystaniu z niej uczestnicy testu podejmowali ważne decyzje, np. o wynajęciu pokoju. Rozwiązanie mogą wprowadzić gminy miejskie i wiejskie.",
+    "category": "integracja_spoleczna",
+    "target_groups": [
+      "osoby w kryzysie bezdomności"
+    ],
+    "tags": [
+      "bezdomność",
+      "higiena",
+      "zdrowie",
+      "mobilna pomoc"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Szlakiem ludzi bezdomnych”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-w-kryzysie-bezdomnosci,szlakiem-ludzi-bezdomnych",
+    "contact_org": "Miejski Ośrodek Pomocy Społecznej w Stalowej Woli"
+  },
+  {
+    "title": "Ścieżka Feniksa – wiejski program wyjścia z bezdomności",
+    "summary": "Długofalowy program pomaga osobom w kryzysie bezdomności z małych gmin. Łączy wsparcie terapeutyczne z pracą na rzecz środowiska.",
+    "description": "Wsparcie odbywa się w małej gminie, z użyciem jej lokalnych zasobów. Uczestnicy pracują m.in. z materiałami z recyklingu i naturalnymi. W teście 9 z 11 uczestników utrzymało abstynencję. Mogą go wdrożyć gminy, OPS i organizacje społeczne.",
+    "category": "integracja_spoleczna",
+    "target_groups": [
+      "osoby w kryzysie bezdomności",
+      "mieszkańcy wsi"
+    ],
+    "tags": [
+      "bezdomność",
+      "gmina wiejska",
+      "reintegracja",
+      "ekologia"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Ścieżka Feniksa – wiejski program wyjścia z bezdomności”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-w-kryzysie-bezdomnosci,wiejski-program-pomocy-osobom-w-kryzysie-bezdomnosci-sciezka-feniksa",
+    "contact_org": "Stowarzyszenie Ku Dobrej Nadziei"
+  },
+  {
+    "title": "Stop otyłości",
+    "summary": "Metoda pomaga dorosłym z niepełnosprawnością intelektualną walczyć z otyłością. Wsparcie odbywa się w miejscu zamieszkania.",
+    "description": "Program łączy edukację, motywowanie i zmianę nawyków. Obejmuje osobę z otyłością i jej najbliższe otoczenie. W teście poprawiły się wyniki badań i spadła waga uczestników. Metodę mogą stosować placówki wsparcia i opieki.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "dorośli z niepełnosprawnością intelektualną"
+    ],
+    "tags": [
+      "otyłość",
+      "zdrowie",
+      "nawyki",
+      "edukacja"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Stop otyłości”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-intelektualna,stop-otylosci-innowacyjna-metoda-pracy-z-osobami-niepelnosprawnymi-intelektualnie",
+    "contact_org": "Powiat Wielicki"
+  },
+  {
+    "title": "Pełnia zdrowia",
+    "summary": "Gra edukacyjna uczy osoby z niepełnosprawnością intelektualną korzystać z usług medycznych. Pomaga rozpoznawać objawy i dbać o zdrowie.",
+    "description": "Zestaw zawiera elektroniczną planszę i karty z objawami oraz profilaktyką. Uczy, kiedy i jak skorzystać z pomocy lekarza. Zwiększa samodzielność w sprawach zdrowia. Mogą z niego korzystać WTZ, ŚDS i organizacje.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "dorośli z niepełnosprawnością intelektualną"
+    ],
+    "tags": [
+      "zdrowie",
+      "edukacja",
+      "gra",
+      "profilaktyka"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Pełnia zdrowia”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-intelektualna,pelnia-zdrowia",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Niepełnosprawność szansą na pełnosprawność",
+    "summary": "Zajęcia przygotowują uczniów z niepełnosprawnością intelektualną do pracy i dorosłego życia. Pomagają określić mocne strony i przyszłe miejsce pracy.",
+    "description": "Model ma charakter socjoterapeutyczny i jest skierowany do szkół średnich. Uczniowie poznają różne zawody i branże. Zajęcia pomagają przełamać wyuczoną bezradność. Mogą je prowadzić WTZ, ŚDS, ZAZ i organizacje.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "młodzież z niepełnosprawnością intelektualną"
+    ],
+    "tags": [
+      "praca",
+      "edukacja",
+      "samodzielność",
+      "młodzież"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Niepełnosprawność szansą na pełnosprawność”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-intelektualna,niepelnosprawnosc-szansa-na-pelnosprawnosc-w-pracy-i-zyciu",
+    "contact_org": "Stowarzyszenie „Razem przy Specjalnym Ośrodku Szkolno-Wychowawczym w Siedlcach”"
+  },
+  {
+    "title": "Dostępna Polska",
+    "summary": "Przewodniki turystyczne napisane prostym językiem dla osób z niepełnosprawnością intelektualną. Pomagają samodzielnie zwiedzać miasta.",
+    "description": "Przewodniki opisują po dwie trasy w trzech polskich miastach. Tekst jest łatwy do czytania i zrozumienia. Pozwala to zaplanować wycieczkę bez pomocy innych. Mogą z nich korzystać rodziny, OPS i organizacje.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "dorośli z niepełnosprawnością intelektualną",
+      "rodziny"
+    ],
+    "tags": [
+      "turystyka",
+      "tekst łatwy",
+      "przewodnik",
+      "samodzielność"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Dostępna Polska”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-intelektualna,dostepna-polska",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Załatw to sam",
+    "summary": "Gra planszowa uczy osoby z niepełnosprawnością intelektualną załatwiać sprawy w urzędach. Zachęca do samodzielności.",
+    "description": "Gra w ciekawy sposób pokazuje, jak działają instytucje publiczne. Do gry dołączono scenariusze warsztatów. Uczestnicy poznają swoje prawa i obowiązki. Grę mogą stosować WTZ, ŚDS i organizacje.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "dorośli z niepełnosprawnością intelektualną"
+    ],
+    "tags": [
+      "gra",
+      "urzędy",
+      "samodzielność",
+      "trening"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Załatw to sam”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-intelektualna,zalatw-to-sam",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Go ahead – mów śmiało!",
+    "summary": "Aplikacja ma uczyć osoby z niepełnosprawnością intelektualną rozmawiać z innymi. Pokazuje reakcję rozmówcy za pomocą emotikonów.",
+    "description": "Użytkownik przechodzi lekcje i quizy z sytuacjami społecznymi. Uczestnicy testu chętnie z niej korzystali. Test nie wykazał jednak wyraźnej poprawy umiejętności komunikacji. Samodzielnie obsłużą ją tylko osoby czytające ze zrozumieniem.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "młodzież z niepełnosprawnością intelektualną",
+      "dorośli z niepełnosprawnością intelektualną"
+    ],
+    "tags": [
+      "komunikacja",
+      "aplikacja",
+      "relacje",
+      "nauka"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Go ahead – mów śmiało!”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-intelektualna,go-ahead-mow-smialo",
+    "contact_org": "Stowarzyszenie „Radość” w Dębicy"
+  },
+  {
+    "title": "AuTyzm i ja",
+    "summary": "Przewodnik dla rodziców i nauczycieli dzieci w spektrum autyzmu. Podpowiada, jak wspierać dziecko w codziennym życiu.",
+    "description": "Zawiera wskazówki dla osób z otoczenia dziecka. Opisuje nowoczesne formy pracy z dzieckiem. Dołączono dzienniczek online do obserwacji zachowań w domu i przedszkolu. Przyda się przedszkolom, szkołom i rodzinom.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "dzieci w spektrum autyzmu",
+      "rodzice",
+      "nauczyciele"
+    ],
+    "tags": [
+      "autyzm",
+      "przedszkole",
+      "przewodnik",
+      "rodzice"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „AuTyzm i ja”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-intelektualna,autyzm-i-ja",
+    "contact_org": "Uniwersytet Medyczny im. K. Marcinkowskiego w Poznaniu"
+  },
+  {
+    "title": "Podróż poza domem w VR",
+    "summary": "Aplikacja w wirtualnej rzeczywistości pomaga oswoić lęk przed wyjściem z domu. Terapia odbywa się w bezpiecznych warunkach.",
+    "description": "Jest przeznaczona dla dzieci i osób z niepełnosprawnością intelektualną. Użytkownik ćwiczy sytuacje społeczne bez wychodzenia z domu. Dzięki treningom niektóre dzieci pierwszy raz weszły do pociągu czy hotelu. Mogą z niej korzystać rodzice, terapeuci i szkoły specjalne.",
+    "category": "zdrowie_psychiczne",
+    "target_groups": [
+      "dzieci z lękiem",
+      "osoby z niepełnosprawnością intelektualną"
+    ],
+    "tags": [
+      "lęk",
+      "wirtualna rzeczywistość",
+      "terapia",
+      "dzieci"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Podróż poza domem w VR”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-intelektualna,podroz-poza-domem-w-wirtualnej-rzeczywistosci",
+    "contact_org": "Stowarzyszenie Edukacja Praktyczna TKK"
+  },
+  {
+    "title": "TA ścieżka",
+    "summary": "Aplikacja prowadzi osobę w spektrum autyzmu po ścieżce w budynku. Dzięki temu nowe miejsce jest mniej stresujące.",
+    "description": "Nawigacja działa dzięki nadajnikom rozmieszczonym w budynku. Aplikacja podpowiada, gdzie iść i jaki krok zrobić dalej. Test pokazał większe poczucie bezpieczeństwa i samodzielności. Rozwiązanie wymaga jeszcze dopracowania.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby w spektrum autyzmu"
+    ],
+    "tags": [
+      "autyzm",
+      "nawigacja",
+      "kultura",
+      "aplikacja"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „TA ścieżka”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-intelektualna,ta-sciezka-terapeutyczna-sciezka-kulturowa-dla-dzieci-i-doroslych-z-autyzmem",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "OSA i eco puzzle",
+    "summary": "Program wsparcia dla rodzin z dorosłą osobą w spektrum autyzmu. Rodziny tworzą grupę samopomocową.",
+    "description": "Rodziny wspólnie działają społecznie i zawodowo. Uczą się m.in. wytwarzać ekologiczne środki higieniczne i na tym zarabiać. Mają też wsparcie psychologa. Wzmacnia to relacje w rodzinie i poza nią.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "dorośli w spektrum autyzmu",
+      "rodziny"
+    ],
+    "tags": [
+      "autyzm",
+      "rodzina",
+      "samopomoc",
+      "aktywność"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „OSA i eco puzzle”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-intelektualna,osa-i-eco-puzzle",
+    "contact_org": "Fundacja pomocy osobom z zaburzeniami za spektrum autyzmu oraz ich rodzin Silentio"
+  },
+  {
+    "title": "Rodzinny system wzajemnej pomocy",
+    "summary": "Model pomaga dorosłym w spektrum autyzmu, którzy nie uczą się ani nie pracują. Wsparcie odbywa się w domu i w rodzinie.",
+    "description": "Model jest przeznaczony dla osób w wieku 20–26 lat. Wykorzystuje terapię zajęciową w domach rodzin, w małych grupach. Rozwija umiejętności społeczne i zawodowe. Ma też odciążać rodziców i opiekunów.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "dorośli w spektrum autyzmu",
+      "rodziny"
+    ],
+    "tags": [
+      "autyzm",
+      "rodzina",
+      "terapia zajęciowa",
+      "praca"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Rodzinny system wzajemnej pomocy”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-intelektualna,rodzinny-system-wzajemnej-pomocy",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Mix AR i VR dla koordynacji ruchowej",
+    "summary": "Aplikacja z rozszerzoną i wirtualną rzeczywistością pomaga dzieciom w spektrum autyzmu ćwiczyć sprawność dłoni. Zachęca do codziennych ćwiczeń.",
+    "description": "Dziecko ćwiczy chwytanie i kontrolę ruchów palców. Dzięki AR i VR dzieci chętniej ćwiczą. Do aplikacji dołączono scenariusze zajęć terapeutycznych. Według testu aplikacja wymaga jeszcze dalszych prac.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "dzieci w spektrum autyzmu"
+    ],
+    "tags": [
+      "autyzm",
+      "motoryka",
+      "aplikacja",
+      "terapia"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Mix AR i VR dla koordynacji ruchowej”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-intelektualna,mix-ar-i-vr-dla-koordynacji-ruchowej",
+    "contact_org": "Stowarzyszenie Edukacja Praktyczna TKK"
+  },
+  {
+    "title": "Wsparcie imprez masowych dla osób z niepełnosprawnością wzroku",
+    "summary": "Maty naprowadzające tworzą bezpieczne ścieżki na koncertach i festiwalach. Pomagają osobom niewidomym i na wózkach.",
+    "description": "Maty mają linie prowadzące, pola uwagi i najazdy dla wózków. Sprawdzają się w budynkach i w plenerze, na różnym podłożu. Są antypoślizgowe i łatwe do czyszczenia. Poradnik pokazuje organizatorom, jak przygotować dostępne wydarzenie.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby niewidome i słabowidzące",
+      "osoby na wózku"
+    ],
+    "tags": [
+      "kultura",
+      "wydarzenia",
+      "dostępność",
+      "niewidomi"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": "https://www.youtube-nocookie.com/embed/3s2kYAWWVkM",
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Wsparcie imprez masowych dla osób z niepełnosprawnością wzroku”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-sensoryczna,wsparcie-imprez-masowych-dla-osob-z-niepelnosprawnoscia-wzroku",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Teleasystent",
+    "summary": "Aplikacja pozwala asystentowi wspierać osobę niewidomą na odległość. Łączy rozmowę wideo z nawigacją w terenie.",
+    "description": "Asystent widzi otoczenie przez kamerę telefonu i podpowiada drogę. Pomaga też w kontaktach z urzędami i w czynnościach domowych. Zakres wsparcia ustala się na podstawie potrzeb danej osoby. Test potwierdził, że rozwiązanie zwiększa samodzielność.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby niewidome"
+    ],
+    "tags": [
+      "asystent",
+      "aplikacja",
+      "niewidomi",
+      "wsparcie zdalne"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": "https://www.youtube-nocookie.com/embed/8xUBVF_5CWU",
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Teleasystent”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-sensoryczna,teleasystent",
+    "contact_org": "Chrześcijańskie Stowarzyszenie Osób Niepełnosprawnych, Ich Rodzin i Przyjaciół „Ognisko”"
+  },
+  {
+    "title": "Hear IT",
+    "summary": "Platforma w polskim języku migowym uczy programowania. Jest przeznaczona dla osób głuchych, które chcą pracować w IT.",
+    "description": "Zawiera słownik wideo z pojęciami IT oraz kursy online. Uczy podstaw języków Python, Java i JavaScript. Materiały są w całości w PJM. Mogą z niej korzystać szkoły, uczelnie i organizacje.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby głuche"
+    ],
+    "tags": [
+      "język migowy",
+      "programowanie",
+      "praca",
+      "edukacja"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": "https://www.youtube-nocookie.com/embed/uDLOSoCb3E8",
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Hear IT”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-sensoryczna,hear-it",
+    "contact_org": "Stowarzyszenie Edukacji Pozaformalnej „Meritum”"
+  },
+  {
+    "title": "Blue Sea Eye",
+    "summary": "Urządzenie z aplikacją pozwala osobom niewidomym samodzielnie sterować łodzią. Podaje kurs i położenie steru głosem i dźwiękami.",
+    "description": "Przenośny wskaźnik działa niezależnie od sprzętu na jachcie. Przekazuje informacje do aplikacji w smartfonie. Test potwierdził samodzielne sterowanie w sprzyjającej pogodzie. Urządzenie wymaga dalszych prac nad trwałością.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby niewidome i słabowidzące"
+    ],
+    "tags": [
+      "żeglarstwo",
+      "niewidomi",
+      "aplikacja",
+      "sport"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Blue Sea Eye”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-sensoryczna,blue-sea-eye",
+    "contact_org": "Fundacja Zobaczyć Morze"
+  },
+  {
+    "title": "Niewidomi nauczyciele języka polskiego",
+    "summary": "Osoby niewidome uczą migrantów języka polskiego. Model daje pracę jednym i pomaga w integracji drugim.",
+    "description": "Powstał kurs języka polskiego dostosowany do potrzeb niewidomych nauczycieli. Zawiera konspekty, nagrania, piosenki i teksty. Są też materiały dla osób wspierających nauczycieli. Mogą go wdrożyć szkoły językowe i pracodawcy.",
+    "category": "integracja_spoleczna",
+    "target_groups": [
+      "osoby niewidome i słabowidzące",
+      "migranci"
+    ],
+    "tags": [
+      "praca",
+      "język polski",
+      "migranci",
+      "niewidomi"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Niewidomi nauczyciele języka polskiego”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-sensoryczna,osoby-niewidome-i-niedowidzace-jako-nauczyciele-jezyka-polskiego",
+    "contact_org": "Jobian Poland Sp. z o.o"
+  },
+  {
+    "title": "NGOZ – nawigacja głosowa osób zależnych",
+    "summary": "Nawigacja głosowa pomaga osobom niewidomym poruszać się po urzędach i muzeach. Działa dzięki nadajnikom w budynku.",
+    "description": "System tworzy głosową mapę przestrzeni. Podaje praktyczne informacje o pomieszczeniach i drogach. Osoba niewidoma może samodzielnie załatwić sprawę. Mogą go wdrożyć urzędy, muzea i przychodnie.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby niewidome i słabowidzące"
+    ],
+    "tags": [
+      "nawigacja",
+      "niewidomi",
+      "dostępność",
+      "urzędy"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": "https://www.youtube-nocookie.com/embed/ZiGxSX-VRfg",
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „NGOZ – nawigacja głosowa osób zależnych”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-sensoryczna,ngoz-nawigacja-glosowa-osob-zaleznych",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Wibraap",
+    "summary": "Kamizelka zamienia dźwięki w wibracje. Osoby głuche mogą poczuć muzykę ciałem.",
+    "description": "Kamizelka działa z aplikacją na komputer i telefon. Może przetwarzać dźwięk z mikrofonu, własne nagrania lub grę na instrumencie. Mogą z niej korzystać m.in. organizatorzy koncertów i spektakli. Urządzenie wymaga jeszcze dalszego rozwoju.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby głuche i słabosłyszące"
+    ],
+    "tags": [
+      "muzyka",
+      "kultura",
+      "głusi",
+      "wibracje"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": "https://www.youtube-nocookie.com/embed/nmsEAH6BbR0",
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Wibraap”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-sensoryczna,wibraap",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "My way to culture",
+    "summary": "Aplikacja prowadzi po muzeum osoby z niepełnosprawnością wzroku, słuchu i ruchu. Każda grupa ma własną ścieżkę zwiedzania.",
+    "description": "Nawigacja działa dzięki nadajnikom w budynku. Aplikacja wybiera trasę dostępną dla danej osoby, np. z windą. Włącza audiodeskrypcję albo film z tłumaczeniem na PJM. Mogą ją wdrożyć muzea i galerie.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby z niepełnosprawnością"
+    ],
+    "tags": [
+      "muzeum",
+      "kultura",
+      "aplikacja",
+      "dostępność"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „My way to culture”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-sensoryczna,my-way-to-culture",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Głucha ankieta",
+    "summary": "Dodatek do systemu ankiet pozwala odpowiadać w polskim języku migowym. Osoby głuche mogą nagrać odpowiedź wideo.",
+    "description": "Wtyczka działa w popularnym systemie LimeSurvey. Badacz dodaje pytanie, a uczestnik odpowiada nagraniem. Dzięki temu głos osób głuchych trafia do badań. Mogą z niej korzystać uczelnie i instytuty badawcze.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby głuche",
+      "badacze"
+    ],
+    "tags": [
+      "język migowy",
+      "ankiety",
+      "badania",
+      "głusi"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Głucha ankieta”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-sensoryczna,glucha-ankieta",
+    "contact_org": "Instytut Spraw Głuchych"
+  },
+  {
+    "title": "Dostępny wniosek dla g/Głuchych",
+    "summary": "Wzory wniosków ułatwiają osobom głuchym załatwianie spraw w urzędach. Pomagają, gdy nie ma tłumacza języka migowego.",
+    "description": "Powstały trzy wzory dokumentów o zapewnienie dostępności. Skracają drogę do uzyskania pomocy tłumacza. Niektórzy użytkownicy potrzebują jednak dodatkowych wyjaśnień. Działają najlepiej, gdy instytucje udostępnią je na swoich stronach.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby głuche i słabosłyszące"
+    ],
+    "tags": [
+      "urzędy",
+      "język migowy",
+      "dostępność",
+      "wnioski"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Dostępny wniosek dla g/Głuchych”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-sensoryczna,dostepny-wniosek-dla-ggluchych",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Czytamoda",
+    "summary": "Aplikacja czyta opisy ubrań na głos. Osoby niewidome mogą same wybrać i kupić odzież.",
+    "description": "Rozwiązanie dodaje audiodeskrypcję do opisów w sklepach. Opisuje styl i wykonanie ubrania. Pozwala robić zakupy odzieżowe bez asysty. Na razie jest polecane dla mniejszych sklepów i butików.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby niewidome i słabowidzące"
+    ],
+    "tags": [
+      "zakupy",
+      "audiodeskrypcja",
+      "aplikacja",
+      "niewidomi"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Czytamoda”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-sensoryczna,czytamoda",
+    "contact_org": "Fundacja Arete Centrum Edukacji Twórczej"
+  },
+  {
+    "title": "Dostępny transport publiczny",
+    "summary": "Aplikacja pomaga osobom niewidomym korzystać z komunikacji miejskiej. Pokazuje przystanki i nadjeżdżające pojazdy.",
+    "description": "To wersja na Androida aplikacji „Zaraz jadę” z systemu iOS. Opisuje infrastrukturę przystanków i wyznacza trasę do przystanku. Działa z czytnikiem ekranu TalkBack. Została przygotowana dla komunikacji miejskiej w Warszawie.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby niewidome i słabowidzące"
+    ],
+    "tags": [
+      "transport",
+      "aplikacja",
+      "niewidomi",
+      "komunikacja miejska"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Dostępny transport publiczny”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-sensoryczna,dostepny-transport-publiczny",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Wspinaczka dostępna dla wszystkich",
+    "summary": "Metoda wspinaczki górskiej i na ściance dla osób niewidomych. Łączy sport z rehabilitacją przez wyzwanie.",
+    "description": "Zajęcia prowadzą wykwalifikowani instruktorzy. Uczestnicy ćwiczą najpierw na ściance, a potem w górach. Test pokazał, że wcześniej potrzebny jest trening kondycji. Mogą ją organizować kluby i organizacje.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby niewidome i słabowidzące"
+    ],
+    "tags": [
+      "sport",
+      "góry",
+      "wspinaczka",
+      "niewidomi"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Wspinaczka dostępna dla wszystkich”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-sensoryczna,turystyka-gorskawspinaczka-dostepna-dla-wszystkich",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Spotkania KulturLove",
+    "summary": "Platforma łączy osoby z niepełnosprawnością z „czasowymi opiekunami”, którzy idą z nimi do kina czy teatru. Ma ułatwić udział w kulturze.",
+    "description": "Opiekunowie nie zawsze mogą towarzyszyć w wyjściach. Platforma pozwala znaleźć towarzysza na konkretne wydarzenie. Działa na komputerze, tablecie i telefonie. W teście trudno było znaleźć chętnych, m.in. z powodu pandemii.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby z niepełnosprawnością",
+      "wolontariusze"
+    ],
+    "tags": [
+      "kultura",
+      "wolontariat",
+      "czas wolny",
+      "platforma"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Spotkania KulturLove”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-sensoryczna,spotkania-kulturlove",
+    "contact_org": "Fundacja Aktywnej Rehabilitacji Emerytowanych Osób Niepełnosprawnych"
+  },
+  {
+    "title": "Zmysły w ruchu",
+    "summary": "Model zajęć tanecznych dla osób niewidomych. Zawiera scenariusze warsztatów i nagrania ćwiczeń.",
+    "description": "Materiały są dostępne w formie elektronicznej i dźwiękowej. Opisują ćwiczenia ruchowe i choreograficzne. Zajęcia mogą mieć charakter terapeutyczny. Mogą je prowadzić instytucje kultury i organizacje.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby niewidome i słabowidzące"
+    ],
+    "tags": [
+      "taniec",
+      "ruch",
+      "kultura",
+      "niewidomi"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Zmysły w ruchu”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-sensoryczna,zmysly-w-ruchu-model-choreografii-dla-osob-niewidomych",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Kaski binauralne",
+    "summary": "Wyciemniony kask z nagraniami przestrzennymi pomaga w rehabilitacji osób tracących wzrok. Uczy rozpoznawania dźwięków z codziennego życia.",
+    "description": "Nagrania pozwalają precyzyjnie określić, skąd dochodzi dźwięk. Odtwarzają czynności z codziennego życia. Testerzy zwrócili uwagę, że kask jest ciężki i nagrzewa się. Mogą z niego korzystać organizacje wspierające niewidomych.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby tracące wzrok"
+    ],
+    "tags": [
+      "rehabilitacja",
+      "dźwięk",
+      "niewidomi",
+      "orientacja"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Kaski binauralne”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-sensoryczna,kaski-binauralne",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Słownik specjalistyczny PL–PJM",
+    "summary": "Aplikacja to słownik specjalistycznych słów w polskim języku migowym. Użytkownicy sami dodają nowe znaki.",
+    "description": "Każde słowo ma nagranie wideo ze znakiem. Słownik działa podobnie do Wikipedii. Na razie zawiera tylko kilka haseł. Przyda się osobom głuchym, tłumaczom i uczelniom.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby głuche",
+      "tłumacze PJM"
+    ],
+    "tags": [
+      "język migowy",
+      "słownik",
+      "aplikacja",
+      "komunikacja"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Słownik specjalistyczny PL–PJM”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-osob-z-niepelnosprawnoscia-sensoryczna,wielodziedzinowy-slownik-terminow-specjalistycznych-pl-pjm",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Agencja pracy incydentalnej",
+    "summary": "Agencja daje osobom w głębokim kryzysie możliwość dorywczej pracy. Zadania są dopasowane do ich możliwości.",
+    "description": "Praca odbywa się w formie nierejestrowanej działalności. Nie ma stałych godzin ani skomplikowanych dokumentów. Model wspiera m.in. osoby w kryzysie bezdomności i psychicznym. W teście z możliwości pracy skorzystały 3 osoby.",
+    "category": "integracja_spoleczna",
+    "target_groups": [
+      "osoby w kryzysie bezdomności",
+      "osoby długotrwale bezrobotne"
+    ],
+    "tags": [
+      "praca",
+      "aktywizacja",
+      "kryzys",
+      "reintegracja"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Agencja pracy incydentalnej”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-rynku-pracy,agencja-pracy-incydentalnej",
+    "contact_org": "Fundacja Pestka"
+  },
+  {
+    "title": "NIEwypaleni",
+    "summary": "Warsztat i broszura pomagają osobom z niepełnosprawnością intelektualną unikać wypalenia w pracy. Wspierają utrzymanie zatrudnienia.",
+    "description": "Trzydniowy warsztat uczy korzystania z broszury. Broszura jest napisana tekstem łatwym do czytania. Opisuje objawy wypalenia i sposoby na przyjemność z pracy. Do oceny efektów potrzebne są dalsze testy.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby z niepełnosprawnością intelektualną"
+    ],
+    "tags": [
+      "praca",
+      "wypalenie",
+      "tekst łatwy",
+      "wsparcie"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „NIEwypaleni”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-rynku-pracy,niewypaleni",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Konsultant ETR",
+    "summary": "Model przygotowuje osoby z niepełnosprawnością intelektualną do pracy jako konsultanci tekstów łatwych do czytania. Daje im nowy zawód.",
+    "description": "Model zawiera profil kompetencji i kwestionariusz rekrutacyjny. Obejmuje program szkoleń dla przyszłych konsultantów. Konsultanci sprawdzają, czy teksty są zrozumiałe. Mogą ich zatrudniać szkoły i urzędy.",
+    "category": "niepelnosprawnosc",
+    "target_groups": [
+      "osoby z niepełnosprawnością intelektualną",
+      "rodziny"
+    ],
+    "tags": [
+      "praca",
+      "tekst łatwy",
+      "szkolenie",
+      "zawód"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Konsultant ETR”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-rynku-pracy,konsultant-etr",
+    "contact_org": "Stowarzyszenie Rodziców i Przyjaciół Osób z Zespołem Downa – Tęcza – w Krakowie"
+  },
+  {
+    "title": "Mobilna giełda pracy",
+    "summary": "Mobilne giełdy pracy mają docierać do kobiet z małych miejscowości. Wydarzenia odbywają się blisko ich domu.",
+    "description": "Samorząd współpracuje z lokalnymi firmami i urzędem pracy. Giełda obejmuje m.in. doradztwo zawodowe i spotkania z pracodawcami. W teście przyszło bardzo niewielu pracodawców. Efekt oceniono jako neutralny.",
+    "category": "integracja_spoleczna",
+    "target_groups": [
+      "kobiety",
+      "mieszkańcy wsi"
+    ],
+    "tags": [
+      "praca",
+      "kobiety",
+      "wieś",
+      "aktywizacja"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Mobilna giełda pracy”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-rynku-pracy,mobilna-gielda-pracy",
+    "contact_org": "Gmina Charsznica - Gminny Ośrodek Pomocy Społecznej w Charsznicy"
+  },
+  {
+    "title": "Oddawacze",
+    "summary": "Aplikacja pozwala oddać niepotrzebne rzeczy i przy okazji wesprzeć cel charytatywny. Odbierający płaci symboliczną kwotę na wybrany cel.",
+    "description": "Oddający wskazuje, na jaki cel trafi wpłata. Osoby o niskich dochodach mogą tanio zdobyć potrzebne przedmioty. Test potwierdził zainteresowanie oddających i organizacji. Platforma potrzebuje jednak większej liczby użytkowników.",
+    "category": "integracja_spoleczna",
+    "target_groups": [
+      "osoby ubogie",
+      "organizacje lokalne"
+    ],
+    "tags": [
+      "aplikacja",
+      "ubóstwo",
+      "ekologia",
+      "charytatywność"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Oddawacze”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-rynku-pracy,oddawacze",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Therapy Set",
+    "summary": "Zestaw siedmiu pomocy terapeutycznych dla seniorów, także leżących. Można go wykonać w warsztatach terapii zajęciowej.",
+    "description": "Pomoce służą do terapii i ćwiczeń przy łóżku seniora. Mogą je wytwarzać mieszkańcy DPS. Na stronie internetowej są instrukcje i scenariusze zajęć. Zestaw przyda się w DPS, ZOL i hospicjach.",
+    "category": "starzenie",
+    "target_groups": [
+      "seniorzy",
+      "opiekunowie"
+    ],
+    "tags": [
+      "terapia zajęciowa",
+      "seniorzy",
+      "DPS",
+      "rehabilitacja"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Therapy Set”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow,therapy-set",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Ścieżka treningu umysłu",
+    "summary": "Plenerowa ścieżka z 12 stacjami ćwiczy pamięć, logikę i koncentrację. Pomaga seniorom dbać o sprawność umysłu.",
+    "description": "Każda funkcja poznawcza ma cztery stacje z ćwiczeniami. Zadania mają trzy poziomy trudności. Ścieżka może stanąć w parku lub na bulwarze. Przyda się też osobom z niepełnosprawnością intelektualną.",
+    "category": "starzenie",
+    "target_groups": [
+      "seniorzy",
+      "osoby z niepełnosprawnością intelektualną"
+    ],
+    "tags": [
+      "pamięć",
+      "trening umysłu",
+      "przestrzeń publiczna",
+      "seniorzy"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Ścieżka treningu umysłu”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow,sciezka-treningu-umyslu",
+    "contact_org": "Politechnika Krakowska im. Tadeusza Kościuszki"
+  },
+  {
+    "title": "Edu gra HaHaHa",
+    "summary": "Gra planszowa uczy jogi śmiechu. Wspiera dobre samopoczucie seniorów i osób z niepełnosprawnością.",
+    "description": "Karty zawierają ćwiczenia rozgrzewające, śmiechowe, integrujące i oddechowe. Gra nie wyłania zwycięzców. Jej celem jest integracja grupy i dodanie energii. Mogą z niej korzystać WTZ, szkoły specjalne i organizacje.",
+    "category": "zdrowie_psychiczne",
+    "target_groups": [
+      "seniorzy",
+      "osoby z niepełnosprawnością intelektualną"
+    ],
+    "tags": [
+      "gra",
+      "joga śmiechu",
+      "samopoczucie",
+      "integracja",
+      "seniorzy"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Edu gra HaHaHa”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow,edu-gra-hahaha",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Obu – obuwie po domu",
+    "summary": "Wełniane kapcie dla seniorów chronią przed poślizgnięciem. Łatwo je założyć i utrzymać w czystości.",
+    "description": "Obuwie jest antypoślizgowe i dobrze dopasowane do stopy. Wełna odprowadza wilgoć i nie podrażnia skóry. Większość upadków seniorów zdarza się w domu. Kapcie mogą produkować firmy obuwnicze i polecać ośrodki wsparcia.",
+    "category": "starzenie",
+    "target_groups": [
+      "seniorzy"
+    ],
+    "tags": [
+      "upadki",
+      "bezpieczeństwo",
+      "obuwie",
+      "seniorzy"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Obu – obuwie po domu”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow,obu-obuwie-po-domu",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Centrum antydepresyjne",
+    "summary": "Terapia z udziałem psów i kotów wspiera seniorów w depresji. Pomoc odbywa się w domu seniora.",
+    "description": "Metoda ma zmniejszać ryzyko epizodów depresyjnych i myśli samobójczych. Wsparcie obejmuje także bliskich seniora. Jest szczególnie potrzebna samotnym osobom na wsi. Mogą ją wdrożyć gminy i organizacje opiekuńcze.",
+    "category": "zdrowie_psychiczne",
+    "target_groups": [
+      "seniorzy",
+      "opiekunowie"
+    ],
+    "tags": [
+      "depresja",
+      "dogoterapia",
+      "seniorzy",
+      "samotność",
+      "wieś"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Centrum antydepresyjne”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow,centrum-antydepresyjne",
+    "contact_org": "Gmina Miechów"
+  },
+  {
+    "title": "Żeglowanie w wyobraźni",
+    "summary": "Gogle wirtualnej rzeczywistości pozwalają poczuć żeglowanie bez wchodzenia na jacht. Pomagają oswoić lęk przed wodą.",
+    "description": "Użytkownik steruje łodzią ruchami rąk. Seniorzy mogą oswoić lęk przed wejściem na jacht. Dzieci z niepełnosprawnością ruchową zdobywają żeglarskie doświadczenie. Powstały też materiały szkoleniowe dla trenerów żeglarstwa.",
+    "category": "starzenie",
+    "target_groups": [
+      "seniorzy",
+      "dzieci z niepełnosprawnością ruchową"
+    ],
+    "tags": [
+      "żeglarstwo",
+      "wirtualna rzeczywistość",
+      "lęk",
+      "aktywność"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Żeglowanie w wyobraźni”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow,zeglowanie-w-wyobrazni-czyli-sposob-na-strachy-na-wodzie",
+    "contact_org": "Fundacja Ekologia i Żagle"
+  },
+  {
+    "title": "Narzędzie do spraw spadkowych dla seniorów",
+    "summary": "Aplikacja ma pomóc seniorom uporządkować sprawy spadkowe. Pokazuje, kto dziedziczy, i pomaga przygotować wzór testamentu.",
+    "description": "Narzędzie ustala krąg spadkobierców według prawa. Wyjaśnia rodzaje testamentów i podpowiada, kiedy potrzebny jest notariusz. Test pokazał, że część pojęć jest niezrozumiała. Testerzy tworzyli wadliwe dokumenty, więc aplikacja wymaga poprawek.",
+    "category": "starzenie",
+    "target_groups": [
+      "seniorzy",
+      "osoby ciężko chore"
+    ],
+    "tags": [
+      "spadek",
+      "testament",
+      "prawo",
+      "aplikacja",
+      "seniorzy"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Narzędzie do spraw spadkowych dla seniorów”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow,stworzenie-narzedzia-ulatwiajacego-seniorom-prawidlowe-regulowanie-spraw-spadkowych",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Korytarz wspomnień",
+    "summary": "Korytarz w DPS zamienia się w miejsce wspomnień mieszkańców. Zdjęcia i nagrania urozmaicają codzienność.",
+    "description": "Na ścianach są zdjęcia mieszkańców i ich opiekunów. Przyciski odtwarzają nagrania z pytaniami i odpowiedziami o osobach ze zdjęć. Test nie wykazał wpływu na pamięć mieszkańców. Rozwiązanie ma przede wszystkim charakter terapeutyczny.",
+    "category": "starzenie",
+    "target_groups": [
+      "seniorzy",
+      "osoby z demencją"
+    ],
+    "tags": [
+      "demencja",
+      "wspomnienia",
+      "DPS",
+      "terapia"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Korytarz wspomnień”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow,korytarz-wspomnien",
+    "contact_org": "Fundacja Jesień na Letniej"
+  },
+  {
+    "title": "Wirtualne izby pamięci",
+    "summary": "Seniorzy tworzą wirtualną galerię przedmiotów z przeszłości. Przy okazji uczą się robić zdjęcia telefonem.",
+    "description": "Model obejmuje warsztaty fotograficzne i opisywanie przedmiotów. Powstał podręcznik i pięć filmów instruktażowych. Bez eksperta seniorom trudno było wybrać wartościowe przedmioty. Sami nie korzystali też z galerii.",
+    "category": "wykluczenie_cyfrowe",
+    "target_groups": [
+      "seniorzy"
+    ],
+    "tags": [
+      "kompetencje cyfrowe",
+      "fotografia",
+      "seniorzy",
+      "pamięć"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Wirtualne izby pamięci”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-seniorow,wirtualne-izby-pamieci",
+    "contact_org": "Stowarzyszenie Czas Przestrzeń Tożsamość"
+  },
+  {
+    "title": "Paszport pacjenta z chorobą rzadką",
+    "summary": "Elektroniczny paszport zawiera najważniejsze informacje o chorobie rzadkiej pacjenta. Pacjent zawsze ma go przy sobie.",
+    "description": "Dane wprowadza personel medyczny w centrum referencyjnym. Paszport zawiera informacje o chorobie, lekach i standardach leczenia. Pozwala lekarzom spoza specjalizacji poznać zasady leczenia danej choroby. Powstały karty trzech chorób, m.in. zespołu Marfana.",
+    "category": "dostep_do_uslug",
+    "target_groups": [
+      "pacjenci z chorobami rzadkimi"
+    ],
+    "tags": [
+      "zdrowie",
+      "choroby rzadkie",
+      "informacja medyczna",
+      "bezpieczeństwo"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": "https://www.youtube-nocookie.com/embed/7QedTbxzsPk",
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Paszport pacjenta z chorobą rzadką”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-zdrowia-i-medycyny,paszport-pacjenta-z-choroba-rzadka",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Himalaje autyzmu",
+    "summary": "Metoda przygotowuje osoby w spektrum autyzmu do wizyty u lekarza. Pomaga, gdy pojawiają się trudne zachowania.",
+    "description": "Metoda ma cztery etapy i gotowe scenariusze postępowania. Pozwala tak zaplanować wizytę, by ograniczyć stres. Umożliwia to postawienie diagnozy i leczenie. Mogą ją stosować przychodnie, szpitale, asystenci i rodziny.",
+    "category": "dostep_do_uslug",
+    "target_groups": [
+      "dorośli w spektrum autyzmu",
+      "rodziny"
+    ],
+    "tags": [
+      "autyzm",
+      "lekarz",
+      "zdrowie",
+      "przygotowanie"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": "https://www.youtube-nocookie.com/embed/q31uQ435YAo",
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Himalaje autyzmu”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-zdrowia-i-medycyny,himalaje-autyzmu",
+    "contact_org": "Chrześcijańskie Stowarzyszenie Osób Niepełnosprawnych, Ich Rodzin i Przyjaciół „Ognisko”"
+  },
+  {
+    "title": "Gra o zdrowie",
+    "summary": "Terapeutyczna gra planszowa przygotowuje osoby w kryzysie psychicznym do pracy. Gracze wcielają się w pracownika, pracodawcę i kandydata.",
+    "description": "Gra pomaga odkryć własne mocne strony. Pozwala przećwiczyć sytuacje z rynku pracy przed podjęciem prawdziwej pracy. Rozgrywkę można podzielić na kilka spotkań. Sprawdza się w oddziałach dziennych i ŚDS.",
+    "category": "zdrowie_psychiczne",
+    "target_groups": [
+      "osoby w kryzysie psychicznym"
+    ],
+    "tags": [
+      "gra",
+      "praca",
+      "zdrowie psychiczne",
+      "terapia"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": "https://www.youtube-nocookie.com/embed/YRzg98fveHc",
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Gra o zdrowie”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-zdrowia-i-medycyny,gra-o-zdrowie",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Telerehabilitacja oddechowa",
+    "summary": "Ćwiczenia oddechowe prowadzone na odległość z pomocą filmów i specjalisty. Ułatwiają rehabilitację osobom z daleka od przychodni.",
+    "description": "Model zawiera filmy z ćwiczeniami i schematy postępowania. Pacjent ćwiczy w domu pod opieką specjalisty. Może też bezpiecznie ćwiczyć samodzielnie. Jest szczególnie przydatny dla seniorów i mieszkańców wsi.",
+    "category": "dostep_do_uslug",
+    "target_groups": [
+      "osoby z chorobami układu oddechowego",
+      "seniorzy",
+      "mieszkańcy wsi"
+    ],
+    "tags": [
+      "rehabilitacja",
+      "zdalnie",
+      "oddech",
+      "zdrowie"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Telerehabilitacja oddechowa”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-zdrowia-i-medycyny,telerehabilitacja-oddechowa",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Inteligentny organizer do leków",
+    "summary": "Organizer na leki przypomina o godzinie zażycia i sprawdza, czy lek został wzięty. Opiekun dostaje powiadomienie w telefonie.",
+    "description": "Pojemnik ma czujniki i sygnalizację świetlną. Opiekun ustawia godziny leków w aplikacji. Dostaje informację o zażytej lub pominiętej dawce. Test pokazał, że urządzenie wymaga dopracowania i pomocy technicznej.",
+    "category": "starzenie",
+    "target_groups": [
+      "seniorzy",
+      "opiekunowie"
+    ],
+    "tags": [
+      "leki",
+      "aplikacja",
+      "opiekunowie",
+      "bezpieczeństwo"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Inteligentny organizer do leków”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-zdrowia-i-medycyny,inteligentny-organizer-do-lekow",
+    "contact_org": "ROPS Kraków"
+  },
+  {
+    "title": "Drogowskazy AJKUM",
+    "summary": "System nawigacji prowadzi pacjentów krok po kroku po dużym szpitalu. Pomaga osobom osłabionym chorobą odnaleźć gabinety.",
+    "description": "Punkty kontrolne w budynku wskazują drogę do celu. Pacjenci korzystali z systemu bez wcześniejszego szkolenia. Test tylko częściowo potwierdził skuteczność, bo obejmował małą część szpitala. Mogą go wdrożyć szpitale i przychodnie.",
+    "category": "dostep_do_uslug",
+    "target_groups": [
+      "pacjenci onkologiczni",
+      "seniorzy"
+    ],
+    "tags": [
+      "nawigacja",
+      "szpital",
+      "onkologia",
+      "orientacja"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Drogowskazy AJKUM”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-zdrowia-i-medycyny,drogowskazy-ajkum",
+    "contact_org": "Fundacja Ajkum im. Anny i Józefa Kumorek"
+  },
+  {
+    "title": "Cold Box",
+    "summary": "Mały pojemnik chłodzący utrzymuje leki, np. insulinę, w odpowiedniej temperaturze. Ułatwia podróżowanie osobom chorym.",
+    "description": "Pojemnik utrzymuje temperaturę od 4 do 7 stopni. Działa na baterię bez stałego zasilania. Jest wodoszczelny, ale wciąż za duży, by nosić go w torebce. Mogą z niego korzystać osoby z cukrzycą i innymi chorobami.",
+    "category": "dostep_do_uslug",
+    "target_groups": [
+      "osoby z cukrzycą",
+      "pacjenci"
+    ],
+    "tags": [
+      "leki",
+      "cukrzyca",
+      "podróże",
+      "zdrowie"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Cold Box”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-zdrowia-i-medycyny,cold-box",
+    "contact_org": "Fundacja Mars"
+  },
+  {
+    "title": "Pacjent Pro",
+    "summary": "Aplikacja wspiera pacjentów oddziału psychiatrycznego od przyjęcia do wypisu. Informuje o zajęciach i pomaga obniżyć niepokój.",
+    "description": "Pacjent wie, co go czeka i jakie ma zajęcia. Aplikacja motywuje do udziału w terapii. Pomaga lepiej odnaleźć się w nowym miejscu. Mogą ją wdrożyć szpitale i centra zdrowia psychicznego.",
+    "category": "zdrowie_psychiczne",
+    "target_groups": [
+      "pacjenci psychiatryczni"
+    ],
+    "tags": [
+      "aplikacja",
+      "szpital",
+      "zdrowie psychiczne",
+      "niepokój"
+    ],
+    "stage": "wdrożona",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Pacjent Pro”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-zdrowia-i-medycyny,pacjent-pro",
+    "contact_org": "SPZOZ Państwowy Szpital dla Nerwowo i Psychicznie Chorych w Rybniku"
+  },
+  {
+    "title": "Oncotriada",
+    "summary": "Pacjentka po diagnozie raka spotyka psychoonkologa i osobę, która wyzdrowiała. Wsparcie zaczyna się przed leczeniem.",
+    "description": "Pacjentka rozmawia jednocześnie z psychoonkologiem i wolontariuszką w remisji. Wolontariuszka dzieli się własnym doświadczeniem. Najlepiej działa, gdy obie chorowały na ten sam rodzaj nowotworu. Test przyniósł częściowe efekty, bo część pacjentek rezygnowała.",
+    "category": "zdrowie_psychiczne",
+    "target_groups": [
+      "pacjentki onkologiczne"
+    ],
+    "tags": [
+      "onkologia",
+      "wsparcie psychiczne",
+      "wolontariat",
+      "diagnoza"
+    ],
+    "stage": "testowana",
+    "region": "cała Małopolska",
+    "video_url": null,
+    "image_url": null,
+    "image_alt": "Ilustracja rozwiązania „Oncotriada”.",
+    "source_url": "https://rops.krakow.pl/innowacje-spoleczne/biblioteka-innowacji-spolecznych/dla-zdrowia-i-medycyny,oncotriada",
+    "contact_org": "ROPS Kraków"
   }
 ]

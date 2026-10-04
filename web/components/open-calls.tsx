@@ -1,16 +1,11 @@
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { calls } from "@/content/catalog";
+import { budgetLabel, deadlineLabel, getCalls, openCalls, upcomingCalls } from "@/lib/calls";
 
-function deadlineLabel(iso: string) {
-  const date = new Date(`${iso}T00:00:00`);
-  if (Number.isNaN(date.getTime())) return iso;
-  return new Intl.DateTimeFormat("pl-PL", { dateStyle: "long" }).format(date);
-}
-
-export function OpenCalls() {
-  const open = calls.filter((item) => item.is_open);
-  const closed = calls.filter((item) => !item.is_open);
+export async function OpenCalls() {
+  const calls = await getCalls();
+  const open = openCalls(calls);
+  const next = upcomingCalls(calls)[0];
 
   return (
     <section data-calls className="mt-10" aria-labelledby="nabory-heading">
@@ -29,21 +24,23 @@ export function OpenCalls() {
                   <p>{item.description}</p>
                   <p>
                     Możesz składać do {deadlineLabel(item.deadline)}. Maksymalna kwota:{" "}
-                    {item.budget_max.toLocaleString("pl-PL")} zł.
+                    {budgetLabel(item.budget_max)}.
                   </p>
                   <p className="flex flex-col gap-2">
                     <Link
-                      href="/kreator/grant"
+                      href={`/kreator/grant/wniosek?nabor=${encodeURIComponent(item.name)}`}
                       className="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-accent px-4 text-center font-semibold text-accent-foreground"
                     >
                       Złóż wniosek o grant
                     </Link>
-                    <a
-                      href={item.regulamin_url}
-                      className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-border px-4 text-center font-medium"
-                    >
-                      Regulamin
-                    </a>
+                    {item.regulamin_url ? (
+                      <a
+                        href={item.regulamin_url}
+                        className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-border px-4 text-center font-medium"
+                      >
+                        Regulamin
+                      </a>
+                    ) : null}
                   </p>
                 </CardContent>
               </Card>
@@ -53,7 +50,7 @@ export function OpenCalls() {
       ) : (
         <p className="mt-3">
           Nabór jest obecnie zamknięty.
-          {closed[0] ? ` Następny termin: ${deadlineLabel(closed[0].deadline)}.` : ""}
+          {next ? ` Następny nabór: ${next.name}, termin ${deadlineLabel(next.deadline)}.` : ""}
         </p>
       )}
     </section>

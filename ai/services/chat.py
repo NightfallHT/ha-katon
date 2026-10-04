@@ -19,7 +19,6 @@ MODULES = (
     ("Kreator", "/kreator", "Fiszka pomysłu, asystent i szkic wniosku."),
     ("Middleman", "/middleman", "Gmina układa z asystentem szkic usługi."),
     ("Kontakt", "/kontakt", "Wiadomość do człowieka, gdy bot nie wystarcza."),
-    ("Moje zgłoszenia", "/moje-zgloszenia", "Status spraw wysłanych w tej przeglądarce."),
     ("Panel administratora", "/admin", "Pracownik ROPS czyta zgłoszenia i publikuje pomysły."),
 )
 
@@ -29,7 +28,7 @@ _FALLBACK_FAQ = """
 Jak zgłosić pomysł? Wejdź w Kreator, opisz problem i wyślij fiszkę.
 Jak znaleźć gotowe rozwiązanie? Wejdź w Dopasuj i opisz, co się dzieje.
 Jak zgłosić się do testu? Otwórz kartę innowacji w bibliotece i wybierz „Chcę przetestować”.
-Gdzie zobaczę status sprawy? W Moje zgłoszenia.
+Gdzie zobaczę status sprawy? Odpowiedź ROPS przyjdzie na e-mail podany przy zgłoszeniu.
 """
 
 
@@ -64,7 +63,8 @@ def _faq_source(question: str) -> Source:
     if any(token in folded for token in ("kontakt", "pracownik")):
         return Source(title="Kontakt", url="/kontakt")
     if any(token in folded for token in ("zgloszen", "status")):
-        return Source(title="Moje zgłoszenia", url="/moje-zgloszenia")
+        # Status updates arrive by email; questions go through the contact form.
+        return Source(title="Kontakt", url="/kontakt")
     if "test" in folded:
         return Source(title="Biblioteka", url="/biblioteka")
     if any(token in folded for token in ("znalezc", "pomoc", "rozwiazan")):

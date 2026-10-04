@@ -1,0 +1,18 @@
+[
+  {
+    "text": "W mojej wsi starsi są samotni i nie mają dojazdu.",
+    "category": "samotnosc",
+    "target_group": "seniorzy",
+    "location": "gmina wiejska",
+    "keywords": [
+      "mojej",
+      "starsi",
+      "samotni",
+      "mają",
+      "dojazdu"
+    ],
+    "role": "admin",
+    "id": "d9cc0d75-7d49-4cab-b903-2eb41ef8abe6",
+    "created_at": "2026-10-03T18:05:51.477Z"
+  }
+]

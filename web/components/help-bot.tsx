@@ -8,42 +8,20 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } 
 
 type Source = { title: string; url: string };
 
-function localReply(message: string, page?: string): { reply: string; sources: Source[]; handoff: boolean } {
-  const text = message.toLowerCase();
-  if (/kontakt|człowiek|pracownik|rops|telefon/.test(text)) {
-    return {
-      reply: "Możesz napisać do pracownika ROPS przez formularz. Odpowiedź przyjdzie na e-mail z demo.",
-      sources: [{ title: "Kontakt", url: "/kontakt" }],
-      handoff: true,
-    };
-  }
-  if (/nabor|grant|wnios/.test(text)) {
-    return {
-      reply: "Otwarte nabory są na stronie Wyzwania i w Kreatorze. Tam złożysz wniosek albo zgłosisz pomysł.",
-      sources: [
-        { title: "Wyzwania i nabory", url: "/wyzwania" },
-        { title: "Kreator", url: "/kreator" },
-      ],
-      handoff: false,
-    };
-  }
-  if (/szuk|dopas|innowac|widz|syn/.test(text)) {
-    return {
-      reply: "Na stronie głównej opisz sytuację zwykłym zdaniem. Pokażemy kilka rozwiązań i dlaczego pasują.",
-      sources: [{ title: "Dopasuj", url: "/dopasuj" }],
-      handoff: false,
-    };
-  }
-  return {
-    reply: `Jesteś na stronie ${page || "Hubu"}. Możesz szukać rozwiązań, zgłosić pomysł albo napisać do ROPS.`,
-    sources: [
-      { title: "Biblioteka", url: "/biblioteka" },
-      { title: "Kontakt", url: "/kontakt" },
-    ],
-    handoff: false,
-  };
+function localSimplify(text: string) {
+  const parts = text
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(/(?<=[.!?])\s+/);
+  const short = parts.slice(0, 2).join(" ");
+  return short || "Krótko: napisz, czego potrzebujesz. Pomożemy krok po kroku.";
 }
-type Msg = { role: "user" | "assistant"; content: string; sources?: Source[]; handoff?: boolean };
+
+// Shown when the AI service cannot be reached: no canned answers, straight to a person.
+const OFFLINE_REPLY =
+  "Asystent AI jest teraz niedostępny. Napisz do pracownika ROPS. Twoje pytanie przeniesiemy do formularza.";
+
+type Msg = { role: "user" | "assistant"; content: string; sources?: Source[]; handoff?: boolean; offline?: boolean };
 
 // Floating help bot. Add <HelpBot /> once in app/layout.tsx.
 export function HelpBot() {
@@ -73,11 +51,7 @@ export function HelpBot() {
       setMessages((m) => [...m, { role: "assistant", content: data.reply, sources: data.sources ?? [], handoff: data.handoff }]);
       setStatus("");
     } catch {
-      const fallback = localReply(message, pathname ?? undefined);
-      setMessages((m) => [
-        ...m,
-        { role: "assistant", content: fallback.reply, sources: fallback.sources, handoff: fallback.handoff },
-      ]);
+      setMessages((m) => [...m, { role: "assistant", content: OFFLINE_REPLY, handoff: true, offline: true }]);
       setStatus("");
     } finally {
       setBusy(false);
@@ -92,6 +66,8 @@ export function HelpBot() {
     try {
       const out = await simplify({ text: target.content });
       setMessages((m) => [...m, { role: "assistant", content: out.text }]);
+    } catch {
+      setMessages((m) => [...m, { role: "assistant", content: localSimplify(target.content) }]);
     } finally {
       setBusy(false);
       setStatus("");
@@ -106,17 +82,19 @@ export function HelpBot() {
       <DialogTrigger asChild>
         <button
           type="button"
-          aria-label="Otwórz pomoc"
           className="fixed bottom-4 right-4 z-40 max-w-[calc(100vw-2rem)] min-h-11 rounded-full border bg-background px-5 py-3 font-semibold shadow-lg focus-visible:ring-2 focus-visible:ring-ring"
         >
           Potrzebujesz pomocy?
         </button>
       </DialogTrigger>
-        <DialogContent className="flex max-h-[85vh] flex-col gap-3 sm:max-w-lg" aria-label="Pomoc">
+      {/* Fits the visible screen at any text size: the conversation shrinks first, and if
+          the question form alone is taller than the screen (A+++ on a laptop) the whole
+          dialog scrolls instead of pushing "Wyślij" below the bottom edge. */}
+      <DialogContent className="flex max-h-[calc(100dvh-2rem)] flex-col gap-3 overflow-y-auto sm:max-w-lg">
         <DialogTitle>Pomoc</DialogTitle>
-        <DialogDescription>Zadaj pytanie o platformę. Odpowiada asystent AI.</DialogDescription>
+        <DialogDescription>Zadaj pytanie o platformę.</DialogDescription>
 
-        <div role="log" aria-live="polite" aria-label="Rozmowa z asystentem" className="min-h-40 flex-1 space-y-3 overflow-y-auto">
+        <div role="log" aria-live="polite" aria-label="Rozmowa z asystentem" className="min-h-24 flex-1 shrink space-y-3 overflow-y-auto">
           {messages.length === 0 && <p>Napisz, w czym możemy pomóc.</p>}
           {messages.map((m, i) => (
             <div key={i} className="rounded-md border p-3">
@@ -131,7 +109,7 @@ export function HelpBot() {
                   ))}
                 </ul>
               )}
-              {m.role === "assistant" && (
+              {m.role === "assistant" && !m.offline && (
                 <button
                   type="button"
                   onClick={() => explainSimpler(i)}
@@ -160,9 +138,18 @@ export function HelpBot() {
             id="bot-input"
             value={text}
             onChange={(e) => setText(e.target.value)}
+            onKeyDown={(e) => {
+              // Enter sends, Shift+Enter adds a new line.
+              if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
+                e.preventDefault();
+                e.currentTarget.form?.requestSubmit();
+              }
+            }}
+            aria-describedby="bot-input-hint"
             rows={2}
             className="w-full rounded-md border p-3"
           />
+          <p id="bot-input-hint" className="text-sm">Enter wysyła, Shift+Enter dodaje nową linię.</p>
           <button
             type="submit"
             disabled={busy}

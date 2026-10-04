@@ -4,15 +4,17 @@ import type {
   EnrichResponse,
   Fiszka,
   GrantDraftResponse,
+  KnowledgeReport,
   KreatorAssistResponse,
   MatchResponse,
   MiddlemanChatResponse,
   MiddlemanReport,
   SimplifyResponse,
 } from "./types";
+import { localKnowledgeReport } from "./local-knowledge";
 import { localMatch } from "./local-match";
 
-const TIMEOUT_MS = 30_000;
+const TIMEOUT_MS = 75_000;
 const POLISH_TIMEOUT = "Serwis odpowiedzi działa wolno. Spróbuj ponownie za chwilę.";
 
 function baseUrl() {
@@ -71,7 +73,7 @@ export async function match(input: {
   try {
     return await request<MatchResponse>("/match", input);
   } catch {
-    return localMatch(input.query);
+    return localMatch(input.query, input.role);
   }
 }
 
@@ -132,6 +134,17 @@ export function middlemanReport(input: {
 
 export function chat(input: { message: string; history: ChatTurn[]; page?: string }) {
   return request<ChatResponse>("/chat", input);
+}
+
+export async function knowledgeReport(input: {
+  query: string;
+  audience?: "person" | "institution";
+}): Promise<KnowledgeReport> {
+  try {
+    return await request<KnowledgeReport>("/knowledge/report", input);
+  } catch {
+    return localKnowledgeReport(input.query, input.audience ?? "person");
+  }
 }
 
 export function adminEnrich(input: { text: string }) {

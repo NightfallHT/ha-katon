@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
+import asyncio
+import logging
+import os
 import re
 import uuid
 from typing import Any
-
-from pydantic import ValidationError
 
 from catalog import innovations
 from db import db
@@ -14,6 +15,8 @@ from demo import lookup
 from llm import LlmError, llm
 from models import Extracted, MatchRequest, MatchResponse, MatchResult, SimilarNeeds
 from util import fold, read_prompt
+
+log = logging.getLogger("ai.match")
 
 # Ola shows "zgłoś jako nowy pomysł" when the top score is below this value.
 LOW_CONFIDENCE_THRESHOLD = 0.5
@@ -69,14 +72,22 @@ def _needles(query: str) -> list[str]:
     extra: list[str] = []
     if any(token in folded for token in ("widze", "niewidom", "wzrok", "braille", "niedowid")):
         extra.extend(["niewidom", "wzrok", "braille", "audiodeskrypc"])
-    if any(token in folded for token in ("gluch", "nieslysz", "slabo slys")):
-        extra.extend(["gluch", "pjm"])
-    if "samot" in folded:
-        extra.append("samotn")
-    if any(token in folded for token in ("lekarz", "dojazd", "dojech", "transport")):
-        extra.extend(["dojazd", "lekarz"])
-    if "niepelnospraw" in folded or "syna" in folded:
-        extra.append("niepelnospraw")
+    if any(token in folded for token in ("gluch", "nieslysz", "slabo slys", "migow")):
+        extra.extend(["gluch", "pjm", "migow", "nieslysz"])
+    if any(token in folded for token in ("samot", "osamot", "izol")):
+        extra.extend(["samotn", "senior", "starsz"])
+    if any(token in folded for token in ("lekarz", "dojazd", "dojech", "transport", "przychod")):
+        extra.extend(["dojazd", "lekarz", "senior"])
+    if any(token in folded for token in ("niepelnospraw", "syna", "wozek", "barier")):
+        extra.extend(["niepelnospraw", "dostep", "barier"])
+    if any(token in folded for token in ("wytchn", "opiekun", "opieka", "opiek")):
+        extra.extend(["opiek", "rodzic", "dziec", "rodzin"])
+    if any(token in folded for token in ("depres", "psych", "stres", "samoboj", "lęk", "lek ")):
+        extra.extend(["psych", "depres", "zdrow"])
+    if any(token in folded for token in ("praca", "bezrob", "zatrud")):
+        extra.extend(["praca", "zatrud", "mlodz"])
+    if any(token in folded for token in ("senior", "starsz", "emeryt")):
+        extra.extend(["senior", "starsz", "samot"])
     seen: list[str] = []
     for word in words + extra:
         if word not in seen:
@@ -84,7 +95,64 @@ def _needles(query: str) -> list[str]:
     return seen
 
 
-def _keyword_score(query: str, item: dict[str, Any]) -> float:
+# The query must share the kind of problem, not only a broad label such as "disability".
+_SITUATIONS = (
+    (("wytchn", "odciaz"), ("wytchn", "odciaz", "wypal", "zastep", "odpocz")),
+    (("nieslysz", "gluch", "migow", "pjm"), ("gluch", "pjm", "migow", "nieslysz")),
+    (("niewid", "braille", "niedowid"), ("niewid", "braille", "wzrok", "audiod")),
+    (("dojazd", "dojech", "lekarz", "przychod"), ("dojazd", "lekarz", "przychod", "transport")),
+    (("samot", "osamot"), ("samot", "izol", "towarz")),
+    (("wychodz", "boi sie", "boje sie"), ("samot", "izol", "towarz")),
+)
+
+
+def _situation_delta(query: str, haystack: str) -> float:
+    folded = fold(query)
+    delta = 0.0
+    for triggers, problems in _SITUATIONS:
+        if not any(token in folded for token in triggers):
+            continue
+        if any(_stem_hit(token, haystack) for token in problems):
+            delta += 0.3
+        else:
+            delta -= 0.35
+    return delta
+
+
+def _for_institution(role: str | None) -> bool:
+    return fold(role or "") in {"gmina", "ngo", "instytucja", "institution"}
+
+
+def _audience_delta(role: str | None, item: dict[str, Any]) -> float:
+    text = fold(
+        " ".join(
+            [
+                str(item.get("summary") or ""),
+                str(item.get("description") or ""),
+                " ".join(item.get("target_groups") or []),
+            ]
+        )
+    )
+    groups = fold(" ".join(item.get("target_groups") or []))
+    can_run = any(token in text for token in ("wdroz", "gmin", "samorz", "organizacj", " ops", "ngo", "jst", "placow"))
+    for_person = any(
+        token in groups
+        for token in ("senior", "rodzic", "mieszkan", "osob", "dziec", "rodzin", "opiekun", "niewid", "gluch", "nieslys")
+    )
+    if _for_institution(role):
+        if can_run and not for_person:
+            return 0.55
+        if can_run:
+            return 0.35
+        return -0.5
+    if for_person and not can_run:
+        return 0.45
+    if for_person:
+        return -0.05
+    return -0.35
+
+
+def _keyword_score(query: str, item: dict[str, Any], role: str | None = None) -> float:
     haystack = fold(
         " ".join(
             [
@@ -96,10 +164,13 @@ def _keyword_score(query: str, item: dict[str, Any]) -> float:
             ]
         )
     )
-    query_words = _needles(query)
-    if not query_words:
+    direct = [word for word in _terms(query) if fold(word) not in _STOP]
+    associated = [word for word in _needles(query) if word not in direct]
+    if not direct and not associated:
         return 0.35
-    hits = sum(1 for word in query_words if _stem_hit(word, haystack))
+    # A word from the query counts more than a loose association.
+    hits = sum(2 for word in direct if _stem_hit(word, haystack))
+    hits += sum(1 for word in associated if _stem_hit(word, haystack))
     folded_query = fold(query)
     about_vision = any(token in folded_query for token in ("widze", "niewidom", "wzrok", "niedowid"))
     about_child = any(token in folded_query for token in ("dziec", "syna", "syn "))
@@ -111,7 +182,10 @@ def _keyword_score(query: str, item: dict[str, Any]) -> float:
         hits -= 2
     if about_child and any(token in haystack for token in ("dziec", "uczn", "mlodzie", "rodzin")):
         hits += 1
-    return min(0.9, max(0.2, 0.22 + 0.1 * hits))
+    # More matching words keep ranking above a loose association. Zero hits stay visible.
+    floor = 0.08 if hits <= 0 else 0.2
+    score = floor + 0.06 * max(hits, 0) + _situation_delta(query, haystack) + _audience_delta(role, item)
+    return round(min(0.96, max(0.02, score)), 4)
 
 
 def hybrid_score(base: float, item: dict[str, Any], extracted: Extracted) -> float:
@@ -166,14 +240,14 @@ def _mock_extract(query: str, location: str | None) -> Extracted:
 
 
 def _why(item: dict[str, Any], extracted: Extracted) -> str:
-    keyword = extracted.keywords[0] if extracted.keywords else "ten problem"
-    return f"To jest blisko tego, co opisujesz: {keyword} i {extracted.target_group}."
+    summary = " ".join(str(item.get("summary") or "").split())
+    return summary or "To rozwiązanie odpowiada na opisaną sprawę."
 
 
-def _rank_local(query: str, extracted: Extracted) -> list[tuple[float, dict[str, Any]]]:
+def _rank_local(query: str, extracted: Extracted, role: str | None = None) -> list[tuple[float, dict[str, Any]]]:
     ranked = []
     for item in innovations():
-        base = _keyword_score(query, item)
+        base = _keyword_score(query, item, role)
         ranked.append((hybrid_score(base, item, extracted), item))
     ranked.sort(key=lambda pair: pair[0], reverse=True)
     return ranked[:10]
@@ -236,7 +310,7 @@ async def match(req: MatchRequest) -> MatchResponse:
 
 def _match_mock(req: MatchRequest) -> MatchResponse:
     extracted = _mock_extract(req.query, req.location)
-    ranked = _rank_local(req.query, extracted)
+    ranked = _rank_local(req.query, extracted, req.role)
     low = not ranked or ranked[0][0] < LOW_CONFIDENCE_THRESHOLD
     return MatchResponse(
         need_id=str(uuid.uuid4()),
@@ -246,75 +320,105 @@ def _match_mock(req: MatchRequest) -> MatchResponse:
     )
 
 
-async def _match_live(req: MatchRequest) -> MatchResponse:
-    extracted_raw = await llm.complete_json(
-        read_prompt("match_extract.md"),
-        f"TASK:match_extract\nZAPYTANIE: {req.query}\nLOKALIZACJA: {req.location or 'brak'}",
-        temperature=0.1,
-    )
-    try:
-        extracted = Extracted.model_validate(extracted_raw)
-    except ValidationError as exc:
-        raise LlmError() from exc
+async def _vector_ranked(req: MatchRequest, extracted: Extracted) -> list[tuple[float, dict[str, Any]]]:
+    if not db.enabled():
+        return []
+    vector = await llm.embed(req.query + " " + " ".join(extracted.keywords))
+    rows = await db.match_innovations(vector, 10)
+    ranked = [
+        (hybrid_score(float(row.get("similarity") or 0), row, extracted), row)
+        for row in rows
+    ]
+    ranked.sort(key=lambda pair: pair[0], reverse=True)
+    return ranked
 
+
+async def _store_need(req: MatchRequest, extracted: Extracted) -> None:
+    try:
+        await asyncio.wait_for(
+            db.insert_need(
+                text=req.query,
+                category=extracted.category,
+                target_group=extracted.target_group,
+                location=extracted.location,
+                keywords=extracted.keywords,
+                role=req.role,
+            ),
+            timeout=8,
+        )
+    except (asyncio.TimeoutError, Exception):
+        log.warning("need was not stored")
+
+
+async def _match_live(req: MatchRequest) -> MatchResponse:
+    extracted = _mock_extract(req.query, req.location)
     ranked: list[tuple[float, dict[str, Any]]] = []
-    if db.enabled():
-        vector = await llm.embed(req.query + " " + " ".join(extracted.keywords))
-        rows = await db.match_innovations(vector, 10)
-        for row in rows:
-            similarity = float(row.get("similarity") or 0)
-            ranked.append((hybrid_score(similarity, row, extracted), row))
-        ranked.sort(key=lambda pair: pair[0], reverse=True)
+    # Vector search is off until innovations have embeddings. The empty RPC was
+    # slower than the page timeout, so every query fell back to one local answer.
+    if os.getenv("MATCH_VECTOR", "0").strip().lower() in {"1", "true", "yes"}:
+        try:
+            ranked = await asyncio.wait_for(_vector_ranked(req, extracted), timeout=4)
+        except (asyncio.TimeoutError, LlmError):
+            ranked = []
     if not ranked:
-        ranked = _rank_local(req.query, extracted)
+        ranked = _rank_local(req.query, extracted, req.role)
 
     candidates = []
-    for score, item in ranked[:10]:
+    for score, item in ranked[:5]:
+        summary = " ".join(str(item.get("summary") or "").split())
         candidates.append(
             {
                 "innovation_id": str(item.get("id")),
                 "title": item.get("title"),
-                "summary": item.get("summary"),
+                "summary": summary[:180],
                 "category": item.get("category"),
-                "tags": item.get("tags") or [],
+                "tags": [],
                 "score": score,
             }
         )
-    rerank_raw = await llm.complete_json(
-        read_prompt("match_rerank.md"),
-        "TASK:match_rerank\nPROBLEM: "
-        + req.query
-        + "\nKANDYDACI: "
-        + _compact(candidates),
-        temperature=0.2,
-    )
     by_id = {str(item.get("id")): (score, item) for score, item in ranked}
-    results = _apply_rerank(rerank_raw, by_id, extracted)
+    results = _results_from_ranked(ranked, extracted, False)
+    rerank_raw: dict[str, Any] = {}
+    try:
+        rerank_raw = await llm.complete_json(
+            read_prompt("match_rerank.md"),
+            (
+                "Szuka instytucja, która chce to wdrożyć u siebie. "
+                "Pokazuj modele do prowadzenia przez gminę, OPS albo organizację, nie udogodnienie dla jednej osoby.\n"
+                if _for_institution(req.role)
+                else "Szuka osoba prywatna. Pokazuj to, z czego może skorzystać osobiście, nie instrukcję wdrożenia dla urzędu.\n"
+            )
+            + "Zostaw tylko inicjatywy, z których ten odbiorca realnie skorzysta w opisanej sprawie. "
+            "Osobie niewidomej nie podawaj kursu dla osób głuchych. "
+            "Pusta lista dopiero wtedy, gdy żaden kandydat by jej nie pomógł. "
+            "W why napisz, jak to jej pomaga, bez wstępu w rodzaju „to skojarzenie”.\n"
+            "SPRAWA: "
+            + req.query
+            + "\nKANDYDACI:\n"
+            + _compact(candidates),
+            temperature=0,
+            timeout=35,
+            attempts=1,
+            max_tokens=350,
+        )
+        reranked = _apply_rerank(rerank_raw, by_id, extracted)
+        if reranked:
+            results = reranked
+    except LlmError:
+        rerank_raw = {}
     low = bool(rerank_raw.get("low_confidence")) or not results or results[0].score < LOW_CONFIDENCE_THRESHOLD
     if low:
         results = [item.model_copy(update={"score": min(item.score, 0.49)}) for item in results]
 
-    similar_count = 0
-    example = None
+    mocked = _mock_similar(extracted.category)
+    similar_count = mocked.count
+    example = mocked.example
     need_id = str(uuid.uuid4())
     if db.enabled():
-        similar = await db.similar_needs(extracted.category)
-        similar_count = int(similar["count"])
-        example = similar["example"]
-        inserted = await db.insert_need(
-            text=req.query,
-            category=extracted.category,
-            target_group=extracted.target_group,
-            location=extracted.location,
-            keywords=extracted.keywords,
-            role=req.role,
+        asyncio.create_task(
+            _store_need(req, extracted),
+            name="store-need",
         )
-        if inserted:
-            need_id = inserted
-    else:
-        mocked = _mock_similar(extracted.category)
-        similar_count = mocked.count
-        example = mocked.example
 
     return MatchResponse(
         need_id=need_id,

@@ -1,29 +1,158 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { gminas, innovations } from "@/content/catalog";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { LoaderCircle, Search } from "lucide-react";
+import { calls, gminas, innovations } from "@/content/catalog";
 import { currentRole, writeCookie, type Role } from "@/lib/demo-session";
-import { middlemanChat, middlemanReport } from "@/lib/api";
-import { categoryLabel } from "@/lib/categories";
+import { middlemanChat, middlemanReport, simplify } from "@/lib/api";
 import type { ChatTurn, MiddlemanReport } from "@/lib/types";
+
+const INSTITUTION_ROLES: Role[] = ["gmina", "ngo"];
+
+function suggestionsForTurn(turn: number, gminaName: string, title: string) {
+  const sets = [
+    [
+      `W ${gminaName} najbardziej seniorzy w mniejszych sołectwach.`,
+      `Rodziny, które nie udźwigną opieki bez „${title}”.`,
+      "Osoby, które nie wyjdą z domu bez czyjejś pomocy.",
+      `Mieszkańcy, do których „${title}” pasuje najbliżej.`,
+    ],
+    [
+      `W ${gminaName} nie ma dojazdu do tej pomocy.`,
+      "Młodsi wyjechali i nie ma kto pomagać na co dzień.",
+      "Ludzie nie wiedzą, że coś takiego już jest.",
+      "Pomoc jest za daleko od domu.",
+    ],
+    [
+      `W ${gminaName} jest OPS, ale nikt nie prowadzi „${title}”.`,
+      "Świetlica i szkoła mogą użyczyć miejsca.",
+      "Jest lokalna organizacja, która robi coś podobnego.",
+      "Na miejscu prawie nic podobnego nie działa.",
+    ],
+    [
+      `${gminaName} udźwignie część etatu koordynatora.`,
+      "Mamy samych wolontariuszy, bez etatu.",
+      "Bez grantu nie wystartujemy.",
+      "Stały nas dojazd, nie cały zespół.",
+    ],
+  ];
+  return sets[Math.min(Math.max(turn, 1), 4) - 1];
+}
+
+function localQuestion(title: string, gminaName: string, turn: number) {
+  const questions = [
+    `Kto w gminie ${gminaName} najbardziej odczuwa problem, który ma rozwiązać „${title}”?`,
+    "Co jest przyczyną, a nie tylko objawem? Na przykład brak dojazdu, wyjazd młodych albo usługa za daleko od domu.",
+    "Co już u Was działa i kto może to prowadzić: OPS, CUS, szkoła, organizacja albo parafia?",
+    "Jaki macie limit ludzi i pieniędzy na pierwszy rok tej usługi?",
+  ];
+  if (turn > 4) {
+    return { reply: "Mam już dość, żeby naszkicować usługę dla tej gminy. Możesz przejść do projektu.", done: true };
+  }
+  return { reply: questions[Math.min(turn, 4) - 1] ?? questions[0], done: false };
+}
+
+function checklistEntries(report: MiddlemanReport, innovationTitle: string, gminaName: string) {
+  const repeated = ["cel", "grup", "partner", "kadr", "koszt", "szacun", "wskaz", "adapt", "przyczyn", "ryzyk"];
+  const fromReport = report.usluga_wrazliwa_checklist.filter((item) => {
+    const key = item.item.toLocaleLowerCase("pl");
+    const answer = (item.answer ?? "").trim();
+    const plain = answer.toLocaleLowerCase("pl");
+    if (repeated.some((bit) => key.includes(bit))) return false;
+    if (!answer || ["jest", "tak", "ok", "cel", "uzupełnione", "do uzupełnienia"].includes(plain)) return false;
+    if (plain === key) return false;
+    return true;
+  });
+  if (fromReport.length) return fromReport;
+  return [
+    {
+      item: "Czas świadczenia",
+      done: true,
+      answer: `„${innovationTitle}” w gminie ${gminaName} ma być prowadzone co najmniej przez rok od startu.`,
+    },
+    {
+      item: "Kto składa wniosek",
+      done: true,
+      answer: `Wniosek o „${innovationTitle}” składa gmina ${gminaName}, jej jednostka albo lokalna organizacja.`,
+    },
+    {
+      item: "Czego brakuje przed zgłoszeniem",
+      done: false,
+      answer: `Przed zgłoszeniem „${innovationTitle}” w ${gminaName} trzeba potwierdzić doświadczenie wnioskodawcy i zgodność z regulaminem naboru.`,
+    },
+  ];
+}
+
+function localReport(title: string, summary: string, gminaName: string, population: number): MiddlemanReport {
+  const small = population < 8000;
+  const costs = small
+    ? [
+        { item: "Koordynacja", amount_pln_per_year: 18000 },
+        { item: "Dojazdy i materiały", amount_pln_per_year: 6000 },
+        { item: "Spotkania z partnerami", amount_pln_per_year: 4000 },
+      ]
+    : [
+        { item: "Koordynacja", amount_pln_per_year: 42000 },
+        { item: "Dojazdy i materiały", amount_pln_per_year: 12000 },
+        { item: "Spotkania z partnerami", amount_pln_per_year: 8000 },
+      ];
+  return {
+    service_name: `${title} — ${gminaName}`,
+    summary: `W ${gminaName} proponujemy oprzeć usługę na pomyśle „${title}”. ${summary} Koszt poniżej to szacunek orientacyjny, nie wycena.`,
+    root_causes: small
+      ? [
+          "Pomoc jest daleko od domu, a część młodszych mieszkańców wyjeżdża.",
+          "Widać objaw, a przyczyna leży w tym, jak pomoc jest zorganizowana.",
+        ]
+      : [
+          "Ludzie często nie wiedzą, że pomoc już istnieje, albo czekają w kolejce.",
+          "Usługa nie jest dopasowana do skali tej gminy.",
+        ],
+    service_description: summary || "Lokalna usługa prowadzona blisko domu, na bazie wybranej innowacji.",
+    delivery_partners: ["gmina", "OPS", "organizacja społeczna"],
+    staffing: "Jedna osoba koordynująca na część etatu. To założenie, dopóki instytucja nie poda etatów.",
+    cost_estimate: costs,
+    kpis: ["Liczba osób, które skorzystały w ciągu roku", "Liczba działań blisko domu"],
+    risks: ["Za mało osób do prowadzenia", "Brak stałego finansowania po pilotażu"],
+    usluga_wrazliwa_checklist: [
+      {
+        item: "Czas świadczenia",
+        done: true,
+        answer: `„${title}” w gminie ${gminaName} ma być prowadzone co najmniej przez rok od startu.`,
+      },
+      {
+        item: "Kto składa wniosek",
+        done: true,
+        answer: `Wniosek o „${title}” składa gmina ${gminaName}, jej jednostka albo lokalna organizacja.`,
+      },
+      {
+        item: "Czego brakuje przed zgłoszeniem",
+        done: false,
+        answer: `Przed zgłoszeniem „${title}” w ${gminaName} trzeba potwierdzić doświadczenie wnioskodawcy i zgodność z regulaminem naboru.`,
+      },
+    ],
+  };
+}
 
 export function MiddlemanClient() {
   const [role, setRole] = useState<Role>("mieszkaniec");
-  const [innovationId, setInnovationId] = useState(innovations[0]?.id ?? "");
+  const [ready, setReady] = useState(false);
+  const [innovationQuery, setInnovationQuery] = useState("");
+  const [innovationId, setInnovationId] = useState("");
   const [gminaName, setGminaName] = useState(gminas[0]?.name ?? "");
+  const [started, setStarted] = useState(false);
   const [message, setMessage] = useState("");
   const [history, setHistory] = useState<ChatTurn[]>([]);
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
   const [report, setReport] = useState<MiddlemanReport | null>(null);
   const [error, setError] = useState("");
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const threadRef = useRef<HTMLDivElement>(null);
 
   const gmina = gminas.find((item) => item.name === gminaName) ?? gminas[0];
-  const innovation = innovations.find((item) => item.id === innovationId) ?? innovations[0];
+  const innovation = innovations.find((item) => item.id === innovationId);
+  const openCall = calls.find((item) => item.is_open);
   const gminaPayload = useMemo(
     () =>
       gmina
@@ -37,62 +166,87 @@ export function MiddlemanClient() {
     [gmina],
   );
 
+  const matches = useMemo(() => {
+    const needle = innovationQuery.trim().toLocaleLowerCase("pl");
+    const pool = needle
+      ? innovations.filter((item) => item.title.toLocaleLowerCase("pl").includes(needle))
+      : innovations;
+    return pool.slice(0, 6);
+  }, [innovationQuery]);
+
   useEffect(() => {
-    setRole(currentRole());
+    const frame = requestAnimationFrame(() => {
+      setRole(currentRole());
+      setReady(true);
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
-  if (role !== "gmina") {
-    return (
-      <div>
-        <h1 className="text-3xl font-bold">Ta część jest dla gmin</h1>
-        <p className="mt-3 max-w-prose">
-          Przełącz rolę na „Gmina”, żeby przygotować projekt usługi.
-        </p>
-        <Button
-          className="mt-4"
-          type="button"
-          onClick={() => {
-            writeCookie("role", "gmina");
-            writeCookie("demo_email", "wojt@gmina-demo.pl");
-            setRole("gmina");
-          }}
-        >
-          Przełącz na: Gmina
-        </Button>
-      </div>
-    );
-  }
+  useEffect(() => {
+    threadRef.current?.lastElementChild?.scrollIntoView({ block: "nearest" });
+  }, [history, busy]);
 
-  async function send() {
-    if (!innovation) return;
-    const text = message.trim() || "Jakie są główne przyczyny tego problemu w naszej gminie?";
+  const userTurns = history.filter((item) => item.role === "user").length;
+  const canDraft = done || userTurns >= 3;
+  async function send(text: string) {
+    if (!innovation || !gmina || busy) return;
+    const trimmed = text.trim();
+    if (!trimmed) return;
     setBusy(true);
     setError("");
+    setMessage("");
+    const prior = history;
     try {
       const reply = await middlemanChat({
         innovation_id: innovation.id,
         gmina: gminaPayload,
-        history,
-        message: text,
+        history: prior,
+        message: trimmed,
       });
-      const next: ChatTurn[] = [
-        ...history,
-        { role: "user", content: text },
+      setHistory([
+        ...prior,
+        { role: "user", content: trimmed },
         { role: "assistant", content: reply.reply },
-      ];
-      setHistory(next);
-      setDone(reply.done || next.filter((item) => item.role === "user").length >= 3);
-      setMessage("");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Nie udało się wysłać wiadomości.");
-      setDone(true);
+      ]);
+      setDone(reply.done);
+      const turn = prior.filter((item) => item.role === "user").length + 1;
+      setSuggestions(
+        reply.suggestions?.filter((item) => item.trim()).slice(0, 4).length
+          ? reply.suggestions.filter((item) => item.trim()).slice(0, 4)
+          : suggestionsForTurn(turn, gmina.name, innovation.title),
+      );
+    } catch {
+      const turn = prior.filter((item) => item.role === "user").length + 1;
+      const fallback = localQuestion(innovation.title, gmina.name, turn);
+      setHistory([
+        ...prior,
+        { role: "user", content: trimmed },
+        { role: "assistant", content: fallback.reply },
+      ]);
+      setSuggestions(suggestionsForTurn(turn, gmina.name, innovation.title));
+      setDone(fallback.done);
+      setError("Asystent odpowiedział z lokalnej podpowiedzi. Połączenie z modelem nie doszło.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function explain(index: number) {
+    const item = history[index];
+    if (!item || item.role !== "assistant" || busy) return;
+    setBusy(true);
+    try {
+      const out = await simplify({ text: item.content });
+      setHistory((current) => [...current, { role: "assistant", content: out.text }]);
+    } catch {
+      setError("Nie udało się uprościć tej wypowiedzi.");
     } finally {
       setBusy(false);
     }
   }
 
   async function buildReport() {
-    if (!innovation) return;
+    if (!innovation || !gmina) return;
     setBusy(true);
     setError("");
     try {
@@ -103,222 +257,344 @@ export function MiddlemanClient() {
       });
       setReport(out.report);
     } catch {
-      setReport({
-        service_name: `Usługa blisko domu — ${gminaPayload.name}`,
-        summary:
-          "Gmina wdraża mobilne wsparcie, żeby starsze osoby nie zostawały bez dojazdu do lekarza.",
-        root_causes: [
-          "Rozproszone osadnictwo",
-          "Słaby transport publiczny",
-          "Samotność seniorów",
-        ],
-        service_description:
-          "Raz w tygodniu bus i dyżur koordynatora łączą mieszkańców z przychodnią i OPS.",
-        delivery_partners: ["OPS", "lokalne NGO", "przychodnia"],
-        staffing: "1 koordynator na 0,5 etatu i 2 kierowców w dyżurze.",
-        cost_estimate: [
-          { item: "Koordynacja", amount_pln_per_year: 48000 },
-          { item: "Transport", amount_pln_per_year: 36000 },
-        ],
-        kpis: ["Liczba kursów", "Liczba osób, które dojechały do lekarza"],
-        risks: ["Brak kierowców", "Niska frekwencja zimą"],
-        usluga_wrazliwa_checklist: [
-          { item: "Opis grupy mieszkańców", done: true },
-          { item: "Partnerzy i koszt", done: true },
-          { item: "Wskaźniki", done: true },
-        ],
-      });
+      setReport(localReport(innovation.title, innovation.summary, gmina.name, gmina.population));
+      setError("Szkic powstał lokalnie, na podstawie wybranej innowacji i gminy.");
     } finally {
       setBusy(false);
     }
   }
 
-  if (report) {
+  if (!ready) {
+    return <p>Wczytuję…</p>;
+  }
+
+  if (!INSTITUTION_ROLES.includes(role)) {
+    return (
+      <section className="home-hero middleman-gate" aria-labelledby="middleman-gate">
+        <div className="home-hero__copy">
+          <p className="eyebrow">Dla instytucji</p>
+          <h1 id="middleman-gate">Middleman zamienia innowację w usługę</h1>
+          <p>
+            To narzędzie dla gminy, OPS albo organizacji. Mieszkaniec szuka pomocy na stronie głównej.
+            Tutaj dopasowujemy gotowy pomysł do miejsca i do programu „Usługa wrażliwa”.
+          </p>
+          <button
+            type="button"
+            className="middleman-primary"
+            onClick={() => {
+              writeCookie("role", "gmina");
+              writeCookie("demo_email", "wojt@gmina-demo.pl");
+              setRole("gmina");
+            }}
+          >
+            Wchodzę jako instytucja
+          </button>
+        </div>
+      </section>
+    );
+  }
+
+  if (report && innovation && gmina) {
     const total = report.cost_estimate.reduce((sum, row) => sum + row.amount_pln_per_year, 0);
     return (
-      <article className="print-report space-y-6">
-        <h1 className="text-3xl font-bold">{report.service_name}</h1>
-        <p>{report.summary}</p>
-        <section>
-          <h2 className="text-2xl font-bold">Przyczyny problemu</h2>
-          <ul className="list-disc pl-6">
+      <article className="knowledge-report print-report">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">Szkic usługi</p>
+            <h1>{report.service_name}</h1>
+            <p>{report.summary}</p>
+          </div>
+          <button type="button" className="secondary-action print:hidden" onClick={() => window.print()}>
+            Pobierz PDF
+          </button>
+        </div>
+        {error ? <p role="status">{error}</p> : null}
+
+        <section className="knowledge-report__brief" aria-labelledby="causes-title">
+          <h2 id="causes-title">Przyczyny problemu</h2>
+          <ul className="knowledge-report__list">
             {report.root_causes.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
         </section>
-        <section>
-          <h2 className="text-2xl font-bold">Projekt usługi</h2>
+
+        <section aria-labelledby="service-title">
+          <h2 id="service-title">Usługa</h2>
           <p>{report.service_description}</p>
         </section>
-        <section>
-          <h2 className="text-2xl font-bold">Partnerzy</h2>
-          <ul className="list-disc pl-6">
+
+        <section aria-labelledby="partners-title">
+          <h2 id="partners-title">Partnerzy</h2>
+          <ul className="knowledge-report__list">
             {report.delivery_partners.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
         </section>
-        <section>
-          <h2 className="text-2xl font-bold">Kadra</h2>
+
+        <section aria-labelledby="staff-title">
+          <h2 id="staff-title">Kadra</h2>
           <p>{report.staffing}</p>
         </section>
-        <section>
-          <h2 className="text-2xl font-bold">Koszty</h2>
-          <table className="w-full border-collapse text-left">
-            <caption className="mb-2 text-left">Szacunek roczny</caption>
-            <thead>
-              <tr className="border-b">
-                <th scope="col" className="py-2">
-                  Pozycja
-                </th>
-                <th scope="col" className="py-2">
-                  Kwota (zł / rok)
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {report.cost_estimate.map((row) => (
-                <tr key={row.item} className="border-b">
-                  <th scope="row" className="py-2 font-medium">
-                    {row.item}
-                  </th>
-                  <td className="py-2">{row.amount_pln_per_year.toLocaleString("pl-PL")}</td>
+
+        <section aria-labelledby="costs-title">
+          <h2 id="costs-title">Koszty</h2>
+          <div className="middleman-table-wrap">
+            <table>
+              <caption>Szacunek orientacyjny, złote na rok</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Pozycja</th>
+                  <th scope="col">Kwota</th>
                 </tr>
-              ))}
-              <tr>
-                <th scope="row" className="py-2">
-                  Razem
-                </th>
-                <td className="py-2">{total.toLocaleString("pl-PL")}</td>
-              </tr>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {report.cost_estimate.map((row) => (
+                  <tr key={row.item}>
+                    <th scope="row">{row.item}</th>
+                    <td>{row.amount_pln_per_year.toLocaleString("pl-PL")} zł</td>
+                  </tr>
+                ))}
+                <tr>
+                  <th scope="row">Razem</th>
+                  <td>{total.toLocaleString("pl-PL")} zł</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </section>
-        <section>
-          <h2 className="text-2xl font-bold">Wskaźniki</h2>
-          <ul className="list-disc pl-6">
+
+        <section aria-labelledby="kpi-title">
+          <h2 id="kpi-title">Wskaźniki</h2>
+          <ul className="knowledge-report__list">
             {report.kpis.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
         </section>
-        <section>
-          <h2 className="text-2xl font-bold">Ryzyka</h2>
-          <ul className="list-disc pl-6">
+
+        <section aria-labelledby="risk-title">
+          <h2 id="risk-title">Ryzyka</h2>
+          <ul className="knowledge-report__list">
             {report.risks.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
         </section>
-        <section>
-          <h2 className="text-2xl font-bold">Checklista Usługa wrażliwa</h2>
-          <ul>
-            {report.usluga_wrazliwa_checklist.map((item) => (
+
+        <section aria-labelledby="check-title">
+          <h2 id="check-title">Checklista „Usługa wrażliwa”</h2>
+          <ul className="middleman-checks">
+            {checklistEntries(report, innovation.title, gmina.name).map((item) => (
               <li key={item.item}>
-                {item.done ? "Zrobione" : "Do uzupełnienia"}: {item.item}
+                <strong>{item.item}</strong>
+                <p>{item.answer}</p>
               </li>
             ))}
           </ul>
         </section>
-        <Button type="button" className="print:hidden" onClick={() => window.print()}>
-          Pobierz PDF
-        </Button>
+
+        <section className="knowledge-report__brief" aria-labelledby="call-title">
+          <h2 id="call-title">Dopasowanie do naboru</h2>
+          {openCall ? (
+            <>
+              <p>
+                Otwarty nabór: {openCall.name}. Termin: {openCall.deadline}. Limit:{" "}
+                {openCall.budget_max.toLocaleString("pl-PL")} zł.
+              </p>
+              <p>{openCall.description}</p>
+            </>
+          ) : (
+            <p>Teraz żaden nabór demonstracyjny nie jest otwarty.</p>
+          )}
+          <p>
+            „Usługa wrażliwa” finansuje adaptację gotowej innowacji do lokalnej usługi, nie pomysł od zera.
+            Ten szkic startuje od „{innovation.title}” w gminie {gmina.name}.
+          </p>
+        </section>
+
+        <button
+          type="button"
+          className="secondary-action print:hidden"
+          onClick={() => {
+            setReport(null);
+            setStarted(false);
+            setHistory([]);
+            setSuggestions([]);
+            setDone(false);
+            setError("");
+          }}
+        >
+          Nowa rozmowa
+        </button>
       </article>
     );
   }
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold">Dopasuj innowację do potrzeb swojej gminy</h1>
-      <p>Odpowiedz na kilka pytań. Przygotujemy propozycję lokalnej usługi.</p>
-
-      <div className="grid gap-4 md:grid-cols-2">
-        <div>
-          <Label htmlFor="innovation">Innowacja</Label>
-          <select
-            id="innovation"
-            className="mt-1 h-11 min-h-11 w-full rounded-lg border bg-card px-3"
-            value={innovationId}
-            onChange={(event) => setInnovationId(event.target.value)}
-          >
-            {innovations.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.title} ({categoryLabel(item.category)})
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <Label htmlFor="gmina">Gmina</Label>
-          <select
-            id="gmina"
-            className="mt-1 h-11 min-h-11 w-full rounded-lg border bg-card px-3"
-            value={gminaName}
-            onChange={(event) => setGminaName(event.target.value)}
-          >
-            {gminas.map((item) => (
-              <option key={item.name} value={item.name}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      {gmina && innovation ? (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-xl">{gmina.name}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>
-              Typ: {gmina.type}. Mieszkańców: {gmina.population.toLocaleString("pl-PL")}. Trend:{" "}
-              {gmina.population_trend}. Powiat: {gmina.powiat}.
-            </p>
-            <p className="mt-2">Wybrana innowacja: {innovation.title}.</p>
-          </CardContent>
-        </Card>
-      ) : null}
-
-      <div aria-live="polite" className="space-y-3">
-        {history.map((item, index) => (
-          <p key={index}>
-            <strong>{item.role === "user" ? "Ty" : "Asystent"}: </strong>
-            {item.content}
+    <div className="home-flow">
+      <section className="home-hero" aria-labelledby="middleman-title">
+        <div className="home-hero__copy">
+          <p className="eyebrow">Dla instytucji</p>
+          <h1 id="middleman-title">Zamień innowację w lokalną usługę</h1>
+          <p>
+            Wybierz gotowy pomysł i gminę. Asystent dopyta o przyczynę problemu i ułoży szkic pod
+            „Usługę wrażliwą”.
           </p>
-        ))}
-        {busy ? <p>Przygotowuję odpowiedź…</p> : null}
-        {error ? <p role="alert">{error}</p> : null}
-      </div>
-
-      <form
-        className="max-w-2xl space-y-3"
-        onSubmit={(event) => {
-          event.preventDefault();
-          void send();
-        }}
-      >
-        <Label htmlFor="message">Twoja wiadomość</Label>
-        <Textarea
-          id="message"
-          value={message}
-          onChange={(event) => setMessage(event.target.value)}
-        />
-        <div className="flex flex-wrap gap-3">
-          <Button type="submit" disabled={busy}>
-            Wyślij
-          </Button>
-          <Button
-            type="button"
-            variant="outline"
-            disabled={busy || (!done && history.filter((i) => i.role === "user").length < 3)}
-            onClick={() => void buildReport()}
-          >
-            Mam dość informacji — przygotuj projekt usługi
-          </Button>
         </div>
-      </form>
+      </section>
+
+      <section className="middleman-setup" aria-labelledby="setup-title">
+        <h2 id="setup-title">Co i gdzie chcecie wdrożyć</h2>
+        <div className="middleman-setup__grid">
+          <div>
+            <label htmlFor="innovation-search">Innowacja</label>
+            <div className="middleman-search">
+              <Search aria-hidden="true" />
+              <input
+                id="innovation-search"
+                value={innovationQuery}
+                onChange={(event) => setInnovationQuery(event.target.value)}
+                placeholder="Wpisz fragment tytułu"
+                disabled={started}
+              />
+            </div>
+            <ul className="middleman-picks" aria-label="Pasujące innowacje">
+              {matches.map((item) => (
+                <li key={item.id}>
+                  <button
+                    type="button"
+                    aria-pressed={item.id === innovationId}
+                    disabled={started}
+                    onClick={() => setInnovationId(item.id)}
+                  >
+                    <strong>{item.title}</strong>
+                    <span>{item.summary}</span>
+                  </button>
+                </li>
+              ))}
+              {matches.length === 0 ? <li>Nie ma innowacji o takim tytule.</li> : null}
+            </ul>
+          </div>
+          <div>
+            <label htmlFor="gmina">Gmina</label>
+            <select
+              id="gmina"
+              value={gminaName}
+              disabled={started}
+              onChange={(event) => setGminaName(event.target.value)}
+            >
+              {gminas.map((item) => (
+                <option key={item.name} value={item.name}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+            {gmina ? (
+              <dl className="middleman-gmina">
+                <div>
+                  <dt>Typ</dt>
+                  <dd>{gmina.type}</dd>
+                </div>
+                <div>
+                  <dt>Mieszkańcy</dt>
+                  <dd>{gmina.population.toLocaleString("pl-PL")}</dd>
+                </div>
+                <div>
+                  <dt>Trend</dt>
+                  <dd>{gmina.population_trend}</dd>
+                </div>
+                <div>
+                  <dt>Powiat</dt>
+                  <dd>{gmina.powiat}</dd>
+                </div>
+              </dl>
+            ) : null}
+          </div>
+        </div>
+        {innovation ? <p className="middleman-chosen">Wybrana innowacja: {innovation.title}.</p> : null}
+        {!started ? (
+          <button
+            type="button"
+            className="middleman-primary"
+            disabled={!innovation || !gmina}
+            onClick={() => {
+              setStarted(true);
+              void send("Chcemy wdrożyć tę innowację w naszej gminie. Pomóż ułożyć z niej usługę.");
+            }}
+          >
+            Rozpocznij rozmowę
+          </button>
+        ) : null}
+      </section>
+
+      {started ? (
+        <section className="middleman-chat" aria-labelledby="chat-title">
+          <h2 id="chat-title">Rozmowa</h2>
+          <div ref={threadRef} role="log" aria-live="polite" aria-relevant="additions" className="middleman-thread">
+            {history.map((item, index) => (
+              <div key={`${item.role}-${index}`} className={item.role === "user" ? "is-user" : "is-assistant"}>
+                <p className="middleman-thread__who">{item.role === "user" ? "Wy" : "Middleman"}</p>
+                <p>{item.content}</p>
+                {item.role === "assistant" ? (
+                  <button type="button" onClick={() => void explain(index)} disabled={busy}>
+                    Wyjaśnij prościej
+                  </button>
+                ) : null}
+              </div>
+            ))}
+            {busy ? (
+              <p className="middleman-wait">
+                <LoaderCircle aria-hidden="true" className="animate-spin" /> Przygotowuję odpowiedź…
+              </p>
+            ) : null}
+          </div>
+          {error ? <p role="alert">{error}</p> : null}
+          {suggestions.length ? (
+            <div>
+              <p className="middleman-suggestions__label">Odpowiedzi na to pytanie</p>
+              <ul className="prompt-list middleman-suggestions" key={suggestions.join("|")}>
+                {suggestions.map((prompt) => (
+                  <li key={prompt}>
+                    <button type="button" onClick={() => void send(prompt)} disabled={busy}>
+                      {prompt}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+          <form
+            className="middleman-composer"
+            onSubmit={(event) => {
+              event.preventDefault();
+              void send(message);
+            }}
+          >
+            <label htmlFor="middleman-message">Twoja odpowiedź</label>
+            <textarea
+              id="middleman-message"
+              value={message}
+              rows={3}
+              onChange={(event) => setMessage(event.target.value)}
+            />
+            <div className="middleman-actions">
+              <button type="submit" className="middleman-primary" disabled={busy || !message.trim()}>
+                Wyślij
+              </button>
+              <button
+                type="button"
+                className="secondary-action"
+                disabled={busy || !canDraft}
+                onClick={() => void buildReport()}
+              >
+                Przygotuj projekt usługi
+              </button>
+            </div>
+          </form>
+        </section>
+      ) : null}
     </div>
   );
 }

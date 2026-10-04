@@ -13,6 +13,8 @@ from typing import Any
 
 import httpx
 
+from util import http_verify
+
 log = logging.getLogger("ai.db")
 
 
@@ -37,7 +39,7 @@ class Db:
             return None
         timeout = httpx.Timeout(15.0, connect=5.0)
         try:
-            async with httpx.AsyncClient(timeout=timeout) as client:
+            async with httpx.AsyncClient(timeout=timeout, verify=http_verify()) as client:
                 response = await client.request(
                     method,
                     self._base() + path,
