@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { demoMessagesFor, demoSubmissionById } from "@/content/demo-submissions";
 import { adminDb } from "../../_lib/supabase";
 import { CATEGORY_LABELS, STATUS_LABELS, TYPE_LABELS, formatDate, label } from "../../_lib/labels";
+import { BackLink } from "../../_lib/back-link";
 import { StatusBadge } from "../../_lib/status";
 import { PayloadView } from "./payload";
 import { EnrichButton, PublishButton, ReplyForm, StatusForm } from "./forms";
@@ -40,11 +41,7 @@ export default async function SubmissionDetail({ params }: { params: Promise<{ i
 
   return (
     <article aria-labelledby="tytul" className="admin-page">
-      <p>
-        <Link href="/admin/zgloszenia" className="admin-back">
-          ← Wróć do listy zgłoszeń
-        </Link>
-      </p>
+      <BackLink href="/admin/zgloszenia">Wróć do listy zgłoszeń</BackLink>
 
       <div className="section-heading">
         <div>

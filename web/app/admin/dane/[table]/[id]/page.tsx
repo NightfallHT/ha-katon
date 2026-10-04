@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { adminDb } from "../../../_lib/supabase";
+import { BackLink } from "../../../_lib/back-link";
 import { getTable, selectList } from "../../_tables";
 import { deleteRow } from "../../actions";
 import { RowForm } from "../../row-form";
@@ -44,14 +44,9 @@ export default async function RowPage({
 
   return (
     <div>
-      <p className="dane-back-row">
-        <Link
-          href={`/admin/dane/${table.name}`}
-          className="dane-back"
-        >
-          Wróć do: {table.label}
-        </Link>
-      </p>
+      <BackLink href={`/admin/dane/${table.name}`}>
+        Wróć do: {table.label}
+      </BackLink>
       <h1 className="dane-title">{title}</h1>
 
       {error ? (

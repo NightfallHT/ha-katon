@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getInnovation } from "@/content/catalog";
 import { adminDb } from "../../_lib/supabase";
+import { BackLink } from "../../_lib/back-link";
 import { VisibilityBadge } from "../../_lib/status";
 import { EditForm } from "./edit-form";
 
@@ -36,11 +36,7 @@ export default async function EditInnovation({ params }: { params: Promise<{ id:
   }
   return (
     <section aria-labelledby="edit-h" className="admin-page">
-      <p>
-        <Link href="/admin/biblioteka" className="admin-back">
-          ← Wróć do listy innowacji
-        </Link>
-      </p>
+      <BackLink href="/admin/biblioteka">Wróć do listy innowacji</BackLink>
       <div className="section-heading">
         <div>
           <p className="eyebrow">Biblioteka</p>

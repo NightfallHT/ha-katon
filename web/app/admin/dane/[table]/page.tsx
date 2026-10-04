@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { adminDb } from "../../_lib/supabase";
+import { BackLink } from "../../_lib/back-link";
 import { getTable, selectList } from "../_tables";
 
 export const dynamic = "force-dynamic";
@@ -51,11 +52,7 @@ export default async function TableListPage({
 
   return (
     <div>
-      <p className="dane-back-row">
-        <Link href="/admin/dane" className="dane-back">
-          Wróć do kategorii
-        </Link>
-      </p>
+      <BackLink href="/admin/dane">Wróć do kategorii</BackLink>
       <h1 className="dane-title">{table.label}</h1>
       <p>{table.description}</p>
 
